@@ -5,6 +5,15 @@ export const HISTORY_KEY = 'cyborg_terminal_history';
 export const COLLAPSED_STORAGE_KEY = 'terminal_commands_expanded';
 export const COLLAPSED_CONTENT_STORAGE_KEY = 'terminal_commands_content_expanded'
 export const TREE_STORAGE_KEY = 'terminal-tree-expanded';
+export const CLASS_BUTTONS_STORAGE_KEY = "cyborg_class_buttons_open";
+export const WALLET_STORAGE_KEY = 'cyborg_retcom_wallet';
+export const COLLAPSE_STORAGE_KEY = "cyborg_collapse_states";
+
+export const CYBORG_LAST_SELECTED = "cyborg_last_selected";
+export const CYBORG_SAVED_CHARACTERS = 'cyborg_saved_characters';
+
+export const RETCOM_EXTRACTED_KEY = 'cyborg_retcom_extracted';
+export const RETCOM_WALLET_KEY = 'cyborg_retcom_wallet';
 
 export function getDiscoveredSecrets() {
   try {

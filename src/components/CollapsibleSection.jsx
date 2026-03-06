@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
+import { COLLAPSE_STORAGE_KEY } from '@utils/localStorage';
 
 // Helper functions for collapse state management
-const COLLAPSE_STORAGE_KEY = "cyborg_collapse_states";
-
 function getCollapseStates() {
   try {
     const stored = localStorage.getItem(COLLAPSE_STORAGE_KEY);

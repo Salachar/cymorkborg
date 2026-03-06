@@ -3,6 +3,7 @@ import { Line, Divider } from '@terminal/TerminalComponents';
 import Extractable from '../Extractable/Extractable';
 
 import { formatCredits } from '@utils/general';
+import { RETCOM_EXTRACTED_KEY } from '@utils/localStorage';
 
 import IMAGE_01 from "@images/profile_images/1.png";
 import IMAGE_02 from "@images/profile_images/2.png";
@@ -58,7 +59,7 @@ export default function BountyCard({
 
   const [isClaimed, setIsClaimed] = useState(() => {
     try {
-      const extracted = JSON.parse(localStorage.getItem('cyborg_retcom_extracted') || '{}');
+      const extracted = JSON.parse(localStorage.getItem(RETCOM_EXTRACTED_KEY) || '{}');
       return extracted[id] === true;
     } catch {
       return false;
@@ -68,7 +69,7 @@ export default function BountyCard({
   useEffect(() => {
     const checkClaimed = () => {
       try {
-        const extracted = JSON.parse(localStorage.getItem('cyborg_retcom_extracted') || '{}');
+        const extracted = JSON.parse(localStorage.getItem(RETCOM_EXTRACTED_KEY) || '{}');
         setIsClaimed(extracted[id] === true);
       } catch {
         setIsClaimed(false);

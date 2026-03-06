@@ -7,7 +7,7 @@ import {
   IceBreaker,
 } from '@terminal/retcomdevice';
 
-import { COLLAPSED_CONTENT_STORAGE_KEY } from '@utils/terminal';
+import { COLLAPSED_CONTENT_STORAGE_KEY } from '@utils/localStorage';
 
 const PARTIAL_HEIGHT = 200;
 const CONTENT_BG = 'rgba(19, 23, 34, 0.6)';

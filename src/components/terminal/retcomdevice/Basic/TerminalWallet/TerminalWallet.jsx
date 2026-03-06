@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Line, Section, Spacer } from '@terminal/TerminalComponents';
 import { formatCredits } from '@utils/general';
+import { WALLET_STORAGE_KEY } from '@utils/localStorage';
 
 /**
  * TerminalWallet - Tracks all extracted items and credits
@@ -14,8 +15,6 @@ import { formatCredits } from '@utils/general';
  *   Receives { credits: number, items: array }
  */
 export default function TerminalWallet({ onTransfer }) {
-  const WALLET_STORAGE_KEY = 'cyborg_retcom_wallet';
-
   const [wallet, setWallet] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem(WALLET_STORAGE_KEY) || '{"credits":0,"items":[]}');

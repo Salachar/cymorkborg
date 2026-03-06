@@ -7,7 +7,7 @@ import {
   TREE_STORAGE_KEY,
   getDiscoveredPasswords,
   saveDiscoveredPasswords,
-} from '@utils/terminal';
+} from '@utils/localStorage';
 
 import TerminalHeader from '@terminal/retcomdevice/Basic/TerminalHeader/TerminalHeader';
 import List from '@terminal/retcomdevice/Basic/List/List';

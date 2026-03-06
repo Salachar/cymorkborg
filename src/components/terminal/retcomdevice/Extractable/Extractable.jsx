@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import { Line, Divider } from '@terminal/TerminalComponents';
 
+import {
+  RETCOM_EXTRACTED_KEY,
+  RETCOM_WALLET_KEY,
+} from '@utils/localStorage';
+
 /**
  * Extractable Component - Reusable item extraction interface
  *
@@ -34,9 +39,6 @@ export default function Extractable({
   disabled = false,
   onExtract,
 }) {
-  const STORAGE_KEY = 'cyborg_retcom_extracted';
-  const WALLET_STORAGE_KEY = 'cyborg_retcom_wallet';
-
   let useDigitalItems = [...digitalItems];
   if (credits) {
     useDigitalItems.push({
@@ -50,7 +52,7 @@ export default function Extractable({
 
   const [extractedPhysical, setExtractedPhysical] = useState(() => {
     try {
-      const extracted = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      const extracted = JSON.parse(localStorage.getItem(RETCOM_EXTRACTED_KEY) || '{}');
       return extracted[`${id}-physical`] === true;
     } catch {
       return false;
@@ -59,7 +61,7 @@ export default function Extractable({
 
   const [extractedDigital, setExtractedDigital] = useState(() => {
     try {
-      const extracted = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      const extracted = JSON.parse(localStorage.getItem(RETCOM_EXTRACTED_KEY) || '{}');
       return extracted[`${id}-digital`] === true;
     } catch {
       return false;
@@ -68,7 +70,7 @@ export default function Extractable({
 
   const saveToWallet = (items) => {
     try {
-      const wallet = JSON.parse(localStorage.getItem(WALLET_STORAGE_KEY) || '{"credits":0,"items":[]}');
+      const wallet = JSON.parse(localStorage.getItem(RETCOM_WALLET_KEY) || '{"credits":0,"items":[]}');
 
       items.forEach(item => {
         if (item.isCredits) {
@@ -87,7 +89,7 @@ export default function Extractable({
         }
       });
 
-      localStorage.setItem(WALLET_STORAGE_KEY, JSON.stringify(wallet));
+      localStorage.setItem(RETCOM_WALLET_KEY, JSON.stringify(wallet));
       // Dispatch custom event so TerminalWallet can update
       window.dispatchEvent(new Event('walletUpdated'));
     } catch (error) {
@@ -99,9 +101,9 @@ export default function Extractable({
     if (disabled || extractedPhysical) return;
 
     try {
-      const extracted = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      const extracted = JSON.parse(localStorage.getItem(RETCOM_EXTRACTED_KEY) || '{}');
       extracted[`${id}-physical`] = true;
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(extracted));
+      localStorage.setItem(RETCOM_EXTRACTED_KEY, JSON.stringify(extracted));
       setExtractedPhysical(true);
 
       // Save to wallet
@@ -120,9 +122,9 @@ export default function Extractable({
     if (disabled || extractedDigital) return;
 
     try {
-      const extracted = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      const extracted = JSON.parse(localStorage.getItem(RETCOM_EXTRACTED_KEY) || '{}');
       extracted[`${id}-digital`] = true;
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(extracted));
+      localStorage.setItem(RETCOM_EXTRACTED_KEY, JSON.stringify(extracted));
       setExtractedDigital(true);
 
       // Save to wallet

@@ -1,3 +1,9 @@
+import {
+  CYBORG_LAST_SELECTED,
+  CYBORG_SAVED_CHARACTERS,
+  COLLAPSE_STORAGE_KEY,
+} from '@utils/localStorage';
+
 import ShunnedNanomancer from "./ShunnedNanomancer";
 import BurnedHacker from "./BurnedHacker";
 import DischargedCorpKiller from "./DischargedCorpKiller";
@@ -89,7 +95,7 @@ class BuilderManager {
   setLastSelected(id) {
     this._last_selected_id = id;
     try {
-      localStorage.setItem('cyborg_last_selected', id);
+      localStorage.setItem(CYBORG_LAST_SELECTED, id);
     } catch (e) {
       console.error("Failed to save last selected:", e);
     }
@@ -113,11 +119,10 @@ class BuilderManager {
 
     if (this._last_selected_id === id) {
       this._last_selected_id = null;
-      localStorage.removeItem('cyborg_last_selected');
+      localStorage.removeItem(CYBORG_LAST_SELECTED);
     }
 
     try {
-      const COLLAPSE_STORAGE_KEY = "cyborg_collapse_states";
       const stored = localStorage.getItem(COLLAPSE_STORAGE_KEY);
       if (stored) {
         const states = JSON.parse(stored);
@@ -140,7 +145,7 @@ class BuilderManager {
         charJSON[c.id] = c.toJSON();
       })
 
-      localStorage.setItem('cyborg_saved_characters', JSON.stringify(charJSON));
+      localStorage.setItem(CYBORG_SAVED_CHARACTERS, JSON.stringify(charJSON));
     } catch (e) {
       console.log("Failed to save characters", e);
     }
@@ -149,7 +154,7 @@ class BuilderManager {
   load () {
     // Load last selected
     try {
-      const lastSelected = localStorage.getItem('cyborg_last_selected');
+      const lastSelected = localStorage.getItem(CYBORG_LAST_SELECTED);
       if (lastSelected) {
         this._last_selected_id = lastSelected;
       }
@@ -158,7 +163,7 @@ class BuilderManager {
     }
 
     try {
-      const chars = localStorage.getItem('cyborg_saved_characters');
+      const chars = localStorage.getItem(CYBORG_SAVED_CHARACTERS);
       if (!chars) return;
       const parsed = JSON.parse(chars);
       Object.keys(parsed).forEach((c_id) => {

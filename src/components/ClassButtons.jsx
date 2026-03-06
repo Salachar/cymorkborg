@@ -1,20 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { CLASSES } from "../data/builder";
-
-const STORAGE_KEY = "cyborg_class_buttons_open";
+import { CLASS_BUTTONS_STORAGE_KEY } from '@utils/localStorage';
 
 function getOpen() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
-    return saved !== null ? JSON.parse(saved) : false;
+    return saved !== null ? JSON.parse(saved) : true;
   } catch (e) {
-    return false;
+    return true;
   }
 }
 
 function saveOpen(value) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(value));
+    localStorage.setItem(CLASS_BUTTONS_STORAGE_KEY, JSON.stringify(value));
   } catch (e) {}
 }
 
