@@ -1,0 +1,184 @@
+/* Beam CSS - Attack Beam with Hit/Miss Behavior */
+
+.icebreaker-beam-area {
+  flex: 1;
+  min-width: 50px;
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* Beam container */
+.beam {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+/* Beam states - controlled by class */
+.beam.beam-miss {
+  /* Stops at shield - only extends to shield position */
+  right: calc(100% - var(--shield-offset, 50%));
+}
+
+.beam.beam-hit {
+  /* Passes through - extends all the way to vault */
+  right: 0;
+}
+
+/* Beam core */
+.beam-core {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgb(239, 68, 68);
+  transform-origin: left center;
+  animation: beam-shoot 0.3s ease-out;
+}
+
+/* Beam glow */
+.beam-glow {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  background: rgba(239, 68, 68, 0.4);
+  filter: blur(8px);
+  transform-origin: left center;
+  animation: beam-shoot 0.3s ease-out;
+}
+
+/* Impact effect on shield (miss) */
+.beam-impact {
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background: rgba(239, 68, 68, 0.6);
+  border-radius: 50%;
+  animation: impact-burst 0.3s ease-out;
+}
+
+.beam-impact::before,
+.beam-impact::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgb(239, 68, 68);
+  animation: impact-ring 0.3s ease-out;
+}
+
+.beam-impact::after {
+  animation-delay: 0.1s;
+}
+
+/* Shield flash on impact (miss) */
+.shield-impact-flash {
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  background: rgba(239, 68, 68, 0.2);
+  animation: shield-flash 0.3s ease-out;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Beam shoot animation */
+@keyframes beam-shoot {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+
+/* Impact burst */
+@keyframes impact-burst {
+  0% {
+    transform: translateY(-50%) scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-50%) scale(1.2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-50%) scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Impact rings */
+@keyframes impact-ring {
+  0% {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Shield flash */
+@keyframes shield-flash {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+/* Hit state - beam passes through cleanly */
+.beam.beam-hit .beam-core {
+  background: rgb(251, 191, 36); /* Yellow on hit */
+}
+
+.beam.beam-hit .beam-glow {
+  background: rgba(251, 191, 36, 0.5);
+}
+
+/* Spark effects at gaps (optional visual enhancement) */
+.beam-spark {
+  position: absolute;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  background: rgb(251, 191, 36);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(251, 191, 36, 1);
+  animation: spark-fade 0.3s ease-out;
+}
+
+.beam-spark.spark-left {
+  left: calc(var(--shield-offset, 50%) - 10px);
+}
+
+.beam-spark.spark-right {
+  left: calc(var(--shield-offset, 50%) + 10px);
+}
+
+@keyframes spark-fade {
+  0% {
+    transform: translateY(-50%) scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50%) scale(2);
+    opacity: 0;
+  }
+}

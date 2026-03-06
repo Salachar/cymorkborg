@@ -1,0 +1,185 @@
+/* Shield CSS - ICE Barrier */
+
+.icebreaker-shield {
+  width: 200px; /* Increased from 180px */
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 6rem;
+}
+
+.shield-container {
+  position: relative;
+  width: 220px; /* Increased from 200px */
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Outer shield ring with gap */
+.shield-ring {
+  z-index: 1;
+  position: absolute;
+  width: 160px; /* Increased from 140px */
+  height: 160px;
+  border-radius: 50%;
+  /* Background set inline with conic-gradient for dynamic gap */
+  filter: drop-shadow(0 0 10px rgba(79, 209, 197, 0.6));
+  transition: transform 0.05s linear;
+}
+
+/* Inner ring to create hollow effect */
+.shield-ring-inner {
+  z-index: 2;
+  position: absolute;
+  width: 136px; /* Increased from 120px */
+  height: 136px;
+  border-radius: 50%;
+  background: rgba(30, 41, 59, 1);
+}
+
+/* Shield crack animation on success */
+.shield-ring.cracked {
+  animation: shield-crack 0.5s ease-out forwards;
+}
+
+@keyframes shield-crack {
+  0% { opacity: 1; }
+  50% {
+    filter: drop-shadow(0 0 30px rgba(79, 209, 197, 1));
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.3);
+  }
+}
+
+/* Corporate lock/tech core in center */
+.shield-core {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  background: rgba(30, 41, 59, 0.95);
+  border: 2px solid rgb(59, 130, 246);
+  box-shadow:
+    0 0 12px rgba(59, 130, 246, 0.4),
+    inset 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+/* Lock body - central square */
+.shield-lock-body {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background: rgba(71, 85, 105, 0.8);
+  border: 2px solid rgb(100, 116, 139);
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Lock shackle - top bracket */
+.shield-lock-shackle {
+  position: absolute;
+  top: 8px;
+  width: 16px;
+  height: 20px;
+  border: 2px solid rgb(100, 116, 139);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  background: transparent;
+}
+
+/* Access indicator - small dot */
+.shield-lock-indicator {
+  position: absolute;
+  bottom: 10px;
+  width: 4px;
+  height: 4px;
+  background: rgb(59, 130, 246);
+  box-shadow: 0 0 6px rgba(59, 130, 246, 0.8);
+  animation: indicator-pulse 2s ease-in-out infinite;
+}
+
+@keyframes indicator-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Corner accents on core */
+.shield-core::before,
+.shield-core::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 2px solid rgb(71, 85, 105);
+}
+
+.shield-core::before {
+  top: -2px;
+  left: -2px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.shield-core::after {
+  bottom: -2px;
+  right: -2px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Success state - core unlocks */
+.shield-core.cracked {
+  animation: core-unlock 0.5s ease-out forwards;
+}
+
+.shield-core.cracked .shield-lock-body {
+  border-color: rgb(34, 197, 94);
+  background: rgba(34, 197, 94, 0.2);
+}
+
+.shield-core.cracked .shield-lock-shackle {
+  animation: shackle-open 0.5s ease-out forwards;
+  border-color: rgb(34, 197, 94);
+}
+
+.shield-core.cracked .shield-lock-indicator {
+  background: rgb(34, 197, 94);
+  box-shadow: 0 0 10px rgba(34, 197, 94, 1);
+}
+
+@keyframes core-unlock {
+  0% {
+    border-color: rgb(59, 130, 246);
+    box-shadow:
+      0 0 12px rgba(59, 130, 246, 0.4),
+      inset 0 0 10px rgba(0, 0, 0, 0.6);
+  }
+  100% {
+    border-color: rgb(34, 197, 94);
+    box-shadow:
+      0 0 20px rgba(34, 197, 94, 0.6),
+      inset 0 0 10px rgba(34, 197, 94, 0.1);
+  }
+}
+
+@keyframes shackle-open {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-45deg); }
+}
+
+.shield-core.cracked {
+  animation: core-fade 0.5s ease-out forwards;
+}
+
+@keyframes core-fade {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}

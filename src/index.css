@@ -1,0 +1,219 @@
+@import "tailwindcss";
+
+/* CY_BORG Dark Cyberpunk Theme */
+:root {
+  /* Neon accent colors */
+  --color-neon-cyan: #00ffff;
+  --color-neon-pink: #ff0080;
+  --color-neon-yellow: #ffff00;
+  --color-neon-blue: #0080ff;
+  --color-neon-purple: #bf00ff;
+  --color-neon-green: #00ff41;
+
+  /* Dark backgrounds */
+  --color-bg-black: #000000;
+  --color-bg-dark: #0a0a0a;
+  --color-bg-darker: #050505;
+  --color-bg-panel: #141414;
+  --color-bg-elevated: #1a1a1a;
+
+  /* Grays */
+  --color-gray-darker: #1f1f1f;
+  --color-gray-dark: #2a2a2a;
+  --color-gray-medium: #4a4a4a;
+  --color-gray-light: #6a6a6a;
+  --color-gray-lighter: #9a9a9a;
+
+  /* UI borders */
+  --color-border-dark: #1f1f1f;
+  --color-border-medium: #333333;
+  --color-border-light: #4a4a4a;
+  --color-border-glow: rgba(0, 255, 255, 0.3);
+
+  /* Legacy variables for backward compatibility */
+  --color-ocean-dark: #0b2e3c;
+  --color-ocean-accent: #217c9e;
+  --color-parchment: #f6f1e7;
+  --color-parchment-semi-aged: #e0d9cd;
+  --color-parchment-aged: #C2B28B;
+  --color-parchment-dried: #A89F91;
+  --color-accent-gold: #c28840;
+  --color-ink: #1D1B2E;
+  --color-ink-squid: #22303C;
+  --color-ink-iron: #2E2D36;
+
+  --color-class: #00ffff; /* Default to cyan */
+  --click-height: 3rem;
+}
+
+/* Tailwind custom theme */
+@theme {
+  --color-cy-cyan: #00ffff;
+  --color-cy-cyan-subtle: #76f2f2;
+  --color-cy-pink: #ff0080;
+  --color-cy-yellow: #ffff00;
+  --color-cy-blue: #0080ff;
+  --color-cy-purple: #bf00ff;
+  --color-cy-green: #00ff41;
+  --color-cy-neon-green: #00ff41;
+  --color-cy-smoke: #9cc0f0;
+}
+
+/* Global resets */
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-bg-black);
+  color: #e0e0e0;
+  font-family: "Courier New", monospace;
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+/* Prevent overscroll bounce on iOS/Safari */
+body {
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.bold {
+  font-weight: bold !important;
+}
+
+.center {
+  text-align: center !important;
+}
+
+#root {
+  max-width: 1200px;
+  height: 100vh;
+  margin: 0 auto;
+  background-color: var(--color-bg-dark);
+  box-shadow:
+    0 0 40px rgba(0, 255, 255, 0.1),
+    0 0 80px rgba(255, 0, 128, 0.05);
+}
+
+.page-content {
+  padding: 2rem 3rem 5rem 3rem;
+}
+
+.divider {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-neon-cyan) 50%,
+    transparent
+  );
+  height: 1px;
+  margin: 2rem 0;
+  opacity: 0.5;
+}
+
+.divider.small {
+  margin: 1rem 0;
+}
+
+/* Neon glow text effect */
+.text-glow-cyan {
+  color: var(--color-neon-cyan);
+  text-shadow:
+    0 0 5px rgba(0, 255, 255, 0.5),
+    0 0 10px rgba(0, 255, 255, 0.3),
+    0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+.text-glow-pink {
+  color: var(--color-neon-pink);
+  text-shadow:
+    0 0 5px rgba(255, 0, 128, 0.5),
+    0 0 10px rgba(255, 0, 128, 0.3),
+    0 0 20px rgba(255, 0, 128, 0.2);
+}
+
+.text-glow-yellow {
+  color: var(--color-neon-yellow);
+  text-shadow:
+    0 0 5px rgba(255, 255, 0, 0.5),
+    0 0 10px rgba(255, 255, 0, 0.3),
+    0 0 20px rgba(255, 255, 0, 0.2);
+}
+
+/* Neon border effect */
+.border-glow-cyan {
+  border-color: var(--color-neon-cyan);
+  box-shadow:
+    0 0 5px rgba(0, 255, 255, 0.3),
+    inset 0 0 5px rgba(0, 255, 255, 0.1);
+}
+
+.border-glow-pink {
+  border-color: var(--color-neon-pink);
+  box-shadow:
+    0 0 5px rgba(255, 0, 128, 0.3),
+    inset 0 0 5px rgba(255, 0, 128, 0.1);
+}
+
+/* Legacy utility classes */
+.tshadow-black {
+  text-shadow:
+    1px 1px 0px black,
+    -1px -1px 0px black,
+    1px -1px 0px black,
+    -1px 1px 0px black;
+}
+
+.no-borders {
+  border: 0 !important;
+}
+
+.columns {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex { display: flex; }
+.flex-1 { flex-grow: 1; }
+
+button {
+  color: #e0e0e0;
+  font-family: "Courier New", monospace;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+@keyframes pulse-text {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes rcd-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+@keyframes rcd-blink {
+  0%, 90%, 100% { opacity: 1; }
+  95% { opacity: 0.15; }
+}
+@keyframes rcd-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pw-cursor {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 0.3; }
+}

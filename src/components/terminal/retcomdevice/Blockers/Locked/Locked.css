@@ -1,0 +1,100 @@
+.locked-banner {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', monospace;
+  background: rgba(15, 23, 42, 0.95);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  position: relative;
+  padding: 1.5rem;
+}
+
+/* Scanline effect */
+.locked-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    var(--glow-color) 0px,
+    transparent 1px,
+    transparent 2px,
+    var(--glow-color) 3px
+  );
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Content layout */
+.locked-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Lock visual */
+.locked-visual {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.locked-icon {
+  position: relative;
+  z-index: 2;
+  color: var(--accent-color);
+  filter: drop-shadow(0 0 15px var(--glow-color));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Pulsing ring around lock */
+.locked-ring {
+  position: absolute;
+  inset: 0;
+  border: 3px solid var(--border-color);
+  border-radius: 50%;
+  animation: locked-pulse-ring 2s ease-in-out infinite;
+}
+
+@keyframes locked-pulse-ring {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.3;
+  }
+}
+
+/* Text content */
+.locked-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.locked-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 10px var(--glow-color);
+}
+
+.locked-message {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgb(148, 163, 184);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}

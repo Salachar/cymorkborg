@@ -1,0 +1,119 @@
+/* CySports - Blood Bowl Coverage */
+
+/* Blood Bowl Spiked Ball Icon */
+.bloodbowl-icon {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.bb-ball {
+  width: 20px;
+  height: 24px;
+  background: linear-gradient(135deg, #64230e 0%, #a44d16 100%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  position: relative;
+  z-index: 2;
+  box-shadow:
+    inset -2px -2px 4px rgba(0, 0, 0, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.bb-ball::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.bb-spike {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  z-index: 10;
+}
+
+.bb-spike-top {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 0 4px 6px 4px;
+  border-color: transparent transparent #858585 transparent;
+}
+
+.bb-spike-bottom {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px 4px 0 4px;
+  border-color: #757474 transparent transparent transparent;
+}
+
+.bb-spike-left {
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 4px 6px 4px 0;
+  border-color: transparent #7d7c7c transparent transparent;
+}
+
+.bb-spike-right {
+  right: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 4px 0 4px 6px;
+  border-color: transparent transparent transparent #797979;
+}
+
+/* Live indicator */
+.cy-sports-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgb(239, 68, 68);
+  box-shadow: 0 0 8px rgb(239, 68, 68);
+  animation: cy-sports-pulse 2s ease-in-out infinite;
+}
+
+@keyframes cy-sports-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Headline category badges */
+.cy-sports-headline-cat {
+  flex-shrink: 0;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.65rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  border-radius: 3px;
+  align-self: flex-start;
+  font-family: monospace;
+}
+
+.cy-sports-headline-cat-injury {
+  background: rgba(251, 191, 36, 0.15);
+  color: rgb(251, 191, 36);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.cy-sports-headline-cat-fatal {
+  background: rgba(239, 68, 68, 0.15);
+  color: rgb(239, 68, 68);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.cy-sports-headline-cat-scandal {
+  background: rgba(168, 85, 247, 0.15);
+  color: rgb(168, 85, 247);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}

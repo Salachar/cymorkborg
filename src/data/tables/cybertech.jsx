@@ -1,0 +1,133 @@
+// Cybertech - d20 table
+// Cybernetic implants and body modifications
+
+export const CYBERTECH = [
+  {
+    id: "cyberclaws",
+    label: "Retracting Cyberclaws",
+    die: "d6",
+    cost: "2k¤",
+    description: <>Mollies or Logans, d6 damage.</>,
+  },
+  {
+    id: "mule_pocket",
+    label: "Mule Pocket",
+    cost: "500¤",
+    description: <>Big enough for a SmartGun™.</>,
+  },
+  {
+    id: "shockers",
+    label: "Subdermal Shockers",
+    die: "d4",
+    cost: "2k¤",
+    description: <>d4 damage to anyone grabbing or hitting you in melee. +2DR to avoid electrical damage.</>,
+  },
+  {
+    id: "autocamo",
+    label: "Autocamo",
+    cost: "3k¤",
+    description: <>Subdermal projection of ever-changing anti-facial-recognition patterns.</>,
+  },
+  {
+    id: "additional_joints",
+    label: "Additional Joints",
+    cost: "2k¤",
+    description: <>−2DR to all grapple-related tests, able to fit into small spaces.</>,
+  },
+  {
+    id: "buzzeyes",
+    label: "Buzzeyes",
+    cost: "3k¤",
+    description: <>Fly-like eyes with 360-vision capabilities.</>,
+  },
+  {
+    id: "strangler",
+    label: "Strangler",
+    die: "d6",
+    cost: "300¤",
+    description: <>Filament wire hidden in a finger, d6 damage each round when grappling.</>,
+  },
+  {
+    id: "skinhard",
+    label: "Skinhard",
+    die: "d2",
+    cost: "3k¤",
+    description: <>Hardened skin providing −d2 armor.</>,
+  },
+  {
+    id: "deserter_fangs",
+    label: "Deserter Fangs",
+    die: "d6",
+    cost: "500¤",
+    description: <>DR10 bite attack, d6 damage. 2-in-6 risk of a free attack against you.</>,
+  },
+  {
+    id: "smartjack",
+    label: "SmartJack",
+    cost: "4k¤",
+    description: <>Enhanced cerebral/RCD-links enabling you to use Smart™-tech to its full potential.</>,
+  },
+  {
+    id: "muscle_ups",
+    label: "Muscle-Ups",
+    cost: "5k¤",
+    description: <>+1 on tests of raw strength such as crushing, lifting, pulling. +4 carrying capacity.</>,
+  },
+  {
+    id: "pulsewires",
+    label: "PulseWires",
+    cost: "6k¤",
+    description: <>+1 Agility, Presence, Strength, or Toughness for 2 hours. Each Pulse costs 75¤.</>,
+  },
+  {
+    id: "bodygun",
+    label: "BodyGun",
+    die: "2d10",
+    cost: "7.5k¤",
+    description: <>Hidden, single shot, large-caliber gun, 2d10 damage.</>,
+  },
+  {
+    id: "taurs",
+    label: "Taurs",
+    die: "d4",
+    cost: "1.5k¤",
+    description: <>Horns, d4 damage.</>,
+  },
+  {
+    id: "sonic_blaster",
+    label: "Sonic Blaster",
+    die: "d6",
+    cost: "6k¤",
+    description: <>Deafening sonic wave hitting up to d3 targets for d6 damage. Recharges automatically after 6 hours.</>,
+  },
+  {
+    id: "handy_bot",
+    label: "Handy Bot",
+    cost: "4k¤",
+    description: <>Detachable drone hand with a 50m range.</>,
+  },
+  {
+    id: "smarthair",
+    label: "Smarthair",
+    cost: "1.2k¤",
+    description: <>Change hairstyle at will.</>,
+  },
+  {
+    id: "skinslot",
+    label: "Skinslot",
+    cost: "1.5k¤",
+    description: <>Extra App slot for your deck, hidden beneath your skin.</>,
+  },
+  {
+    id: "skeleplating",
+    label: "Skeleplating",
+    cost: "15k¤",
+    description: <>Skeleton covered in a thin metal layer, +10 HP.</>,
+  },
+  {
+    id: "brainbox",
+    label: "Brainbox",
+    cost: "500k¤",
+    description: <>Black box for your brain. As long as it remains intact at the point of death, the user's mind can be restarted in another brainbox. Cloning or otherwise getting a new body comes with additional costs and is highly illegal unless you already are rich beyond the reach of the law.</>,
+  },
+];

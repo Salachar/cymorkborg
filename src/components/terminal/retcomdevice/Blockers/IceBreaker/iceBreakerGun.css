@@ -1,0 +1,477 @@
+/* Gun CSS - Punk Aesthetic Tech Stack */
+.icebreaker-gun {
+  width: 120px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.gun-garbage-top,
+.gun-garbage-bottom {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Garbage block base styles */
+.gun-garbage-1,
+.gun-garbage-2,
+.gun-garbage-3,
+.gun-garbage-4,
+.gun-garbage-5,
+.gun-garbage-6,
+.gun-garbage-7 {
+  border: 2px solid rgb(79, 209, 197);
+  box-shadow: inset 3px 3px 10px rgba(0, 0, 0, 0.7);
+  position: relative;
+  background: rgba(15, 23, 42, 0.95);
+}
+
+/* Garbage 1 - Cyan dot + line */
+.gun-garbage-1 {
+  height: 18px;
+  width: 65px;
+  border-color: rgb(79, 209, 197);
+}
+
+.gun-garbage-1::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 8px;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: rgb(79, 209, 197);
+  box-shadow: 0 0 6px rgba(79, 209, 197, 0.8);
+  animation: pulse-slow 3s ease-in-out infinite;
+}
+
+.gun-garbage-1::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 2px;
+  background: rgb(79, 209, 197);
+  box-shadow: 0 0 4px rgba(79, 209, 197, 0.6);
+}
+
+/* Garbage 2 - Hot pink/yellow bars */
+.gun-garbage-2 {
+  height: 24px;
+  width: 45px;
+  border-color: rgb(236, 72, 153); /* Hot pink */
+}
+
+.gun-garbage-2::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  height: 2px;
+  background: rgb(236, 72, 153);
+  box-shadow: 0 0 4px rgba(236, 72, 153, 0.6);
+  animation: pulse-fast 1.5s ease-in-out infinite;
+}
+
+.gun-garbage-2::after {
+  content: '';
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  right: 6px;
+  height: 2px;
+  background: rgb(251, 191, 36);
+  box-shadow: 0 0 4px rgba(251, 191, 36, 0.6);
+}
+
+/* Garbage 3 - Red dots */
+.gun-garbage-3 {
+  height: 28px;
+  width: 85px;
+  border-color: rgb(239, 68, 68);
+}
+
+.gun-garbage-3::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  background: rgb(239, 68, 68);
+  box-shadow:
+    0 0 6px rgba(239, 68, 68, 0.8),
+    12px 0 0 rgb(239, 68, 68),
+    12px 0 6px rgba(239, 68, 68, 0.8);
+  animation: pulse-medium 2s ease-in-out infinite;
+}
+
+.gun-garbage-3::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 2px;
+  background: rgb(79, 209, 197);
+}
+
+/* Garbage 4 - Vertical vents + purple dot */
+.gun-garbage-4 {
+  height: 26px;
+  width: 55px;
+  border-color: rgb(168, 85, 247); /* Purple */
+}
+
+.gun-garbage-4::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: rgb(79, 209, 197);
+  box-shadow:
+    0 0 4px rgba(79, 209, 197, 0.6),
+    8px 0 0 rgb(79, 209, 197),
+    8px 0 4px rgba(79, 209, 197, 0.6),
+    16px 0 0 rgb(79, 209, 197),
+    16px 0 4px rgba(79, 209, 197, 0.6);
+}
+
+.gun-garbage-4::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 5px;
+  background: rgb(168, 85, 247);
+  box-shadow: 0 0 8px rgba(168, 85, 247, 0.9);
+  animation: pulse-fast 1.5s ease-in-out infinite 0.5s;
+}
+
+/* Garbage 5 - Cyan stacked lines + yellow dot */
+.gun-garbage-5 {
+  height: 30px;
+  width: 95px;
+  border-color: rgb(79, 209, 197);
+}
+
+.gun-garbage-5::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  width: 25px;
+  height: 2px;
+  background: rgb(79, 209, 197);
+  box-shadow:
+    0 0 4px rgba(79, 209, 197, 0.6),
+    0 6px 0 rgb(79, 209, 197),
+    0 6px 4px rgba(79, 209, 197, 0.6),
+    0 12px 0 rgb(79, 209, 197),
+    0 12px 4px rgba(79, 209, 197, 0.6);
+}
+
+.gun-garbage-5::after {
+  content: '';
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: rgb(251, 191, 36);
+  box-shadow:
+    0 0 8px rgba(251, 191, 36, 0.9),
+    -15px 0 0 2px rgb(79, 209, 197),
+    -15px 0 6px rgba(79, 209, 197, 0.7);
+  animation: pulse-medium 2s ease-in-out infinite;
+}
+
+/* Garbage 6 - Toxic green bars */
+.gun-garbage-6 {
+  height: 26px; /* Increased from 22px */
+  width: 70px;
+  border-color: rgb(132, 204, 22); /* Toxic green */
+}
+
+.gun-garbage-6::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 10px;
+  background: rgb(132, 204, 22);
+  box-shadow:
+    0 0 6px rgba(132, 204, 22, 0.8),
+    10px 0 0 rgb(132, 204, 22),
+    10px 0 6px rgba(132, 204, 22, 0.8),
+    20px 0 0 rgb(132, 204, 22),
+    20px 0 6px rgba(132, 204, 22, 0.8);
+  animation: flicker-green 2.5s ease-in-out infinite;
+}
+
+.gun-garbage-6::after {
+  content: '';
+  position: absolute;
+  right: 8px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: rgb(236, 72, 153);
+  box-shadow: 0 0 4px rgba(236, 72, 153, 0.6);
+}
+
+/* Garbage 7 - Mixed chaos */
+.gun-garbage-7 {
+  height: 28px; /* Increased from 20px */
+  width: 50px;
+  border-color: rgb(251, 191, 36); /* Yellow */
+}
+
+.gun-garbage-7::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 6px;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: rgb(168, 85, 247);
+  box-shadow:
+    0 0 6px rgba(168, 85, 247, 0.9),
+    14px 0 0 rgb(239, 68, 68),
+    14px 0 6px rgba(239, 68, 68, 0.8);
+  animation: pulse-chaotic 1.8s ease-in-out infinite;
+}
+
+.gun-garbage-7::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 2px;
+  background: rgb(132, 204, 22);
+  box-shadow: 0 0 4px rgba(132, 204, 22, 0.7);
+}
+
+/* Main gun integrated */
+.gun-integrated {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* Main housing */
+.gun-housing {
+  width: 65px;
+  height: 70px;
+  background: rgba(15, 23, 42, 0.95);
+  position: relative;
+  border: 2px solid rgb(236, 72, 153); /* Hot pink border */
+  box-shadow:
+    inset 3px 3px 10px rgba(0, 0, 0, 0.7),
+    0 0 8px rgba(236, 72, 153, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 10px 15px;
+}
+
+/* Cooling vents */
+.gun-vent {
+  width: 35px;
+  height: 3px;
+  background: rgb(79, 209, 197);
+  box-shadow: 0 0 6px rgba(79, 209, 197, 0.7);
+}
+
+/* Power chamber */
+.gun-chamber {
+  width: 25px;
+  height: 35px;
+  background: rgba(30, 41, 59, 0.95);
+  border: 2px solid rgb(168, 85, 247); /* Purple */
+  border-left: none;
+  margin-left: -2px;
+  position: relative;
+  box-shadow:
+    0 0 10px rgba(168, 85, 247, 0.4),
+    inset 0 0 8px rgba(0, 0, 0, 0.6);
+}
+
+.gun-chamber::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: rgb(132, 204, 22); /* Toxic green */
+  box-shadow: 0 0 8px rgba(132, 204, 22, 0.8);
+  animation: pulse-green 2s ease-in-out infinite;
+}
+
+/* Main barrel */
+.gun-barrel {
+  width: 45px;
+  height: 16px;
+  background: rgba(30, 41, 59, 0.95);
+  border-top: 2px solid rgb(239, 68, 68);
+  border-bottom: 2px solid rgb(239, 68, 68);
+  margin-left: -2px;
+  position: relative;
+  box-shadow:
+    0 0 10px rgba(239, 68, 68, 0.4),
+    inset 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.gun-barrel::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  right: 5px;
+  height: 2px;
+  background: rgb(239, 68, 68);
+  transform: translateY(-50%);
+  box-shadow: 0 0 4px rgba(239, 68, 68, 0.6);
+}
+
+/* Emitter tip */
+.gun-emitter {
+  width: 12px;
+  height: 12px;
+  background: rgb(239, 68, 68);
+  border: 2px solid rgb(220, 38, 38);
+  margin-left: -2px;
+  box-shadow:
+    0 0 12px rgba(239, 68, 68, 0.9),
+    inset 0 0 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Charging state */
+.gun-integrated.charging .gun-vent {
+  background: rgb(251, 191, 36);
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.9);
+  animation: vent-flicker 1.5s ease-out;
+}
+
+.gun-integrated.charging .gun-housing {
+  border-color: rgb(251, 191, 36);
+  box-shadow:
+    inset 3px 3px 10px rgba(0, 0, 0, 0.7),
+    0 0 15px rgba(251, 191, 36, 0.5);
+}
+
+.gun-integrated.charging .gun-chamber {
+  border-color: rgb(251, 191, 36);
+  box-shadow: 0 0 15px rgba(251, 191, 36, 0.6);
+}
+
+.gun-integrated.charging .gun-chamber::before {
+  background: rgb(251, 191, 36);
+  box-shadow: 0 0 12px rgba(251, 191, 36, 1);
+  animation: core-pulse 1.5s ease-out;
+}
+
+.gun-integrated.charging .gun-barrel {
+  border-color: rgb(251, 191, 36);
+  box-shadow: 0 0 15px rgba(251, 191, 36, 0.7);
+}
+
+.gun-integrated.charging .gun-barrel::after {
+  background: rgb(251, 191, 36);
+  box-shadow: 0 0 8px rgba(251, 191, 36, 0.8);
+}
+
+.gun-integrated.charging .gun-emitter {
+  background: rgb(251, 191, 36);
+  border-color: rgb(245, 158, 11);
+  box-shadow:
+    0 0 20px rgba(251, 191, 36, 1),
+    inset 0 0 6px rgba(255, 255, 255, 0.3);
+  animation: emitter-charge 1.5s ease-out;
+}
+
+
+
+/* Pulse animations for punk aesthetic */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(79, 209, 197, 0.8); }
+  50% { opacity: 0.4; box-shadow: 0 0 2px rgba(79, 209, 197, 0.3); }
+}
+
+@keyframes pulse-medium {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes pulse-fast {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 8px rgba(236, 72, 153, 0.9);
+  }
+  50% {
+    opacity: 0.3;
+    box-shadow: 0 0 2px rgba(236, 72, 153, 0.3);
+  }
+}
+
+@keyframes pulse-green {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 8px rgba(132, 204, 22, 0.8);
+  }
+  50% {
+    opacity: 0.6;
+    box-shadow: 0 0 12px rgba(132, 204, 22, 1);
+  }
+}
+
+@keyframes pulse-chaotic {
+  0%, 100% { opacity: 1; }
+  33% { opacity: 0.4; }
+  66% { opacity: 0.9; }
+}
+
+@keyframes flicker-green {
+  0%, 100% { opacity: 1; }
+  25% { opacity: 0.7; }
+  50% { opacity: 1; }
+  75% { opacity: 0.6; }
+}
+
+@keyframes vent-flicker {
+  0%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes core-pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.4); }
+}
+
+@keyframes emitter-charge {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}

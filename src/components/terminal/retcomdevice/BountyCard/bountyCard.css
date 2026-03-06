@@ -1,0 +1,454 @@
+/* BountyCard - Wanted Bounty Listing (Dark Mode, Horizontal) */
+
+.bounty-card {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', monospace;
+  background: rgba(30, 41, 59, 0.95);
+  border: 2px solid rgba(239, 68, 68, 0.4);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s;
+}
+
+/* Claimed state */
+.bounty-card-claimed {
+  border-color: rgba(148, 163, 184, 0.3);
+  opacity: 0.7;
+}
+
+.bounty-card-claimed .bounty-header {
+  background: rgba(15, 23, 42, 0.6);
+  border-bottom-color: rgba(148, 163, 184, 0.2);
+}
+
+.bounty-card-claimed .bounty-title {
+  color: rgb(148, 163, 184);
+}
+
+.bounty-card-claimed .bounty-name {
+  color: rgb(148, 163, 184);
+  text-decoration: line-through;
+}
+
+.bounty-card-claimed .bounty-amount {
+  background: rgba(148, 163, 184, 0.1);
+  border-color: rgba(148, 163, 184, 0.3);
+}
+
+.bounty-card-claimed .bounty-amount-value {
+  color: rgb(148, 163, 184);
+}
+
+.bounty-card-claimed .bounty-claim-banner {
+  border-top-color: rgba(16, 185, 129, 0.3);
+  border-bottom-color: rgba(16, 185, 129, 0.3);
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.bounty-card-claimed .bounty-footer-warning {
+  color: rgb(148, 163, 184);
+}
+
+/* Header */
+.bounty-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: rgba(15, 23, 42, 0.8);
+  border-bottom: 2px solid rgba(239, 68, 68, 0.3);
+}
+
+.bounty-header-left {
+  flex: 1;
+}
+
+.bounty-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: rgb(239, 68, 68);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.25rem;
+}
+
+.bounty-id {
+  font-size: 0.75rem;
+  color: rgb(148, 163, 184);
+  font-family: monospace;
+}
+
+.bounty-header-right {
+  flex-shrink: 0;
+  display: flex;
+  gap: 1rem;
+}
+
+.bounty-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  border: 1.5px solid;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.bounty-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* Content - tighter layout with image top-right */
+.bounty-content {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  align-items: start;
+}
+
+/* Main info area */
+.bounty-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Name section */
+.bounty-name-section {
+  margin-bottom: 0.5rem;
+}
+
+.bounty-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgb(226, 232, 240);
+  margin-bottom: 0.25rem;
+}
+
+.bounty-alias {
+  font-size: 1rem;
+  color: rgb(148, 163, 184);
+  font-style: italic;
+}
+
+/* Payment section - horizontal */
+.bounty-payment-section {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(79, 209, 197, 0.2);
+}
+
+/* Bounty amount - more compact */
+.bounty-amount {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.25rem 1rem;
+  background: rgba(0, 170, 40, 0.1);
+  border: 2px solid rgba(0, 170, 40, 0.3);
+  border-radius: 6px;
+}
+
+.bounty-amount-label {
+  font-size: 0.75rem;
+  color: rgb(148, 163, 184);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.bounty-amount-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: rgb(0, 170, 40);
+  font-family: monospace;
+}
+
+/* Meta - more compact */
+.bounty-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.bounty-meta-item {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.bounty-meta-label {
+  color: rgb(148, 163, 184);
+  font-weight: 600;
+}
+
+.bounty-meta-value {
+  color: rgb(203, 213, 225);
+}
+
+/* Details grid - two columns */
+.bounty-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* Sections */
+.bounty-section {
+  margin-bottom: 0;
+}
+
+.bounty-section-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgb(79, 209, 197);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+/* Durability */
+.bounty-durability {
+  padding: 0.75rem;
+  background: rgba(15, 23, 42, 0.5);
+  border-left: 3px solid;
+  border-radius: 4px;
+}
+
+.bounty-durability-tier {
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.bounty-durability-intel {
+  font-size: 0.8rem;
+  color: rgb(203, 213, 225);
+  line-height: 1.3;
+  font-style: italic;
+}
+
+/* Combat */
+.bounty-combat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: rgba(15, 23, 42, 0.5);
+  border-radius: 4px;
+}
+
+.bounty-combat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.bounty-combat-label {
+  font-size: 0.7rem;
+  color: rgb(148, 163, 184);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.bounty-combat-value {
+  font-size: 0.8rem;
+  color: rgb(226, 232, 240);
+}
+
+.bounty-combat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.bounty-combat-list-item {
+  font-size: 0.8rem;
+  color: rgb(203, 213, 225);
+  padding-left: 0.5rem;
+}
+
+/* Intel */
+.bounty-intel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: rgba(15, 23, 42, 0.5);
+  border-radius: 4px;
+}
+
+.bounty-intel-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.bounty-intel-label {
+  font-size: 0.7rem;
+  color: rgb(148, 163, 184);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.bounty-intel-value {
+  font-size: 0.8rem;
+  color: rgb(203, 213, 225);
+}
+
+.bounty-intel-notes {
+  font-size: 0.8rem;
+  color: rgb(251, 191, 36);
+  line-height: 1.4;
+  font-style: italic;
+  padding: 0.5rem;
+  background: rgba(251, 191, 36, 0.1);
+  border-left: 2px solid rgb(251, 191, 36);
+  border-radius: 3px;
+}
+
+/* Image area - top right */
+.bounty-image-area {
+  display: flex;
+  flex-direction: column;
+  /* gap: 1rem; */
+  border: 2px solid;
+  border-radius: 6px;
+}
+
+.bounty-image-container {
+  width: 100%;
+  height: 250px;
+  background: rgba(0, 0, 0, 0.6);
+  /* border: 2px solid rgba(79, 209, 197, 0.3); */
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+.bounty-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(0.2) hue-rotate(160deg) saturate(1.2);
+}
+
+/* Silhouette fallback */
+.bounty-silhouette {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  opacity: 0.3;
+}
+
+.silhouette-head {
+  width: 60px;
+  height: 60px;
+  background: rgb(148, 163, 184);
+  border-radius: 50%;
+}
+
+.silhouette-shoulders {
+  width: 100px;
+  height: 80px;
+  background: rgb(148, 163, 184);
+  border-radius: 50% 50% 0 0;
+}
+
+/* Scanline overlay - static */
+.bounty-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 255, 136, 0.03) 0px,
+    transparent 1px,
+    transparent 2px,
+    rgba(0, 255, 136, 0.03) 3px
+  );
+  pointer-events: none;
+}
+
+/* Moving scan line */
+.bounty-scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.8), transparent);
+  box-shadow: 0 0 8px rgba(0, 255, 136, 0.6);
+  animation: scan-move 3s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes scan-move {
+  0% { transform: translateY(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(250px); opacity: 0; }
+}
+
+/* Green tint overlay */
+.bounty-image-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 255, 136, 0.08);
+  pointer-events: none;
+}
+
+/* Threat badge */
+.bounty-threat-badge {
+  padding: 0.75rem;
+
+  border-radius: 6px;
+  text-align: center;
+}
+
+.threat-label {
+  font-size: 0.7rem;
+  color: rgb(148, 163, 184);
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.05em;
+}
+
+.threat-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/* Claim banner - thin */
+.bounty-claim-banner {
+  padding: 1rem 1.5rem;
+  background: rgba(15, 23, 42, 0.5);
+  border-top: 2px solid rgba(239, 68, 68, 0.2);
+  border-bottom: 2px solid rgba(239, 68, 68, 0.2);
+}
+
+/* Footer */
+.bounty-footer {
+  background: rgba(15, 23, 42, 0.8);
+  padding: 0.75rem 1rem;
+  border-top: 2px solid rgba(239, 68, 68, 0.3);
+}
+
+.bounty-footer-warning {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgb(239, 68, 68);
+  text-align: center;
+  letter-spacing: 0.1em;
+}
