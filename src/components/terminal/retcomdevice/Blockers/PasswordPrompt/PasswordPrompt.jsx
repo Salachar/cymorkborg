@@ -143,7 +143,7 @@ export default function PasswordPrompt({
 
   return (
     <div
-      className="my-4 border-2 rounded-lg p-4 font-mono"
+      className="my-2 md:my-4 border-2 rounded-lg p-2 md:p-4 font-mono"
       style={{
         borderColor: 'rgb(77, 167, 188)',
         backgroundColor: 'rgba(29, 35, 50, 0.9)',
@@ -163,7 +163,13 @@ export default function PasswordPrompt({
         <>
           {/* Current Password Display */}
           <div className="mb-4">
-            <div className="text-2xl font-bold tracking-wider mb-1" style={{ color: 'rgb(79, 209, 197)', minHeight: '2rem' }}>
+            <div
+              className="text-xl md:text-2xl font-bold tracking-wider mb-1"
+              style={{
+                color: 'rgb(79, 209, 197)',
+                minHeight: '2rem',
+              }}
+            >
               {currentPassword.replace(/ /g, '·') || ''}
               <span style={{ animation: 'pw-cursor 1s step-end infinite' }}>▌</span>
             </div>
@@ -263,24 +269,24 @@ export default function PasswordPrompt({
           )}
 
           {/* Action Buttons */}
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <button
               onClick={handleBackspace}
-              className="px-4 py-2 font-bold rounded"
+              className="px-2 md:px-4 py-2 font-bold rounded text-sm md:text-base"
               style={{ backgroundColor: 'rgb(45, 53, 72)', color: 'rgb(133, 175, 231)', border: '2px solid rgb(77, 167, 188)' }}
             >
               ← Back
             </button>
             <button
               onClick={handleClear}
-              className="px-4 py-2 font-bold rounded"
+              className="px-2 md:px-4 py-2 font-bold rounded text-sm md:text-base"
               style={{ backgroundColor: 'rgb(45, 53, 72)', color: 'rgb(133, 175, 231)', border: '2px solid rgb(77, 167, 188)' }}
             >
               Clear
             </button>
 
             {/* Space + Submit — split 50/50 */}
-            <div style={{ flex: 1, display: 'flex', gap: '0.5rem' }}>
+            <div style={{ flex: 1, minWidth: '140px', display: 'flex', gap: '0.5rem' }}>
               <button
                 onClick={handleSpace}
                 className="font-bold rounded transition-all duration-150"

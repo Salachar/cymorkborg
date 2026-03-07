@@ -1,5 +1,10 @@
 import React from 'react';
 
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import OpenInFullIcon from '@mui/icons-material/OpenInFull';
+import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
+
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 const C = {
@@ -71,6 +76,7 @@ function ToggleBtn({
 }
 
 export default function CommandRow({
+  path = '',
   displayName,
   favicon = null,
   preview = null,
@@ -100,6 +106,12 @@ export default function CommandRow({
 
   const stopProp = (fn) => (e) => { e.stopPropagation(); fn?.(); };
 
+  const breadcrumb = depth > 0 ? (() => {
+    const parts = path.split('/');
+    const parents = parts.slice(0, -1).slice(-2); // last two parents
+    return parents.join(' → ');
+  })() : null;
+
   return (
     <div
       style={{
@@ -111,41 +123,34 @@ export default function CommandRow({
         ...style,
       }}
     >
-      {/* ── Header strip ── */}
       <div
-        onClick={onClick}
+        className="flex flex-row justify-between"
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.75rem',
-          padding: depth === 0 ? '0.8rem 1rem' : '0.65rem 0.9rem',
-          cursor: isExpandable ? 'pointer' : 'default',
-          userSelect: 'none',
-          minHeight: depth === 0 ? '3.5rem' : '3rem',
+          padding: '0.2rem 0.5rem 0 0.5rem',
         }}
       >
-        {favicon && <Favicon favicon={favicon} />}
-
-        {hasChildren ? (
-          <ChevronRightIcon
-            style={{
-              fontSize: 18,
-              color: accentColor,
-              flexShrink: 0,
-              transform: isExpanded ? 'rotate(90deg)' : 'rotate(0deg)',
-              transition: 'transform 0.15s',
-            }}
-          />
-        ) : (
-          <span style={{ width: '18px', flexShrink: 0 }} />
+        {breadcrumb && (
+          <div style={{
+            fontSize: '0.6rem',
+            color: C.textMuted,
+            fontFamily: 'monospace',
+            letterSpacing: '0.04em',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+          }}>
+            {breadcrumb.split(' → ').map((part, i, arr) => (
+              <span key={i}>
+                {i > 0 && <span style={{ color: 'rgba(79, 209, 197, 0.25)' }}> → </span>}
+                <span style={{
+                  color: i === arr.length - 1 ? C.teal : 'rgba(79, 209, 197, 0.35)',
+                }}>
+                  {part}
+                </span>
+              </span>
+            ))}
+          </div>
         )}
-
-        <span style={{
-          flex: 1, color: accentColor, fontWeight: 'bold',
-          fontSize, letterSpacing: '0.05em', fontFamily: 'monospace',
-        }}>
-          {displayName}
-        </span>
 
         {!isLocked && hasChildren && childCount > 0 && (
           <span
@@ -159,6 +164,44 @@ export default function CommandRow({
             ({childCount} nodes)
           </span>
         )}
+      </div>
+
+      {/* ── Header strip ── */}
+      <div
+        onClick={onClick}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.5rem',
+          padding: depth === 0 ? '0.8rem 1rem' : '0.5rem 1rem 0.75rem 1rem',
+          cursor: isExpandable ? 'pointer' : 'default',
+          userSelect: 'none',
+          // minHeight: depth === 0 ? '3.5rem' : '3rem',
+        }}
+      >
+        {favicon && <Favicon favicon={favicon} />}
+
+        {hasChildren ? (
+          <ChevronRightIcon
+            style={{
+              fontSize: 18,
+              color: accentColor,
+              flexShrink: 0,
+              transform: isExpanded ? 'rotate(90deg)' : 'rotate(0deg)',
+              transition: 'transform 0.15s',
+              height: '1rem',
+            }}
+          />
+        ) : (
+          <span style={{ width: '18px', flexShrink: 0 }} />
+        )}
+
+        <span style={{
+          flex: 1, color: accentColor, fontWeight: 'bold',
+          fontSize, letterSpacing: '0.05em', fontFamily: 'monospace',
+        }}>
+          {displayName}
+        </span>
 
         {hasBlocker && (
           <span style={{
@@ -174,31 +217,48 @@ export default function CommandRow({
           </span>
         )}
 
-        {/* Content toggle buttons — only when expanded and has content */}
         {hasContent && (
           <div style={{ display: 'flex', gap: '0.3rem', flexShrink: 0 }}>
-            <ToggleBtn
-              label={isVisible ? 'HIDE CONTENT' : 'SHOW CONTENT'}
-              active={true}
-              accentColor={accentColor}
-              accentBorder={accentBorder}
-              accentDim={accentDim}
+            <button
               onClick={stopProp(onToggleVisibility)}
               style={{
-                width: '8rem',
+                padding: '0.25rem',
+                border: `1px solid ${accentBorder}`,
+                borderRadius: '2px',
+                backgroundColor: accentDim,
+                color: accentColor,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
               }}
-            />
-            <ToggleBtn
-              label={contentSize === 'full' ? 'MINIMIZE' : 'MAXIMIZE'}
-              active={true}
-              accentColor={accentColor}
-              accentBorder={accentBorder}
-              accentDim={accentDim}
+            >
+              {isVisible
+                ? <VisibilityOffIcon style={{ fontSize: 14 }} />
+                : <VisibilityIcon style={{ fontSize: 14 }} />
+              }
+            </button>
+            {/* <button
               onClick={stopProp(onToggleSize)}
               style={{
-                width: '7rem',
+                padding: '0.25rem',
+                border: `1px solid ${accentBorder}`,
+                borderRadius: '2px',
+                backgroundColor: accentDim,
+                color: accentColor,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
               }}
-            />
+            >
+              {contentSize === 'full'
+                ? <CloseFullscreenIcon style={{ fontSize: 14 }} />
+                : <OpenInFullIcon style={{ fontSize: 14 }} />
+              }
+            </button> */}
           </div>
         )}
       </div>

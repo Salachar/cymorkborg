@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Line, Divider } from '@terminal/TerminalComponents';
 import { getAllChannelKeys, getChannelInfo, getRandomRadioTrack } from '@data/random/audioTracks';
 
+import './radio.css';
+
 export default function Radio({
   id = "radio-default",
   initialChannel,
@@ -60,15 +62,8 @@ export default function Radio({
   const visualizerColor = getTrackColor();
 
   return (
-    <div style={{ position: 'relative' }}>
-      <div
-        style={{
-          border: '2px solid rgb(77, 167, 188)',
-          borderRadius: '4px',
-          backgroundColor: 'rgba(29, 35, 50, 0.3)',
-          padding: '1rem',
-        }}
-      >
+    <div className="radio-wrapper">
+      <div className="radio-container">
         {/* Header */}
         <Line smoke large bold style={{ marginBottom: '0.5rem' }}>
           [CYBER RADIO - {model}]
@@ -76,23 +71,11 @@ export default function Radio({
         <Divider />
 
         {/* Main horizontal layout */}
-        <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+        <div className="radio-layout">
           {/* Left side - Channel tuner */}
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: 'rgba(15, 23, 42, 0.6)',
-              border: '2px solid rgb(71, 85, 105)',
-              borderRadius: '4px',
-              padding: '1rem',
-              minWidth: '180px',
-            }}
-          >
+          <div className="radio-tuner">
             {/* Channel display */}
-            <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
+            <div className="radio-tuner-channel">
               <div
                 style={{
                   fontSize: '1.75rem',
@@ -119,7 +102,7 @@ export default function Radio({
             </div>
 
             {/* Navigation buttons */}
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
+            <div className="radio-tuner-buttons">
               {/* Previous button */}
               <button
                 onClick={handlePrevChannel}
@@ -212,20 +195,7 @@ export default function Radio({
           </div>
 
           {/* Right side - Audio Visualizer */}
-          <div
-            style={{
-              width: '200px',
-              backgroundColor: 'rgba(15, 23, 42, 0.8)',
-              border: '2px solid rgb(71, 85, 105)',
-              borderRadius: '4px',
-              padding: '1rem',
-              display: 'flex',
-              alignItems: 'flex-end',
-              justifyContent: 'space-evenly',
-              gap: '4px',
-              overflow: 'hidden',
-            }}
-          >
+          <div className="radio-visualizer">
             {/* Visualizer bars */}
             {[...Array(12)].map((_, i) => (
               <div

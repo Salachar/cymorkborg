@@ -1,18 +1,20 @@
 /* Shield CSS - ICE Barrier */
 
 .icebreaker-shield {
-  width: 200px; /* Increased from 180px */
+  width: 120px; /* Increased from 180px */
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 6rem;
+  margin-right: 4rem;
 }
 
 .shield-container {
   position: relative;
-  width: 220px; /* Increased from 200px */
-  height: 220px;
+  /* width: 220px;
+  height: 220px; */
+  width: 140px;
+  height: 140px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,8 +24,10 @@
 .shield-ring {
   z-index: 1;
   position: absolute;
-  width: 160px; /* Increased from 140px */
-  height: 160px;
+  /* width: 160px;
+  height: 160px; */
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   /* Background set inline with conic-gradient for dynamic gap */
   filter: drop-shadow(0 0 10px rgba(79, 209, 197, 0.6));
@@ -34,8 +38,10 @@
 .shield-ring-inner {
   z-index: 2;
   position: absolute;
-  width: 136px; /* Increased from 120px */
-  height: 136px;
+  /* width: 136px;
+  height: 136px; */
+  width: 84px;
+  height: 84px;
   border-radius: 50%;
   background: rgba(30, 41, 59, 1);
 }
@@ -182,4 +188,11 @@
 @keyframes core-fade {
   0% { opacity: 1; }
   100% { opacity: 0; }
+}
+
+@media (min-width: 640px) {
+  .icebreaker-shield { width: 200px; margin-right: 6rem; }
+  .shield-container { width: 220px; height: 220px; }
+  .shield-ring { width: 160px; height: 160px; }
+  .shield-ring-inner { width: 136px; height: 136px; }
 }

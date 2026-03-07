@@ -9,7 +9,7 @@ import {
 
 import { COLLAPSED_CONTENT_STORAGE_KEY } from '@utils/localStorage';
 
-const PARTIAL_HEIGHT = 200;
+const PARTIAL_HEIGHT = 150;
 const CONTENT_BG = 'rgba(19, 23, 34, 0.6)';
 const CONTENT_BORDER = 'rgba(77, 167, 188, 0.2)';
 const FADE_COLOR = 'rgba(19, 23, 34, 0.95)';
@@ -69,6 +69,24 @@ function ContentPanel({ children, size, onToggleSize, style = {} }) {
 // ============================================================================
 // RECURSIVE NODE
 // ============================================================================
+
+const getDepthStyle = (depth) => {
+  const borders = [
+    'rgb(79, 209, 197)',
+    'rgba(79, 209, 197, 0.5)',
+    'rgba(79, 209, 197, 0.3)',
+  ];
+  const bgs = [
+    'rgba(29, 35, 50, 0.7)',
+    'rgba(22, 28, 42, 0.7)',
+    'rgba(16, 20, 32, 0.7)',
+  ];
+  const index = Math.min(depth, borders.length - 1);
+  return {
+    borderLeft: `3px solid ${borders[index]}`,
+    backgroundColor: bgs[index],
+  };
+};
 
 function CommandNode({
   id,
@@ -173,6 +191,7 @@ function CommandNode({
     <div>
       <div>
         <CommandRow
+          path={path}
           displayName={id}
           favicon={def.favicon ?? null}
           preview={def.preview ?? null}
@@ -191,9 +210,10 @@ function CommandNode({
           onToggleVisibility={handleToggleVisibility}
           onToggleSize={handleToggleSize}
           onClick={() => isExpandable && onToggle(path)}
-          style={{
-            marginLeft: `${depth * INDENT}rem`
-          }}
+          // style={getDepthStyle(depth)}
+          // style={{
+          //   marginLeft: `${depth * INDENT}rem`
+          // }}
         />
 
         {/* Content panel — same width as row, not indented further */}
@@ -201,9 +221,9 @@ function CommandNode({
           <ContentPanel
             size={contentSize}
             onToggleSize={handleToggleSize}
-            style={{
-              marginLeft: `${contentSize === 'partial' ? (depth * INDENT) + 'rem' : '0'}`
-            }}
+            // style={{
+            //   marginLeft: `${contentSize === 'partial' ? (depth * INDENT) + 'rem' : '0'}`
+            // }}
           >
             {isLocked ? renderBlocker() : resolvedContent}
           </ContentPanel>

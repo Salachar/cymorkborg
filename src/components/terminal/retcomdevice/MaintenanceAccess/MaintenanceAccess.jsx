@@ -10,18 +10,16 @@ export default function MaintenanceAccess({
   notes = [],
   children,
 }) {
-  // Status color mapping
   const statusColors = {
-    OPERATIONAL: 'rgb(34, 197, 94)', // green
-    DEGRADED: 'rgb(251, 191, 36)',    // yellow
-    ERROR: 'rgb(239, 68, 68)',         // red
+    OPERATIONAL: 'rgb(34, 197, 94)',
+    DEGRADED: 'rgb(251, 191, 36)',
+    ERROR: 'rgb(239, 68, 68)',
   };
 
   const statusColor = statusColors[systemStatus] || statusColors.OPERATIONAL;
 
   return (
     <div style={{ position: 'relative' }}>
-      {/* Container with enterprise blue-gray styling */}
       <div
         style={{
           border: '2px solid rgb(100, 116, 139)',
@@ -30,55 +28,46 @@ export default function MaintenanceAccess({
           overflow: 'hidden',
         }}
       >
-        {/* Header bar - enterprise style */}
+        {/* Header */}
         <div
           style={{
             backgroundColor: 'rgb(51, 65, 85)',
-            padding: '0.75rem 1rem',
             borderBottom: '1px solid rgb(100, 116, 139)',
           }}
+          className="px-3 py-2 md:px-4 md:py-3"
         >
-          <Line smoke large bold style={{ margin: 0 }}>
+          <Line smoke bold className="text-sm md:text-base" style={{ margin: 0 }}>
             {title}
           </Line>
         </div>
 
-        {/* Main content area */}
-        <div style={{ padding: '1rem' }}>
-          {/* System info section */}
+        {/* Main content */}
+        <div className="p-2 md:p-4">
+
+          {/* System info */}
           <div
             style={{
               backgroundColor: 'rgba(15, 23, 42, 0.6)',
               border: '1px solid rgb(71, 85, 105)',
               borderRadius: '3px',
-              padding: '0.75rem',
-              marginBottom: '1rem',
             }}
+            className="p-2 md:p-3 mb-3"
           >
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-              <Line cyan bold style={{ margin: 0, fontSize: '0.95rem' }}>
+            <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
+              <Line cyan bold className="text-xs md:text-sm" style={{ margin: 0 }}>
                 SYSTEM INFORMATION
               </Line>
-
-              {/* Status indicator */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <div className="flex items-center gap-2">
                 <div
                   style={{
-                    width: '8px',
-                    height: '8px',
+                    width: '8px', height: '8px',
                     borderRadius: '50%',
                     backgroundColor: statusColor,
                     boxShadow: `0 0 8px ${statusColor}`,
+                    flexShrink: 0,
                   }}
                 />
-                <span
-                  style={{
-                    fontSize: '0.75rem',
-                    fontWeight: 'bold',
-                    color: statusColor,
-                    fontFamily: 'monospace',
-                  }}
-                >
+                <span className="text-xs font-bold font-mono" style={{ color: statusColor }}>
                   {systemStatus}
                 </span>
               </div>
@@ -96,33 +85,27 @@ export default function MaintenanceAccess({
             />
           </div>
 
+          {/* Notes */}
           {notes.length > 0 && (
             <div
               style={{
                 backgroundColor: 'rgba(15, 23, 42, 0.6)',
                 border: '1px solid rgb(71, 85, 105)',
                 borderRadius: '3px',
-                padding: '0.75rem',
               }}
+              className="p-2 md:p-3 mb-3"
             >
-              <Line cyan bold style={{ margin: 0, fontSize: '0.95rem', marginBottom: '0.5rem' }}>
+              <Line cyan bold className="text-xs md:text-sm" style={{ margin: 0, marginBottom: '0.5rem' }}>
                 NOTES
               </Line>
               {notes.map((note, i) => (
                 <div
                   key={i}
-                  style={{
-                    display: 'flex',
-                    gap: '0.5rem',
-                    marginTop: '0.5rem',
-                    paddingLeft: '0.5rem',
-                    borderLeft: '2px solid rgb(251, 191, 36)',
-                  }}
+                  className="flex gap-2 mt-2 pl-2"
+                  style={{ borderLeft: '2px solid rgb(251, 191, 36)' }}
                 >
-                  <span style={{ color: 'rgb(251, 191, 36)', fontSize: '0.75rem', flexShrink: 0 }}>
-                    •
-                  </span>
-                  <Line yellow style={{ margin: 0, fontSize: '0.875rem' }}>
+                  <span className="text-xs shrink-0" style={{ color: 'rgb(251, 191, 36)' }}>•</span>
+                  <Line yellow className="text-xs md:text-sm" style={{ margin: 0 }}>
                     {note}
                   </Line>
                 </div>
@@ -131,16 +114,14 @@ export default function MaintenanceAccess({
           )}
 
           {Boolean(children) && (
-            <div style={{
-              margin: '1rem 0',
-            }}>
-              {children }
+            <div className="my-3">
+              {children}
             </div>
           )}
 
-          {/* Footer info */}
-          <div style={{ marginTop: '1rem' }}>
-            <Line yellow style={{ fontSize: '0.7rem' }}>
+          {/* Footer */}
+          <div className="mt-3">
+            <Line yellow className="text-xs" style={{ opacity: 0.7 }}>
               ⚠ Authorized personnel only - All actions logged
             </Line>
           </div>

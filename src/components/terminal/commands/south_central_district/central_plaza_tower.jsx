@@ -116,8 +116,8 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
           },
 
           "Atrium ATM": {
-            mastermind: {
-              difficulty: 'easy',
+            icebreaker: {
+              difficulty: 'hard',
             },
             content: (
               <ATM

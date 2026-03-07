@@ -1,7 +1,7 @@
 import {
   Line,
-  Divider,
   InsetBox,
+  NodePreview,
 } from '@terminal/TerminalComponents';
 
 import {
@@ -27,7 +27,12 @@ import {
 import cyberlich_painting_image from '@images/cyberlich_painting.png';
 
 export const STEEL_PENTHOUSE_COMMANDS = {
-  "Steel Jackhammer's Penthouse - Smart Home System": {
+  "Steel Jackhammer's Penthouse": {
+    preview: (
+      <NodePreview>
+        <Line span yellow> · Smart Home System</Line>
+      </NodePreview>
+    ),
     password: {
       pw: 'unkillable',
       hint: "Can't take down the champ!",

@@ -74,7 +74,7 @@ export const BUSINESS_COMMANDS = {
         ),
       },
 
-      "Patient Records [CONFIDENTIAL]": {
+      "Patient Records": {
         password: {
           pw: "scalpel",
           hint: "Slicey slicey time tool",

@@ -245,7 +245,7 @@ export const LUCKY_FLIGHT_CASINO = {
         },
       },
 
-      "Casino Internal Network": {
+      "Internal Network": {
         favicon: <Icons.LAN />,
         password: {
           pw: "loaded dice",

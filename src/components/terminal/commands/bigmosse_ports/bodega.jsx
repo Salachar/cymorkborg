@@ -5,6 +5,7 @@ import {
   Divider,
   DataTable,
   InsetBox,
+  NodePreview,
 } from '@terminal/TerminalComponents';
 
 import {
@@ -32,13 +33,18 @@ import BatusBodegaAd from './bodega_ad'
 import cop_car_image from '@images/cop_car.png';
 
 export const BODEGA_COMMANDS = {
-  "Batu's Bodega (FREE ACCESS)": {
+  "Batu's Bodega": {
     favicon: <Icons.Bodega />,
     content: (
       <BatusBodegaAd />
     ),
+    preview: (
+      <NodePreview>
+        <Line span neon> · FREE WIFI ACCESS!</Line>
+      </NodePreview>
+    ),
     related_commands: {
-      "Charlie's Mission Brief": {
+      "Charlie's Brief": {
         content: (
           <Briefing
             title="Lucky Flight Takedown"
@@ -159,7 +165,7 @@ export const BODEGA_COMMANDS = {
 
       "Bodega ATM": {
         mastermind: {
-          difficulty: 'easy',
+          difficulty: 'medium',
         },
         content: (
           <ATM
@@ -285,7 +291,7 @@ export const BODEGA_COMMANDS = {
         ),
       },
 
-      "Community Bulletin Board": {
+      "Community Bulletin": {
         content: (
           <CommunityBoard
             id="bodega-bulletin"

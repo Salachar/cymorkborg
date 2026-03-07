@@ -152,22 +152,17 @@ export const InsetBox = ({ children, title, color = "cyan", className = "", styl
         backgroundColor: 'rgba(15, 23, 42, 0.6)',
         border: '1px solid rgb(71, 85, 105)',
         borderRadius: '3px',
-        padding: '0.75rem',
-        margin: "1rem 0",
+        margin: "0.75rem 0",
         ...style,
       }}
     >
-      <div style={{
-        color: COLOR_MAP[color],
-        fontWeight: "bold",
-        marginBottom: "0.5rem",
-      }}>
-        {title}
-      </div>
-      <div style={{
-        fontSize: "0.875rem",
-      }}>
-        {children}
+      <div className="p-2 md:p-3">
+        <div className="text-xs md:text-sm font-bold mb-2" style={{ color: COLOR_MAP[color] }}>
+          {title}
+        </div>
+        <div className="text-xs md:text-sm">
+          {children}
+        </div>
       </div>
     </div>
   );
@@ -222,160 +217,37 @@ export const Header = ({ children, color = "cyan" }) => {
   );
 };
 
-// Status badge
-export const Status = ({ children, type = "success" }) => {
-  const typeColorMap = {
-    success: COLOR_MAP.neon,
-    warning: COLOR_MAP.yellow,
-    error: COLOR_MAP.red,
-    info: COLOR_MAP.cyan,
-  };
-
-  return (
-    <span style={{
-      color: typeColorMap[type],
-      fontWeight: "bold"
-    }}>
-      [{children}]
-    </span>
-  );
-};
-
-// Clickable command link (for use in terminal output)
-export const CommandLink = ({ command, children, onClick }) => {
-  return (
-    <span
-      style={{
-        color: COLOR_MAP.cyan,
-        cursor: "pointer",
-        textDecoration: "none"
-      }}
-      onClick={() => onClick && onClick(command)}
-    >
-      {children || command}
-    </span>
-  );
-};
-
-// Data table component
 export const DataTable = ({ data }) => {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+    <div className="flex flex-col gap-1">
       {data.map((row, index) => (
-        <div key={index} style={{ display: "flex", gap: "1rem" }}>
-          <span style={{ color: COLOR_MAP.yellow, minWidth: "150px" }}>{row.label}:</span>
-          <span style={{ color: COLOR_MAP.neon }}>{row.value}</span>
+        <div key={index} className="flex flex-wrap gap-x-4 gap-y-0.5">
+          <span className="text-xs md:text-sm shrink-0" style={{ color: COLOR_MAP.yellow, minWidth: '80px' }}>{row.label}:</span>
+          <span className="text-xs md:text-sm" style={{ color: COLOR_MAP.neon }}>{row.value}</span>
         </div>
       ))}
     </div>
   );
 };
 
-// Code block
-export const CodeBlock = ({ children }) => {
-  return (
-    <div style={{
-      backgroundColor: "rgba(0, 0, 0, 0.5)",
-      border: `1px solid ${COLOR_MAP.neon}`,
-      padding: "0.5rem",
-      marginTop: "0.5rem",
-      fontFamily: "monospace",
-      fontSize: "0.875rem"
-    }}>
-      <pre style={{
-        color: COLOR_MAP.neon,
-        whiteSpace: "pre-wrap",
-        margin: 0
-      }}>
-        {children}
-      </pre>
-    </div>
-  );
-};
-
-// Progress bar
 export const ProgressBar = ({ percent = 100, label = "" }) => {
   const filled = Math.round(percent / 4);
   const empty = 25 - filled;
 
   return (
-    <div style={{ color: COLOR_MAP.neon }}>
+    <div className="text-xs md:text-sm overflow-hidden break-all" style={{ color: COLOR_MAP.neon }}>
       {label && <span style={{ color: COLOR_MAP.yellow }}>{label}: </span>}
       [{'█'.repeat(filled)}{'░'.repeat(empty)}] {percent}%
     </div>
   );
 };
 
-// Stat display (for character/enemy stats)
-export const StatBlock = ({ stats }) => {
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
-      {Object.entries(stats).map(([key, value]) => (
-        <div key={key} style={{ display: "flex", gap: "0.5rem" }}>
-          <span style={{
-            color: COLOR_MAP.yellow,
-            textTransform: "uppercase",
-            minWidth: "100px"
-          }}>
-            {key}:
-          </span>
-          <span style={{
-            color: COLOR_MAP.neon,
-            fontWeight: "bold"
-          }}>
-            {value}
-          </span>
-        </div>
-      ))}
-    </div>
-  );
-};
-
-// Key-value pair display
 export const KeyValue = ({ label, value, valueColor = "neon" }) => {
   return (
-    <div style={{ display: "flex", gap: "0.5rem" }}>
-      <span style={{ color: COLOR_MAP.yellow }}>{label}:</span>
-      <span style={{ color: COLOR_MAP[valueColor] }}>{value}</span>
+    <div className="flex flex-wrap gap-x-2 gap-y-0.5">
+      <span className="text-xs md:text-sm shrink-0" style={{ color: COLOR_MAP.yellow }}>{label}:</span>
+      <span className="text-xs md:text-sm" style={{ color: COLOR_MAP[valueColor] }}>{value}</span>
     </div>
   );
 };
 
-// Boot messages helper - needs to be a function that receives setInput
-export const getBootMessages = (setInput) => [{
-  content: (
-    <Line smoke>BOOTING CY_NET TERMINAL...</Line>
-  ),
-}, {
-  content: (
-    <Line pink>Client: {navigator.userAgent}</Line>
-  ),
-}, {
-  content: (
-    <Line cyan>Platform: {navigator.platform || "#"} | {navigator.oscpu || "#"} | {navigator.vendor || "#"}</Line>
-  ),
-}, {
-  content: (
-    <ProgressBar />
-  ),
-}, {
-  content: (
-    <Line smoke>INITIALIZING SECURE CONNECTION...</Line>
-  ),
-}, {
-  content: (
-    <Line cyan>CONNECTION ESTABLISHED <Line red inline>[UNSECURED]</Line></Line>
-  ),
-}, {
-  content: (
-    <Line smoke>
-      <CommandLink command="help" onClick={(cmd) => setInput(cmd)}>help</CommandLink> - Basic usage information.
-    </Line>
-  ),
-}, {
-  content: (
-    <Line smoke>
-      <CommandLink command="list" onClick={(cmd) => setInput(cmd)}>list</CommandLink> - See all access points.
-    </Line>
-  ),
-}];

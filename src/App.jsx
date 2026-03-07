@@ -65,7 +65,7 @@ export default function App() {
             <CyNavLink to="/rules" label="Rules" color="yellow" />
             <CyNavLink to="/combat" label="Combat" color="pink" />
             <CyNavLink to="/classes" label="Classes" color="pink" />
-            <CyNavLink to="/retcomdevice" label="RetComDevice" color="green" />
+            <CyNavLink to="/retcom" label="RetCom" color="green" />
 
             {/* Nav extra slot — right side */}
             {navExtra && (
@@ -80,9 +80,9 @@ export default function App() {
         </nav>
 
         {/* Scrollable content area */}
-        {location.pathname === '/retcomdevice' ? (
+        {location.pathname === '/retcom' ? (
           <Routes>
-            <Route path="/retcomdevice" element={<RetComDevice />} />
+            <Route path="/retcom" element={<RetComDevice />} />
           </Routes>
         ) : (
           <div ref={contentRef} className="flex-1 overflow-y-auto overflow-x-hidden">
