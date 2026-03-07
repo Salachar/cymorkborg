@@ -33,12 +33,19 @@ export default function AppDataExportImport({
       const blob = new Blob([dataStr], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
 
+      // const link = document.createElement('a');
+      // link.href = url;
+      // const fileName = `cyborg_backup_${Date.now()}.json`;
+      // link.download = fileName;
+      // link.click();
+
+      const fileName = `cyborg_backup_${Date.now()}.json`;
       const link = document.createElement('a');
       link.href = url;
-      const fileName = `cyborg_backup_${Date.now()}.json`;
       link.download = fileName;
+      document.body.appendChild(link);
       link.click();
-
+      document.body.removeChild(link);
       URL.revokeObjectURL(url);
 
       console.log('App data exported successfully');

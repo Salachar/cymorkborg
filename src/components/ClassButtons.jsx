@@ -4,7 +4,7 @@ import { CLASS_BUTTONS_STORAGE_KEY } from '@utils/localStorage';
 
 function getOpen() {
   try {
-    const saved = localStorage.getItem(STORAGE_KEY);
+    const saved = localStorage.getItem(CLASS_BUTTONS_STORAGE_KEY);
     return saved !== null ? JSON.parse(saved) : true;
   } catch (e) {
     return true;

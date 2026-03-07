@@ -63,6 +63,12 @@ class BaseClass {
       this._current_health = 1;
     }
 
+    if (typeof data.max_health === "number") {
+      this._max_health = data.max_health;
+    } else {
+      this._max_health = this._current_health || 1;
+    }
+
     if (typeof data.stat_points === "number") {
       this._stat_points = data.stat_points;
     }
@@ -73,6 +79,14 @@ class BaseClass {
 
     if (typeof data.glitches === "number") {
       this._glitches = data.glitches;
+    } else {
+      this._glitches = 0;
+    }
+
+    if (typeof data.max_glitches === "number") {
+      this._max_glitches = data.max_glitches;
+    } else {
+      this._max_glitches = this._glitches || 0;
     }
 
     if (data.selected_tables && Object.keys(data.selected_tables).length) {
@@ -576,8 +590,10 @@ class BaseClass {
       class: this.class,
       name: this.name,
       current_health: this.current_health,
+      max_health: this.max_health,
       credits: this.credits,
       glitches: this.glitches,
+      max_glitches: this.max_glitches,
       selected_tables: this.selected_tables,
       gear: this.gear,
       shop_cart: this.shop_cart,
