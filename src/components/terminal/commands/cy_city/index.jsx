@@ -212,6 +212,7 @@ export const CY_CITY_PORTAL = {
       <NodePreview>
         <span style={{ color: 'rgb(0, 255, 65)' }}>3 games</span>
         {' '}available — Nanobomb Defusal, Netrunner Memory Deck, and Cyber Poker.
+        <Line red top>* Games are not small tablet/phone friendly at the moment</Line>
       </NodePreview>
     ),
     content: (

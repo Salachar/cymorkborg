@@ -30,7 +30,7 @@ export const WEAPONS_TABLE = [
     id: "smartgun",
     label: "SmartGun™",
     die: "d6a",
-    description: <>d10a damage with SmartJack. a = capable of autofire</>,
+    description: <>d10a damage with SmartJack (Cybertech). a = capable of autofire</>,
   },
   {
     id: "small_smgs",

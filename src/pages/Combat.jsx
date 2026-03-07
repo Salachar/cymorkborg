@@ -4,12 +4,22 @@ import {
   DefinitionBox,
 } from "../components/PageComponents";
 
+export function GlitchTip({ children }) {
+  return (
+    <div className="bg-cy-cyan/10 border border-cy-cyan p-3 rounded">
+      <p className="text-cy-cyan text-sm">
+        <strong>Glitch Tip:</strong> {children}
+      </p>
+    </div>
+  );
+}
+
 export default function Combat() {
   return (
     <Page>
       <PageHeader
         title="Combat Flow"
-        subtitle="Step-by-step guide for running combat encounters"
+        // subtitle="Step-by-step guide for running combat encounters"
       />
 
       {/* Quick Reference Box */}
@@ -59,7 +69,7 @@ export default function Combat() {
         ]}
       >
         <p className="text-gray-300 mb-4 text-sm">
-          Reality glitches in your favor. You start with d2 Glitches (or class die).
+          Reality glitches in your favor. You start with at least d2 Glitches (or class die).
           Regain them by rolling again after spending all and resting.
         </p>
       </DefinitionBox>
@@ -83,6 +93,7 @@ export default function Combat() {
                 <li>• <strong className="text-cy-cyan">4-6:</strong> PCs act first</li>
               </ul>
             </div>
+            <GlitchTip>Spend a Glitch to reroll the initiative die and take the better result.</GlitchTip>
             <p className="text-gray-400 text-sm">
               <strong className="text-cy-cyan">If needed:</strong> Roll Agility + d6 to determine individual order within each group.
             </p>
@@ -97,13 +108,16 @@ export default function Combat() {
         >
           <div className="space-y-3">
             <div className="bg-cy-cyan/10 border border-cy-cyan p-3 rounded">
-              <p className="text-cy-cyan text-sm">
+              <div className="text-cy-cyan text-sm">
                 <strong>Cybertech Tip:</strong> Check for attack options on any cybertech you might have.
-              </p>
+              </div>
+              <div className="text-cy-cyan text-sm mt-2">
+                <strong>SmartJack:</strong> Acquirable cybertech that enhances some guns.
+              </div>
             </div>
 
             <ActionOption
-              action="Take Cover (Optional)"
+              action="Take Cover"
               test="No roll"
               description="Position yourself behind cover. Increase DR to hit you, or lower DR to defend while covered."
               optional={true}
@@ -125,7 +139,7 @@ export default function Combat() {
               description="Aim and fire. Roll to hit, then roll weapon damage."
             />
             <ActionOption
-              action="Aim at Target (Optional)"
+              action="Aim at Target"
               test="No roll (1 round)"
               description="Spend one round aiming. Next attack gets either -2DR to hit OR +2 damage."
               optional={true}
@@ -136,7 +150,7 @@ export default function Combat() {
               description="Spray and pray. On hit: roll damage, then you can attack again (same or different target). Max 3 attacks total. Check armor for each hit."
             />
             <ActionOption
-              action="Suppressive Fire (Optional)"
+              action="Suppressive Fire"
               test="Agility (spend mag)"
               description="Suppress up to d3 targets with automatic weapon. Suppressed targets must either get out of the way (+4DR to next action) or stand their ground (defend DR14 autofire)."
               optional={true}
@@ -156,7 +170,7 @@ export default function Combat() {
             <ActionOption
               action="Other Actions"
               test="Varies"
-              description="Move, reload, use item, help ally, etc. GM determines if a test is needed."
+              description="Move, reload, use item, help ally, etc. Any action you might want to try. GM determines if a test is needed."
             />
 
             {/* Range Note */}
@@ -197,19 +211,22 @@ export default function Combat() {
                 />
                 <ResultBox
                   result="< DR12 (Miss)"
-                  effect="You miss. End your turn."
+                  effect="Attack misses"
                   color="gray"
                 />
                 <ResultBox
                   result="Natural 1 (Fumble)"
-                  effect="Roll d6 on weapon mishap table"
+                  effect="Roll on the weapon fumble table"
                   color="red"
                 />
               </div>
             </div>
 
+            <GlitchTip>Spend a Glitch before rolling to reduce the DR by 4.</GlitchTip>
+            <GlitchTip>Spend a Glitch to neutralize a fumble — no roll on the weapon fumble table.</GlitchTip>
+
             <div className="bg-red-900/20 border border-red-600 p-3 rounded">
-              <p className="text-red-400 font-bold text-sm mb-2">Fumble Table (d6):</p>
+              <p className="text-red-400 font-bold text-sm mb-2">Weapon Fumble Table (d6):</p>
               <ul className="space-y-1 text-gray-400 text-xs">
                 <li>• <strong>1-3:</strong> Out of ammo or drop weapon</li>
                 <li>• <strong>4-5:</strong> Misfire / Weapon breaks</li>
@@ -238,11 +255,8 @@ export default function Combat() {
                 Final damage: <strong className="text-cy-cyan">5 HP</strong>
               </p>
             </div>
-            <div className="bg-cy-cyan/10 border border-cy-cyan p-3 rounded">
-              <p className="text-cy-cyan text-sm">
-                <strong>Glitch Tip:</strong> Spend a Glitch to deal maximum weapon damage (no roll needed).
-              </p>
-            </div>
+
+            <GlitchTip>Spend a Glitch to deal maximum weapon damage — no roll needed.</GlitchTip>
 
             {/* Hits Always Hurt */}
             <div className="bg-gray-900/50 border border-gray-700 p-3 rounded mt-4">
@@ -265,6 +279,8 @@ export default function Combat() {
               <p className="text-gray-300 mb-3">
                 When attacked, roll <strong className="text-cy-yellow">Agility DR12</strong> to defend.
               </p>
+
+
               <div className="space-y-2 text-sm">
                 <ResultBox
                   result="Natural 20 (Critical Defense)"
@@ -289,11 +305,38 @@ export default function Combat() {
               </div>
             </div>
 
-            <div className="bg-cy-cyan/10 border border-cy-cyan p-3 rounded">
-              <p className="text-cy-cyan text-sm">
-                <strong>Glitch Tip:</strong> Spend a Glitch to reduce incoming damage by d6.
+            {/* Alternate Rule Block */}
+            <div className="bg-gray-900/50 border border-gray-600 border-dashed p-3 rounded">
+              <p className="text-gray-400 font-bold text-sm mb-2 uppercase tracking-wider">⚙ Alternate Rule: GM Rolls Attacks</p>
+              <p className="text-gray-500 text-xs mb-3">
+                Instead of the player defending, the GM rolls <strong className="text-gray-400">Agility DR12</strong> for the enemy's attack.
               </p>
+              <div className="space-y-2 text-sm">
+                <ResultBox
+                  result="Natural 20 (Critical Hit)"
+                  effect="Enemy hits for ×2 damage + reduces player armor by 1 tier"
+                  color="red"
+                />
+                <ResultBox
+                  result="≥ DR12 (Hit)"
+                  effect="Enemy hits. Player rolls armor to reduce damage."
+                  color="gray"
+                />
+                <ResultBox
+                  result="< DR12 (Miss)"
+                  effect="Enemy misses. No damage."
+                  color="green"
+                />
+                <ResultBox
+                  result="Natural 1 (Fumble)"
+                  effect="Enemy fumbles — player gets a free attack on them"
+                  color="cyan"
+                />
+              </div>
             </div>
+
+            <GlitchTip>Spend a Glitch to reduce incoming damage by d6.</GlitchTip>
+            <GlitchTip>Spend a Glitch to neutralize a fumble — take normal damage instead of ×2.</GlitchTip>
           </div>
         </CombatStep>
 
@@ -342,6 +385,8 @@ export default function Combat() {
                 Attacks DR10, Defense DR14. Continues until Battered, Dead, or sedated.
               </p>
             </div>
+
+            <GlitchTip>Spend a Glitch to reroll on the Battered table and take the better result.</GlitchTip>
           </div>
         </CombatStep>
 

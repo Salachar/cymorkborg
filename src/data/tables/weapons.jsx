@@ -90,7 +90,7 @@ export const WEAPONS_FOR_SALE = [
     label: "SmartGun™",
     die: "d6a",
     cost: "100¤",
-    description: <>d10a with a SmartJack.</>,
+    description: <>d10a with a SmartJack (Cybertech).</>,
   },
   {
     id: "small_smgs",

@@ -106,10 +106,22 @@ export default function CommandRow({
 
   const stopProp = (fn) => (e) => { e.stopPropagation(); fn?.(); };
 
+  // const breadcrumb = depth > 0 ? (() => {
+  //   const parts = path.split('/');
+  //   const parents = parts.slice(0, -1).slice(-3); // last two parents
+  //   return parents.join(' → ');
+  // })() : null;
+
   const breadcrumb = depth > 0 ? (() => {
     const parts = path.split('/');
-    const parents = parts.slice(0, -1).slice(-2); // last two parents
-    return parents.join(' → ');
+    const parents = parts.slice(0, -1);
+
+    return parents.map((part, i) => {
+      const isRecent = i >= parents.length - 2;
+      if (isRecent) return part;
+      // Abbreviate: first char of each word, uppercase
+      return part.split(/\s+/).map(word => word[0]?.toUpperCase() ?? '').join('');
+    });
   })() : null;
 
   return (
@@ -129,7 +141,7 @@ export default function CommandRow({
           padding: '0.2rem 0.5rem 0 0.5rem',
         }}
       >
-        {breadcrumb && (
+        {/* {breadcrumb && (
           <div style={{
             fontSize: '0.6rem',
             color: C.textMuted,
@@ -150,6 +162,21 @@ export default function CommandRow({
               </span>
             ))}
           </div>
+        )} */}
+        {breadcrumb && (
+          <div style={{ fontSize: '0.6rem', fontFamily: 'monospace', letterSpacing: '0.04em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+            {breadcrumb.map((part, i, arr) => (
+              <span key={i}>
+                {i > 0 && <span style={{ color: 'rgba(79, 209, 197, 0.25)' }}> → </span>}
+                <span style={{ color: i >= arr.length - 2 ? C.teal : 'rgba(79, 209, 197, 0.35)' }}>
+                  {part}
+                </span>
+              </span>
+            ))}
+          </div>
+        )}
+        {!breadcrumb && (
+          <div />
         )}
 
         {!isLocked && hasChildren && childCount > 0 && (
@@ -173,7 +200,7 @@ export default function CommandRow({
           display: 'flex',
           alignItems: 'center',
           gap: '0.5rem',
-          padding: depth === 0 ? '0.8rem 1rem' : '0.5rem 1rem 0.75rem 1rem',
+          padding: '0.5rem 1rem 0.75rem 1rem',
           cursor: isExpandable ? 'pointer' : 'default',
           userSelect: 'none',
           // minHeight: depth === 0 ? '3.5rem' : '3rem',
@@ -217,53 +244,32 @@ export default function CommandRow({
           </span>
         )}
 
-        {hasContent && (
-          <div style={{ display: 'flex', gap: '0.3rem', flexShrink: 0 }}>
-            <button
-              onClick={stopProp(onToggleVisibility)}
-              style={{
-                padding: '0.25rem',
-                border: `1px solid ${accentBorder}`,
-                borderRadius: '2px',
-                backgroundColor: accentDim,
-                color: accentColor,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0,
-              }}
-            >
-              {isVisible
-                ? <VisibilityOffIcon style={{ fontSize: 14 }} />
-                : <VisibilityIcon style={{ fontSize: 14 }} />
-              }
-            </button>
-            {/* <button
-              onClick={stopProp(onToggleSize)}
-              style={{
-                padding: '0.25rem',
-                border: `1px solid ${accentBorder}`,
-                borderRadius: '2px',
-                backgroundColor: accentDim,
-                color: accentColor,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0,
-              }}
-            >
-              {contentSize === 'full'
-                ? <CloseFullscreenIcon style={{ fontSize: 14 }} />
-                : <OpenInFullIcon style={{ fontSize: 14 }} />
-              }
-            </button> */}
-          </div>
-        )}
+        <div style={{ display: 'flex', gap: '0.3rem', flexShrink: 0 }}>
+          <button
+            onClick={stopProp(onToggleVisibility)}
+            style={{
+              padding: '0.25rem',
+              border: `1px solid ${accentBorder}`,
+              borderRadius: '2px',
+              backgroundColor: accentDim,
+              color: accentColor,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+              // always "show" for sizing/spacing reasons
+              visibility: hasContent ? 'visible' : 'hidden',
+            }}
+          >
+            {isVisible
+              ? <VisibilityOffIcon style={{ fontSize: 14 }} />
+              : <VisibilityIcon style={{ fontSize: 14 }} />
+            }
+          </button>
+        </div>
       </div>
 
-      {/* ── Preview — always visible when present ── */}
       {preview && (
         <div
           onClick={(e) => e.stopPropagation()}
