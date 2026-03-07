@@ -91,7 +91,7 @@ export default function AppDataExportImport({
         });
 
         setImportStatus('success');
-
+        setTimeout(() => window.location.reload(), 800);
       } catch (error) {
         console.error('Import error:', error);
         setImportStatus('error');
