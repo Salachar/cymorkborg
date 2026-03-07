@@ -105,10 +105,6 @@ body {
     0 0 80px rgba(255, 0, 128, 0.05);
 }
 
-.page-content {
-  padding: 2rem 3rem 5rem 3rem;
-}
-
 .divider {
   background: linear-gradient(
     90deg,

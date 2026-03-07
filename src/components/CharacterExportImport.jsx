@@ -103,11 +103,11 @@ export default function AppDataExportImport({
     event.target.value = '';
   };
 
-  const buttonClass = "px-4 py-2 bg-gray-800 border-2 border-cy-cyan-subtle text-white font-bold uppercase text-sm transition-all shadow-lg shadow-cy-cyan/30";
+  const buttonClass = "px-4 py-2 bg-gray-800 border-2 border-cy-cyan-subtle text-white font-bold uppercase text-xs transition-all shadow-lg shadow-cy-cyan/30";
   const buttonStyles = {
-    minWidth: "8rem",
     color: "white",
     cursor: "pointer",
+    opacity: "0.6",
   };
 
   return (
@@ -119,7 +119,7 @@ export default function AppDataExportImport({
           style={buttonStyles}
           title="Export all app data including characters, settings, and preferences"
         >
-          Export All Data
+          Export
         </button>
 
         <label
@@ -127,7 +127,7 @@ export default function AppDataExportImport({
           style={buttonStyles}
           title="Import app data backup (will replace all current data)"
         >
-          Import Backup
+          Import
           <input
             ref={fileInputRef}
             type="file"

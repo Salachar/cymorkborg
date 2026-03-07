@@ -17,25 +17,6 @@ export const PageHeader = ({
   );
 }
 
-export const PageBox = ({
-  title = "",
-  children,
-}) => {
-  return (
-    <section className="mb-12">
-      <div className="bg-gradient-to-br from-gray-900/90 to-black border-2 border-cy-cyan/30 p-8 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-cy-cyan/5 blur-3xl" />
-        <div className="relative z-10">
-          <h2 className="text-3xl font-black text-cy-yellow mb-4 uppercase">
-            {title}
-          </h2>
-          {children}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 export const Callout = ({
   title = "",
   children,

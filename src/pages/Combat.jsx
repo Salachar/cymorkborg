@@ -417,16 +417,16 @@ function CombatStep({ number, title, color, children }) {
   return (
     <div className={`border-l-4 ${colorMap[color]} p-6`}>
       <div className="flex items-start gap-4 mb-4">
-        <div className={`text-4xl font-black ${textColorMap[color]} opacity-50`}>
+        {/* <div className={`text-4xl font-black ${textColorMap[color]} opacity-50`}>
           {number}
-        </div>
+        </div> */}
         <h2 className={`text-2xl font-black ${textColorMap[color]} uppercase pt-1`}>
           {title}
         </h2>
       </div>
-      <div className="pl-16">
+      {/* <div className="pl-6"> */}
         {children}
-      </div>
+      {/* </div> */}
     </div>
   );
 }

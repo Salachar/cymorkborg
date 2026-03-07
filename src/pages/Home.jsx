@@ -1,7 +1,6 @@
 import {
   Page,
   PageHeader,
-  PageBox,
   Callout,
 } from "../components/PageComponents";
 
@@ -10,17 +9,25 @@ export default function Home() {
     <Page>
       <PageHeader title="CY_BORG" />
 
-      <PageBox title="Welcome to 20X3_">
-        <p className="text-lg text-gray-300 leading-relaxed mb-4">
-          Constantly in flux; shifting, distorting, always reborn as something worse. Destruction by ecological catastrophes, the fallout of history's belligerence; by modern man-made Miseries or the blood spilled by the reckless machine of capitalist supremacy. Mankind's greatest ability truly is to destroy itself in creative ways. Designer demise, consumer-customized death, endlessly on repeat.
-        </p>
-        <p className="text-lg text-gray-300 leading-relaxed mb-4">
-          Poisonous space rocks, nuclear weapons, cyclical revolutions, warring nations, warring corporations, warring neighbors; pandemics, tsunamis, volcanoes. In between it all: direct person-machine interfaces, tactical neural implants, and bacteria from outer space intercellular nanorobotics. And the sky is full of ads.
-        </p>
-        <p className="text-lg text-cy-yellow font-bold">
-          Everyone is interfaced/injected/infected/infested with something. Everyone wants something from everyone else. Everyone is a liar and a cheat. Everyone wants more creds. ¤¤¤¤
-        </p>
-      </PageBox>
+      <section className="mb-12">
+        <div className="bg-gradient-to-br from-gray-900/90 to-black border-2 border-cy-cyan/30 p-6 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-cy-cyan/5 blur-3xl" />
+          <div className="relative z-10">
+            <h2 className="text-2xl font-black text-cy-yellow mb-4 uppercase">
+              Welcome to 20X3_
+            </h2>
+            <p className="text-base text-gray-300 leading-relaxed mb-4">
+              Constantly in flux; shifting, distorting, always reborn as something worse. Destruction by ecological catastrophes, the fallout of history's belligerence; by modern man-made Miseries or the blood spilled by the reckless machine of capitalist supremacy. Mankind's greatest ability truly is to destroy itself in creative ways. Designer demise, consumer-customized death, endlessly on repeat.
+            </p>
+            <p className="text-base text-gray-300 leading-relaxed mb-4">
+              Poisonous space rocks, nuclear weapons, cyclical revolutions, warring nations, warring corporations, warring neighbors; pandemics, tsunamis, volcanoes. In between it all: direct person-machine interfaces, tactical neural implants, and bacteria from outer space intercellular nanorobotics. And the sky is full of ads.
+            </p>
+            <p className="text-sm text-cy-yellow font-bold">
+              Everyone is interfaced/injected/infected/infested with something. Everyone wants something from everyone else. Everyone is a liar and a cheat. Everyone wants more creds. ¤¤¤¤
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* Rule Zero */}
       <Callout title="[RULE #00]">

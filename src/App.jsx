@@ -59,7 +59,7 @@ export default function App() {
             }}
           />
 
-          <div className="relative flex items-center h-16 px-4">
+          <div className="relative flex items-center h-16 px-4 overflow-scroll">
             <CyNavLink to="/" label="Home" color="cyan" end />
             <CyNavLink to="/artwork" label="Artwork" color="yellow" />
             <CyNavLink to="/rules" label="Rules" color="yellow" />

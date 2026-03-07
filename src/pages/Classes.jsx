@@ -163,7 +163,7 @@ export default function Classes() {
         }}
       />
 
-      <div className="page-content">
+      <div className="px-6 pt-6 pb-16 md:px-12 md:pt-8 md:pb-20">
         {hasCharacters && (
           <div className="mb-6">
             <CharacterTabs

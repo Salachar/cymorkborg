@@ -158,7 +158,7 @@ export default function Stats({
               </div>
 
               {/* Body - Horizontal layout for controls and dice */}
-              <div className="flex items-center gap-4 p-4">
+              <div className="flex flex-wrap items-center gap-4 p-4">
                 {/* Stat Value/Controls */}
                 <div className="flex-shrink-0">
                   <StatButton
@@ -173,7 +173,7 @@ export default function Stats({
                 </div>
 
                 {/* Dice Roller */}
-                <div className="flex-1 flex items-center pl-2">
+                <div className="flex-1 flex items-center">
                   <SegmentedDice
                     dice="3d6"
                     mod={statMod}

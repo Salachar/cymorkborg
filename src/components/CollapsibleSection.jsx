@@ -65,7 +65,7 @@ export default function CollapsibleSectionWithState({
         className={`cursor-pointer hover:opacity-80 transition-opacity ${headerClass}`}
         onClick={handleToggle}
       >
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between flex-wrap gap-y-1">
           <h2 className={`text-2xl font-black uppercase tracking-wider ${headerTextClass}`}>
             {title}
           </h2>
