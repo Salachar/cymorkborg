@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Line, Divider } from '@terminal/TerminalComponents';
 import Extractable from '../Extractable/Extractable';
-
 import { formatCredits } from '@utils/general';
 import { RETCOM_EXTRACTED_KEY } from '@utils/localStorage';
+import './BountyCard.css';
 
 import IMAGE_01 from "@images/profile_images/1.png";
 import IMAGE_02 from "@images/profile_images/2.png";
@@ -24,21 +24,6 @@ const IMAGES_ARRAY = [
   IMAGE_08, IMAGE_09, IMAGE_10, IMAGE_11, IMAGE_12, IMAGE_13,
 ];
 
-/**
- * BountyCard - Wanted bounty listing
- *
- * Props:
- * - id: String (unique bounty ID, required for Extractable)
- * - name: String (target name)
- * - alias: String (optional, nickname/callsign)
- * - image: String or Number (photo URL or IMAGES_ARRAY index)
- * - bounty: String (payment amount, e.g., "5,000¤")
- * - sponsor: String (who's paying)
- * - hp: Number (used to calculate durability tier, default: 10)
- * - lastSeen: String (optional, location)
- * - notes: String (optional, additional intel)
- * - threat: String (optional, LOW/MEDIUM/HIGH/CRITICAL, auto-calculated from HP if not provided)
- */
 export default function BountyCard({
   id,
   name,
@@ -75,41 +60,18 @@ export default function BountyCard({
         setIsClaimed(false);
       }
     };
-
     window.addEventListener('storage', checkClaimed);
     return () => window.removeEventListener('storage', checkClaimed);
   }, [id]);
 
-  // Calculate durability assessment from HP
   const getDurabilityAssessment = () => {
-    if (hp <= 4) return {
-      tier: 'FRAGILE',
-      intel: 'Easy takedown. One good hit should do it.',
-      color: 'rgb(34, 197, 94)'
-    };
-    if (hp <= 8) return {
-      tier: 'STANDARD',
-      intel: 'Average resilience. Took a broken bottle to the ribs and kept moving.',
-      color: 'rgb(251, 191, 36)'
-    };
-    if (hp <= 12) return {
-      tier: 'REINFORCED',
-      intel: 'Survived three-story fall through synthglass roof. Walked away.',
-      color: 'rgb(249, 115, 22)'
-    };
-    if (hp <= 16) return {
-      tier: 'FORTIFIED',
-      intel: 'Team of four couldn\'t put them down. Heavy chrome or just tough as hell.',
-      color: 'rgb(239, 68, 68)'
-    };
-    return {
-      tier: 'APEX',
-      intel: 'Walked through pulse rifle fire. Bring everything you\'ve got.',
-      color: 'rgb(220, 38, 38)'
-    };
+    if (hp <= 4) return { tier: 'FRAGILE', intel: 'Easy takedown. One good hit should do it.', color: 'rgb(34, 197, 94)' };
+    if (hp <= 8) return { tier: 'STANDARD', intel: 'Average resilience. Took a broken bottle to the ribs and kept moving.', color: 'rgb(251, 191, 36)' };
+    if (hp <= 12) return { tier: 'REINFORCED', intel: 'Survived three-story fall through synthglass roof. Walked away.', color: 'rgb(249, 115, 22)' };
+    if (hp <= 16) return { tier: 'FORTIFIED', intel: "Team of four couldn't put them down. Heavy chrome or just tough as hell.", color: 'rgb(239, 68, 68)' };
+    return { tier: 'APEX', intel: "Walked through pulse rifle fire. Bring everything you've got.", color: 'rgb(220, 38, 38)' };
   };
 
-  // Auto-calculate threat level if not provided
   const getThreatLevel = () => {
     if (threat) return threat;
     if (hp <= 6) return 'LOW';
@@ -119,8 +81,7 @@ export default function BountyCard({
   };
 
   const getThreatColor = () => {
-    const level = getThreatLevel();
-    switch(level) {
+    switch (getThreatLevel()) {
       case 'LOW': return 'rgb(34, 197, 94)';
       case 'MEDIUM': return 'rgb(251, 191, 36)';
       case 'HIGH': return 'rgb(249, 115, 22)';
@@ -134,343 +95,158 @@ export default function BountyCard({
   const threatColor = getThreatColor();
 
   return (
-    <div style={{ position: 'relative' }}>
-      <div
-        style={{
-          border: `2px solid ${isClaimed ? 'rgb(100, 116, 139)' : 'rgba(239, 68, 68, 0.5)'}`,
-          borderRadius: '4px',
-          backgroundColor: 'rgba(30, 41, 59, 0.5)',
-          overflow: 'hidden',
-          opacity: isClaimed ? 0.6 : 1,
-        }}
-      >
-        {/* Header */}
-        <div
-          style={{
-            backgroundColor: 'rgb(51, 65, 85)',
-            padding: '0.75rem 1rem',
-            borderBottom: '1px solid rgb(100, 116, 139)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}
-        >
-          <div style={{ flex: 1 }}>
-            <Line smoke style={{ margin: 0, fontSize: '0.75rem', opacity: 0.7 }}>
-              BOUNTY LISTING
-            </Line>
-            <Line smoke large bold style={{ margin: 0 }}>
-              [ID: {id}]
-            </Line>
-          </div>
+    <div className={`bounty-card ${isClaimed ? 'bounty-card-claimed' : ''}`}>
 
-          {/* Status indicator */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+      {/* Header */}
+      <div className="bounty-header">
+        <div className="bounty-header-left">
+          <div className="bounty-title">BOUNTY LISTING</div>
+          <div className="bounty-id">[ID: {id}]</div>
+        </div>
+        <div className="bounty-header-right">
+          <div
+            className="bounty-status"
+            style={{
+              borderColor: isClaimed ? 'rgb(148, 163, 184)' : 'rgb(34, 197, 94)',
+              color: isClaimed ? 'rgb(148, 163, 184)' : 'rgb(34, 197, 94)',
+              backgroundColor: isClaimed ? 'rgba(148,163,184,0.1)' : 'rgba(34,197,94,0.1)',
+            }}
+          >
             <div
+              className="bounty-status-dot"
               style={{
-                width: '8px',
-                height: '8px',
-                borderRadius: '50%',
                 backgroundColor: isClaimed ? 'rgb(148, 163, 184)' : 'rgb(34, 197, 94)',
                 boxShadow: `0 0 8px ${isClaimed ? 'rgb(148, 163, 184)' : 'rgb(34, 197, 94)'}`,
               }}
             />
-            <span
-              style={{
-                fontSize: '0.75rem',
-                fontWeight: 'bold',
-                color: isClaimed ? 'rgb(148, 163, 184)' : 'rgb(34, 197, 94)',
-                fontFamily: 'monospace',
-              }}
-            >
-              {isClaimed ? 'CLAIMED' : 'ACTIVE'}
-            </span>
+            {isClaimed ? 'CLAIMED' : 'ACTIVE'}
           </div>
         </div>
+      </div>
 
-        <div style={{ padding: '1rem' }}>
-          {/* Main content - side by side */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 200px', gap: '1rem', marginBottom: '1rem' }}>
-            {/* Left: Target info */}
-            <div>
-              {/* Name */}
-              <Line
-                style={{
-                  margin: 0,
-                  fontSize: '1.5rem',
-                  fontWeight: 'bold',
-                  color: isClaimed ? 'rgb(148, 163, 184)' : 'rgb(226, 232, 240)',
-                  textDecoration: isClaimed ? 'line-through' : 'none',
-                  marginBottom: '0.25rem',
-                }}
-              >
-                {name}
-              </Line>
-              {alias && (
-                <Line smoke style={{ margin: 0, fontSize: '0.875rem', fontStyle: 'italic', marginBottom: '1rem' }}>
-                  "{alias}"
-                </Line>
-              )}
+      {/* Content */}
+      <div className="bounty-content">
 
-              {/* Target details grid */}
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'auto 1fr',
-                  gap: '0.5rem 1rem',
-                  marginTop: '1rem',
-                }}
-              >
-                <Line smoke style={{ margin: 0, fontSize: '0.75rem', opacity: 0.7 }}>
-                  BOUNTY:
-                </Line>
-                <Line
-                  style={{
-                    margin: 0,
-                    fontSize: '1.25rem',
-                    fontWeight: 'bold',
-                    color: isClaimed ? 'rgb(148, 163, 184)' : 'rgb(34, 197, 94)',
-                    fontFamily: 'monospace',
-                  }}
-                >
-                  {formatCredits(credits)}
-                </Line>
+        {/* Left — main info */}
+        <div className="bounty-main">
 
-                <Line smoke style={{ margin: 0, fontSize: '0.75rem', opacity: 0.7 }}>
-                  SPONSOR:
-                </Line>
-                <Line cyan style={{ margin: 0, fontSize: '0.875rem', fontWeight: 500 }}>
-                  {sponsor}
-                </Line>
-
-                <Line smoke style={{ margin: 0, fontSize: '0.75rem', opacity: 0.7 }}>
-                  THREAT:
-                </Line>
-                <Line style={{ margin: 0, fontSize: '0.875rem', fontWeight: 'bold', color: threatColor }}>
-                  {threatLevel}
-                </Line>
-
-                {lastSeen && (
-                  <>
-                    <Line smoke style={{ margin: 0, fontSize: '0.75rem', opacity: 0.7 }}>
-                      LAST SEEN:
-                    </Line>
-                    <Line yellow style={{ margin: 0, fontSize: '0.875rem', fontWeight: 500 }}>
-                      {lastSeen}
-                    </Line>
-                  </>
-                )}
-              </div>
-
-              {/* Durability assessment */}
-              <div
-                style={{
-                  marginTop: '1rem',
-                  padding: '0.75rem',
-                  backgroundColor: 'rgba(15, 23, 42, 0.6)',
-                  border: `1px solid ${durability.color}`,
-                  borderLeft: `3px solid ${durability.color}`,
-                  borderRadius: '3px',
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                  <Line smoke style={{ margin: 0, fontSize: '0.75rem', opacity: 0.7 }}>
-                    DURABILITY:
-                  </Line>
-                  <Line style={{ margin: 0, fontSize: '0.875rem', fontWeight: 'bold', color: durability.color }}>
-                    {durability.tier}
-                  </Line>
-                </div>
-                <Line smoke style={{ margin: 0, fontSize: '0.8rem', fontStyle: 'italic', lineHeight: 1.3 }}>
-                  {durability.intel}
-                </Line>
-              </div>
-
-              {/* Notes */}
-              {notes && notes.length > 0 && (
-                <div
-                  style={{
-                    marginTop: '1rem',
-                    padding: '0.75rem',
-                    backgroundColor: 'rgba(251, 191, 36, 0.1)',
-                    border: '1px solid rgba(251, 191, 36, 0.3)',
-                    borderRadius: '3px',
-                  }}
-                >
-                  {notes.map((note, i) => (
-                    <Line
-                      key={i}
-                      yellow
-                      style={{
-                        margin: 0,
-                        fontSize: '0.875rem',
-                        marginBottom: i < notes.length - 1 ? '0.5rem' : '0'
-                      }}
-                    >
-                      • {note}
-                    </Line>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Right: Image with effects */}
+          {/* Name */}
+          <div className="bounty-name-section">
             <div
+              className="bounty-name"
               style={{
-                border: `2px solid ${threatColor}`,
-                borderRadius: '4px',
-                backgroundColor: `${threatColor}15`,
-                overflow: 'hidden',
-                position: 'relative',
-                height: '300px',
+                color: isClaimed ? 'rgb(148, 163, 184)' : 'rgb(226, 232, 240)',
+                textDecoration: isClaimed ? 'line-through' : 'none',
               }}
             >
-              {/* Image container */}
+              {name}
+            </div>
+            {alias && <div className="bounty-alias">"{alias}"</div>}
+          </div>
+
+          {/* Payment */}
+          <div className="bounty-payment-section">
+            <div className="bounty-amount">
+              <div className="bounty-amount-label">BOUNTY</div>
               <div
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  position: 'relative',
-                  backgroundColor: 'rgba(0, 0, 0, 0.6)',
-                }}
+                className="bounty-amount-value"
+                style={{ color: isClaimed ? 'rgb(148, 163, 184)' : 'rgb(34, 197, 94)' }}
               >
-                {imageSource ? (
-                  <img
-                    src={imageSource}
-                    alt={name}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                      filter: 'sepia(0.2) hue-rotate(160deg) saturate(1.2)',
-                    }}
-                  />
-                ) : (
-                  // Silhouette fallback
-                  <div
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '1rem',
-                      opacity: 0.3,
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: '60px',
-                        height: '60px',
-                        backgroundColor: 'rgb(148, 163, 184)',
-                        borderRadius: '50%',
-                      }}
-                    />
-                    <div
-                      style={{
-                        width: '100px',
-                        height: '80px',
-                        backgroundColor: 'rgb(148, 163, 184)',
-                        borderRadius: '50% 50% 0 0',
-                      }}
-                    />
-                  </div>
-                )}
-
-                {/* Scanline overlay */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    inset: 0,
-                    background: `repeating-linear-gradient(
-                      0deg,
-                      rgba(0, 255, 136, 0.03) 0px,
-                      transparent 1px,
-                      transparent 2px,
-                      rgba(0, 255, 136, 0.03) 3px
-                    )`,
-                    pointerEvents: 'none',
-                  }}
-                />
-
-                {/* Moving scan line */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: '2px',
-                    background: 'linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.8), transparent)',
-                    boxShadow: '0 0 8px rgba(0, 255, 136, 0.6)',
-                    animation: 'scan-move 3s linear infinite',
-                    pointerEvents: 'none',
-                  }}
-                />
-
-                {/* Green tint */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    inset: 0,
-                    background: 'rgba(0, 255, 136, 0.08)',
-                    pointerEvents: 'none',
-                  }}
-                />
+                {formatCredits(credits)}
               </div>
             </div>
+            <div className="bounty-meta">
+              <div className="bounty-meta-item">
+                <span className="bounty-meta-label">SPONSOR:</span>
+                <span className="bounty-meta-value" style={{ color: 'rgb(79, 209, 197)' }}>{sponsor}</span>
+              </div>
+              <div className="bounty-meta-item">
+                <span className="bounty-meta-label">THREAT:</span>
+                <span className="bounty-meta-value" style={{ color: threatColor, fontWeight: 'bold' }}>{threatLevel}</span>
+              </div>
+              {lastSeen && (
+                <div className="bounty-meta-item">
+                  <span className="bounty-meta-label">LAST SEEN:</span>
+                  <span className="bounty-meta-value" style={{ color: 'rgb(250, 204, 21)' }}>{lastSeen}</span>
+                </div>
+              )}
+            </div>
           </div>
+
+          {/* Durability */}
+          <div
+            className="bounty-durability"
+            style={{ borderColor: durability.color }}
+          >
+            <div className="bounty-durability-tier" style={{ color: durability.color }}>
+              {durability.tier}
+            </div>
+            <div className="bounty-durability-intel">{durability.intel}</div>
+          </div>
+
+          {/* Notes */}
+          {notes && notes.length > 0 && (
+            <div className="bounty-intel-notes">
+              {notes.map((note, i) => (
+                <div key={i}>{i > 0 && <br />}• {note}</div>
+              ))}
+            </div>
+          )}
 
           {/* Extractable */}
           <Extractable
             id={`${id}-bounty-extractable`}
-            digitalItems={[
-              {
-                id: `${id}-bounty-credits-item`,
-                label: 'Bounty Payment',
-                description: `Proof of capture - ${sponsor}`,
-                value: credits,
-                isCredits: true,
-              }
-            ]}
+            digitalItems={[{
+              id: `${id}-bounty-credits-item`,
+              label: 'Bounty Payment',
+              description: `Proof of capture - ${sponsor}`,
+              value: credits,
+              isCredits: true,
+            }]}
           />
         </div>
 
-        {Boolean(children) && (
-          <div style={{
-            padding: '1rem',
-            background: 'rgba(0, 0, 0, 0.5)',
-            borderRadius: '6px',
-          }}>
-            {children}
-          </div>
-        )}
-
-        {/* Footer warning */}
+        {/* Right — image */}
         <div
-          style={{
-            padding: '0.75rem 1rem',
-            borderTop: '1px solid rgb(100, 116, 139)',
-            backgroundColor: 'rgb(51, 65, 85)',
-            textAlign: 'center',
-          }}
+          className="bounty-image-area"
+          style={{ borderColor: threatColor, backgroundColor: `${threatColor}15` }}
         >
-          <Line red style={{ fontSize: '0.7rem', margin: 0, fontWeight: 'bold', letterSpacing: '0.1em' }}>
-            ARMED AND DANGEROUS - EXTREME CAUTION ADVISED
-          </Line>
+          <div className="bounty-image-container">
+            {imageSource ? (
+              <img src={imageSource} alt={name} className="bounty-image" />
+            ) : (
+              <div className="bounty-silhouette">
+                <div className="silhouette-head" />
+                <div className="silhouette-shoulders" />
+              </div>
+            )}
+            <div className="bounty-scanlines" />
+            <div className="bounty-scan-line" />
+          </div>
+
+          {/* Threat badge */}
+          <div
+            className="bounty-threat-badge"
+            style={{ backgroundColor: `${threatColor}15` }}
+          >
+            <div className="threat-label">THREAT LEVEL</div>
+            <div className="threat-value" style={{ color: threatColor }}>{threatLevel}</div>
+          </div>
         </div>
       </div>
 
-      {/* CSS animation */}
-      <style>{`
-        @keyframes scan-move {
-          0% { transform: translateY(0); opacity: 0; }
-          10% { opacity: 1; }
-          90% { opacity: 1; }
-          100% { transform: translateY(300px); opacity: 0; }
-        }
-      `}</style>
+      {Boolean(children) && (
+        <div style={{ padding: '1rem', background: 'rgba(0,0,0,0.5)', borderRadius: '6px' }}>
+          {children}
+        </div>
+      )}
+
+      {/* Footer */}
+      <div className="bounty-footer">
+        <div className="bounty-footer-warning">
+          ARMED AND DANGEROUS - EXTREME CAUTION ADVISED
+        </div>
+      </div>
     </div>
   );
 }

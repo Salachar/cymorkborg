@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
 import { Line, Spacer } from '@terminal/TerminalComponents';
 
 export default function DistrictPortal({
@@ -16,8 +16,6 @@ export default function DistrictPortal({
   theme = 'district',
   children,
 }) {
-  const [districtPulse, setDistrictPulse] = useState(true);
-
   // Theme configurations for different district types
   const themeConfig = {
     district: {
@@ -52,15 +50,6 @@ export default function DistrictPortal({
 
   const colors = themeConfig[theme] || themeConfig.district;
 
-  // District pulse animation
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDistrictPulse(prev => !prev);
-    }, 2000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   // Threat level colors
   const getThreatColor = () => {
     const levels = {
@@ -84,66 +73,12 @@ export default function DistrictPortal({
         position: 'relative',
       }}
     >
-      {/* Animated corner brackets */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '10px',
-          left: '10px',
-          width: '30px',
-          height: '30px',
-          borderTop: `4px solid ${colors.accent}`,
-          borderLeft: `4px solid ${colors.accent}`,
-          opacity: districtPulse ? 1 : 0.4,
-          transition: 'opacity 0.5s',
-        }}
-      />
-      <div
-        style={{
-          position: 'absolute',
-          top: '10px',
-          right: '10px',
-          width: '30px',
-          height: '30px',
-          borderTop: `4px solid ${colors.accent}`,
-          borderRight: `4px solid ${colors.accent}`,
-          opacity: districtPulse ? 1 : 0.4,
-          transition: 'opacity 0.5s',
-        }}
-      />
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '10px',
-          left: '10px',
-          width: '30px',
-          height: '30px',
-          borderBottom: `4px solid ${colors.accent}`,
-          borderLeft: `4px solid ${colors.accent}`,
-          opacity: districtPulse ? 1 : 0.4,
-          transition: 'opacity 0.5s',
-        }}
-      />
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '10px',
-          right: '10px',
-          width: '30px',
-          height: '30px',
-          borderBottom: `4px solid ${colors.accent}`,
-          borderRight: `4px solid ${colors.accent}`,
-          opacity: districtPulse ? 1 : 0.4,
-          transition: 'opacity 0.5s',
-        }}
-      />
-
       {/* Header banner with grid pattern */}
       <div
         style={{
           background: `linear-gradient(135deg, ${colors.primary}40 0%, ${colors.secondary}30 100%)`,
           borderBottom: `3px solid ${colors.primary}`,
-          padding: '1.5rem',
+          padding: 'clamp(0.75rem, 3vw, 1.5rem)',
           position: 'relative',
           overflow: 'hidden',
         }}
@@ -181,7 +116,7 @@ export default function DistrictPortal({
 
           <div
             style={{
-              fontSize: '2rem',
+              fontSize: 'clamp(1.1rem, 5vw, 2rem)',
               fontWeight: 'bold',
               color: colors.primary,
               fontFamily: 'monospace',
@@ -226,13 +161,13 @@ export default function DistrictPortal({
       </div>
 
       {/* Content area */}
-      <div style={{ padding: '1.5rem' }}>
+      <div style={{ padding: 'clamp(0.75rem, 3vw, 1.5rem)' }}>
         {/* District info grid */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-            gap: '1rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+            gap: '0.75rem',
           }}
         >
           {/* Region info */}
@@ -337,7 +272,7 @@ export default function DistrictPortal({
           style={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
-            gap: '1rem',
+            gap: '0.75rem',
           }}
         >
           <div
@@ -358,7 +293,7 @@ export default function DistrictPortal({
             </div>
             <div
               style={{
-                fontSize: '1.25rem',
+                fontSize: 'clamp(0.875rem, 3vw, 1.25rem)',
                 fontWeight: 'bold',
                 color: getThreatColor(),
                 fontFamily: 'monospace',
@@ -387,7 +322,7 @@ export default function DistrictPortal({
             </div>
             <div
               style={{
-                fontSize: '1.25rem',
+                fontSize: 'clamp(0.875rem, 3vw, 1.25rem)',
                 fontWeight: 'bold',
                 color: colors.accent,
                 fontFamily: 'monospace',

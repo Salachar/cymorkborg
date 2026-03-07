@@ -75,8 +75,10 @@ export default function TerminalWallet({ onTransfer }) {
           padding: '0.75rem 1rem',
           borderBottom: '1px solid rgb(251, 191, 36)',
           display: 'flex',
+          flexWrap: 'wrap',
           justifyContent: 'space-between',
           alignItems: 'center',
+          gap: '0.5rem',
         }}
       >
         <div>
@@ -91,19 +93,20 @@ export default function TerminalWallet({ onTransfer }) {
         {/* Total credits display */}
         <div
           style={{
-            padding: '0.5rem 1rem',
+            padding: '0.35rem 0.75rem',
             borderRadius: '3px',
             backgroundColor: 'rgba(251, 191, 36, 0.2)',
             border: '1px solid rgb(251, 191, 36)',
             textAlign: 'center',
+            flexShrink: 0,
           }}
         >
-          <div style={{ fontSize: '0.7rem', color: 'rgb(148, 163, 184)', marginBottom: '0.25rem' }}>
+          <div style={{ fontSize: '0.7rem', color: 'rgb(148, 163, 184)', marginBottom: '0.15rem' }}>
             TOTAL CREDITS
           </div>
           <div
             style={{
-              fontSize: '1.5rem',
+              fontSize: 'clamp(1rem, 4vw, 1.5rem)',
               fontWeight: 'bold',
               color: 'rgb(251, 191, 36)',
               fontFamily: 'monospace',
@@ -139,8 +142,10 @@ export default function TerminalWallet({ onTransfer }) {
               <div
                 style={{
                   display: 'flex',
+                  flexWrap: 'wrap',
                   justifyContent: 'space-between',
                   alignItems: 'center',
+                  gap: '0.25rem',
                   padding: '0.75rem',
                   backgroundColor: 'rgba(251, 191, 36, 0.1)',
                   border: '1px solid rgba(251, 191, 36, 0.3)',
@@ -167,7 +172,7 @@ export default function TerminalWallet({ onTransfer }) {
                       display: 'flex',
                       alignItems: 'flex-start',
                       gap: '0.5rem',
-                      padding: '0.75rem',
+                      padding: '0.5rem 0.75rem',
                       backgroundColor: 'rgba(15, 23, 42, 0.6)',
                       border: '1px solid rgb(71, 85, 105)',
                       borderRadius: '3px',
