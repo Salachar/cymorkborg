@@ -1,3 +1,5 @@
+import Icons from '@utils/icons';
+
 import {
   Line,
   InsetBox,
@@ -24,6 +26,7 @@ import {
 
 export const ALLIANSEN_WAREHOUSE_COMMANDS = {
   "Alliansen Inc. Warehouse": {
+    favicon: <Icons.Warehouse />,
     content: (
       <FacilityPortal
         companyName="Alliansen Inc."

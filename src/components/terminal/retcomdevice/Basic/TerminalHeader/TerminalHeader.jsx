@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 
 const BG = 'rgb(27, 36, 58)';
 const BORDER = 'rgb(77, 167, 188)';
@@ -9,7 +10,6 @@ const DIM = 'rgb(148, 163, 184)';
 
 export default function TerminalHeader({ onClear }) {
   const [adsBlocked, setAdsBlocked] = useState(47);
-  const [packetsRouted, setPacketsRouted] = useState(1247);
 
   useEffect(() => {
     const adInterval = setInterval(() => {
@@ -18,13 +18,8 @@ export default function TerminalHeader({ onClear }) {
       }
     }, 8000);
 
-    const packetInterval = setInterval(() => {
-      setPacketsRouted(prev => prev + Math.floor(Math.random() * 20) + 5);
-    }, 3000);
-
     return () => {
       clearInterval(adInterval);
-      clearInterval(packetInterval);
     };
   }, []);
 
@@ -33,8 +28,8 @@ export default function TerminalHeader({ onClear }) {
       style={{
         // width: '100%',
         backgroundColor: BG,
-        borderLeft: `1px solid ${BORDER}`,
-        borderRight: `1px solid ${BORDER}`,
+        // borderLeft: `1px solid ${BORDER}`,
+        // borderRight: `1px solid ${BORDER}`,
         borderBottom: `1px solid ${BORDER}`,
         borderTop: 'none',
         display: 'flex',
@@ -43,7 +38,7 @@ export default function TerminalHeader({ onClear }) {
         padding: '0.6rem 1rem',
         flexShrink: 0,
         fontFamily: 'monospace',
-        margin: '0 2rem',
+        // margin: '0 2rem',
       }}
     >
       {/* Spinning eye — identity piece */}
@@ -95,7 +90,6 @@ export default function TerminalHeader({ onClear }) {
       {/* Live stats ticker */}
       <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', flex: 1 }}>
         <Stat label="ADS BLOCKED" value={adsBlocked.toLocaleString()} color={GREEN} />
-        <Stat label="PACKETS" value={packetsRouted.toLocaleString()} color={TEAL} />
       </div>
 
       {onClear && (
@@ -103,17 +97,18 @@ export default function TerminalHeader({ onClear }) {
           onClick={onClear}
           style={{
             marginLeft: 'auto',
-            padding: '0.25rem 0.5rem',
+            padding: '0.35rem',
             border: `1px solid rgba(251, 191, 36, 0.4)`,
             borderRadius: '3px',
             backgroundColor: 'rgba(251, 191, 36, 0.06)',
             color: YELLOW,
-            fontSize: '0.75rem',
             cursor: 'pointer',
-            fontFamily: 'monospace',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
-          Collapse all
+          <CloseFullscreenIcon style={{ fontSize: 16, color: YELLOW }} />
         </button>
       )}
     </div>

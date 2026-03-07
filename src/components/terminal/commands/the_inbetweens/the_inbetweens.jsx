@@ -1,9 +1,12 @@
+import Icons from '@utils/icons';
+
 import {
   Line,
-  Section,
   Divider,
   InsetBox,
+  NodePreview,
 } from '@terminal/TerminalComponents';
+
 import {
   FacilityPortal,
   DistrictPortal,
@@ -14,6 +17,12 @@ import THE_55_COMMANDS from './the_55';
 
 export const THE_INBETWEENS_DISTRICT = {
   "The Inbetweens": {
+    favicon: <Icons.Pin />,
+    preview: (
+      <NodePreview>
+        <Line span smoke> · Endless tenements. Cubicle zombies. Ads on every surface.</Line>
+      </NodePreview>
+    ),
     content: (
       <DistrictPortal
         districtName="THE INBETWEENS"
@@ -85,6 +94,7 @@ export const THE_INBETWEENS_DISTRICT = {
       ...THE_55_COMMANDS,
 
       "Burnchurch Hex": {
+        favicon: <Icons.BurnchurchHex />,
         content: (
           <PublicPortal
             name="BURNCHURCH HEX"
@@ -127,6 +137,7 @@ export const THE_INBETWEENS_DISTRICT = {
       },
 
       "Borghold Prison Complex": {
+        favicon: <Icons.Prison />,
         content: (
           <FacilityPortal
             companyName="BORGHOLD CORRECTIONAL"

@@ -1,7 +1,10 @@
+import Icons from '@utils/icons';
+
 import {
   Divider,
   InsetBox,
   Line,
+  NodePreview,
 } from '@terminal/TerminalComponents';
 
 import {
@@ -12,6 +15,12 @@ import {
 
 export const CENTRAL_DISTRICT = {
   "Central": {
+    favicon: <Icons.Pin />,
+    preview: (
+      <NodePreview>
+        <Line span cyan> · Corporate towers. White collar crime. SecCorps on every corner.</Line>
+      </NodePreview>
+    ),
     content: (
       <DistrictPortal
         districtName="CENTRAL"

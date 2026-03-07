@@ -1,6 +1,4 @@
-import ApartmentIcon from '@mui/icons-material/Apartment';
-
-const ICON_STYLE = { fontSize: 20, color: 'rgb(79, 209, 197)' };
+import Icons from '@utils/icons';
 
 import {
   Line,
@@ -23,6 +21,7 @@ import {
 
 export const RESIDENTIAL_COMMANDS = {
   "Idol Coffins Pop-Up Hotel": {
+    favicon: <Icons.Hotel />,
     content: (
       <PublicPortal
         name="IDOL COFFINS"
@@ -62,7 +61,7 @@ export const RESIDENTIAL_COMMANDS = {
   },
 
   "Torres Apartments": {
-    favicon: <ApartmentIcon style={ICON_STYLE} />,
+    favicon: <Icons.Apartment />,
     preview: (
       <NodePreview>
         <Line span smoke> · Studio vacancies available</Line>

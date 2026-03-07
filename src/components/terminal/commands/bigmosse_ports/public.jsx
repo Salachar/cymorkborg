@@ -1,3 +1,5 @@
+import Icons from '@utils/icons';
+
 import {
   Box,
   Line,
@@ -14,6 +16,7 @@ import {
 
 export const PUBLIC_COMMANDS = {
   "Corp Compliance Alert": {
+    favicon: <Icons.Alert />,
     content: (
       <LocalAd
         corp="CORPORATE RELATIONS BUREAU"
@@ -37,6 +40,7 @@ export const PUBLIC_COMMANDS = {
   },
 
   "Samurai Concert [Ad]": {
+    favicon: <Icons.Ad />,
     content: (
       <LocalAd
         corp="SAMURAI"
@@ -61,6 +65,7 @@ export const PUBLIC_COMMANDS = {
   },
 
   "Canal Water Taxi Network": {
+    favicon: <Icons.Taxi />,
     content: (
       <MaintenanceAccess
         title="[PORTS CANAL TRANSIT]"
@@ -98,6 +103,7 @@ export const PUBLIC_COMMANDS = {
   },
 
   "Dice Emporium [Ad]": {
+    favicon: <Icons.Ad />,
     content: (
       <LocalAd
         corp="THE LOADED DICE"
@@ -119,6 +125,7 @@ export const PUBLIC_COMMANDS = {
   },
 
   "Ports Bar [Ad]": {
+    favicon: <Icons.Ad />,
     content: (
       <LocalAd
         corp="THE ANCHOR BAR"
@@ -140,6 +147,7 @@ export const PUBLIC_COMMANDS = {
   },
 
   "Street Doc [Ad]": {
+    favicon: <Icons.Ad />,
     content: (
       <LocalAd
         corp="EMERGENCY MEDICAL"
@@ -161,6 +169,7 @@ export const PUBLIC_COMMANDS = {
   },
 
   "SecOps Recruitment [Ad]": {
+    favicon: <Icons.Ad />,
     content: (
       <LocalAd
         corp="CY SECURITY OPERATIONS"
@@ -179,6 +188,7 @@ export const PUBLIC_COMMANDS = {
   },
 
   "Public Safety Warning": {
+    favicon: <Icons.Ad />,
     content: (
       <LocalAd
         corp="PUBLIC SAFETY NOTICE"
@@ -202,6 +212,7 @@ export const PUBLIC_COMMANDS = {
   },
 
   "Street Preacher Live Stream": {
+    favicon: <Icons.Ad />,
     content: (
       <Box color="red">
         <Line red bold large>[LIVE: BROTHER STATIC'S SERMON]</Line>
@@ -223,6 +234,7 @@ export const PUBLIC_COMMANDS = {
   },
 
   "Traffic Signal Control (Innovation & 7th)": {
+    favicon: <Icons.Traffic />,
     content: (
       <MaintenanceAccess
         title="[TRAFFIC SIGNAL - INNOVATION AVE & 7TH ST]"
@@ -254,6 +266,7 @@ export const PUBLIC_COMMANDS = {
   },
 
   "NetBattler Arcade (Tech Mall)": {
+    favicon: <Icons.Trophy />,
     content: (
       <PublicPortal
         name="NETBATTLER ARCADE"
@@ -285,7 +298,8 @@ export const PUBLIC_COMMANDS = {
     ),
   },
 
-  "Trauma Response Station (Medical District)": {
+  "Trauma Response Station": {
+    favicon: <Icons.Hospital />,
     content: (
       <PublicPortal
         name="TRAUMA RESPONSE COORDINATION"

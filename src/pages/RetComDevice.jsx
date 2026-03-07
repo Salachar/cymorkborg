@@ -82,17 +82,17 @@ export default function RetComDevice() {
           minHeight: 0,
           display: 'flex',
           flexDirection: 'column',
-          padding: '0 2rem',
+          // padding: '0 2rem',
           paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))',
         }}
       >
         <div
           className="flex-1 overflow-y-auto"
           style={{
-            border: '1px solid rgb(77, 167, 188)',
-            borderTop: 'none',
-            borderBottomLeftRadius: '6px',
-            borderBottomRightRadius: '6px',
+            // border: '1px solid rgb(77, 167, 188)',
+            // borderTop: 'none',
+            // borderBottomLeftRadius: '6px',
+            // borderBottomRightRadius: '6px',
             backgroundColor: 'rgba(29, 35, 50, 0.7)',
             padding: '0.75rem',
             minHeight: 0,

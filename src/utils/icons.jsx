@@ -1,0 +1,86 @@
+// @utils/icons.js
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import ApartmentIcon from '@mui/icons-material/Apartment';
+import BuildIcon from '@mui/icons-material/Build';
+import BusinessIcon from '@mui/icons-material/Business';
+import CasinoIcon from '@mui/icons-material/Casino';
+import CodeIcon from '@mui/icons-material/Code';
+import DiamondIcon from '@mui/icons-material/Diamond';
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
+import LockIcon from '@mui/icons-material/Lock';
+import MapIcon from '@mui/icons-material/Map';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import ScienceIcon from '@mui/icons-material/Science';
+import SportsBarIcon from '@mui/icons-material/SportsBar';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+import StorefrontIcon from '@mui/icons-material/Storefront';
+import VideocamIcon from '@mui/icons-material/Videocam';
+import CampaignIcon from '@mui/icons-material/Campaign';
+import FmdGoodIcon from '@mui/icons-material/FmdGood';
+import WhatshotIcon from '@mui/icons-material/Whatshot';
+import GavelIcon from '@mui/icons-material/Gavel';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import Nightlife from '@mui/icons-material/Nightlife';
+import Taxi from '@mui/icons-material/LocalTaxi';
+import Traffic from '@mui/icons-material/Traffic';
+import Trophy from '@mui/icons-material/EmojiEvents';
+import RipperDoc from '@mui/icons-material/Vaccines';
+import Warehouse from '@mui/icons-material/Warehouse';
+import Hotel from '@mui/icons-material/Hotel';
+import LAN from '@mui/icons-material/Lan';
+import ATM from '@mui/icons-material/LocalAtm';
+import Food from '@mui/icons-material/RestaurantMenu';
+import Time from '@mui/icons-material/AccessTime';
+import Entertainment from '@mui/icons-material/TheaterComedy';
+import Vending from '@mui/icons-material/LocalDrink';
+import Maintenance from '@mui/icons-material/BuildCircle';
+
+const TEAL = { fontSize: 20, color: 'rgb(79, 209, 197)' };
+const YELLOW = { fontSize: 20, color: 'rgb(251, 191, 36)' };
+const RED = { fontSize: 20, color: 'rgb(252, 129, 129)' };
+const SLATE = { fontSize: 20, color: 'rgb(148, 163, 184)' };
+
+const Icons = {
+  Maintenance: () => <Maintenance style={SLATE} />,
+  Vending: () => <Vending style={TEAL} />,
+  Entertainment: () => <Entertainment style={TEAL} />,
+  Time: () => <Time style={TEAL} />,
+  Food: () => <Food style={TEAL} />,
+  ATM: () => <ATM style={YELLOW} />,
+  LAN: () => <LAN style={TEAL} />,
+  RipperDoc: () => <RipperDoc style={TEAL} />,
+  Trophy: () => <Trophy style={YELLOW} />,
+  Traffic: () => <Traffic style={SLATE} />,
+  Taxi: () => <Taxi style={TEAL} />,
+  Nightlife: () => <Nightlife style={YELLOW} />,
+  Alert: () => <WarningAmberIcon style={YELLOW} />,
+  BurnchurchHex: () => <WhatshotIcon style={RED} />,
+  Prison: () => <GavelIcon style={YELLOW} />,
+  Pin: () => <FmdGoodIcon style={RED} />,
+  Ad: () => <CampaignIcon style={TEAL} />,
+  Bodega: () => <StorefrontIcon style={TEAL} />,
+  Camera: () => <VideocamIcon style={SLATE} />,
+  Hospital: () => <LocalHospitalIcon style={RED} />,
+  Garage: () => <BuildIcon style={TEAL} />,
+  Bar: () => <SportsBarIcon style={TEAL} />,
+  Pawn: () => <DiamondIcon style={TEAL} />,
+  PawnGold: () => <DiamondIcon style={YELLOW} />,
+  Cipher: () => <LockIcon style={TEAL} />,
+  Tech: () => <CodeIcon style={TEAL} />,
+  Shipping: () => <LocalShippingIcon style={YELLOW} />,
+  Science: () => <ScienceIcon style={TEAL} />,
+  Casino: () => <CasinoIcon style={TEAL} />,
+  Music: () => <MusicNoteIcon style={TEAL} />,
+  Apartment: () => <ApartmentIcon style={TEAL} />,
+  Tower: () => <BusinessIcon style={TEAL} />,
+  City: () => <LocationCityIcon style={TEAL} />,
+  Map: () => <MapIcon style={TEAL} />,
+  Games: () => <SportsEsportsIcon style={TEAL} />,
+  Wallet: () => <AccountBalanceWalletIcon style={YELLOW} />,
+  Warehouse: () => <Warehouse style={TEAL} />,
+  Hotel: () => <Hotel style={TEAL} />,
+};
+
+export default Icons;

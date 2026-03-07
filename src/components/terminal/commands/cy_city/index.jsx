@@ -1,11 +1,4 @@
-import LocationCityIcon from '@mui/icons-material/LocationCity';
-import MapIcon from '@mui/icons-material/Map';
-import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-// import CasinoIcon from '@mui/icons-material/Casino';
-
-const ICON_STYLE = { fontSize: 20, color: 'rgb(79, 209, 197)' };
-const ICON_STYLE_YELLOW = { fontSize: 20, color: 'rgb(251, 191, 36)' };
+import Icons from '@utils/icons';
 
 import {
   Line,
@@ -28,13 +21,19 @@ import CyberPoker from '@terminal/retcomdevice/Games/CyberPoker/CyberPoker';
 
 import { CY_CITY_NETWORK } from "./cy_public";
 
-// ============================================================================
-// CY CITY - MAIN MEGACITY PORTAL
-// ============================================================================
+// Central District - <Line span cyan> · Corporate towers. White collar crime. SecCorps on every corner.</Line>
+// The Inbetweens - <Line span smoke> · Endless tenements. Cubicle zombies. Ads on every surface.</Line>
+// Bigmosse - <Line span red> · Gang wars. Cult activity. G0 scars that never healed.</Line>
+// Ports - <Line span yellow> · Black market. Hedonism. Gunfights drowned out by bass.</Line>
+// The Hills / Galgbacken - <Line span cyan> · Gated villas. Old money. The people who built this mess.</Line>
+// Mosscroft / Industrial - <Line span smoke> · Toxic smog. Factory drones. Industry feeding Cy's consumption.</Line>
+// The Fringe - <Line span red> · Unregistered. Unmapped. Where the city bleeds into wasteland.</Line>
+// South Central - <Line span yellow> · Alliansen territory. Corporate law. Chrome and concrete.</Line>
+// The 55 - <Line span cyan> · Vertical city within a city. 55 floors of everything.</Line>
 
 export const CY_CITY_PORTAL = {
   "Wallet": {
-    favicon: <AccountBalanceWalletIcon style={ICON_STYLE_YELLOW} />,
+    favicon: <Icons.Wallet />,
     preview: (
       <NodePreview>
         <span style={{ color: 'rgb(251, 191, 36)' }}>★</span> Keeps track of all collected credits and items in the RetComDevice
@@ -43,7 +42,7 @@ export const CY_CITY_PORTAL = {
     content: <TerminalWallet />,
   },
   "Cy Public": {
-    favicon: <LocationCityIcon style={ICON_STYLE} />,
+    favicon: <Icons.City />,
     preview: (
       <NodePreview>
         <Line red span bold>THREAT: CRITICAL</Line>
@@ -132,7 +131,7 @@ export const CY_CITY_PORTAL = {
     },
   },
   "Cy City Network": {
-    favicon: <MapIcon style={ICON_STYLE} />,
+    favicon: <Icons.Map />,
     preview: (
       <NodePreview>
         <Line>
@@ -208,7 +207,7 @@ export const CY_CITY_PORTAL = {
     },
   },
   "Cy Games": {
-    favicon: <SportsEsportsIcon style={ICON_STYLE} />,
+    favicon: <Icons.Games />,
     preview: (
       <NodePreview>
         <span style={{ color: 'rgb(0, 255, 65)' }}>3 games</span>

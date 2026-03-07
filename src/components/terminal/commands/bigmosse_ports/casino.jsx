@@ -1,6 +1,4 @@
-import CasinoIcon from '@mui/icons-material/Casino';
-
-const ICON_STYLE = { fontSize: 20, color: 'rgb(79, 209, 197)' };
+import Icons from '@utils/icons';
 
 import {
   InsetBox,
@@ -40,7 +38,7 @@ import floor2Image from '@images/blueprints/lucky_flight_floor_2.png';
 
 export const LUCKY_FLIGHT_CASINO = {
   "Lucky Flight Casino!": {
-    favicon: <CasinoIcon style={ICON_STYLE} />,
+    favicon: <Icons.Casino />,
     preview: (
       <NodePreview>
         <Line span neon> · Your favorite 24/7 neighborhood casino!</Line>
@@ -51,6 +49,7 @@ export const LUCKY_FLIGHT_CASINO = {
     ),
     related_commands: {
       "Lucky Flight CityCam": {
+        favicon: <Icons.Camera />,
         content: (
           <CCTV
             src={lfc_cctv}
@@ -62,6 +61,7 @@ export const LUCKY_FLIGHT_CASINO = {
         ),
       },
       "Lobby ATM": {
+        favicon: <Icons.ATM />,
         password: {
           pw: "liquidity",
           hint: "You don't need more money. You need to move it.",
@@ -86,6 +86,7 @@ export const LUCKY_FLIGHT_CASINO = {
       },
 
       "Happy Hour Specials!": {
+        favicon: <Icons.Food />,
         content: (
           <Menu
             title="HAPPY HOUR"
@@ -117,6 +118,7 @@ export const LUCKY_FLIGHT_CASINO = {
       },
 
       "Hours of Operation": {
+        favicon: <Icons.Time />,
         content: (
           <HoursBanner
             name="Lucky Strike Casino"
@@ -133,6 +135,7 @@ export const LUCKY_FLIGHT_CASINO = {
       },
 
       "Entertainment Lineup": {
+        favicon: <Icons.Entertainment />,
         content: (
           <EventLineup
             venueName="Cave Club"
@@ -155,6 +158,7 @@ export const LUCKY_FLIGHT_CASINO = {
       },
 
       "Available Transportation": {
+        favicon: <Icons.Taxi />,
         content: (
           <Message
             title="LUCKY FLIGHT CASINO"
@@ -176,6 +180,7 @@ export const LUCKY_FLIGHT_CASINO = {
       },
 
       "NukaCola Vending Machine": {
+        favicon: <Icons.Vending />,
         content: (
           <VendingMachine
             id="lfc-lobby-nuka"
@@ -193,6 +198,7 @@ export const LUCKY_FLIGHT_CASINO = {
         ),
         related_commands: {
           "Maintenance Access": {
+            favicon: <Icons.Vending />,
             password: {
               pw: "quantum",
               hint: "Top selling soda",
@@ -240,6 +246,7 @@ export const LUCKY_FLIGHT_CASINO = {
       },
 
       "Casino Internal Network": {
+        favicon: <Icons.LAN />,
         password: {
           pw: "loaded dice",
           hint: "Better not get caught",

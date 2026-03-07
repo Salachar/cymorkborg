@@ -1,6 +1,4 @@
-import StorefrontIcon from '@mui/icons-material/Storefront';
-
-const ICON_STYLE = { fontSize: 20, color: 'rgb(79, 209, 197)' };
+import Icons from '@utils/icons';
 
 import {
   Line,
@@ -35,7 +33,7 @@ import cop_car_image from '@images/cop_car.png';
 
 export const BODEGA_COMMANDS = {
   "Batu's Bodega (FREE ACCESS)": {
-    favicon: <StorefrontIcon style={ICON_STYLE} />,
+    favicon: <Icons.Bodega />,
     content: (
       <BatusBodegaAd />
     ),

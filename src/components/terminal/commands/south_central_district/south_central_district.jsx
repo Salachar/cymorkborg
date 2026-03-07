@@ -1,7 +1,11 @@
+import Icons from '@utils/icons';
+
 import {
   Line,
   InsetBox,
+  NodePreview,
 } from '@terminal/TerminalComponents';
+
 import {
   CCTV,
   DistrictPortal,
@@ -15,6 +19,12 @@ import south_central_cctv from '@images/locations/south_central_cctv.png';
 
 export const SOUTH_CENTRAL_DISTRICT_COMMANDS = {
   "South Central": {
+    favicon: <Icons.Pin />,
+    preview: (
+      <NodePreview>
+        <Line span yellow> · Alliansen territory. Corporate law. Chrome and concrete.</Line>
+      </NodePreview>
+    ),
     content: (
       <DistrictPortal
         districtName="SOUTH CENTRAL"

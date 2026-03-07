@@ -14,7 +14,7 @@ const CONTENT_BG = 'rgba(19, 23, 34, 0.6)';
 const CONTENT_BORDER = 'rgba(77, 167, 188, 0.2)';
 const FADE_COLOR = 'rgba(19, 23, 34, 0.95)';
 const TREE_LINE_COLOR = 'rgba(77, 167, 188, 0.25)';
-const INDENT = 2; // rem per depth level
+const INDENT = 1.5; // rem per depth level
 
 // ============================================================================
 // CONTENT PANEL
@@ -216,8 +216,8 @@ function CommandNode({
           style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: '0.25rem',
-            marginTop: '0.25rem',
+            gap: '0.5rem',
+            marginTop: '0.5rem',
           }}
         >
           {childEntries.map(([childId, childDef]) => {
@@ -277,7 +277,11 @@ export default function List({
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '0.5rem',
+    }}>
       {campaignCommandList.map(({ id, ...def }) => (
         <CommandNode
           key={id}

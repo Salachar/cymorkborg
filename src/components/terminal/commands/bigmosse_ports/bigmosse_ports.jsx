@@ -1,3 +1,5 @@
+import Icons from '@utils/icons';
+
 import {
   InsetBox,
   Line,
@@ -21,8 +23,12 @@ import bigmosse_ports_cctv from '@images/locations/bigmosse_ports_cctv.png';
 
 export const BIGMOSSE_PORTS_COMMANDS = {
   "Bigmosse & Ports": {
+    favicon: <Icons.Pin />,
     preview: (
       <NodePreview>
+        <Line span red> · Gang wars. Cult activity. G0 scars that never healed.</Line>
+        <Line span yellow> · Black market. Hedonism. Gunfights drowned out by bass.</Line>
+        <br />
         <Line span yellow> · Lucky Flight Casino</Line> open 24/7!
       </NodePreview>
     ),
@@ -78,6 +84,7 @@ export const BIGMOSSE_PORTS_COMMANDS = {
     ),
     related_commands: {
       "Bigmosse CityCam": {
+        favicon: <Icons.Camera />,
         content: (
           <CCTV
             src={bigmosse_ports_cctv}
