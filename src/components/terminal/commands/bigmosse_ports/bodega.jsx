@@ -391,7 +391,7 @@ export const BODEGA_COMMANDS = {
                 title="BODEGA"
                 subtitle="PERSONNEL RECORDS"
                 message="EMPLOYEE ACCESS GRANTED"
-                note="Internal network maintained by Batu (basic security)"
+                note="Internal network maintained by Batu"
                 theme="corporate"
               >
                 <Line smoke large bold>[PERSONNEL RECORDS]</Line>

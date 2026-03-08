@@ -36,6 +36,7 @@ export const STONE_EELS_COMMANDS = {
     ),
     related_commands: {
       "Tonight's Entertainment": {
+        favicon: <Icons.Entertainment />,
         content: (
           <EventLineup
             venueName="Cave Club"
@@ -64,6 +65,7 @@ export const STONE_EELS_COMMANDS = {
       },
 
       "Bar Menu": {
+        favicon: <Icons.BarMenu />,
         content: (
           <Menu
             title="CAVE CLUB BAR"
@@ -95,6 +97,7 @@ export const STONE_EELS_COMMANDS = {
       },
 
       "Hours & Location": {
+        favicon: <Icons.Hours />,
         content: (
           <HoursBanner
             name="CAVE CLUB"
@@ -109,6 +112,7 @@ export const STONE_EELS_COMMANDS = {
       },
 
       "Community Board": {
+        favicon: <Icons.Bulletin />,
         content: (
           <CommunityBoard
             name="COMMUNITY BOARD"
@@ -132,6 +136,7 @@ export const STONE_EELS_COMMANDS = {
       },
 
       "Management Network": {
+        favicon: <Icons.LAN />,
         password: {
           pw: "python",
           hint: "Gives the best hugs",
@@ -156,6 +161,7 @@ export const STONE_EELS_COMMANDS = {
         ),
         related_commands: {
           "Security Systems": {
+            favicon: <Icons.Security />,
             content: (
               <MaintenanceAccess
                 title="[SECURITY SYSTEMS]"
@@ -175,7 +181,8 @@ export const STONE_EELS_COMMANDS = {
             ),
           },
 
-          "VIP Management": {
+          "VIP List": {
+            favicon: <Icons.Person />,
             password: {
               pw: "constrictor",
               hint: "The walls are closing in",
@@ -236,6 +243,7 @@ export const STONE_EELS_COMMANDS = {
           },
 
           "Incident Reports": {
+            favicon: <Icons.Files />,
             content: (
               <IncidentLog
                 title="INCIDENT LOG"
@@ -279,6 +287,7 @@ export const STONE_EELS_COMMANDS = {
           },
 
           "Back Office Safe": {
+            favicon: <Icons.Lock />,
             password: {
               pw: "ekans or arbok",
               hint: "Favorite pokemon, its one of two...",
@@ -331,6 +340,7 @@ export const STONE_EELS_COMMANDS = {
           },
 
           "Territory Status": {
+            favicon: <Icons.Query />,
             content: (
               <Message
                 title="STONE EELS"
@@ -362,6 +372,7 @@ export const STONE_EELS_COMMANDS = {
           },
 
           "Personnel Files": {
+            favicon: <Icons.Person />,
             content: (
               <MaintenanceAccess
                 title="[PERSONNEL FILES]"
@@ -380,6 +391,7 @@ export const STONE_EELS_COMMANDS = {
             ),
             related_commands: {
               "Saša": {
+                favicon: <Icons.Person />,
                 content: (
                   <PersonnelFile
                     employeeId="GANG-SE-001"
@@ -404,6 +416,7 @@ export const STONE_EELS_COMMANDS = {
               },
 
               "Kaz 'Brick' Volkov": {
+                favicon: <Icons.Person />,
                 content: (
                   <PersonnelFile
                     employeeId="GANG-SE-008"
@@ -428,6 +441,7 @@ export const STONE_EELS_COMMANDS = {
               },
 
               "Rina 'Switch' Pak": {
+                favicon: <Icons.Person />,
                 content: (
                   <PersonnelFile
                     employeeId="GANG-SE-014"

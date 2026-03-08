@@ -51,6 +51,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
     ),
     related_commands: {
       "Operating Hours": {
+        favicon: <Icons.Hours />,
         content: (
           <HoursBanner
             name="Alliansen Warehouse #47"
@@ -71,6 +72,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
       },
 
       "Shipping Manifests": {
+        favicon: <Icons.Files />,
         content: (
           <MaintenanceAccess
             title="[SHIPPING DATABASE]"
@@ -104,6 +106,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
       },
 
       "Employee Roster": {
+        favicon: <Icons.Person />,
         content: (
           <MaintenanceAccess
             title="[PERSONNEL DATABASE]"
@@ -122,6 +125,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
       },
 
       "Floor Plan (Public)": {
+        favicon: <Icons.Files />,
         content: (
           <MaintenanceAccess
             title="[FACILITY LAYOUT]"
@@ -154,6 +158,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
       },
 
       "Internal Network": {
+        favicon: <Icons.LAN />,
         password: {
           pw: "administraitor",
           hint: "What you get when an admin turns on you",
@@ -178,6 +183,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
         ),
         related_commands: {
           "Facility Operations": {
+            favicon: <Icons.Query />,
             content: (
               <MaintenanceAccess
                 title="[WAREHOUSE OPERATIONS]"
@@ -206,6 +212,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
           },
 
           "Current Shift Schedule": {
+            favicon: <Icons.Schedule />,
             content: (
               <ShiftSchedule
                 location="Alliansen Warehouse"
@@ -228,6 +235,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
           },
 
           "Employee Notice Board": {
+            favicon: <Icons.Bulletin />,
             content: (
               <CommunityBoard
                 name="EMPLOYEE NOTICES"
@@ -251,6 +259,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
           },
 
           "Supervisor's Terminal": {
+            favicon: <Icons.Computer />,
             password: {
               pw: "werehouse",
               hint: "What do you get when a wolf bits a house?",
@@ -281,6 +290,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
             ),
             related_commands: {
               "Personnel Records": {
+                favicon: <Icons.Person />,
                 content: (
                   <MaintenanceAccess
                     title="[PERSONNEL FILES]"
@@ -298,6 +308,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
                 ),
                 related_commands: {
                   "Marcus Webb": {
+                    favicon: <Icons.Person />,
                     content: (
                       <PersonnelFile
                         employeeId="ALI-NS-4721"
@@ -323,6 +334,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
                   },
 
                   "David Chen": {
+                    favicon: <Icons.Person />,
                     content: (
                       <PersonnelFile
                         employeeId="ALI-SEC-6892"
@@ -347,6 +359,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
                   },
 
                   "Sofia Martinez": {
+                    favicon: <Icons.Person />,
                     content: (
                       <PersonnelFile
                         employeeId="ALI-SEC-5438"
@@ -371,6 +384,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
                   },
 
                   "James Park": {
+                    favicon: <Icons.Person />,
                     content: (
                       <PersonnelFile
                         employeeId="ALI-SEC-7821"
@@ -395,6 +409,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
                   },
 
                   "Andre Foster": {
+                    favicon: <Icons.Person />,
                     content: (
                       <PersonnelFile
                         employeeId="ALI-SEC-5603"
@@ -419,6 +434,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
                   },
 
                   "Nina Volkov": {
+                    favicon: <Icons.Person />,
                     content: (
                       <PersonnelFile
                         employeeId="ALI-SEC-6234"
@@ -445,6 +461,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
               },
 
               "Classified Shipment Manifest": {
+                favicon: <Icons.Files />,
                 content: (
                   <Message
                     title="SECURE CARGO"
@@ -481,6 +498,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
               },
 
               "Supervisor's Office Safe": {
+                favicon: <Icons.Lock />,
                 password: {
                   pw: "phishing",
                   hint: "Hackers favorite hobby",
@@ -539,6 +557,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
           },
 
           "Main Security Workstation": {
+            favicon: <Icons.Computer />,
             content: (
               <Workstation
                 owner="David Chen"
@@ -561,6 +580,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
             ),
             related_commands: {
               "Network Traffic Monitor": {
+                favicon: <Icons.LAN />,
                 content: (
                   <NetworkTrafficMonitor
                     systemName="WAREHOUSE NETWORK MONITOR"
@@ -591,6 +611,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
               },
 
               "Security Incident Log": {
+                favicon: <Icons.Files />,
                 content: (
                   <IncidentLog
                     title="SECURITY INCIDENTS"
@@ -640,6 +661,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
               },
 
               "Camera Network Overview": {
+                favicon: <Icons.Camera />,
                 content: (
                   <NetworkDevices
                     networkName="SURVEILLANCE_SYSTEM"
@@ -655,6 +677,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
                 ),
                 related_commands: {
                   "External Camera": {
+                    favicon: <Icons.Camera />,
                     content: (
                       <Camera
                         id="alliansen-warehouse-external"
@@ -676,6 +699,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
                   },
 
                   "Main Floor Camera": {
+                    favicon: <Icons.Camera />,
                     content: (
                       <Camera
                         id="alliansen-warehouse-main"
@@ -697,6 +721,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
                   },
 
                   "Secure Cargo Camera": {
+                    favicon: <Icons.Camera />,
                     content: (
                       <Camera
                         id="alliansen-warehouse-securecargo"
@@ -720,6 +745,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
           },
 
           "Warehouse Vending Machine": {
+            favicon: <Icons.Vending />,
             content: (
               <VendingMachine
                 id="alliansen-warehouse-vending"

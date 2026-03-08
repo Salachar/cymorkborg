@@ -50,6 +50,9 @@ import Debug from '@mui/icons-material/SettingsEthernet';
 import Files from '@mui/icons-material/BackupTable';
 import Security from '@mui/icons-material/Security';
 import Query from '@mui/icons-material/QueryStats';
+import Schedule from '@mui/icons-material/EventNote';
+import Computer from '@mui/icons-material/Computer';
+import BarMenu from '@mui/icons-material/Tapas';
 
 const TEAL = { fontSize: 20, color: 'rgb(79, 209, 197)' };
 const YELLOW = { fontSize: 20, color: 'rgb(251, 191, 36)' };
@@ -57,6 +60,9 @@ const RED = { fontSize: 20, color: 'rgb(252, 129, 129)' };
 const SLATE = { fontSize: 20, color: 'rgb(148, 163, 184)' };
 
 const Icons = {
+  BarMenu: () => <BarMenu style={TEAL} />,
+  Computer: () => <Computer style={TEAL} />,
+  Schedule: () => <Schedule style={TEAL} />,
   Query: () => <Query style={TEAL} />,
   Security: () => <Security style={TEAL} />,
   Files: () => <Files style={TEAL} />,
@@ -90,7 +96,7 @@ const Icons = {
   Pin: () => <FmdGoodIcon style={RED} />,
   Ad: () => <CampaignIcon style={TEAL} />,
   Bodega: () => <StorefrontIcon style={TEAL} />,
-  Camera: () => <VideocamIcon style={SLATE} />,
+  Camera: () => <VideocamIcon style={TEAL} />,
   Hospital: () => <LocalHospitalIcon style={RED} />,
   Garage: () => <BuildIcon style={TEAL} />,
   Bar: () => <SportsBarIcon style={TEAL} />,

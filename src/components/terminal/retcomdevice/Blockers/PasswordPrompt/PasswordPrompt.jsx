@@ -182,9 +182,9 @@ export default function PasswordPrompt({
 
           {/* Rules / notes */}
           <div className="mb-3 text-xs" style={{ color: 'rgba(148, 163, 184, 0.6)', display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
-            <div>Keys shown are the only characters in the password. Order them correctly.</div>
+            <div>Keys shown are the only characters in the password.</div>
             {passwordHasSpaces && (
-              <div style={{ color: 'rgb(251, 191, 36)' }}>↳ This password contains spaces — use the SPACE button.</div>
+              <div style={{ color: 'rgb(251, 191, 36)' }}>↳ This password contains spaces.</div>
             )}
             {hasDecoys && (
               <div style={{ color: 'rgb(252, 129, 129)' }}>

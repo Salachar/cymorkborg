@@ -94,6 +94,7 @@ export const RESIDENTIAL_COMMANDS = {
     ),
     related_commands: {
       "Security Cameras": {
+        favicon: <Icons.Camera />,
         content: (
           <NetworkDevices
             networkName="TORRES_SECURITY"
@@ -108,6 +109,7 @@ export const RESIDENTIAL_COMMANDS = {
       },
 
       "Camera - Lobby": {
+        favicon: <Icons.Camera />,
         content: (
           <Camera
             id="torres-lobby-cam"
@@ -128,6 +130,7 @@ export const RESIDENTIAL_COMMANDS = {
       },
 
       "Building Incident Log": {
+        favicon: <Icons.Files />,
         content: (
           <IncidentLog
             title="BUILDING INCIDENTS"
@@ -172,6 +175,7 @@ export const RESIDENTIAL_COMMANDS = {
       },
 
       "Unit 2A": {
+        favicon: <Icons.Person />,
         content: (
           <Tenet
             id="CIT-2847-JT"
@@ -190,6 +194,7 @@ export const RESIDENTIAL_COMMANDS = {
         ),
         related_commands: {
           "Game Console": {
+            favicon: <Icons.VideoGame />,
             content: (
               <GameConsole
                 model="CyberDeck Pro X"
@@ -206,6 +211,7 @@ export const RESIDENTIAL_COMMANDS = {
           },
 
           "Personal Safe": {
+            favicon: <Icons.Lock />,
             password: {
               pw: "maintenance",
               hint: "The resident's department at the casino",
@@ -259,6 +265,7 @@ export const RESIDENTIAL_COMMANDS = {
       },
 
       "Unit 3B - Personal Safe": {
+        favicon: <Icons.Lock />,
         password: {
           pw: "localhost",
           hint: "This terminal doesn't trust the outside world",
@@ -299,6 +306,7 @@ export const RESIDENTIAL_COMMANDS = {
       },
 
       "Unit 4B - Personal Safe": {
+        favicon: <Icons.Lock />,
         password: {
           pw: "dealer",
           hint: "The resident's job at the casino",
@@ -334,6 +342,7 @@ export const RESIDENTIAL_COMMANDS = {
       },
 
       "Building Management": {
+        favicon: <Icons.LAN />,
         password: {
           pw: "blind",
           hint: "You pay before you see",

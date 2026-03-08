@@ -33,7 +33,6 @@ export default function Message({
         borderRadius: '4px',
         backgroundColor: 'rgba(29, 35, 50, 0.3)',
         overflow: 'hidden',
-        marginBottom: '1rem',
       }}
     >
       {/* Header section */}
