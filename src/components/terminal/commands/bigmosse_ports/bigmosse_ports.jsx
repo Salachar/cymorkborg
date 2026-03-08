@@ -22,7 +22,7 @@ import { RESIDENTIAL_COMMANDS } from './residential';
 import bigmosse_ports_cctv from '@images/locations/bigmosse_ports_cctv.png';
 
 export const BIGMOSSE_PORTS_COMMANDS = {
-  "Bigmosse & Ports": {
+  "Bigmosse & Ports District": {
     favicon: <Icons.Pin />,
     preview: (
       <NodePreview>
@@ -59,16 +59,14 @@ export const BIGMOSSE_PORTS_COMMANDS = {
           <Line red bold>• Heirs of Kergoz - Cult with Barnyard Fields base</Line>
           <Line yellow>• Royal West Shipping - Legitimate (armed) warehouses</Line>
           <Line yellow>• Idol Coffins - Pop-up rock-star hotels</Line>
-          <Line yellow>• Various street gangs and smaller factions</Line>
+          <Line yellow>• Various street gangs and smaller groups</Line>
         </InsetBox>
-
         <InsetBox title="BORDER ZONE CHARACTERISTICS:">
           <Line cyan>• Slums side: Festering scars from G0 Incident, rundown</Line>
           <Line cyan>• Ports side: Entertainment, black market, hedonism</Line>
           <Line cyan>• Canal access: Taxi boats, smuggling routes</Line>
           <Line cyan>• Mixed architecture: Cargo containers, warehouses, clubs</Line>
         </InsetBox>
-
         <InsetBox title="SURVIVAL TIPS:">
           <Line yellow>• Pay protection money or have gang connections</Line>
           <Line yellow>• Don't ask questions about cargo or packages</Line>

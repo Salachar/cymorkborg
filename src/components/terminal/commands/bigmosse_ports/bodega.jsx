@@ -41,14 +41,16 @@ export const BODEGA_COMMANDS = {
     preview: (
       <NodePreview>
         <Line span neon> · FREE WIFI ACCESS!</Line>
+        <Line span neon> · Market drone drop off location</Line>
       </NodePreview>
     ),
     related_commands: {
       "Charlie's Brief": {
+        favicon: <Icons.Briefing />,
         content: (
           <Briefing
             title="Lucky Flight Takedown"
-            issuer="Charlie Sand (via note)"
+            issuer="Charlie Sand"
             classification="CONFIDENTIAL"
             primary={[
               {
@@ -84,7 +86,6 @@ export const BODEGA_COMMANDS = {
               "SecOps monitors casino - heavy response if major alarm triggered",
               "Workers are victims too - avoid unnecessary casualties",
             ]}
-            footer="Note: Charlie wasn't here when you arrived. Thugs spooked him. He left this briefing and will return in 2 days. You're on your own until then. — Good luck."
           >
             <RetComImage
               src={cop_car_image}
@@ -95,6 +96,7 @@ export const BODEGA_COMMANDS = {
       },
 
       "Bodega Menu": {
+        favicon: <Icons.Food />,
         content: (
           <Menu
             title="DAILY SPECIALS"
@@ -126,14 +128,15 @@ export const BODEGA_COMMANDS = {
       },
 
       "Coffee Machine": {
+        favicon: <Icons.CoffeeMachine />,
         content: (
           <CoffeeMachine />
         ),
         related_commands: {
           "Digital Wallet": {
             password: {
-              pw: "java",
-              hint: "Dan really hates it",
+              pw: "clock",
+              hint: "I have hands but can't clap",
               content: <DigitalWallet isLocked />
             },
             content: (
@@ -147,12 +150,14 @@ export const BODEGA_COMMANDS = {
       },
 
       "Bodega Radio": {
+        favicon: <Icons.Radio />,
         content: (
           <Radio />
         )
       },
 
       "Arcade Machine": {
+        favicon: <Icons.VideoGame />,
         icebreaker: {
           difficulty: 'easy',
         },
@@ -164,6 +169,7 @@ export const BODEGA_COMMANDS = {
       },
 
       "Bodega ATM": {
+        favicon: <Icons.ATM />,
         mastermind: {
           difficulty: 'medium',
         },
@@ -184,6 +190,7 @@ export const BODEGA_COMMANDS = {
       },
 
       "Vending Machine": {
+        favicon: <Icons.Vending />,
         content: (
           <VendingMachine
             id="bodega-outside-vending"
@@ -192,6 +199,7 @@ export const BODEGA_COMMANDS = {
         ),
         related_commands: {
           "Maintenance Access": {
+            favicon: <Icons.Maintenance />,
             password: {
               pw: "refresh",
               hint: "What you do to restock the machine",
@@ -201,6 +209,7 @@ export const BODEGA_COMMANDS = {
             ),
             related_commands: {
               "VendWallet": {
+                favicon: <Icons.Wallet />,
                 content: (
                   <DigitalWallet
                     id="bodega-vending-machine-wallet"
@@ -231,6 +240,7 @@ export const BODEGA_COMMANDS = {
       },
 
       "Deals!": {
+        favicon: <Icons.Deals />,
         content: (
           <Message
             title="BODEGA"
@@ -263,6 +273,7 @@ export const BODEGA_COMMANDS = {
       },
 
       "Hours of Operation": {
+        favicon: <Icons.Hours />,
         content: (
           <HoursBanner
             name="Batu's Bodega"
@@ -292,6 +303,7 @@ export const BODEGA_COMMANDS = {
       },
 
       "Community Bulletin": {
+        favicon: <Icons.Bulletin />,
         content: (
           <CommunityBoard
             id="bodega-bulletin"
@@ -314,8 +326,9 @@ export const BODEGA_COMMANDS = {
       },
 
       "Internal Network": {
+        favicon: <Icons.LAN />,
         password: {
-          pw: "pay day",
+          pw: "payday",
           hint: "Niece's favorite day and candybar",
           showFirst: true,
           showCount: true,
@@ -332,9 +345,8 @@ export const BODEGA_COMMANDS = {
             notes={[
               "Owner: Batu Khamidov",
               "Connected devices: 3 (security camera, POS terminal, office PC)",
-              "Last admin login: 3 days ago (Batu)",
+              "Last admin login: Batu",
               "Security level: Basic (WPA2, default firewall)",
-              "Network still active despite store closure"
             ]}
           >
             <Line yellow>Note from Batu (cloud sync): "Zara - Please restock the vending machine"</Line>
@@ -342,6 +354,7 @@ export const BODEGA_COMMANDS = {
         ),
         related_commands: {
           "Security Camera - Main Shop": {
+            favicon: <Icons.Camera />,
             content: (
               <Camera
                 id="bodega-main-cam"
@@ -372,6 +385,7 @@ export const BODEGA_COMMANDS = {
           },
 
           "Personnel Files": {
+            favicon: <Icons.Person />,
             content: (
               <Message
                 title="BODEGA"
@@ -384,12 +398,13 @@ export const BODEGA_COMMANDS = {
                 <Line cyan>Active employees: 2</Line>
                 <InsetBox title="EMPLOYEE ROSTER:" color="yellow">
                   <Line neon>→ Batu (Owner/Operator)</Line>
-                  <Line neon>→ Zara (Part-time, Batu's niece)</Line>
+                  <Line neon>→ Zara (Part-time)</Line>
                 </InsetBox>
               </Message>
             ),
             related_commands: {
               "Batu": {
+                favicon: <Icons.Person />,
                 password: {
                   pw: "community",
                   hint: "What Batu cares about more than profit",
@@ -424,6 +439,7 @@ export const BODEGA_COMMANDS = {
               },
 
               "Zara": {
+                favicon: <Icons.Person />,
                 content: (
                   <PersonnelFile
                     employeeId="BODEGA-002"
@@ -433,7 +449,6 @@ export const BODEGA_COMMANDS = {
                     supervisor="Batu Khamidov (uncle)"
                     clearanceLevel={1}
                     salary="Unpaid (family arrangement)"
-                    location="2 blocks north - Shared apartment"
                     email="zara_k_courier@freenet.cy"
                     phone="[AVAILABLE]"
                     emergencyContact="Batu Khamidov (uncle)"
@@ -442,10 +457,8 @@ export const BODEGA_COMMANDS = {
                     notes={[
                       "PRIMARY EMPLOYMENT: Freelance courier (cyberbike)",
                       "BODEGA ROLE: Works shifts between courier jobs, has keys & security codes",
-                      "RECENT ACTIVITY: Shift cancelled by Batu 3 days ago (unusual)",
-                      "RECENT ACTIVITY: No store contact for 2 days",
                       "RECENT ACTIVITY: Attempted to reach Batu via RCD - no response",
-                      "RECENT ACTIVITY: Found store damaged, filed missing person report this morning",
+                      "RECENT ACTIVITY: Found store damaged, filed missing person report",
                     ]}
                   />
                 ),
@@ -454,6 +467,7 @@ export const BODEGA_COMMANDS = {
           },
 
           "Inventory Status": {
+            favicon: <Icons.Inventory />,
             content: (
               <Message
                 title="BODEGA"
@@ -463,8 +477,8 @@ export const BODEGA_COMMANDS = {
                 theme="casual"
               >
                 <InsetBox title="CURRENT STOCK STATUS:">
-                  <Line red>⚠ Significant inventory loss detected</Line>
-                  <Line red>⚠ Physical count required for accuracy</Line>
+                  <Line red>Significant inventory loss detected</Line>
+                  <Line red>Physical count required for accuracy</Line>
                 </InsetBox>
                 <InsetBox title="ESTIMATED REMAINING STOCK:">
                   <Line neon>Credchips (loose change in register): Present</Line>
@@ -477,15 +491,13 @@ export const BODEGA_COMMANDS = {
                   <Line cyan>✓ Wifi router: Operational</Line>
                   <Line cyan>✓ Security system: Online</Line>
                   <Line cyan>✓ Under-counter storage: Intact</Line>
-                  <Line yellow>? Old taser (Batu's personal defense): Location unknown</Line>
-                  <Line yellow>? Fire extinguisher: Should be under counter</Line>
-                  <Line yellow>? Bottle inventory: Needs physical inspection</Line>
                 </InsetBox>
               </Message>
             ),
           },
 
           "Office Safe": {
+            favicon: <Icons.Lock />,
             password: {
               pw: "zara",
               hint: "His niece's name",

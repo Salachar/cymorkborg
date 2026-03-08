@@ -219,6 +219,7 @@ export const LUCKY_FLIGHT_CASINO = {
              ),
             related_commands: {
               "VendWallet": {
+                favicon: <Icons.Wallet />,
                 content: (
                   <DigitalWallet
                     id="bodega-vending-machine-wallet"
@@ -228,6 +229,7 @@ export const LUCKY_FLIGHT_CASINO = {
                 ),
               },
               "DebugMode": {
+                favicon: <Icons.Debug />,
                 content: (
                   <Message
                     title="VENDING MACHINE"
@@ -235,7 +237,7 @@ export const LUCKY_FLIGHT_CASINO = {
                     note="Dispense drinks via main interface - no charge"
                     theme="corporate"
                   >
-                    <Line yellow large>⚠ FREE VEND MODE ENABLED</Line>
+                    <Line yellow large>FREE VEND MODE ENABLED</Line>
                     <Line cyan>All payment verification disabled</Line>
                   </Message>
                 ),
@@ -269,6 +271,7 @@ export const LUCKY_FLIGHT_CASINO = {
         ),
         related_commands: {
           "Facility Files": {
+            favicon: <Icons.Files />,
             password: {
               pw: "architecture",
               hint: "What blueprints are a form of",
@@ -296,6 +299,7 @@ export const LUCKY_FLIGHT_CASINO = {
             ),
             related_commands: {
               "Blueprint: Basement": {
+                favicon: <Icons.Files />,
                 content: (
                   <Message
                     title="LUCKY FLIGHT CASINO - BASEMENT BLUEPRINT"
@@ -324,6 +328,7 @@ export const LUCKY_FLIGHT_CASINO = {
               },
 
               "Blueprint: Floor 1": {
+                favicon: <Icons.Files />,
                 content: (
                   <Message
                     title="LUCKY FLIGHT CASINO - FLOOR 1 BLUEPRINT"
@@ -352,6 +357,7 @@ export const LUCKY_FLIGHT_CASINO = {
                 ),
               },
               "Blueprint: Floor 2": {
+                favicon: <Icons.Files />,
                 content: (
                   <Message
                     title="LUCKY FLIGHT CASINO - FLOOR 2 BLUEPRINT"
@@ -384,6 +390,7 @@ export const LUCKY_FLIGHT_CASINO = {
             },
           },
           "Personnel Files": {
+            favicon: <Icons.Person />,
             password: {
               pw: "slevin",
               hint: "Lucky number Kelevra",
@@ -408,6 +415,7 @@ export const LUCKY_FLIGHT_CASINO = {
             ),
             related_commands: {
               "Wingus Drey": {
+                favicon: <Icons.Person />,
                 content: (
                   <PersonnelFile
                     employeeId="LFC-SEC-2891"
@@ -432,6 +440,7 @@ export const LUCKY_FLIGHT_CASINO = {
                 ),
               },
               "Dingus Marks": {
+                favicon: <Icons.Person />,
                 content: (
                   <PersonnelFile
                     employeeId="LFC-SEC-2892"
@@ -455,6 +464,7 @@ export const LUCKY_FLIGHT_CASINO = {
                 ),
               },
               "Adilet Nurlan": {
+                favicon: <Icons.Person />,
                 content: (
                   <PersonnelFile
                     employeeId="LFC-SEC-3104"
@@ -485,6 +495,7 @@ export const LUCKY_FLIGHT_CASINO = {
                 ),
               },
               "Vaska Jordan": {
+                favicon: <Icons.Person />,
                 content: (
                   <PersonnelFile
                     employeeId="LFC-MGT-0001"
@@ -511,6 +522,7 @@ export const LUCKY_FLIGHT_CASINO = {
                 ),
               },
               "Wattana Kovit": {
+                favicon: <Icons.Person />,
                 content: (
                   <PersonnelFile
                     employeeId="LFC-SEC-ALPHA"
@@ -526,6 +538,7 @@ export const LUCKY_FLIGHT_CASINO = {
                 ),
               },
               "UNNAMED ENTRY": {
+                favicon: <Icons.Person />,
                 password: {
                   pw: "database",
                   hint: "Please help! I've been turned into a living...",
@@ -567,6 +580,7 @@ export const LUCKY_FLIGHT_CASINO = {
             },
           },
           "Security Coverage": {
+            favicon: <Icons.Security />,
             password: {
               pw: "surveillance",
               hint: "What cameras are used for",
@@ -589,6 +603,7 @@ export const LUCKY_FLIGHT_CASINO = {
             ),
             related_commands: {
               "Access Control System": {
+                favicon: <Icons.Maintenance />,
                 password: {
                   pw: "keycard",
                   hint: "What employees swipe to get in",
@@ -622,6 +637,7 @@ export const LUCKY_FLIGHT_CASINO = {
                 )
               },
               "Camera Coverage - Floor 1": {
+                favicon: <Icons.Camera />,
                 content: (
                   <NetworkDevices
                     networkName="CCTV_FLOOR_1"
@@ -641,6 +657,7 @@ export const LUCKY_FLIGHT_CASINO = {
               },
 
               "Camera Coverage - Floor 2": {
+                favicon: <Icons.Camera />,
                 content: (
                   <NetworkDevices
                     networkName="CCTV_FLOOR_2"
@@ -660,6 +677,7 @@ export const LUCKY_FLIGHT_CASINO = {
               },
 
               "Camera Coverage - Basement": {
+                favicon: <Icons.Camera />,
                 content: (
                   <>
                     <NetworkDevices
@@ -678,6 +696,7 @@ export const LUCKY_FLIGHT_CASINO = {
             },
           },
           "Financial Records": {
+            favicon: <Icons.Files />,
             password: {
               pw: "debt",
               hint: "What casino uses to control neighborhood",
@@ -699,6 +718,7 @@ export const LUCKY_FLIGHT_CASINO = {
             ),
             related_commands: {
               "Debt Ledger": {
+                favicon: <Icons.Files />,
                 content: (
                   <Message
                     title="DEBT LEDGER"
@@ -716,6 +736,7 @@ export const LUCKY_FLIGHT_CASINO = {
                 ),
               },
               "High Roller List": {
+                favicon: <Icons.Files />,
                 content: (
                   <VIPList
                     eventName="High Rollers - Tonight"
@@ -742,6 +763,7 @@ export const LUCKY_FLIGHT_CASINO = {
             },
           },
           "Network Traffic Monitor": {
+            favicon: <Icons.LAN />,
             password: {
               pw: "packets",
               hint: "What travels across a network",
@@ -769,6 +791,7 @@ export const LUCKY_FLIGHT_CASINO = {
             )
           },
           "Operations": {
+            favicon: <Icons.Files />,
             content: (
               <MaintenanceAccess
                 title="[OPERATIONS DASHBOARD]"
@@ -787,6 +810,7 @@ export const LUCKY_FLIGHT_CASINO = {
             ),
             related_commands: {
               "Incident Log": {
+                favicon: <Icons.Files />,
                 password: {
                   pw: "chaos",
                   hint: "Casino's natural state",
@@ -838,6 +862,7 @@ export const LUCKY_FLIGHT_CASINO = {
                 ),
               },
               "Power Core Status": {
+                favicon: <Icons.Query />,
                 password: {
                   pw: "unstable",
                   hint: "Condition of Room 16",

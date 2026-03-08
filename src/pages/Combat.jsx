@@ -19,7 +19,6 @@ export default function Combat() {
     <Page>
       <PageHeader
         title="Combat Flow"
-        // subtitle="Step-by-step guide for running combat encounters"
       />
 
       {/* Quick Reference Box */}

@@ -162,8 +162,8 @@ export const DOC_JOY_CLINIC_COMMANDS = {
         related_commands: {
           "Maintenance Panel": {
             password: {
-              pw: "restock",
-              hint: "What you do when inventory runs low",
+              pw: "suppressor",
+              hint: "Polite murder accessory",
               content: <Locked theme="terminal" title="VENDING MAINTENANCE" />
             },
             content: (
@@ -342,7 +342,7 @@ export const DOC_JOY_CLINIC_COMMANDS = {
           "MedCryo Storage": {
             password: {
               pw: "iceicebaby",
-              hint: "Gotta keep everything nice and cold",
+              hint: "Gotta keep everything nice and Vanilla Ice cold",
               content: <Locked theme="safe" title="MEDICAL STORAGE" />
             },
             content: (

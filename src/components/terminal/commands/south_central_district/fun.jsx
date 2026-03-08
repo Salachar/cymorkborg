@@ -524,8 +524,8 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
     related_commands: {
       "Duty Roster": {
         password: {
-          pw: "secops",
-          hint: "What the security personnel are called",
+          pw: "fragmentation",
+          hint: "What happens to the grenade. And you.",
           content: <Locked theme="terminal" title="DUTY ROSTER" />
         },
         content: (
@@ -564,8 +564,8 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
 
       "Evidence Locker": {
         password: {
-          pw: "evidence",
-          hint: "What's stored in this room",
+          pw: "ballistic",
+          hint: "Going this is another way of losing your mind",
           content: <Locked theme="vault" title="EVIDENCE STORAGE" />
         },
         content: (

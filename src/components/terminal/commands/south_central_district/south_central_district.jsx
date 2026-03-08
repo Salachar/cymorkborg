@@ -18,7 +18,7 @@ import { SOUTH_CENTRAL_FUN_COMMANDS } from "./fun";
 import south_central_cctv from '@images/locations/south_central_cctv.png';
 
 export const SOUTH_CENTRAL_DISTRICT_COMMANDS = {
-  "South Central": {
+  "South Central District": {
     favicon: <Icons.Pin />,
     preview: (
       <NodePreview>

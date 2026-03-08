@@ -1,4 +1,3 @@
-// @utils/icons.js
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import BuildIcon from '@mui/icons-material/Build';
@@ -36,6 +35,21 @@ import Time from '@mui/icons-material/AccessTime';
 import Entertainment from '@mui/icons-material/TheaterComedy';
 import Vending from '@mui/icons-material/LocalDrink';
 import Maintenance from '@mui/icons-material/BuildCircle';
+import Briefing from '@mui/icons-material/Assignment';
+import Bounty from '@mui/icons-material/AssignmentInd';
+import CoffeeMachine from '@mui/icons-material/CoffeeMaker';
+import Radio from '@mui/icons-material/Radio';
+import VideoGame from '@mui/icons-material/VideogameAsset';
+import Hours from '@mui/icons-material/AccessTime';
+import Deals from '@mui/icons-material/LocalOffer';
+import Inventory from '@mui/icons-material/Inventory';
+import Lock from '@mui/icons-material/Lock';
+import Person from '@mui/icons-material/Person';
+import Bulletin from '@mui/icons-material/FormatListBulleted';
+import Debug from '@mui/icons-material/SettingsEthernet';
+import Files from '@mui/icons-material/BackupTable';
+import Security from '@mui/icons-material/Security';
+import Query from '@mui/icons-material/QueryStats';
 
 const TEAL = { fontSize: 20, color: 'rgb(79, 209, 197)' };
 const YELLOW = { fontSize: 20, color: 'rgb(251, 191, 36)' };
@@ -43,6 +57,21 @@ const RED = { fontSize: 20, color: 'rgb(252, 129, 129)' };
 const SLATE = { fontSize: 20, color: 'rgb(148, 163, 184)' };
 
 const Icons = {
+  Query: () => <Query style={TEAL} />,
+  Security: () => <Security style={TEAL} />,
+  Files: () => <Files style={TEAL} />,
+  Debug: () => <Debug style={TEAL} />,
+  Bulletin: () => <Bulletin style={TEAL} />,
+  Person: () => <Person style={TEAL} />,
+  Lock: () => <Lock style={TEAL} />,
+  Hours: () => <Hours style={TEAL} />,
+  Deals: () => <Deals style={TEAL} />,
+  Inventory: () => <Inventory style={TEAL} />,
+  VideoGame: () => <VideoGame style={TEAL} />,
+  Radio: () => <Radio style={TEAL} />,
+  CoffeeMachine: () => <CoffeeMachine style={TEAL} />,
+  Briefing: () => <Briefing style={RED} />,
+  Bounty: () => <Bounty style={RED} />,
   Maintenance: () => <Maintenance style={SLATE} />,
   Vending: () => <Vending style={TEAL} />,
   Entertainment: () => <Entertainment style={TEAL} />,

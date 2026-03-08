@@ -14,7 +14,7 @@ import {
 } from '@terminal/retcomdevice';
 
 export const CENTRAL_DISTRICT = {
-  "Central": {
+  "Central District": {
     favicon: <Icons.Pin />,
     preview: (
       <NodePreview>

@@ -962,7 +962,8 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                 related_commands: {
                   "Holo Display Memory": {
                     password: {
-                      pw: 'lich',
+                      pw: 'heman',
+                      hint: "I'll get you next time!",
                       content: <EncryptedMessage />
                     },
                     content: (

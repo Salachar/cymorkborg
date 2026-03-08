@@ -177,7 +177,7 @@ export const STONE_EELS_COMMANDS = {
 
           "VIP Management": {
             password: {
-              pw: "contrictor",
+              pw: "constrictor",
               hint: "The walls are closing in",
               content: <Locked theme="terminal" title="VIP GUEST SYSTEM" />
             },

@@ -72,27 +72,19 @@ export default function RetComDevice() {
       className="flex-1 flex flex-col overflow-hidden font-mono"
       style={{ backgroundColor: 'rgb(19, 23, 34)' }}
     >
-      {/* Header — sits flush under the nav, no padding above */}
       <TerminalHeader onClear={handleReset} />
-
-      {/* Scrollable list area */}
       <div
         style={{
           flex: 1,
           minHeight: 0,
           display: 'flex',
           flexDirection: 'column',
-          // padding: '0 2rem',
-          paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))',
+          paddingBottom: 'calc(max(1.5rem, env(safe-area-inset-bottom)) + 0.75rem)',
         }}
       >
         <div
           className="flex-1 overflow-y-auto"
           style={{
-            // border: '1px solid rgb(77, 167, 188)',
-            // borderTop: 'none',
-            // borderBottomLeftRadius: '6px',
-            // borderBottomRightRadius: '6px',
             backgroundColor: 'rgba(29, 35, 50, 0.7)',
             padding: '0.75rem',
             minHeight: 0,

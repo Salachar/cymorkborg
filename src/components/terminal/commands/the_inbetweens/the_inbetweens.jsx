@@ -16,7 +16,7 @@ import {
 import THE_55_COMMANDS from './the_55';
 
 export const THE_INBETWEENS_DISTRICT = {
-  "The Inbetweens": {
+  "The Inbetweens District": {
     favicon: <Icons.Pin />,
     preview: (
       <NodePreview>

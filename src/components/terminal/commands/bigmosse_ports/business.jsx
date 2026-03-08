@@ -177,8 +177,8 @@ export const BUSINESS_COMMANDS = {
 
       "Inventory System": {
         password: {
-          pw: "razor",
-          hint: "The shop owner's nickname",
+          pw: "bruteforce",
+          hint: "Not elegant. But effective",
           content: <Locked theme="terminal" title="INVENTORY SYSTEM" />
         },
         content: (
