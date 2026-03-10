@@ -119,12 +119,14 @@ export default function CommandRow({
 
   return (
     <div
+      onClick={onClick}
       style={{
         borderRadius: '4px',
         border: `1px solid ${accentBorder}`,
         backgroundColor: isExpanded ? accentDim : C.bg,
         overflow: 'hidden',
         transition: 'background-color 0.15s',
+        cursor: isExpandable ? 'pointer' : 'default',
         ...style,
       }}
     >
@@ -166,15 +168,12 @@ export default function CommandRow({
 
       {/* ── Header strip ── */}
       <div
-        onClick={onClick}
         style={{
           display: 'flex',
           alignItems: 'center',
           gap: '0.5rem',
           padding: '0.5rem 1rem 0.75rem 1rem',
-          cursor: isExpandable ? 'pointer' : 'default',
           userSelect: 'none',
-          // minHeight: depth === 0 ? '3.5rem' : '3rem',
         }}
       >
         {favicon && <Favicon favicon={favicon} />}

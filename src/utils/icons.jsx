@@ -63,6 +63,7 @@ import House from '@mui/icons-material/House';
 import LocalPoliceIcon from '@mui/icons-material/LocalPolice';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
+import GroupsIcon from '@mui/icons-material/Groups';
 
 const TEAL = { fontSize: 20, color: 'rgb(79, 209, 197)' };
 const YELLOW = { fontSize: 20, color: 'rgb(251, 191, 36)' };
@@ -70,6 +71,7 @@ const RED = { fontSize: 20, color: 'rgb(252, 129, 129)' };
 const SLATE = { fontSize: 20, color: 'rgb(148, 163, 184)' };
 
 const Icons = {
+  Group: () => <GroupsIcon style={TEAL} />,
   Medical: () => <MedicalServicesIcon style={TEAL} />,
   Services: () => <MenuBookIcon style={TEAL} />,
   Police: () => <LocalPoliceIcon style={TEAL} />,

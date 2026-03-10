@@ -222,11 +222,21 @@ export const CY_CITY_PORTAL = {
       "Play Nanobomb Defusal": {
         type: "component",
         content: <MinesweeperGame width={20} height={10} tileSize={2} />,
+        preview: (
+          <NodePreview>
+            <Line pink> · Minesweeper</Line>
+          </NodePreview>
+        ),
       },
 
       "Play Netrunner Memory Deck": {
         type: "component",
         content: <MemoryGame gridSize={4} tileSize={4} />,
+        preview: (
+          <NodePreview>
+            <Line pink> · Memory match </Line>
+          </NodePreview>
+        ),
       },
 
       "Play Netrunner Memory Deck (Hard)": {
@@ -237,6 +247,11 @@ export const CY_CITY_PORTAL = {
       "Play Cyber Poker": {
         type: "component",
         content: <CyberPoker />,
+        preview: (
+          <NodePreview>
+            <Line pink> · Luigi Picture Poker clone</Line>
+          </NodePreview>
+        ),
       },
     }
   },

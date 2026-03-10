@@ -256,7 +256,7 @@ export default function List({
   campaignCommandList = [],
   discoveredPasswords = {},
   expandedRows = {},
-  indent = 0,
+  indent = 1,
   onToggle,
   onUnlock,
 }) {

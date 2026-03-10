@@ -9,7 +9,7 @@ const YELLOW = 'rgb(251, 191, 36)';
 const DIM = 'rgb(148, 163, 184)';
 
 export default function TerminalHeader({
-  indent = 0,
+  indent = 1,
   onClear = () => {},
   onIndent = () => {},
 }) {
