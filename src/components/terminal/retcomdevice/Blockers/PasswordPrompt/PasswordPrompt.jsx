@@ -143,7 +143,7 @@ export default function PasswordPrompt({
 
   return (
     <div
-      className="my-2 md:my-4 border-2 rounded-lg p-2 md:p-4 font-mono"
+      className="border-2 rounded-lg p-2 md:p-4 font-mono"
       style={{
         borderColor: 'rgb(77, 167, 188)',
         backgroundColor: 'rgba(29, 35, 50, 0.9)',
@@ -154,7 +154,10 @@ export default function PasswordPrompt({
         <div className="font-bold text-lg" style={{ color: showSuccess ? 'rgb(59, 235, 82)' : 'rgb(133, 175, 231)' }}>
           {showSuccess ? 'PASSWORD ACCEPTED' : 'PASSWORD ENTRY'}
         </div>
-        <div className="text-sm" style={{ color: 'rgb(148, 163, 184)' }}>
+        <div style={{
+          color: 'rgb(148, 163, 184)',
+          fontSize: '0.6rem',
+        }}>
           {command}
         </div>
       </div>

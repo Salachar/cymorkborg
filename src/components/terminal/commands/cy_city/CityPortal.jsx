@@ -28,56 +28,6 @@ export default function CityPortal({
           overflow: 'hidden',
         }}
       >
-        {/* Pulsing corner brackets */}
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '40px',
-            height: '40px',
-            borderTop: '4px solid rgb(239, 68, 68)',
-            borderLeft: '4px solid rgb(239, 68, 68)',
-            animation: 'cityPulse 3s ease-in-out infinite',
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            right: 0,
-            width: '40px',
-            height: '40px',
-            borderTop: '4px solid rgb(239, 68, 68)',
-            borderRight: '4px solid rgb(239, 68, 68)',
-            animation: 'cityPulse 3s ease-in-out infinite',
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            width: '40px',
-            height: '40px',
-            borderBottom: '4px solid rgb(239, 68, 68)',
-            borderLeft: '4px solid rgb(239, 68, 68)',
-            animation: 'cityPulse 3s ease-in-out infinite',
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            right: 0,
-            width: '40px',
-            height: '40px',
-            borderBottom: '4px solid rgb(239, 68, 68)',
-            borderRight: '4px solid rgb(239, 68, 68)',
-            animation: 'cityPulse 3s ease-in-out infinite',
-          }}
-        />
-
         {/* Grid pattern overlay */}
         <div
           style={{
@@ -96,7 +46,7 @@ export default function CityPortal({
         {/* Header section with scanning effect */}
         <div
           style={{
-            padding: '2rem',
+            padding: '1rem',
             borderBottom: '2px solid rgba(239, 68, 68, 0.3)',
             backgroundColor: 'rgba(30, 41, 59, 0.6)',
             position: 'relative',
@@ -122,7 +72,7 @@ export default function CityPortal({
             </Line>
             <Line
               style={{
-                fontSize: '3rem',
+                fontSize: '2.2rem',
                 fontWeight: 'bold',
                 margin: 0,
                 marginTop: '0.5rem',
@@ -142,7 +92,7 @@ export default function CityPortal({
           {tagline && (
             <Line
               style={{
-                fontSize: '1.25rem',
+                fontSize: '1rem',
                 fontStyle: 'italic',
                 margin: 0,
                 color: 'rgb(251, 191, 36)',
@@ -175,7 +125,7 @@ export default function CityPortal({
                   <Line smoke style={{ fontSize: '0.7rem', margin: 0, opacity: 0.7 }}>
                     POPULATION
                   </Line>
-                  <Line red bold style={{ fontSize: '1.25rem', margin: 0 }}>
+                  <Line red bold style={{ fontSize: '1rem', margin: 0 }}>
                     {population}
                   </Line>
                 </div>
@@ -193,7 +143,7 @@ export default function CityPortal({
                   <Line smoke style={{ fontSize: '0.7rem', margin: 0, opacity: 0.7 }}>
                     FOUNDED
                   </Line>
-                  <Line red bold style={{ fontSize: '1.25rem', margin: 0 }}>
+                  <Line red bold style={{ fontSize: '1rem', margin: 0 }}>
                     {yearFounded}
                   </Line>
                 </div>
@@ -211,7 +161,7 @@ export default function CityPortal({
                   <Line smoke style={{ fontSize: '0.7rem', margin: 0, opacity: 0.7 }}>
                     THREAT LEVEL
                   </Line>
-                  <Line red bold style={{ fontSize: '1.25rem', margin: 0 }}>
+                  <Line red bold style={{ fontSize: '1rem', margin: 0 }}>
                     {threatLevel}
                   </Line>
                 </div>
@@ -222,7 +172,7 @@ export default function CityPortal({
         </div>
 
         {/* Main content */}
-        <div style={{ padding: '2rem', position: 'relative' }}>
+        <div style={{ padding: '1.5rem', position: 'relative' }}>
           {/* Atmosphere description */}
           {atmosphere && (
             <>

@@ -293,7 +293,7 @@ export default function DistrictPortal({
             </div>
             <div
               style={{
-                fontSize: 'clamp(0.875rem, 3vw, 1.25rem)',
+                fontSize: 'clamp(0.875rem, 3vw, 1rem)',
                 fontWeight: 'bold',
                 color: getThreatColor(),
                 fontFamily: 'monospace',
@@ -322,7 +322,7 @@ export default function DistrictPortal({
             </div>
             <div
               style={{
-                fontSize: 'clamp(0.875rem, 3vw, 1.25rem)',
+                fontSize: 'clamp(0.875rem, 3vw, 1rem)',
                 fontWeight: 'bold',
                 color: colors.accent,
                 fontFamily: 'monospace',

@@ -5,6 +5,7 @@ import CY_CITY_COMMANDS from '@terminal/commands/cy_city';
 import {
   PASSWORD_STORAGE_KEY,
   TREE_STORAGE_KEY,
+  LIST_INDENT_KEY,
   getDiscoveredPasswords,
   saveDiscoveredPasswords,
 } from '@utils/localStorage';

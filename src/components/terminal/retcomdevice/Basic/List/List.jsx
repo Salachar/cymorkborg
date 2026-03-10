@@ -9,7 +9,6 @@ import {
 
 import {
   COLLAPSED_CONTENT_STORAGE_KEY,
-  LIST_INDENT_KEY,
 } from '@utils/localStorage';
 
 const PARTIAL_HEIGHT = 150;
@@ -17,7 +16,6 @@ const CONTENT_BG = 'rgba(19, 23, 34, 0.6)';
 const CONTENT_BORDER = 'rgba(77, 167, 188, 0.2)';
 const FADE_COLOR = 'rgba(19, 23, 34, 0.95)';
 const TREE_LINE_COLOR = 'rgba(77, 167, 188, 0.25)';
-const INDENT = 1; // rem per depth level
 
 // ============================================================================
 // CONTENT PANEL
@@ -72,24 +70,6 @@ function ContentPanel({ children, size, onToggleSize, style = {} }) {
 // ============================================================================
 // RECURSIVE NODE
 // ============================================================================
-
-const getDepthStyle = (depth) => {
-  const borders = [
-    'rgb(79, 209, 197)',
-    'rgba(79, 209, 197, 0.5)',
-    'rgba(79, 209, 197, 0.3)',
-  ];
-  const bgs = [
-    'rgba(29, 35, 50, 0.7)',
-    'rgba(22, 28, 42, 0.7)',
-    'rgba(16, 20, 32, 0.7)',
-  ];
-  const index = Math.min(depth, borders.length - 1);
-  return {
-    borderLeft: `3px solid ${borders[index]}`,
-    backgroundColor: bgs[index],
-  };
-};
 
 function CommandNode({
   id,
@@ -216,7 +196,6 @@ function CommandNode({
           onClick={() => isExpandable && onToggle(path)}
           style={{
             marginLeft: `${depth * indent}rem`,
-            ...getDepthStyle(depth)
           }}
         />
 
@@ -289,24 +268,6 @@ export default function List({
       return {};
     }
   });
-
-  // const [indent, setIndent] = useState(() => {
-  //   try {
-  //     const saved = localStorage.getItem(LIST_INDENT_KEY);
-  //     return saved !== null ? parseFloat(saved) : 1;
-  //   } catch {
-  //     return 1;
-  //   }
-  // });
-
-  // const handleSetIndent = (val) => {
-  //   setIndent(val);
-  //   try {
-  //     localStorage.setItem(LIST_INDENT_KEY, String(val));
-  //   } catch (e) {
-  //     console.error('Failed to save indent:', e);
-  //   }
-  // };
 
   const handleSetContentSize = (path, size) => {
     setContentSizes(prev => {
