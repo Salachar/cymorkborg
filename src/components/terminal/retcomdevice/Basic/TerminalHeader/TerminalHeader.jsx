@@ -8,7 +8,11 @@ const GREEN = 'rgb(0, 255, 65)';
 const YELLOW = 'rgb(251, 191, 36)';
 const DIM = 'rgb(148, 163, 184)';
 
-export default function TerminalHeader({ onClear }) {
+export default function TerminalHeader({
+  indent = 0,
+  onClear = () => {},
+  onIndent = () => {},
+}) {
   const [adsBlocked, setAdsBlocked] = useState(47);
 
   useEffect(() => {
@@ -90,6 +94,29 @@ export default function TerminalHeader({ onClear }) {
       {/* Live stats ticker */}
       <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', flex: 1 }}>
         <Stat label="ADS BLOCKED" value={adsBlocked.toLocaleString()} color={GREEN} />
+      </div>
+
+      {/* Header controls */}
+      <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '0.25rem', marginBottom: '0.25rem' }}>
+        <span style={{ fontSize: '0.65rem', color: 'rgba(79, 209, 197, 0.5)', fontFamily: 'monospace', marginRight: '0.25rem' }}>INDENT</span>
+        {[0, 1, 1.5].map(val => (
+          <button
+            key={val}
+            onClick={() => onIndent(val)}
+            style={{
+              padding: '0.15rem 0.4rem',
+              fontSize: '0.65rem',
+              fontFamily: 'monospace',
+              backgroundColor: indent === val ? 'rgba(79, 209, 197, 0.2)' : 'transparent',
+              color: indent === val ? 'rgb(79, 209, 197)' : 'rgba(79, 209, 197, 0.35)',
+              border: `1px solid ${indent === val ? 'rgba(79, 209, 197, 0.4)' : 'rgba(79, 209, 197, 0.15)'}`,
+              borderRadius: '2px',
+              cursor: 'pointer',
+            }}
+          >
+            {val}
+          </button>
+        ))}
       </div>
 
       {onClear && (

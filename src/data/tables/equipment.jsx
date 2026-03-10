@@ -174,7 +174,7 @@ export const EQUIPMENT = [
   },
   {
     id: "scum_explosive",
-    label: "Scum Explosive",
+    label: "Scvm Explosive",
     cost: "100¤",
     tags: ["Illegal"],
     description: <>Enough for a moderately reinforced door.</>,

@@ -115,6 +115,13 @@ export default function Combat() {
               </div>
             </div>
 
+            <div className="bg-gray-900/50 border border-gray-700 p-3 rounded">
+              <p className="text-cy-yellow font-bold text-sm mb-2">Movement</p>
+              <p className="text-gray-400 text-sm">
+                On your turn you can move anywhere within a reasonably sized room — roughly <strong className="text-gray-300">6 spaces on a 1" grid</strong> (~30ft). Movement doesn't require a roll and can be split up between actions/attacks if you have multiple.
+              </p>
+            </div>
+
             <ActionOption
               action="Take Cover"
               test="No roll"
@@ -189,7 +196,7 @@ export default function Combat() {
         {/* Step 3 */}
         <CombatStep
           number="03"
-          title="Roll to Hit"
+          title="Roll to Hit (If attacking)"
           color="yellow"
         >
           <div className="space-y-3">
@@ -278,7 +285,6 @@ export default function Combat() {
               <p className="text-gray-300 mb-3">
                 When attacked, roll <strong className="text-cy-yellow">Agility DR12</strong> to defend.
               </p>
-
 
               <div className="space-y-2 text-sm">
                 <ResultBox

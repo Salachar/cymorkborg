@@ -7,14 +7,17 @@ import {
   IceBreaker,
 } from '@terminal/retcomdevice';
 
-import { COLLAPSED_CONTENT_STORAGE_KEY } from '@utils/localStorage';
+import {
+  COLLAPSED_CONTENT_STORAGE_KEY,
+  LIST_INDENT_KEY,
+} from '@utils/localStorage';
 
 const PARTIAL_HEIGHT = 150;
 const CONTENT_BG = 'rgba(19, 23, 34, 0.6)';
 const CONTENT_BORDER = 'rgba(77, 167, 188, 0.2)';
 const FADE_COLOR = 'rgba(19, 23, 34, 0.95)';
 const TREE_LINE_COLOR = 'rgba(77, 167, 188, 0.25)';
-const INDENT = 1.5; // rem per depth level
+const INDENT = 1; // rem per depth level
 
 // ============================================================================
 // CONTENT PANEL
@@ -99,6 +102,7 @@ function CommandNode({
   onToggle,
   onUnlock,
   onSetContentSize,
+  indent = 1,
 }) {
   const isExpanded = Boolean(expandedRows[path]);
   const isBypassed = Boolean(discoveredPasswords[path]);
@@ -210,10 +214,10 @@ function CommandNode({
           onToggleVisibility={handleToggleVisibility}
           onToggleSize={handleToggleSize}
           onClick={() => isExpandable && onToggle(path)}
-          // style={getDepthStyle(depth)}
-          // style={{
-          //   marginLeft: `${depth * INDENT}rem`
-          // }}
+          style={{
+            marginLeft: `${depth * indent}rem`,
+            ...getDepthStyle(depth)
+          }}
         />
 
         {/* Content panel — same width as row, not indented further */}
@@ -221,9 +225,9 @@ function CommandNode({
           <ContentPanel
             size={contentSize}
             onToggleSize={handleToggleSize}
-            // style={{
-            //   marginLeft: `${contentSize === 'partial' ? (depth * INDENT) + 'rem' : '0'}`
-            // }}
+            style={{
+              marginLeft: `${contentSize === 'partial' ? (depth * indent) + 'rem' : '0'}`
+            }}
           >
             {isLocked ? renderBlocker() : resolvedContent}
           </ContentPanel>
@@ -255,6 +259,7 @@ function CommandNode({
                 onToggle={onToggle}
                 onUnlock={onUnlock}
                 onSetContentSize={onSetContentSize}
+                indent={indent}
               />
             );
           })}
@@ -272,6 +277,7 @@ export default function List({
   campaignCommandList = [],
   discoveredPasswords = {},
   expandedRows = {},
+  indent = 0,
   onToggle,
   onUnlock,
 }) {
@@ -283,6 +289,24 @@ export default function List({
       return {};
     }
   });
+
+  // const [indent, setIndent] = useState(() => {
+  //   try {
+  //     const saved = localStorage.getItem(LIST_INDENT_KEY);
+  //     return saved !== null ? parseFloat(saved) : 1;
+  //   } catch {
+  //     return 1;
+  //   }
+  // });
+
+  // const handleSetIndent = (val) => {
+  //   setIndent(val);
+  //   try {
+  //     localStorage.setItem(LIST_INDENT_KEY, String(val));
+  //   } catch (e) {
+  //     console.error('Failed to save indent:', e);
+  //   }
+  // };
 
   const handleSetContentSize = (path, size) => {
     setContentSizes(prev => {
@@ -315,6 +339,7 @@ export default function List({
           onToggle={onToggle}
           onUnlock={onUnlock}
           onSetContentSize={handleSetContentSize}
+          indent={indent}
         />
       ))}
     </div>

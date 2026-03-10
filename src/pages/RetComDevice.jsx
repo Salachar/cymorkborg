@@ -25,6 +25,15 @@ export default function RetComDevice() {
   const [discoveredPasswords, setDiscoveredPasswords] = useState({});
   const [expandedRows, setExpandedRows] = useState({});
 
+  const [indent, setIndent] = useState(() => {
+    try {
+      const saved = localStorage.getItem(LIST_INDENT_KEY);
+      return saved !== null ? parseFloat(saved) : 1;
+    } catch {
+      return 1;
+    }
+  });
+
   useEffect(() => {
     setDiscoveredPasswords(getDiscoveredPasswords());
     try {
@@ -67,12 +76,25 @@ export default function RetComDevice() {
     setExpandedRows({});
   };
 
+  const handleSetIndent = (val) => {
+    setIndent(val);
+    try {
+      localStorage.setItem(LIST_INDENT_KEY, String(val));
+    } catch (e) {
+      console.error('Failed to save indent:', e);
+    }
+  };
+
   return (
     <div
       className="flex-1 flex flex-col overflow-hidden font-mono"
       style={{ backgroundColor: 'rgb(19, 23, 34)' }}
     >
-      <TerminalHeader onClear={handleReset} />
+      <TerminalHeader
+        indent={indent}
+        onClear={handleReset}
+        onIndent={handleSetIndent}
+      />
       <div
         style={{
           flex: 1,
@@ -94,6 +116,7 @@ export default function RetComDevice() {
             campaignCommandList={CAMPAIGN_COMMANDS_LIST}
             discoveredPasswords={discoveredPasswords}
             expandedRows={expandedRows}
+            indent={indent}
             onToggle={handleToggle}
             onUnlock={handleUnlock}
           />

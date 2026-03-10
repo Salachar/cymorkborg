@@ -36,7 +36,8 @@ export const CY_CITY_PORTAL = {
     favicon: <Icons.Wallet />,
     preview: (
       <NodePreview>
-        <span style={{ color: 'rgb(251, 191, 36)' }}>★</span> Keeps track of all collected credits and items in the RetComDevice
+        <Line yellow> · Keeps track of all collected credits and items in the RetComDevice</Line>
+        <Line yellow> · Extracted credits/items are transferable to characters here</Line>
       </NodePreview>
     ),
     content: <TerminalWallet />,
@@ -46,8 +47,7 @@ export const CY_CITY_PORTAL = {
     preview: (
       <NodePreview>
         <Line red span bold>THREAT: CRITICAL</Line>
-        {' · '}Population 2.8M official, 4M+ estimated
-        {' · '}Pre-Incident ruins. Corporate glass. Slum fires.
+        <Line smoke span style={{ fontSize: '0.6rem' }}> · Population 2.8M official, 4M+ estimated · Pre-Incident ruins. Corporate glass. Slum fires.</Line>
         <Line top>
           Public access terminal. City news, weather, corp announcements.{' '}
           <Line span style={{ opacity: 0.6 }}>No secured nodes — just what they want you to know.</Line>

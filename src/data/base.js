@@ -347,37 +347,6 @@ class BaseClass {
     return this._gear;
   }
 
-  getGearSelections(section_name) {
-    const section = this._gear[section_name] || {};
-    const selections = {};
-    Object.keys(section).forEach((id) => {
-      if (section[id].selected) {
-        selections[id] = true;
-      }
-    });
-    return selections;
-  }
-
-  setGearSelection(section_name, entry) {
-    const entry_id = entry.id || entry.label || entry.name;
-    if (!entry_id) return;
-
-    if (!this._gear[section_name]) {
-      this._gear[section_name] = {};
-    }
-
-    const current = this._gear[section_name][entry_id];
-
-    if (current && current.selected) {
-      delete this._gear[section_name][entry_id];
-    } else {
-      this._gear[section_name][entry_id] = {
-        quantity: 1,
-        selected: true,
-      };
-    }
-  }
-
   // Shopping cart system
   get shop_cart() {
     return this._shop_cart;
@@ -490,7 +459,7 @@ class BaseClass {
           // Add new item
           this._gear[section][itemId] = {
             quantity: cartItem.quantity,
-            selected: true
+            // selected: true
           };
         }
       });
@@ -499,6 +468,28 @@ class BaseClass {
     // Clear cart
     this._shop_cart = {};
     return true;
+  }
+
+  addItemToGear(item) {
+    const section = item.section || 'extracted';
+    const itemId = item.id || item.label;
+    if (!itemId) return;
+
+    if (!this._gear[section]) this._gear[section] = {};
+
+    if (this._gear[section][itemId]) {
+      this._gear[section][itemId].quantity += item.quantity || 1;
+    } else {
+      // Store fallback data — used if item isn't found in any section table
+      this._gear[section][itemId] = {
+        quantity: item.quantity,
+        label: item.label,
+        description: item.description || null,
+        die: item.die || null,
+        cost: item.cost || null,
+        value: item.value || null,
+      };
+    }
   }
 
   addFreeToInventory() {
@@ -516,7 +507,6 @@ class BaseClass {
         } else {
           this._gear[section][itemId] = {
             quantity: cartItem.quantity,
-            selected: true
           };
         }
       });

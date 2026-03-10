@@ -106,16 +106,9 @@ export default function CommandRow({
 
   const stopProp = (fn) => (e) => { e.stopPropagation(); fn?.(); };
 
-  // const breadcrumb = depth > 0 ? (() => {
-  //   const parts = path.split('/');
-  //   const parents = parts.slice(0, -1).slice(-3); // last two parents
-  //   return parents.join(' → ');
-  // })() : null;
-
   const breadcrumb = depth > 0 ? (() => {
     const parts = path.split('/');
     const parents = parts.slice(0, -1);
-
     return parents.map((part, i) => {
       const isRecent = i >= parents.length - 2;
       if (isRecent) return part;
@@ -141,28 +134,6 @@ export default function CommandRow({
           padding: '0.2rem 0.5rem 0 0.5rem',
         }}
       >
-        {/* {breadcrumb && (
-          <div style={{
-            fontSize: '0.6rem',
-            color: C.textMuted,
-            fontFamily: 'monospace',
-            letterSpacing: '0.04em',
-            whiteSpace: 'nowrap',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-          }}>
-            {breadcrumb.split(' → ').map((part, i, arr) => (
-              <span key={i}>
-                {i > 0 && <span style={{ color: 'rgba(79, 209, 197, 0.25)' }}> → </span>}
-                <span style={{
-                  color: i === arr.length - 1 ? C.teal : 'rgba(79, 209, 197, 0.35)',
-                }}>
-                  {part}
-                </span>
-              </span>
-            ))}
-          </div>
-        )} */}
         {breadcrumb && (
           <div style={{ fontSize: '0.6rem', fontFamily: 'monospace', letterSpacing: '0.04em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
             {breadcrumb.map((part, i, arr) => (

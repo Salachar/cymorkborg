@@ -1,8 +1,10 @@
+import Icons from '@utils/icons';
+
 import {
   Line,
-  Divider,
   InsetBox,
 } from '@terminal/TerminalComponents';
+
 import {
   BiometricLog,
   BountyCard,
@@ -12,12 +14,10 @@ import {
   DigitalWallet,
   Extractable,
   HoursBanner,
-  IncidentLog,
   Locked,
   MaintenanceAccess,
   Menu,
   PublicPortal,
-  SecureAccessControl,
   SmartFridge,
   VendingMachine,
   Workstation,
@@ -27,6 +27,7 @@ import STEEL_PROFILE from "@images/profile_images/steel_jackhammer.png";
 
 export const DOC_JOY_CLINIC_COMMANDS = {
   "Doc Joy's Clinic": {
+    favicon: <Icons.RipperDoc />,
     content: (
       <PublicPortal
         name="DOC JOY'S CLINIC"
@@ -51,6 +52,7 @@ export const DOC_JOY_CLINIC_COMMANDS = {
     ),
     related_commands: {
       "Active Reaper Contract": {
+        favicon: <Icons.Bounty />,
         content: (
           <BountyCard
             id="bounty-steel-jackhammer"
@@ -86,6 +88,7 @@ export const DOC_JOY_CLINIC_COMMANDS = {
       },
 
       "Services Menu": {
+        favicon: <Icons.Services />,
         content: (
           <Menu
             title="DOC JOY'S SERVICES"
@@ -125,6 +128,7 @@ export const DOC_JOY_CLINIC_COMMANDS = {
       },
 
       "Community Board": {
+        favicon: <Icons.Bulletin />,
         content: (
           <CommunityBoard
             name="CLINIC BULLETIN BOARD"
@@ -145,6 +149,7 @@ export const DOC_JOY_CLINIC_COMMANDS = {
       },
 
       "Vending Machine": {
+        favicon: <Icons.Vending />,
         content: (
           <VendingMachine
             id="docjoy-waiting-vending"
@@ -161,6 +166,7 @@ export const DOC_JOY_CLINIC_COMMANDS = {
         ),
         related_commands: {
           "Maintenance Panel": {
+            favicon: <Icons.Maintenance />,
             password: {
               pw: "suppressor",
               hint: "Polite murder accessory",
@@ -188,6 +194,7 @@ export const DOC_JOY_CLINIC_COMMANDS = {
       },
 
       "Coffee Machine": {
+        favicon: <Icons.CoffeeMachine />,
         content: (
           <CoffeeMachine>
             <DigitalWallet
@@ -199,6 +206,7 @@ export const DOC_JOY_CLINIC_COMMANDS = {
       },
 
       "Internal Systems": {
+        favicon: <Icons.LAN />,
         password: {
           pw: "reaperwork",
           hint: "What Doc Joy calls his specialty contract jobs (check services menu)",
@@ -229,6 +237,7 @@ export const DOC_JOY_CLINIC_COMMANDS = {
         ),
         related_commands: {
           "Security Footage": {
+            favicon: <Icons.Camera />,
             content: (
               <Camera
                 cameraId="CAM-DOCJOY-01"
@@ -298,6 +307,7 @@ export const DOC_JOY_CLINIC_COMMANDS = {
           },
 
           "CyberWare Lockbox": {
+            favicon: <Icons.Lock />,
             password: {
               pw: "prototype",
               hint: "What was stolen from the lab",
@@ -340,6 +350,7 @@ export const DOC_JOY_CLINIC_COMMANDS = {
           },
 
           "MedCryo Storage": {
+            favicon: <Icons.Medical />,
             password: {
               pw: "iceicebaby",
               hint: "Gotta keep everything nice and Vanilla Ice cold",
@@ -407,6 +418,7 @@ export const DOC_JOY_CLINIC_COMMANDS = {
             ),
           },
           "Office Workstation": {
+            favicon: <Icons.Computer />,
             password: {
               pw: "reaperdoc",
               hint: "Best job in the business",

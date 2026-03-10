@@ -1,3 +1,5 @@
+import Icons from '@utils/icons';
+
 import {
   Line,
   Warning,
@@ -21,6 +23,7 @@ import CY_CITY_MAP from '@images/cycity_overview.png';
 
 export const CY_CITY_NETWORK = {
   "Cy City Map": {
+    favicon: <Icons.Map />,
     content: (
       <RetComImage
         src={CY_CITY_MAP}
@@ -30,29 +33,34 @@ export const CY_CITY_NETWORK = {
   },
 
   "Cy City News Network": {
+    favicon: <Icons.News />,
     content: (
       <EventFeed />
     ),
   },
 
   "CyWeather": {
+    favicon: <Icons.Cloud />,
     content: (
       <CyWeather />
     ),
   },
 
   "CySports Network": {
+    favicon: <Icons.Rugby />,
     content: (
       <CySports />
     ),
   },
 
   "Public Utilities": {
+    favicon: <Icons.Bulletin />,
     content: (
       <CyCityPublicAccessBanner />
     ),
     related_commands: {
       "Cy Traffic (Real-Time)": {
+        favicon: <Icons.Traffic />,
         content: (
           <Message
             title="CY TRAFFIC"
@@ -82,6 +90,7 @@ export const CY_CITY_NETWORK = {
       },
 
       "Cy Entertainment Guide": {
+        favicon: <Icons.Entertainment />,
         content: (
           <Message
             title="CY ENTERTAINMENT"
@@ -112,6 +121,7 @@ export const CY_CITY_NETWORK = {
       },
 
       "Cy Survival Tips": {
+        favicon: <Icons.Tips />,
         content: (
           <Message
             title="CY SURVIVAL GUIDE"
@@ -137,6 +147,7 @@ export const CY_CITY_NETWORK = {
       },
 
       "Cy Dating Network": {
+        favicon: <Icons.Heart />,
         content: (
           <Message
             title="CY-MATCH"
@@ -161,6 +172,7 @@ export const CY_CITY_NETWORK = {
       },
 
       "Cy Food Delivery App": {
+        favicon: <Icons.Food />,
         content: (
           <Message
             title="CY-EATS"
@@ -189,6 +201,7 @@ export const CY_CITY_NETWORK = {
       },
 
       "Cy Horoscope Network": {
+        favicon: <Icons.Stars />,
         content: (
           <Message
             title="NET ORACLE"
@@ -213,6 +226,7 @@ export const CY_CITY_NETWORK = {
       },
 
       "Cy Urban Legends Archive": {
+        favicon: <Icons.Files />,
         content: (
           <Message
             title="CY URBAN LEGENDS"
@@ -244,6 +258,7 @@ export const CY_CITY_NETWORK = {
       },
 
       "Cy Public Services": {
+        favicon: <Icons.Bulletin />,
         content: (
           <Message
             title="CY PUBLIC SERVICES"
@@ -276,6 +291,7 @@ export const CY_CITY_NETWORK = {
       },
 
       "Cy Job Board": {
+        favicon: <Icons.Bulletin />,
         content: (
           <Message
             title="CY EMPLOYMENT NETWORK"
@@ -321,6 +337,7 @@ export const CY_CITY_NETWORK = {
       },
 
       "Cy Housing Market": {
+        favicon: <Icons.House />,
         content: (
           <Message
             title="CY REAL ESTATE"
@@ -363,6 +380,7 @@ export const CY_CITY_NETWORK = {
       },
 
       "Cy Crime Reports": {
+        favicon: <Icons.Police />,
         content: (
           <Message
             title="CY CRIME STATISTICS"
@@ -407,6 +425,7 @@ export const CY_CITY_NETWORK = {
       },
 
       "Cy Meme Feed": {
+        favicon: <Icons.Ad />,
         content: (
           <Message
             title="CY VIRAL CONTENT"
@@ -447,6 +466,7 @@ export const CY_CITY_NETWORK = {
   },
 
   "Corporate Portals": {
+    favicon: <Icons.Tower />,
     content: (
       <CyCityCorporatePortalsBanner />
     ),
@@ -490,6 +510,7 @@ export const CY_CITY_NETWORK = {
       },
 
       "Alliansen Inc.": {
+        favicon: <Icons.Tower />,
         content: (
           <CorpAd
             corp="ALLIANSEN INC."
@@ -531,6 +552,7 @@ export const CY_CITY_NETWORK = {
       },
 
       "AST Endless Seas": {
+        favicon: <Icons.Tower />,
         content: (
           <CorpAd
             corp="AST ENDLESS SEAS"
@@ -572,6 +594,7 @@ export const CY_CITY_NETWORK = {
       },
 
       "Cynergy Water & Power": {
+        favicon: <Icons.Tower />,
         content: (
           <CorpAd
             corp="CYNERGY WATER & POWER CO."
@@ -611,6 +634,7 @@ export const CY_CITY_NETWORK = {
       },
 
       "Fideistic Transformation": {
+        favicon: <Icons.Tower />,
         content: (
           <CorpAd
             corp="FIDEISTIC TRANSFORMATION"
@@ -650,6 +674,7 @@ export const CY_CITY_NETWORK = {
       },
 
       "Kaytell Makers": {
+        favicon: <Icons.Tower />,
         content: (
           <CorpAd
             corp="KAYTELL MAKERS"
@@ -689,6 +714,7 @@ export const CY_CITY_NETWORK = {
       },
 
       "Spectral FT Banks": {
+        favicon: <Icons.Wallet />,
         content: (
           <CorpAd
             corp="SPECTRAL FT BANKS & HOLDINGS"
@@ -727,6 +753,7 @@ export const CY_CITY_NETWORK = {
       },
 
       "UCS Corporate": {
+        favicon: <Icons.Tower />,
         content: (
           <CorpAd
             corp="UNITED CITADEL SECURITY"
@@ -766,6 +793,7 @@ export const CY_CITY_NETWORK = {
       },
 
       "Tulles & deVerte Lifestyle Feed": {
+        favicon: <Icons.Nightlife />,
         content: (
           <CorpAd
             corp="TULLES&DEVERTE"
@@ -805,6 +833,7 @@ export const CY_CITY_NETWORK = {
       },
 
       "Royal West Shipping": {
+        favicon: <Icons.Tower />,
         content: (
           <CorpAd
             corp="ROYAL WEST SHIPPING CO."
@@ -866,6 +895,7 @@ export const CY_CITY_NETWORK = {
       },
 
       "Gravf|Mellberg|Tosk Law": {
+        favicon: <Icons.Prison />,
         content: (
           <CorpAd
             corp="GRAVF/MELLBERG/TOSK"

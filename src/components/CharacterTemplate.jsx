@@ -22,12 +22,8 @@ import Services from "./character/Services";
 import Debt from "./character/Debt";
 
 import {
-  WEAPONS_FOR_SALE,
-  EQUIPMENT,
   CYBERTECH,
   APPS,
-  DRUGS,
-  AMMO_BOOSTERS,
   STYLES,
   FEATURES,
   WANTS,
@@ -40,44 +36,8 @@ import {
   STARTING_ITEMS_3,
   DEBT_TO_WHOM,
   DEBT_URGENCY,
+  GEAR_SECTIONS,
 } from "../data/tables";
-
-const GEAR_SECTIONS = [
-  {
-    name: "weapons",
-    label: "Weapons",
-    note: (
-      <span>You get d4 Basic Mags for free (in shop) if applicable to the weapon.</span>
-    ),
-    entries: WEAPONS_FOR_SALE,
-  },
-  {
-    name: "ammo",
-    label: "Ammo & Boosters",
-    entries: AMMO_BOOSTERS,
-  },
-  {
-    name: "equipment",
-    label: "Equipment",
-    note: (
-      <span>Illegal items require a Security Operative License. Without it, SecOps are authorized to shoot to kill.</span>
-    ),
-    entries: EQUIPMENT,
-  },
-  {
-    name: "cybertech",
-    label: "Cybertech",
-    entries: CYBERTECH,
-  },
-  {
-    name: "drugs",
-    label: "Drugs",
-    note: (
-      <span>Cost after the / is for weaker, recreational doses</span>
-    ),
-    entries: DRUGS,
-  },
-]
 
 export default function CharacterTemplate({
   builder = false,

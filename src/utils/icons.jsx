@@ -53,6 +53,16 @@ import Query from '@mui/icons-material/QueryStats';
 import Schedule from '@mui/icons-material/EventNote';
 import Computer from '@mui/icons-material/Computer';
 import BarMenu from '@mui/icons-material/Tapas';
+import News from '@mui/icons-material/Newspaper';
+import Cloud from '@mui/icons-material/Cloud';
+import Rugby from '@mui/icons-material/SportsRugby';
+import Tips from '@mui/icons-material/TipsAndUpdates';
+import Heart from '@mui/icons-material/Favorite';
+import Stars from '@mui/icons-material/AutoAwesome';
+import House from '@mui/icons-material/House';
+import LocalPoliceIcon from '@mui/icons-material/LocalPolice';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
 
 const TEAL = { fontSize: 20, color: 'rgb(79, 209, 197)' };
 const YELLOW = { fontSize: 20, color: 'rgb(251, 191, 36)' };
@@ -60,6 +70,16 @@ const RED = { fontSize: 20, color: 'rgb(252, 129, 129)' };
 const SLATE = { fontSize: 20, color: 'rgb(148, 163, 184)' };
 
 const Icons = {
+  Medical: () => <MedicalServicesIcon style={TEAL} />,
+  Services: () => <MenuBookIcon style={TEAL} />,
+  Police: () => <LocalPoliceIcon style={TEAL} />,
+  House: () => <House style={TEAL} />,
+  Stars: () => <Stars style={TEAL} />,
+  Heart: () => <Heart style={TEAL} />,
+  Tips: () => <Tips style={TEAL} />,
+  Rugby: () => <Rugby style={TEAL} />,
+  Cloud: () => <Cloud style={TEAL} />,
+  News: () => <News style={TEAL} />,
   BarMenu: () => <BarMenu style={TEAL} />,
   Computer: () => <Computer style={TEAL} />,
   Schedule: () => <Schedule style={TEAL} />,
@@ -87,7 +107,7 @@ const Icons = {
   LAN: () => <LAN style={TEAL} />,
   RipperDoc: () => <RipperDoc style={TEAL} />,
   Trophy: () => <Trophy style={YELLOW} />,
-  Traffic: () => <Traffic style={SLATE} />,
+  Traffic: () => <Traffic style={TEAL} />,
   Taxi: () => <Taxi style={TEAL} />,
   Nightlife: () => <Nightlife style={YELLOW} />,
   Alert: () => <WarningAmberIcon style={YELLOW} />,

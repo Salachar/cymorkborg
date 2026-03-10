@@ -854,11 +854,7 @@ export const LUCKY_FLIGHT_CASINO = {
                         }
                       },
                     ]}
-                  >
-                    <Divider />
-                    <Line cyan>High chaos = good cover</Line>
-                    <Line yellow>Security spread thin</Line>
-                  </IncidentLog>
+                  />
                 ),
               },
               "Power Core Status": {

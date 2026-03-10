@@ -656,63 +656,72 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                 temperature={38}
                 physicalItems={[
                   {
-                    id: "fridge_beer",
-                    label: "Beer x48 bottles",
-                    description: "Various brands for party"
+                    id: "jackhammer_fridge_beer",
+                    label: "Beer",
+                    description: "Various brands for party",
+                    quantity: 48,
                   },
                   {
-                    id: "fridge_energy",
-                    label: "Energy Drinks x32 cans",
-                    description: "Party fuel"
+                    id: "jackhammer_fridge_energy",
+                    label: "Energy Drinks",
+                    description: "Party fuel",
+                    quantity: 32,
                   },
                   {
-                    id: "fridge_synth_juice",
-                    label: "Synth-juice x12 bottles",
-                    description: "Synthetic fruit juice"
+                    id: "jackhammer_fridge_synth_juice",
+                    label: "Synth-juice",
+                    description: "Synthetic fruit juice",
+                    quantity: 12,
                   },
                   {
-                    id: "fridge_cocktails",
-                    label: "Pre-mixed Cocktails x18 cans",
-                    description: "Ready to drink"
+                    id: "jackhammer_fridge_cocktails",
+                    label: "Pre-mixed Cocktails",
+                    description: "Ready to drink",
+                    quantity: 18,
                   },
                   {
-                    id: "fridge_water",
-                    label: "Water x24 bottles",
-                    description: "Mostly untouched"
+                    id: "jackhammer_fridge_water",
+                    label: "Water",
+                    description: "Mostly untouched",
+                    quantity: 24,
                   },
                   {
-                    id: "fridge_protein",
-                    label: "Protein Packs x8",
-                    description: "Meal replacement"
+                    id: "jackhammer_fridge_protein",
+                    label: "Protein Packs",
+                    description: "Meal replacement",
+                    quantity: 8,
                   },
                   {
-                    id: "fridge_takeout",
+                    id: "jackhammer_fridge_takeout",
                     label: "Leftover Takeout",
                     description: "Days old, probably bad"
                   },
                 ]}
                 freezerItems={[
                   {
-                    id: "freezer_blackout",
-                    label: "Blackout x10 doses",
-                    description: "Sedative drug - kept frozen for preservation",
-                    value: 1500,
-                    isCredits: false
+                    id: "jackhammer_freezer_blackout",
+                    label: "Blackout",
+                    description: "Sedative drug, kept frozen",
+                    quantity: 10,
+                    section: "drugs",
                   },
                   {
-                    id: "freezer_ice_cream",
-                    label: "Ice Cream x3 containers",
-                    description: "Various flavors"
+                    id: "jackhammer_freezer_ice_cream",
+                    label: "Ice Cream",
+                    description: "Various flavors",
+                    quantity: 3,
                   },
                   {
-                    id: "freezer_pizza",
-                    label: "Frozen Pizza x4 boxes",
-                    description: "Untouched"
+                    id: "jackhammer_freezer_pizza",
+                    label: "Frozen Pizza",
+                    description: "Untouched",
+                    quantity: 4,
                   },
                   {
-                    id: "freezer_ice",
-                    label: "Ice x2 bags",
-                    description: "For drinks"
+                    id: "jackhammer_freezer_ice",
+                    label: "Ice",
+                    description: "For drinks",
+                    quantity: 2,
                   },
                 ]}
                 freezerTemp={0}

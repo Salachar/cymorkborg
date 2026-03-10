@@ -7,6 +7,7 @@ import {
   STARTING_ITEMS_1,
   STARTING_ITEMS_2,
   STARTING_ITEMS_3,
+  searchAllItems,
 } from "../../data/tables";
 
 // Category definitions with colors
@@ -17,10 +18,11 @@ const CATEGORIES = {
   cybertech: { label: "CYBERTECH", color: "text-cy-cyan", border: "border-cy-cyan", bg: "bg-cy-cyan/20" },
   drugs: { label: "DRUG", color: "text-cy-pink", border: "border-cy-pink", bg: "bg-cy-pink/20" },
   ammo: { label: "AMMO", color: "text-green-400", border: "border-green-700", bg: "bg-green-900/20" },
+  extracted: { label: "EXTRACTED", color: "text-teal-400", border: "border-teal-700", bg: "bg-teal-900/20" },
   custom: { label: "MISC", color: "text-purple-400", border: "border-purple-700", bg: "bg-purple-900/20" },
 };
 
-const CATEGORY_ORDER = ["weapons", "ammo", "armor", "equipment", "cybertech", "drugs", "custom"];
+const CATEGORY_ORDER = ["weapons", "ammo", "armor", "equipment", "cybertech", "drugs", "extracted", "custom"];
 
 export default function Inventory({
   character = null,
@@ -71,17 +73,23 @@ export default function Inventory({
 
   // Gather all inventory items (from market sections)
   const inventoryItems = [];
+
   Object.keys(character.gear).forEach(section => {
-    const sectionEntries = allEntries[section] || [];
     Object.keys(character.gear[section]).forEach(itemId => {
       const gearItem = character.gear[section][itemId];
-      if (!gearItem.selected) return;
+      const found = searchAllItems(itemId);
 
-      const entry = sectionEntries.find(e => (e.id || e.label) === itemId);
-      if (!entry) return;
+      const entry = found?.entry ?? {
+        label: gearItem.label || itemId,
+        description: gearItem.description,
+        die: gearItem.die,
+        cost: gearItem.cost,
+      };
+
+      const resolvedSection = found?.section ?? section;
 
       inventoryItems.push({
-        section,
+        section: resolvedSection,
         itemId,
         quantity: gearItem.quantity,
         entry,

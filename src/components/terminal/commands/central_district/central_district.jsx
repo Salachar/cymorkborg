@@ -121,6 +121,7 @@ export const CENTRAL_DISTRICT = {
     ),
     related_commands: {
       "TG Labs [Ad]": {
+        favicon: <Icons.Ad />,
         content: (
           <CorpAd
             corp="TG LABS"
@@ -147,6 +148,7 @@ export const CENTRAL_DISTRICT = {
       },
 
       "Undersjön Project Updates": {
+        favicon: <Icons.Files />,
         content: (
           <Message
             title="UNDERSJÖN PROJECT"
