@@ -202,7 +202,7 @@ export const CY_CITY_PORTAL = {
     related_commands: {
       ...BIGMOSSE_PORTS_COMMANDS,
       ...SOUTH_CENTRAL_DISTRICT_COMMANDS,
-      // ...THE_INBETWEENS_DISTRICT,
+      ...THE_INBETWEENS_DISTRICT,
       ...CENTRAL_DISTRICT,
     },
   },

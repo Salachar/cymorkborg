@@ -34,7 +34,6 @@ export { STARTING_ITEMS_1 } from './startingItems1';
 export { STARTING_ITEMS_2 } from './startingItems2';
 export { STARTING_ITEMS_3 } from './startingItems3';
 
-
 export const GEAR_SECTIONS = [
   {
     name: "weapons",

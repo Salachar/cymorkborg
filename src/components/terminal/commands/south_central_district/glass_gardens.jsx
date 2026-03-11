@@ -195,8 +195,8 @@ export const GLASS_GARDENS_COMMANDS = {
       "Internal Access": {
         favicon: <Icons.LAN />,
         password: {
-          pw: "crystalchalice",
-          hint: "You can see through it and drink from it",
+          pw: "glass salad",
+          hint: "This veggie dish will cut you up",
         },
         content: (
           <MaintenanceAccess
@@ -262,6 +262,10 @@ export const GLASS_GARDENS_COMMANDS = {
 
       "Crystal Lattice": {
         favicon: <Icons.Nightlife />,
+        password: {
+          pw: "crystalchalice",
+          hint: "A Kings cup",
+        },
         content: (
           <PrivatePortal
             networkId="CRYSTAL_LATTICE"

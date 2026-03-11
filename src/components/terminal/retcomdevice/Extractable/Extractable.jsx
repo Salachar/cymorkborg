@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Line, Divider } from '@terminal/TerminalComponents';
+import { searchAllItems } from '@data/tables';
 import { getExtracted, saveExtracted, getWallet, saveWallet } from '@utils/localStorage';
 
 /**
@@ -140,11 +141,32 @@ export default function Extractable({
 // ─── ItemSection ─────────────────────────────────────────────────────────────
 
 function ItemSection({
-  label, sublabel, accentColor,
-  buttonLabel, buttonLabelPast,
-  items, extractedIds, allTaken, disabled,
-  onExtractItem, onExtractAll,
+  label,
+  sublabel,
+  accentColor,
+  buttonLabel,
+  buttonLabelPast,
+  items,
+  extractedIds,
+  allTaken,
+  disabled,
+  onExtractItem,
+  onExtractAll,
 }) {
+  const resolveItem = (item) => {
+    if (!item.id) return item;
+    const found = searchAllItems(item.id);
+    if (!found) return item;
+    // Merge — item props win for quantity/section overrides, lookup fills in the rest
+    return {
+      ...found.entry,
+      section: item.section || found.section,
+      quantity: item.quantity || 1,
+      isCredits: item.isCredits,
+      id: item.id,
+    };
+  };
+
   return (
     <div
       style={{
@@ -182,6 +204,8 @@ function ItemSection({
       <div style={{ marginTop: '0.75rem' }}>
         {items.map((item, i) => {
           const taken = extractedIds.has(item.id);
+          const display = resolveItem(item);
+
           return (
             <div
               key={item.id}
@@ -199,17 +223,32 @@ function ItemSection({
 
               <div style={{ flex: 1 }}>
                 <Line style={{ margin: 0, color: taken ? 'rgb(148, 163, 184)' : accentColor, fontSize: '0.875rem' }}>
-                  <strong>{item.label}</strong>
-                  {item.quantity > 1 && (
-                    <span style={{ fontWeight: 'normal', opacity: 0.7, marginLeft: '0.4rem' }}>×{item.quantity}</span>
+                  <strong>{display.label}</strong>
+                  {display.quantity > 1 && (
+                    <span style={{ fontWeight: 'normal', opacity: 0.7, marginLeft: '0.4rem' }}>×{display.quantity}</span>
                   )}
-                  {item.description && <span>: {item.description}</span>}
-                  {item.value && item.isCredits && (
-                    <span style={{ color: taken ? 'rgb(148, 163, 184)' : 'rgb(34, 197, 94)', marginLeft: '0.5rem', fontWeight: 'bold' }}>
-                      [{item.value.toLocaleString()}¤]
-                    </span>
+                  {display.die && (
+                    <span style={{ fontFamily: 'monospace', marginLeft: '0.4rem', opacity: 0.8 }}>{display.die}</span>
+                  )}
+                  {display.cost && (
+                    <span style={{ color: 'rgb(34, 197, 94)', marginLeft: '0.4rem', fontWeight: 'normal', fontSize: '0.8rem' }}>{display.cost}</span>
                   )}
                 </Line>
+                {display.description && (
+                  <Line smoke style={{ margin: 0, fontSize: '0.78rem', marginTop: '0.15rem', opacity: taken ? 0.5 : 0.8 }}>
+                    {display.description}
+                  </Line>
+                )}
+                {display.value && !display.isCredits && (
+                  <Line style={{ margin: 0, fontSize: '0.75rem', marginTop: '0.15rem', color: 'rgb(34, 197, 94)', opacity: taken ? 0.5 : 1 }}>
+                    ~{display.value.toLocaleString()}¤
+                  </Line>
+                )}
+                {display.value && display.isCredits && (
+                  <span style={{ color: taken ? 'rgb(148, 163, 184)' : 'rgb(34, 197, 94)', marginLeft: '0.5rem', fontWeight: 'bold' }}>
+                    [{display.value.toLocaleString()}¤]
+                  </span>
+                )}
               </div>
 
               {!taken && (

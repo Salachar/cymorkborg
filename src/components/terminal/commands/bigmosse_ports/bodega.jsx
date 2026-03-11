@@ -534,6 +534,9 @@ export const BODEGA_COMMANDS = {
                     label: "Casino chip",
                     description: "Lucky Flight 100¤ chip (never cashed, sentimental)"
                   },
+                  {
+                    id: "machete",
+                  },
                 ]}
                 digital={[
                   {

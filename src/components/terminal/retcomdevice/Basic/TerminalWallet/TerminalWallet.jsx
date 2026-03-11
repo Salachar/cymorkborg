@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Line, Section, Spacer, Divider } from '@terminal/TerminalComponents';
 import { formatCredits } from '@utils/general';
 import { getWallet, saveWallet } from '@utils/localStorage';
+import { searchAllItems } from '@data/tables';
 import BuilderManager from '@data/builder';
 
 // ─── TransferConfirm ──────────────────────────────────────────────────────────
@@ -177,42 +178,37 @@ export default function TerminalWallet() {
 
             <Section title={`ITEMS EXTRACTED: (${totalItems})`} color="cyan">
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                {wallet.items.map((item, i) => (
-                  <div
-                    key={i}
-                    style={{
-                      display: 'flex', alignItems: 'flex-start', gap: '0.5rem',
-                      padding: '0.5rem 0.75rem',
-                      backgroundColor: 'rgba(15, 23, 42, 0.6)',
-                      border: '1px solid rgb(71, 85, 105)', borderRadius: '3px',
-                    }}
-                  >
-                    <span style={{ color: 'rgb(79, 209, 197)', fontSize: '0.875rem', flexShrink: 0 }}>→</span>
-                    <div style={{ flex: 1 }}>
-                      <Line cyan bold style={{ margin: 0, fontSize: '0.875rem' }}>
-                        {item.label}
-                        {item.quantity > 1 && (
-                          <span style={{ color: 'rgb(148, 163, 184)', fontWeight: 'normal', marginLeft: '0.4rem' }}>
-                            ×{item.quantity}
-                          </span>
+                {wallet.items.map((item, i) => {
+                  const found = searchAllItems(item.id);
+                  const display = found ? { ...found.entry, quantity: item.quantity || 1 } : item;
+                  return (
+                    <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', padding: '0.5rem 0.75rem', backgroundColor: 'rgba(15, 23, 42, 0.6)', border: '1px solid rgb(71, 85, 105)', borderRadius: '3px' }}>
+                      <span style={{ color: 'rgb(79, 209, 197)', fontSize: '0.875rem', flexShrink: 0 }}>→</span>
+                      <div style={{ flex: 1 }}>
+                        <Line cyan bold style={{ margin: 0, fontSize: '0.875rem' }}>
+                          {display.label}
+                          {display.quantity > 1 && (
+                            <span style={{ color: 'rgb(148, 163, 184)', fontWeight: 'normal', marginLeft: '0.4rem' }}>×{display.quantity}</span>
+                          )}
+                          {display.die && (
+                            <span style={{ fontFamily: 'monospace', marginLeft: '0.4rem', opacity: 0.8, fontWeight: 'normal' }}>{display.die}</span>
+                          )}
+                          {display.cost && (
+                            <span style={{ color: 'rgb(34, 197, 94)', marginLeft: '0.4rem', fontWeight: 'normal', fontSize: '0.8rem' }}>{display.cost}</span>
+                          )}
+                        </Line>
+                        {display.description && (
+                          <Line smoke style={{ margin: 0, fontSize: '0.8rem', marginTop: '0.15rem' }}>{display.description}</Line>
                         )}
-                      </Line>
-                      {item.description && (
-                        <Line smoke style={{ margin: 0, fontSize: '0.8rem', marginTop: '0.25rem' }}>{item.description}</Line>
-                      )}
-                      {item.value && (
-                        <Line yellow style={{ margin: 0, fontSize: '0.8rem', marginTop: '0.25rem' }}>
-                          Estimated value: {formatCredits(item.value)}
-                        </Line>
-                      )}
-                      {item.die && (
-                        <Line yellow style={{ margin: 0, fontSize: '0.75rem', marginTop: '0.25rem', fontFamily: 'monospace' }}>
-                          [{item.die}]
-                        </Line>
-                      )}
+                        {item.value && !found && (
+                          <Line yellow style={{ margin: 0, fontSize: '0.8rem', marginTop: '0.15rem' }}>
+                            ~{formatCredits(item.value)}
+                          </Line>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </Section>
 

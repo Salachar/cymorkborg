@@ -1,6 +1,6 @@
 import Icons from '@utils/icons';
 
-import THE_55_LOWER_LEVELS_COMMANDS from "./the_55_01_lower_levels";
+import { THE_55_LOWER_LEVELS_COMMANDS } from "./the_55_01_lower_levels/lower_levels";
 import THE_55_CAPSULE_CLOSETS_COMMANDS from "./the_55_02_capsule_closets";
 import THE_55_REC_COMMANDS from "./the_55_03_rec";
 import THE_55_ALLIANSEN_ARMS_COMMANDS from "./the_55_04_alliansen_arms";
@@ -28,6 +28,9 @@ import {
 export const THE_55_COMMANDS = {
   "The 55 [Stack #95563]": {
     favicon: <Icons.Apartment />,
+    password: {
+      pw: 'fiftyfivepeachtrees'
+    },
     content: (
       <DistrictPortal
         districtName="THE 55"
