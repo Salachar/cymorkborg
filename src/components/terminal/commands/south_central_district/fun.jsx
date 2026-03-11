@@ -1,8 +1,11 @@
+import Icons from '@utils/icons';
+
 import {
   Line,
   Divider,
   InsetBox,
 } from '@terminal/TerminalComponents';
+
 import {
   Safe,
   Jukebox,
@@ -18,6 +21,7 @@ import {
 
 export const SOUTH_CENTRAL_FUN_COMMANDS = {
   "Gravf|Mellberg|Tosk Law Offices": {
+    favicon: <Icons.Tower />,
     content: (
       <FacilityPortal
         companyName="GRAVE/MELLBERG/TOSK"
@@ -66,6 +70,7 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
     ),
     related_commands: {
       "Reception Area": {
+        favicon: <Icons.Atrium />,
         content: (
           <MaintenanceAccess
             title="[RECEPTION - FLOOR 18]"
@@ -91,6 +96,7 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
         ),
       },
       "Internal Access": {
+        favicon: <Icons.LAN />,
         content: (
           <MaintenanceAccess
             title="Gravf|Mellberg|Tosk Law Offices"
@@ -102,6 +108,7 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
         ),
         related_commands: {
           "Personnel File - Marcus Grave": {
+            favicon: <Icons.Person />,
             content: (
               <PersonnelFile
                 employeeId="GMT-PARTNER-001"
@@ -130,6 +137,7 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
         }
       },
       "Coffee Machine": {
+        favicon: <Icons.CoffeeMachine />,
         content: (
           <CoffeeMachine />
         ),
@@ -138,6 +146,7 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
   },
 
   "Undersjon Retail Park": {
+    favicon: <Icons.Bulletin />,
     content: (
       <PublicPortal
         name="UNDERSJON"
@@ -186,6 +195,7 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
   },
 
   "The Golden Ratio": {
+    favicon: <Icons.Fitness />,
     content: (
       <PublicPortal
         name="THE GOLDEN RATIO"
@@ -231,6 +241,7 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
     ),
     related_commands: {
       "Member Directory": {
+        favicon: <Icons.Group />,
         password: {
           pw: "olympus",
           hint: "The highest membership tier",
@@ -268,6 +279,7 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
       },
 
       "Locker Room Safe": {
+        favicon: <Icons.Lock />,
         password: {
           pw: "platinum",
           hint: "The most common membership tier",
@@ -315,6 +327,7 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
   },
 
   "Shaft & Piston": {
+    favicon: <Icons.Bar />,
     content: (
       <PublicPortal
         name="SHAFT & PISTON"
@@ -341,6 +354,7 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
     ),
     related_commands: {
       "Bar Menu": {
+        favicon: <Icons.BarMenu />,
         content: (
           <Menu
             title="SHAFT & PISTON"
@@ -373,6 +387,7 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
       },
 
       "Personnel File - Owner": {
+        favicon: <Icons.Person />,
         content: (
           <PersonnelFile
             employeeId="BAR-SHAFT-001"
@@ -400,6 +415,7 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
       },
 
       "Jukebox": {
+        favicon: <Icons.Radio />,
         content: (
           <Jukebox
             model="JB-500"
@@ -417,6 +433,7 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
       },
 
       "Bar Safe": {
+        favicon: <Icons.Lock />,
         password: {
           pw: "union",
           hint: "What the workers at this bar believe in",
@@ -466,6 +483,7 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
   },
 
   "UCS SecCorps Station #7": {
+    favicon: <Icons.Security />,
     content: (
       <FacilityPortal
         companyName="UNITED CITADEL SECURITY"
@@ -523,6 +541,7 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
     ),
     related_commands: {
       "Duty Roster": {
+        favicon: <Icons.Schedule />,
         password: {
           pw: "fragmentation",
           hint: "What happens to the grenade. And you.",
@@ -563,6 +582,7 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
       },
 
       "Evidence Locker": {
+        favicon: <Icons.Room />,
         password: {
           pw: "ballistic",
           hint: "Going this is another way of losing your mind",

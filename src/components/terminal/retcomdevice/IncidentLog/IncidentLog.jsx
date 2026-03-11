@@ -1,7 +1,5 @@
 import {
   Line,
-  Section,
-  Divider,
   InsetBox,
 } from '@terminal/TerminalComponents';
 
@@ -31,8 +29,8 @@ export default function IncidentLog({
     <>
       <Line smoke large bold>[{title}]</Line>
       <Line cyan>{timeframe}</Line>
-      {incidents.map((incident) => (
-        <InsetBox title={incident.timestamp} color="yellow">
+      {incidents.map((incident, idx) => (
+        <InsetBox key={`key_inc_log_${idx}`} title={incident.timestamp} color="yellow">
           <Line className={getTypeColor(incident.type)} cyan>
             Incident Type: {incident.type}
           </Line>

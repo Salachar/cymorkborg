@@ -52,6 +52,7 @@ export const BUSINESS_COMMANDS = {
     ),
     related_commands: {
       "Personnel File": {
+        favicon: <Icons.Person />,
         content: (
           <PersonnelFile
             employeeId="CLINIC-DOC-001"
@@ -75,6 +76,7 @@ export const BUSINESS_COMMANDS = {
       },
 
       "Patient Records": {
+        favicon: <Icons.Files />,
         password: {
           pw: "scalpel",
           hint: "Slicey slicey time tool",
@@ -149,6 +151,7 @@ export const BUSINESS_COMMANDS = {
     ),
     related_commands: {
       "Personnel File": {
+        favicon: <Icons.Person />,
         content: (
           <PersonnelFile
             employeeId="SHOP-TECH-001"
@@ -176,6 +179,7 @@ export const BUSINESS_COMMANDS = {
       },
 
       "Inventory System": {
+        favicon: <Icons.Inventory />,
         password: {
           pw: "bruteforce",
           hint: "Not elegant. But effective",
@@ -245,6 +249,7 @@ export const BUSINESS_COMMANDS = {
     ),
     related_commands: {
       "Community Bulletin": {
+        favicon: <Icons.Bulletin />,
         content: (
           <CommunityBoard
             name="COMMUNITY BULLETIN BOARD"
@@ -267,6 +272,7 @@ export const BUSINESS_COMMANDS = {
       },
 
       "Personnel File": {
+        favicon: <Icons.Person />,
         content: (
           <PersonnelFile
             employeeId="SHOP-OWNER-001"
@@ -294,6 +300,7 @@ export const BUSINESS_COMMANDS = {
       },
 
       "Internal Access": {
+        favicon: <Icons.LAN />,
         password: {
           pw: "boxesboxesboxes",
           hint: "So many boxes",
@@ -356,6 +363,7 @@ export const BUSINESS_COMMANDS = {
     ),
     related_commands: {
       "Bar Menu": {
+        favicon: <Icons.BarMenu />,
         content: (
           <Menu
             title="THE RUSTY ANCHOR"
@@ -387,6 +395,7 @@ export const BUSINESS_COMMANDS = {
       },
 
       "Personnel File": {
+        favicon: <Icons.Person />,
         content: (
           <PersonnelFile
             employeeId="BAR-OWNER-001"
@@ -414,6 +423,7 @@ export const BUSINESS_COMMANDS = {
       },
 
       "Jukebox Terminal (JB-707-F4)": {
+        favicon: <Icons.Radio />,
         content: (
           <Jukebox
             model="JB-707"
@@ -431,6 +441,7 @@ export const BUSINESS_COMMANDS = {
       },
 
       "Bar Safe": {
+        favicon: <Icons.Lock />,
         password: {
           pw: "crustacean",
           hint: "Crabs and such",
@@ -495,6 +506,7 @@ export const BUSINESS_COMMANDS = {
     ),
     related_commands: {
       "Personnel File": {
+        favicon: <Icons.Person />,
         content: (
           <PersonnelFile
             employeeId="PAWN-OWNER-001"
@@ -522,6 +534,7 @@ export const BUSINESS_COMMANDS = {
       },
 
       "ATM": {
+        favicon: <Icons.ATM />,
         password: {
           pw: "cashmoney",
           hint: "What everyone wants from an ATM",
@@ -547,6 +560,7 @@ export const BUSINESS_COMMANDS = {
       },
 
       "Access Pawn Records": {
+        favicon: <Icons.Files />,
         password: {
           pw: "thehouse",
           hint: "It always wins",
@@ -615,6 +629,7 @@ export const BUSINESS_COMMANDS = {
     ),
     related_commands: {
       "Personnel File": {
+        favicon: <Icons.Person />,
         content: (
           <PersonnelFile
             employeeId="SHOP-ELEC-001"
@@ -639,6 +654,7 @@ export const BUSINESS_COMMANDS = {
       },
 
       "Shop Inventory": {
+        favicon: <Icons.Inventory />,
         content: (
           <MaintenanceAccess
             title="[INVENTORY DATABASE]"
@@ -674,6 +690,7 @@ export const BUSINESS_COMMANDS = {
       },
 
       "Demo Console": {
+        favicon: <Icons.VideoGame />,
         content: (
           <ArcadeCabinet
             id="demo-sanchez-console"
@@ -702,6 +719,7 @@ export const BUSINESS_COMMANDS = {
       },
 
       "Back Room Safe": {
+        favicon: <Icons.Lock />,
         content: (
           <Safe
             id="sanchez-backroom-safe"
@@ -785,6 +803,7 @@ export const BUSINESS_COMMANDS = {
     ),
     related_commands: {
       "Personnel File": {
+        favicon: <Icons.Person />,
         content: (
           <PersonnelFile
             employeeId="PAWN-OWNER-008"
@@ -802,6 +821,7 @@ export const BUSINESS_COMMANDS = {
       },
 
       "Shop Safe": {
+        favicon: <Icons.Lock />,
         password: {
           pw: "listerine",
           hint: "It's a booze cause it's green",
@@ -848,6 +868,7 @@ export const BUSINESS_COMMANDS = {
       },
 
       "Pawn Records": {
+        favicon: <Icons.File />,
         password: {
           pw: "deathdogs",
           hint: "They have an absurd amount of nitrates",
@@ -912,6 +933,7 @@ export const BUSINESS_COMMANDS = {
     ),
     related_commands: {
       "Personnel File": {
+        favicon: <Icons.Person />,
         content: (
           <PersonnelFile
             employeeId="TECH-CIPHER-001"
@@ -937,6 +959,7 @@ export const BUSINESS_COMMANDS = {
       },
 
       "Office Workstation": {
+        favicon: <Icons.Computer />,
         password: {
           pw: "encryption",
           hint: "What Cipher specializes in for security",
@@ -967,6 +990,7 @@ export const BUSINESS_COMMANDS = {
       },
 
       "Office Safe": {
+        favicon: <Icons.Lock />,
         password: {
           pw: "decryption",
           hint: "Opposite of encryption",
@@ -1031,6 +1055,7 @@ export const BUSINESS_COMMANDS = {
     ),
     related_commands: {
       "Bar Menu": {
+        favicon: <Icons.BarMenu />,
         content: (
           <Menu
             title="THE COMPILER BAR"
@@ -1063,6 +1088,7 @@ export const BUSINESS_COMMANDS = {
       },
 
       "Personnel File": {
+        favicon: <Icons.Person />,
         content: (
           <PersonnelFile
             employeeId="BAR-COMPILER-001"
@@ -1086,6 +1112,7 @@ export const BUSINESS_COMMANDS = {
       },
 
       "Bar Jukebox": {
+        favicon: <Icons.Radio />,
         content: (
           <Jukebox
             model="JB-808"
@@ -1103,6 +1130,7 @@ export const BUSINESS_COMMANDS = {
       },
 
       "Bar Safe": {
+        favicon: <Icons.Lock />,
         password: {
           pw: "algorithm",
           hint: "What programmers write to solve problems",
@@ -1148,6 +1176,7 @@ export const BUSINESS_COMMANDS = {
       },
 
       "Internal Systems": {
+        favicon: <Icons.LAN />,
         password: {
           pw: "debug",
           hint: "What programmers do when code doesn't work",

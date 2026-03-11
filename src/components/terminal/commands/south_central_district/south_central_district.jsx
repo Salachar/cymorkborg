@@ -65,6 +65,7 @@ export const SOUTH_CENTRAL_DISTRICT_COMMANDS = {
     ),
     related_commands: {
       "South Central CityCam": {
+        favicon: <Icons.Camera />,
         content: (
           <CCTV
             src={south_central_cctv}

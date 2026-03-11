@@ -78,6 +78,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
     ),
     related_commands: {
       "Atrium": {
+        favicon: <Icons.Atrium />,
         content: (
           <PublicPortal
             name="CENTRAL PLAZA TOWER"
@@ -104,6 +105,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
         ),
         related_commands: {
           "Atrium CityCam": {
+            favicon: <Icons.Camera />,
             content: (
               <CCTV
                 src={central_tower_atrium_cctv_image}
@@ -116,6 +118,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
           },
 
           "Atrium ATM": {
+            favicon: <Icons.ATM />,
             icebreaker: {
               difficulty: 'hard',
             },
@@ -140,6 +143,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
           },
 
           "Vending Machine": {
+            favicon: <Icons.Vending />,
             content: (
               <VendingMachine
                 id="vend-tower-lobby"
@@ -150,6 +154,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
           },
 
           "ChromeLux Boutique": {
+            favicon: <Icons.GoldStars />,
             content: (
               <PublicPortal
                 name="CHROMELUX"
@@ -180,6 +185,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
             ),
             related_commands: {
               "Product Catalog": {
+                favicon: <Icons.Inventory />,
                 content: (
                   <Menu
                     title="CHROMELUX"
@@ -229,6 +235,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
               },
 
               "Management Portal": {
+                favicon: <Icons.LAN />,
                 password: {
                   pw: "chromium",
                   hint: "Such a precious material",
@@ -271,6 +278,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
                 ),
                 related_commands: {
                   "Personnel File - Dr. Nakamura": {
+                    favicon: <Icons.Person />,
                     content: (
                       <PersonnelFile
                         employeeId="CHROMELUX-OWNER-001"
@@ -298,6 +306,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
                   },
 
                   "ChromeVault": {
+                    favicon: <Icons.Lock />,
                     content: (
                       <Safe
                         id="chromelux-vault"
@@ -347,6 +356,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
       },
 
       "Resident Directory": {
+        favicon: <Icons.Group />,
         content: (
           <MaintenanceAccess
             title="[RESIDENT DIRECTORY - PUBLIC ACCESS]"
@@ -369,6 +379,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
         ),
         related_commands: {
           "Unit 2204 - Floor 22": {
+            favicon: <Icons.Person />,
             content: (
               <Tenet
                 id="RES-2204"
@@ -385,6 +396,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
           },
 
           "Unit 1508 - Floor 15": {
+            favicon: <Icons.Person />,
             content: (
               <Tenet
                 id="RES-1508"
@@ -400,6 +412,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
           },
 
           "Unit 3302 - Floor 33": {
+            favicon: <Icons.Person />,
             content: (
               <Tenet
                 id="RES-3302"
@@ -415,6 +428,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
           },
 
           "Unit 4201 - Floor 42": {
+            favicon: <Icons.Person />,
             content: (
               <Tenet
                 id="RES-4201"
@@ -435,6 +449,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
       },
 
       "Tower Management": {
+        favicon: <Icons.LAN />,
         content: (
           <MaintenanceAccess
             title="[TOWER MANAGEMENT - FLOOR 51]"
@@ -460,6 +475,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
         ),
         related_commands: {
           "Camera Grid": {
+            favicon: <Icons.Camera />,
             content: (
               <MaintenanceAccess
                 title="[SECURITY CAMERA GRID]"
@@ -493,6 +509,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
             ),
             related_commands: {
               "Floor 42 - Penthouse Hallway": {
+                favicon: <Icons.Camera />,
                 content: (
                   <Camera
                     id="cam-fl42-hall-a"
@@ -511,6 +528,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
                 ),
                 related_commands: {
                   "Live Feed": {
+                    favicon: <Icons.LiveFeed />,
                     content: (
                       <MaintenanceAccess
                         title="[CAM-FL42-HALL-A LIVE FEED]"
@@ -544,6 +562,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
               },
 
               "Service Entrance Camera": {
+                favicon: <Icons.Camera />,
                 content: (
                   <Camera
                     id="cam-service-ent"
@@ -562,6 +581,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
                 ),
                 related_commands: {
                   "Live Feed": {
+                    favicon: <Icons.LiveFeed />,
                     content: (
                       <MaintenanceAccess
                         title="[CAM-SERVICE-ENT LIVE FEED]"
@@ -592,6 +612,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
               },
 
               "Roof Access Camera": {
+                favicon: <Icons.Camera />,
                 content: (
                   <MaintenanceAccess
                     title="[CAM-ROOF STATUS]"
@@ -619,6 +640,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
           },
 
           "Building Access": {
+            favicon: <Icons.LAN />,
             content: (
               <SecureAccessControl
                 systemName="BUILDING ACCESS CONTROL"
@@ -687,6 +709,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
           },
 
           "Building Network": {
+            favicon: <Icons.Camera />,
             content: (
               <MaintenanceAccess
                 title="[BUILDING NETWORK ACCESS]"
@@ -717,6 +740,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
             ),
             related_commands: {
               "Service Keycard Database": {
+                favicon: <Icons.Database />,
                 content: (
                   <MaintenanceAccess
                     title="[SERVICE KEYCARD DATABASE]"
@@ -749,6 +773,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
               },
 
               "Connected Devices": {
+                favicon: <Icons.LAN />,
                 content: (
                   <NetworkDevices
                     networkName="TOWER_INTERNAL"
@@ -770,6 +795,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
           },
 
           "Facility Information": {
+            favicon: <Icons.Files />,
             content: (
               <MaintenanceAccess
                 title="[BUILDING SPECIFICATIONS]"
@@ -810,6 +836,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
             ),
             related_commands: {
               "Penthouse Blueprint": {
+                favicon: <Icons.Files />,
                 content: (
                   <MaintenanceAccess
                     title="[UNIT 4201 - MAINTENANCE FILE]"
@@ -857,6 +884,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
           },
 
           "HVAC Control": {
+            favicon: <Icons.Maintenance />,
             content: (
               <MaintenanceAccess
                 title="[HVAC CONTROL SYSTEM]"
@@ -884,6 +912,7 @@ export const CENTRAL_PLAZA_TOWER_COMMANDS = {
           },
 
           "Maintenance Log": {
+            favicon: <Icons.Files />,
             content: (
               <MaintenanceAccess
                 title="[BUILDING MAINTENANCE LOG]"

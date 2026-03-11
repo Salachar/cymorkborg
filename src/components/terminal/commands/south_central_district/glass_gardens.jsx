@@ -1,3 +1,5 @@
+import Icons from '@utils/icons';
+
 import {
   Line,
   InsetBox,
@@ -116,11 +118,13 @@ function GlassGardensPortal() {
 
 export const GLASS_GARDENS_COMMANDS = {
   "The Glass Gardens": {
+    favicon: <Icons.GoldDeck />,
     content: (
       <GlassGardensPortal />
     ),
     related_commands: {
       "Glass Gardens CityCam": {
+        favicon: <Icons.Camera />,
         content: (
           <CCTV
             src={glass_gardens_camera_image}
@@ -132,6 +136,7 @@ export const GLASS_GARDENS_COMMANDS = {
         ),
       },
       "Menu": {
+        favicon: <Icons.Menu />,
         content: (
           <Menu
             title="THE GLASS GARDENS"
@@ -171,6 +176,7 @@ export const GLASS_GARDENS_COMMANDS = {
       },
 
       "Reservation System": {
+        favicon: <Icons.Computer />,
         content: (
           <MaintenanceAccess
             title="[RESERVATION SYSTEM]"
@@ -187,6 +193,7 @@ export const GLASS_GARDENS_COMMANDS = {
       },
 
       "Internal Access": {
+        favicon: <Icons.LAN />,
         password: {
           pw: "crystalchalice",
           hint: "You can see through it and drink from it",
@@ -206,6 +213,7 @@ export const GLASS_GARDENS_COMMANDS = {
         ),
         related_commands: {
           "VIP Guest List": {
+            favicon: <Icons.Group />,
             content: (
               <VIPList
                 eventName="Glass Gardens — Tonight"
@@ -253,6 +261,7 @@ export const GLASS_GARDENS_COMMANDS = {
       },
 
       "Crystal Lattice": {
+        favicon: <Icons.Nightlife />,
         content: (
           <PrivatePortal
             networkId="CRYSTAL_LATTICE"

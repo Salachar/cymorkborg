@@ -64,6 +64,14 @@ import LocalPoliceIcon from '@mui/icons-material/LocalPolice';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
 import GroupsIcon from '@mui/icons-material/Groups';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import StorageIcon from '@mui/icons-material/Storage';
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
+import DeckIcon from '@mui/icons-material/Deck';
+import DevicesOtherIcon from '@mui/icons-material/DevicesOther';
+import KitchenIcon from '@mui/icons-material/Kitchen';
+import TableRestaurantIcon from '@mui/icons-material/TableRestaurant';
 
 const TEAL = { fontSize: 20, color: 'rgb(79, 209, 197)' };
 const YELLOW = { fontSize: 20, color: 'rgb(251, 191, 36)' };
@@ -71,12 +79,23 @@ const RED = { fontSize: 20, color: 'rgb(252, 129, 129)' };
 const SLATE = { fontSize: 20, color: 'rgb(148, 163, 184)' };
 
 const Icons = {
+  Furniture: () => <TableRestaurantIcon style={TEAL} />,
+  Fridge: () => <KitchenIcon style={TEAL} />,
+  Devices: () => <DevicesOtherIcon style={TEAL} />,
+  Deck: () => <DeckIcon style={TEAL} />,
+  GoldDeck: () => <DeckIcon style={YELLOW} />,
+  Room: () => <MeetingRoomIcon style={TEAL} />,
+  Fitness: () => <FitnessCenterIcon style={TEAL} />,
+  Database: () => <StorageIcon style={TEAL} />,
+  Atrium: () => <AccountBalanceIcon style={TEAL} />,
   Group: () => <GroupsIcon style={TEAL} />,
   Medical: () => <MedicalServicesIcon style={TEAL} />,
+  Menu: () => <MenuBookIcon style={TEAL} />,
   Services: () => <MenuBookIcon style={TEAL} />,
   Police: () => <LocalPoliceIcon style={TEAL} />,
   House: () => <House style={TEAL} />,
   Stars: () => <Stars style={TEAL} />,
+  GoldStars: () => <Stars style={YELLOW} />,
   Heart: () => <Heart style={TEAL} />,
   Tips: () => <Tips style={TEAL} />,
   Rugby: () => <Rugby style={TEAL} />,
@@ -119,6 +138,7 @@ const Icons = {
   Ad: () => <CampaignIcon style={TEAL} />,
   Bodega: () => <StorefrontIcon style={TEAL} />,
   Camera: () => <VideocamIcon style={TEAL} />,
+  LiveFeed: () => <VideocamIcon style={YELLOW} />,
   Hospital: () => <LocalHospitalIcon style={RED} />,
   Garage: () => <BuildIcon style={TEAL} />,
   Bar: () => <SportsBarIcon style={TEAL} />,

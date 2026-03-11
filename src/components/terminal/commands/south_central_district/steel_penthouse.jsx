@@ -1,3 +1,5 @@
+import Icons from '@utils/icons';
+
 import {
   Line,
   InsetBox,
@@ -28,6 +30,7 @@ import cyberlich_painting_image from '@images/cyberlich_painting.png';
 
 export const STEEL_PENTHOUSE_COMMANDS = {
   "Steel Jackhammer's Penthouse": {
+    favicon: <Icons.House />,
     preview: (
       <NodePreview>
         <Line span yellow> · Smart Home System</Line>
@@ -59,6 +62,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
     ),
     related_commands: {
       "Building Services": {
+        favicon: <Icons.Services />,
         password: {
           pw: 'steel4201',
           content: <Locked theme="terminal" />
@@ -84,6 +88,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
         ),
         related_commands: {
           "HVAC & Climate": {
+            favicon: <Icons.Maintenance />,
             content: (
               <MaintenanceAccess
                 title="[CLIMATE & LIGHTING CONTROL]"
@@ -109,6 +114,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           },
 
           "Fire Suppression": {
+            favicon: <Icons.Maintenance />,
             content: (
               <MaintenanceAccess
                 title="[FIRE SUPPRESSION SYSTEM]"
@@ -132,6 +138,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           },
 
           "Emergency Systems": {
+            favicon: <Icons.Maintenance />,
             content: (
               <MaintenanceAccess
                 title="[EMERGENCY SYSTEMS]"
@@ -156,6 +163,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
       },
 
       "Internal Access": {
+        favicon: <Icons.LAN />,
         password: {
           pw: 'TWOKROKS2',
           hint: "The actual amount that weren't drugged",
@@ -172,6 +180,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
         ),
         related_commands: {
           "Network Traffic": {
+            favicon: <Icons.Computer />,
             content: (
               <NetworkTrafficMonitor
                 systemName="JACKHAMMER_HOME NETWORK TRAFFIC"
@@ -247,6 +256,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           },
 
           "Connected Devices": {
+            favicon: <Icons.LAN />,
             content: (
               <NetworkDevices
                 networkName="JACKHAMMER_HOME"
@@ -271,6 +281,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           },
 
           "VIP Guest List": {
+            favicon: <Icons.Group />,
             content: (
               <VIPList
                 eventName="Steel Jackhammer's Penthouse Party"
@@ -347,6 +358,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           },
 
           "Camera System": {
+            favicon: <Icons.Camera />,
             content: (
               <MaintenanceAccess
                 title="[SECURITY CAMERA GRID]"
@@ -373,6 +385,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
             ),
             related_commands: {
               "Main Living Area Camera": {
+                favicon: <Icons.Camera />,
                 content: (
                   <Camera
                     id="cam-penthouse-living"
@@ -392,6 +405,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
               },
 
               "Kitchen Camera": {
+                favicon: <Icons.Camera />,
                 content: (
                   <Camera
                     id="cam-penthouse-kitchen"
@@ -411,6 +425,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
               },
 
               "Tiger Room Camera": {
+                favicon: <Icons.Camera />,
                 content: (
                   <Camera
                     id="cam-penthouse-tigers"
@@ -430,6 +445,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
               },
 
               "Master Bedroom Camera": {
+                favicon: <Icons.Camera />,
                 content: (
                   <Camera
                     id="cam-penthouse-master"
@@ -449,6 +465,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
               },
 
               "Gym Camera": {
+                favicon: <Icons.Camera />,
                 content: (
                   <Camera
                     id="cam-penthouse-gym"
@@ -467,6 +484,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
               },
 
               "Spa Camera": {
+                favicon: <Icons.Camera />,
                 content: (
                   <Camera
                     id="cam-penthouse-spa"
@@ -485,6 +503,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
               },
 
               "Main Balcony Camera": {
+                favicon: <Icons.Camera />,
                 content: (
                   <Camera
                     id="cam-penthouse-balcony"
@@ -508,6 +527,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
       },
 
       "Smart Appliances": {
+        favicon: <Icons.Devices />,
         content: (
           <MaintenanceAccess
             title="[SMART APPLIANCE NETWORK]"
@@ -525,6 +545,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
         ),
         related_commands: {
           "Jukebox": {
+            favicon: <Icons.Radio />,
             content: (
               <Jukebox
                 location="Steel Jackhammer's Penthouse - Holo Space"
@@ -569,6 +590,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           },
 
           "Sparring Cydroid": {
+            favicon: <Icons.Fitness />,
             content: (
               <MaintenanceAccess
                 title="[SPARRING CYDROID CONTROL]"
@@ -596,6 +618,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           },
 
           "Game Console": {
+            favicon: <Icons.VideoGame />,
             content: (
               <ArcadeCabinet
                 id="console-penthouse-elite"
@@ -615,6 +638,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           },
 
           "Holo Projectors": {
+            favicon: <Icons.Computer />,
             content: (
               <MaintenanceAccess
                 title="[HOLO PROJECTOR CONTROL]"
@@ -648,6 +672,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           },
 
           "Smart Fridge": {
+            favicon: <Icons.Fridge />,
             content: (
               <SmartFridge
                 id="penthouse-fridge"
@@ -731,6 +756,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           },
 
           "Coffee Machine": {
+            favicon: <Icons.CoffeeMachine />,
             content: (
               <CoffeeMachine>
                 <Extractable
@@ -750,6 +776,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           },
 
           "Spa Controls": {
+            favicon: <Icons.Maintenance />,
             content: (
               <MaintenanceAccess
                 title="[SPA CONTROL SYSTEMS]"
@@ -783,6 +810,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
       },
 
       "Room Systems": {
+        favicon: <Icons.Room />,
         content: (
           <RoomAccess
             title="ROOM-BY-ROOM STATUS"
@@ -793,6 +821,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
         ),
         related_commands: {
           "Hallway": {
+            favicon: <Icons.Room />,
             content: (
               <RoomAccess
                 title="HALLWAY"
@@ -812,6 +841,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           },
 
           "Guest Room": {
+            favicon: <Icons.Room />,
             content: (
               <RoomAccess
                 title="GUEST ROOM"
@@ -828,6 +858,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
             ),
             related_commands: {
               "Drawer Storage": {
+                favicon: <Icons.Furniture />,
                 content: (
                   <Extractable
                     id="penthouse-guest-drawer"
@@ -852,6 +883,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           },
 
           "Tiger Room": {
+            favicon: <Icons.Room />,
             content: (
               <RoomAccess
                 title="TIGER ROOM"
@@ -874,6 +906,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           },
 
           "Main Balcony": {
+            favicon: <Icons.Room />,
             content: (
               <RoomAccess
                 title="MAIN BALCONY"
@@ -893,6 +926,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           },
 
           "Master Bedroom": {
+            favicon: <Icons.Room />,
             content: (
               <RoomAccess
                 title="MASTER BEDROOM"
@@ -912,6 +946,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
             ),
             related_commands: {
               "Wall Safe": {
+                favicon: <Icons.Lock />,
                 password: {
                   pw: 'password',
                   hint: "Default",
@@ -940,6 +975,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           },
 
           "Main Living Area": {
+            favicon: <Icons.Room />,
             content: (
               <RoomAccess
                 title="MAIN LIVING AREA"
@@ -956,6 +992,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
             ),
             related_commands: {
               "Cyber-Lich Holo Painting": {
+                favicon: <Icons.Room />,
                 content: (
                   <RoomAccess
                     title="CYBER-LICH HOLO PAINTING"
@@ -970,6 +1007,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                 ),
                 related_commands: {
                   "Holo Display Memory": {
+                    favicon: <Icons.Database />,
                     password: {
                       pw: 'heman',
                       hint: "I'll get you next time!",
@@ -1004,6 +1042,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           },
 
           "Balcony": {
+            favicon: <Icons.Room />,
             content: (
               <RoomAccess
                 title="PRIVATE BALCONY"
