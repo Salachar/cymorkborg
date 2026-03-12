@@ -1,7 +1,16 @@
 import { useState, useEffect } from 'react';
-import { Line, Section, Spacer, Divider } from '@terminal/TerminalComponents';
+
+import {
+  Divider,
+  InsetBox,
+  Line,
+  Section,
+  Spacer,
+} from '@terminal/TerminalComponents';
+
 import { formatCredits } from '@utils/general';
 import { getWallet, saveWallet } from '@utils/localStorage';
+
 import { searchAllItems } from '@data/tables';
 import BuilderManager from '@data/builder';
 
@@ -67,6 +76,55 @@ function TransferConfirm({ character, onTransfer }) {
   );
 }
 
+function ClearConfirm({ onClear }) {
+  const [pending, setPending] = useState(false);
+
+  return (
+    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <div style={{ display: 'flex', gap: '0.4rem', width: '25%' }}>
+        {pending ? (
+          <>
+            <button
+              onClick={() => setPending(false)}
+              style={{
+                flex: 1, padding: '0.35rem 0.25rem', fontSize: '0.65rem', fontWeight: 'bold',
+                backgroundColor: 'rgba(71, 85, 105, 0.3)', color: 'rgb(148, 163, 184)',
+                border: '1px solid rgb(71, 85, 105)', borderRadius: '3px',
+                cursor: 'pointer', fontFamily: 'monospace',
+              }}
+            >
+              CANCEL
+            </button>
+            <button
+              onClick={() => { onClear(); setPending(false); }}
+              style={{
+                flex: 1, padding: '0.35rem 0.25rem', fontSize: '0.65rem', fontWeight: 'bold',
+                backgroundColor: 'rgba(239, 68, 68, 0.2)', color: 'rgb(239, 68, 68)',
+                border: '1px solid rgb(239, 68, 68)', borderRadius: '3px',
+                cursor: 'pointer', fontFamily: 'monospace',
+              }}
+            >
+              CONFIRM
+            </button>
+          </>
+        ) : (
+          <button
+            onClick={() => setPending(true)}
+            style={{
+              flex: 1, padding: '0.35rem 0.5rem', fontSize: '0.65rem', fontWeight: 'bold',
+              backgroundColor: 'rgba(239, 68, 68, 0.1)', color: 'rgb(239, 68, 68)',
+              border: '1px solid rgba(239, 68, 68, 0.35)', borderRadius: '3px',
+              cursor: 'pointer', fontFamily: 'monospace',
+            }}
+          >
+            CLEAR
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
 // ─── TerminalWallet ───────────────────────────────────────────────────────────
 
 export default function TerminalWallet() {
@@ -87,10 +145,8 @@ export default function TerminalWallet() {
   };
 
   const handleClearWallet = () => {
-    if (window.confirm('Clear all extracted items and credits? This cannot be undone.')) {
-      saveWallet({ credits: 0, items: [] });
-      setWallet({ credits: 0, items: [] });
-    }
+    saveWallet({ credits: 0, items: [] });
+    setWallet({ credits: 0, items: [] });
   };
 
   const totalItems = wallet.items.length;
@@ -252,19 +308,13 @@ export default function TerminalWallet() {
               )}
             </Section>
 
+            <Spacer />
             <Divider />
-
-            <button
-              onClick={handleClearWallet}
-              style={{
-                width: '100%', padding: '0.6rem', fontSize: '0.75rem', fontWeight: 'bold',
-                backgroundColor: 'rgba(239, 68, 68, 0.1)', color: 'rgb(239, 68, 68)',
-                border: '1px solid rgba(239, 68, 68, 0.35)', borderRadius: '3px',
-                cursor: 'pointer', fontFamily: 'monospace', transition: 'all 0.2s',
-              }}
-            >
-              CLEAR WALLET
-            </button>
+            {/* <Spacer /> */}
+            <InsetBox color="yellow" title="Clearing the Wallet">
+              <Line style={{ fontSize: '0.65rem' }}>Clearing will wipe the wallet without transferring to a character. Extracted items remain extracted.</Line>
+            </InsetBox>
+            <ClearConfirm onClear={handleClearWallet} />
           </>
         )}
       </div>
