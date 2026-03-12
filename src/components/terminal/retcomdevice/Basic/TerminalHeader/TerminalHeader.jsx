@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+
 import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
+import BatteryChargingFullIcon from '@mui/icons-material/BatteryChargingFull';
 
 const BG = 'rgb(27, 36, 58)';
 const BORDER = 'rgb(77, 167, 188)';
@@ -10,8 +12,10 @@ const DIM = 'rgb(148, 163, 184)';
 
 export default function TerminalHeader({
   indent = 1,
+  batterySaver = false,
   onClear = () => {},
   onIndent = () => {},
+  onBatterySaver = () => {},
 }) {
   const [adsBlocked, setAdsBlocked] = useState(47);
 
@@ -30,10 +34,7 @@ export default function TerminalHeader({
   return (
     <div
       style={{
-        // width: '100%',
         backgroundColor: BG,
-        // borderLeft: `1px solid ${BORDER}`,
-        // borderRight: `1px solid ${BORDER}`,
         borderBottom: `1px solid ${BORDER}`,
         borderTop: 'none',
         display: 'flex',
@@ -42,7 +43,6 @@ export default function TerminalHeader({
         padding: '0.6rem 1rem',
         flexShrink: 0,
         fontFamily: 'monospace',
-        // margin: '0 2rem',
       }}
     >
       {/* Spinning eye — identity piece */}
@@ -136,6 +136,26 @@ export default function TerminalHeader({
           }}
         >
           <CloseFullscreenIcon style={{ fontSize: 16, color: YELLOW }} />
+        </button>
+      )}
+
+      {onBatterySaver && (
+        <button
+          onClick={() => onBatterySaver(!batterySaver)}
+          title={batterySaver ? 'Battery saver on' : 'Battery saver off'}
+          style={{
+            padding: '0.35rem',
+            border: `1px solid ${batterySaver ? 'rgba(34, 197, 94, 0.4)' : 'rgba(148, 163, 184, 0.2)'}`,
+            borderRadius: '3px',
+            backgroundColor: batterySaver ? 'rgba(34, 197, 94, 0.1)' : 'transparent',
+            color: batterySaver ? GREEN : DIM,
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <BatteryChargingFullIcon style={{ fontSize: 16 }} />
         </button>
       )}
     </div>

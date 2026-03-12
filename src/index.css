@@ -213,3 +213,10 @@ button {
   0%, 100% { opacity: 0.8; }
   50% { opacity: 0.3; }
 }
+
+.stop-animations *,
+.stop-animations *::before,
+.stop-animations *::after {
+  animation: none !important;
+  transition: none !important;
+}

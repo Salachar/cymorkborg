@@ -14,6 +14,7 @@ export const CYBORG_SAVED_CHARACTERS        = 'cyborg_saved_characters';
 export const RETCOM_EXTRACTED_KEY           = 'cyborg_retcom_extracted';
 export const RETCOM_WALLET_KEY              = 'cyborg_retcom_wallet';
 export const LIST_INDENT_KEY                = 'cyborg_list_indent';
+export const BATTERY_SAVER_KEY = 'cyborg_battery_saver';
 
 // Alias — both names exist in the codebase
 export const WALLET_STORAGE_KEY = RETCOM_WALLET_KEY;

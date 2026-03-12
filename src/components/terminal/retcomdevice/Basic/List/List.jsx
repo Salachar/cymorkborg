@@ -32,6 +32,7 @@ function ContentPanel({ children, size, onToggleSize, style = {} }) {
         e.stopPropagation();
         onToggleSize?.();
       }}
+      className={isPartial ? 'stop-animations' : ''}
       style={{
         border: `1px solid ${CONTENT_BORDER}`,
         borderRadius: '4px',
