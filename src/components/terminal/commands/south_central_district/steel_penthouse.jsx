@@ -163,6 +163,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
       },
 
       "Internal Access": {
+        internal: true,
         favicon: <Icons.LAN />,
         password: {
           pw: 'TWOKROKS2',
@@ -171,6 +172,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
         },
         content: (
           <MaintenanceAccess
+            variant="internal"
             title="[SECURITY SYSTEMS HUB]"
             deviceModel="Integrated Security Platform"
             deviceId="SECURITY-MAIN-4201"

@@ -136,6 +136,7 @@ export const STONE_EELS_COMMANDS = {
       },
 
       "Management Network": {
+        internal: true,
         favicon: <Icons.LAN />,
         password: {
           pw: "python",
@@ -144,6 +145,7 @@ export const STONE_EELS_COMMANDS = {
         },
         content: (
           <MaintenanceAccess
+            variant="internal"
             title="[CAVE CLUB INTERNAL NETWORK]"
             deviceModel="Stone Eels Secure Network"
             deviceId="CAVE-NET-MAIN"

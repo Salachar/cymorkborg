@@ -157,7 +157,8 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
         ),
       },
 
-      "Internal Network": {
+      "Internal Access": {
+        internal: true,
         favicon: <Icons.LAN />,
         password: {
           pw: "administraitor",
@@ -166,6 +167,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
         },
         content: (
           <MaintenanceAccess
+            variant="internal"
             title="[ALLIANSEN WAREHOUSE NETWORK]"
             deviceModel="Corporate Network Gateway"
             deviceId="NET-WH47-MAIN"

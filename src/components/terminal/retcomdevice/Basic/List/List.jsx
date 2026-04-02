@@ -104,6 +104,7 @@ function CommandNode({
   );
   const childCount = hasChildren ? Object.keys(def.related_commands).length : 0;
   const isExpandable = isLocked || hasContent || hasChildren;
+  const rowVariant = def.backdoor ? 'backdoor' : def.internal ? 'internal' : 'default';
 
   const blockerType = def.mastermind
     ? 'mastermind'
@@ -176,6 +177,7 @@ function CommandNode({
     <div>
       <div>
         <CommandRow
+          variant={rowVariant}
           path={path}
           displayName={id}
           favicon={def.favicon ?? null}

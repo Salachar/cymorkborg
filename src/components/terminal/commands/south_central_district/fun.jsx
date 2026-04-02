@@ -96,9 +96,11 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
         ),
       },
       "Internal Access": {
+        internal: true,
         favicon: <Icons.LAN />,
         content: (
           <MaintenanceAccess
+            variant="internal"
             title="Gravf|Mellberg|Tosk Law Offices"
             deviceId="NET-GATEWAY-MAIN"
             firmwareVersion="v2.7.3"

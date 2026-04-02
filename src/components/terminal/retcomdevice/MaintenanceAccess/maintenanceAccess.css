@@ -1,0 +1,240 @@
+/* ─── MaintenanceAccess ───────────────────────────────────────────────────── */
+
+.ma-root {
+  position: relative;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.ma-shell {
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.ma-body {
+  padding: 0.75rem;
+}
+
+.ma-section {
+  border-radius: 3px;
+  padding: 0.6rem 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.ma-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.ma-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.ma-note {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.ma-footer {
+  margin-top: 0.75rem;
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+.ma-children {
+  margin: 0.75rem 0;
+}
+
+/* ─── Variant: default (maintenance) ─────────────────────────────────────── */
+
+.ma-variant-default .ma-shell {
+  border: 2px solid rgb(100, 116, 139);
+  background-color: rgba(30, 41, 59, 0.5);
+}
+
+.ma-variant-default .ma-header {
+  background-color: rgb(51, 65, 85);
+  border-bottom: 1px solid rgb(100, 116, 139);
+  padding: 0.5rem 0.75rem;
+}
+
+.ma-variant-default .ma-header-title {
+  color: rgb(148, 163, 184);
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin: 0;
+  letter-spacing: 0.06em;
+}
+
+.ma-variant-default .ma-section {
+  background-color: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgb(71, 85, 105);
+}
+
+.ma-variant-default .ma-section-label {
+  color: rgb(79, 209, 197);
+  font-size: 0.72rem;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+}
+
+.ma-variant-default .ma-note {
+  border-left: 2px solid rgb(251, 191, 36);
+}
+
+.ma-variant-default .ma-note-bullet {
+  color: rgb(251, 191, 36);
+  font-size: 0.75rem;
+}
+
+.ma-variant-default .ma-note-text {
+  color: rgb(251, 191, 36);
+  font-size: 0.78rem;
+}
+
+.ma-variant-default .ma-footer {
+  color: rgb(251, 191, 36);
+}
+
+/* ─── Variant: internal ───────────────────────────────────────────────────── */
+
+.ma-variant-internal .ma-shell {
+  border: 2px solid rgba(79, 209, 197, 0.6);
+  background-color: rgba(10, 25, 35, 0.85);
+  box-shadow: 0 0 20px rgba(79, 209, 197, 0.08), inset 0 0 40px rgba(79, 209, 197, 0.03);
+}
+
+.ma-variant-internal .ma-header {
+  background-color: rgba(79, 209, 197, 0.1);
+  border-bottom: 1px solid rgba(79, 209, 197, 0.4);
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.ma-variant-internal .ma-header-stamp {
+  font-size: 0.6rem;
+  font-weight: bold;
+  letter-spacing: 0.14em;
+  color: rgb(79, 209, 197);
+  background-color: rgba(79, 209, 197, 0.15);
+  border: 1px solid rgba(79, 209, 197, 0.4);
+  padding: 0.1rem 0.4rem;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.ma-variant-internal .ma-header-title {
+  color: rgb(79, 209, 197);
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin: 0;
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 8px rgba(79, 209, 197, 0.4);
+}
+
+.ma-variant-internal .ma-section {
+  background-color: rgba(10, 30, 40, 0.7);
+  border: 1px solid rgba(79, 209, 197, 0.2);
+}
+
+.ma-variant-internal .ma-section-label {
+  color: rgba(79, 209, 197, 0.7);
+  font-size: 0.68rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+
+.ma-variant-internal .ma-note {
+  border-left: 2px solid rgba(79, 209, 197, 0.5);
+}
+
+.ma-variant-internal .ma-note-bullet {
+  color: rgb(79, 209, 197);
+  font-size: 0.75rem;
+}
+
+.ma-variant-internal .ma-note-text {
+  color: rgb(203, 213, 225);
+  font-size: 0.78rem;
+}
+
+.ma-variant-internal .ma-footer {
+  color: rgba(79, 209, 197, 0.6);
+}
+
+/* ─── Variant: backdoor ───────────────────────────────────────────────────── */
+
+.ma-variant-backdoor .ma-shell {
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-left: 5px solid rgb(168, 85, 247);
+  border-radius: 0 4px 4px 0;
+  background-color: rgb(12, 8, 18);
+  box-shadow: 0 0 18px rgba(168, 85, 247, 0.25), 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.ma-variant-backdoor .ma-header {
+  background-color: transparent;
+  border-bottom: 1px solid rgba(168, 85, 247, 0.25);
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.ma-variant-backdoor .ma-header-stamp {
+  font-size: 0.62rem;
+  font-weight: bold;
+  letter-spacing: 0.12em;
+  color: rgb(168, 85, 247);
+  text-shadow: 0 0 8px rgb(168, 85, 247);
+}
+
+.ma-variant-backdoor .ma-header-title {
+  color: rgb(255, 255, 255);
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin: 0;
+  letter-spacing: 0.06em;
+}
+
+.ma-variant-backdoor .ma-section {
+  background-color: rgba(20, 10, 35, 0.6);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+.ma-variant-backdoor .ma-section-label {
+  color: rgb(168, 85, 247);
+  font-size: 0.68rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 6px rgba(168, 85, 247, 0.5);
+}
+
+.ma-variant-backdoor .ma-note {
+  border-left: 2px solid rgba(168, 85, 247, 0.5);
+}
+
+.ma-variant-backdoor .ma-note-bullet {
+  color: rgb(168, 85, 247);
+  font-size: 0.75rem;
+}
+
+.ma-variant-backdoor .ma-note-text {
+  color: rgb(203, 213, 225);
+  font-size: 0.78rem;
+}
+
+.ma-variant-backdoor .ma-footer {
+  color: rgba(168, 85, 247, 0.7);
+  text-shadow: 0 0 6px rgba(168, 85, 247, 0.3);
+}

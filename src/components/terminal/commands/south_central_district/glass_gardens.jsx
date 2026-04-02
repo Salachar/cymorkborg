@@ -193,6 +193,7 @@ export const GLASS_GARDENS_COMMANDS = {
       },
 
       "Internal Access": {
+        internal: true,
         favicon: <Icons.LAN />,
         password: {
           pw: "glass salad",
@@ -200,6 +201,7 @@ export const GLASS_GARDENS_COMMANDS = {
         },
         content: (
           <MaintenanceAccess
+            variant="internal"
             title="[GLASS GARDENS — INTERNAL ACCESS]"
             deviceModel="Staff Network"
             deviceId="GLASS-GARDENS-INT"

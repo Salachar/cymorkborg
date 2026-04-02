@@ -300,6 +300,7 @@ export const BUSINESS_COMMANDS = {
       },
 
       "Internal Access": {
+        internal: true,
         favicon: <Icons.LAN />,
         password: {
           pw: "boxesboxesboxes",
@@ -308,6 +309,7 @@ export const BUSINESS_COMMANDS = {
         },
         content: (
           <MaintenanceAccess
+            variant="internal"
             title="[SHOP INTERNAL SYSTEMS]"
             deviceModel="Retail Management System"
             deviceId="RETAIL-MIRA-01"
@@ -1175,7 +1177,8 @@ export const BUSINESS_COMMANDS = {
         ),
       },
 
-      "Internal Systems": {
+      "Internal Access": {
+        internal: true,
         favicon: <Icons.LAN />,
         password: {
           pw: "debug",
@@ -1184,6 +1187,7 @@ export const BUSINESS_COMMANDS = {
         },
         content: (
           <MaintenanceAccess
+            variant="internal"
             title="[BAR INTERNAL SYSTEMS]"
             deviceModel="POS & Inventory System"
             deviceId="BAR-COMPILER-01"

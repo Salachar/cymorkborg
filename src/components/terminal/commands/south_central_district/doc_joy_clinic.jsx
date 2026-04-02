@@ -205,7 +205,8 @@ export const DOC_JOY_CLINIC_COMMANDS = {
         ),
       },
 
-      "Internal Systems": {
+      "Internal Access": {
+        internal: true,
         favicon: <Icons.LAN />,
         password: {
           pw: "reaperwork",
@@ -214,6 +215,7 @@ export const DOC_JOY_CLINIC_COMMANDS = {
         },
         content: (
           <MaintenanceAccess
+            variant="internal"
             title="Doc Joy's Clinic"
             deviceModel="Surgical Suite"
             deviceId="CLINIC-OP-01"

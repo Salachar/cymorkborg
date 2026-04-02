@@ -247,7 +247,8 @@ export const LUCKY_FLIGHT_CASINO = {
         },
       },
 
-      "Internal Network": {
+      "Internal Access": {
+        internal: true,
         favicon: <Icons.LAN />,
         password: {
           pw: "loaded dice",
@@ -256,6 +257,7 @@ export const LUCKY_FLIGHT_CASINO = {
         },
         content: (
           <MaintenanceAccess
+            variant="internal"
             title="[CASINO INTERNAL NETWORK]"
             deviceModel="Lucky Flight Systems Gateway"
             deviceId="NET-GATEWAY-MAIN"

@@ -170,7 +170,7 @@ export const BODEGA_COMMANDS = {
 
       "Bodega ATM": {
         favicon: <Icons.ATM />,
-        mastermind: {
+        icebreaker: {
           difficulty: 'medium',
         },
         content: (
@@ -325,7 +325,8 @@ export const BODEGA_COMMANDS = {
         ),
       },
 
-      "Internal Network": {
+      "Internal Access": {
+        internal: true,
         favicon: <Icons.LAN />,
         password: {
           pw: "payday",
@@ -336,6 +337,7 @@ export const BODEGA_COMMANDS = {
         },
         content: (
           <MaintenanceAccess
+            variant="internal"
             title="[BODEGA INTERNAL NETWORK]"
             deviceModel="Small Business Router"
             deviceId="BODEGA-NET-01"
