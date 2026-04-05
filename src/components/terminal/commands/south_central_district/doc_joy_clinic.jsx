@@ -210,7 +210,9 @@ export const DOC_JOY_CLINIC_COMMANDS = {
         favicon: <Icons.LAN />,
         password: {
           pw: "reaperwork",
-          hint: "What Doc Joy calls his specialty contract jobs (check services menu)",
+          showFirst: true,
+          showCount: true,
+          hint: "What Doc Joy calls his specialty contract jobs",
           content: <Locked theme="terminal" title="STAFF ACCESS" />
         },
         content: (

@@ -197,6 +197,8 @@ export const GLASS_GARDENS_COMMANDS = {
         favicon: <Icons.LAN />,
         password: {
           pw: "glass salad",
+          showFrequency: true,
+          showFirst: true,
           hint: "This veggie dish will cut you up",
         },
         content: (

@@ -166,7 +166,9 @@ export const STEEL_PENTHOUSE_COMMANDS = {
         internal: true,
         favicon: <Icons.LAN />,
         password: {
-          pw: 'TWOKROKS2',
+          pw: 'twokroks',
+          showFirst: true,
+          showCount: true,
           hint: "The actual amount that weren't drugged",
           content: <Locked theme="terminal" />
         },
