@@ -41,7 +41,7 @@ export const Offline = {
 export const Commercial = {
   args: {
     cameraId: 'CAM-CPT-FOYER',
-    location: 'Central Plaza Tower — Ground Floor Atrium',
+    location: 'Peach Trees — Ground Floor Atrium',
     coverage: 'Main entrance, security desk, elevator bank',
     status: 'ACTIVE',
     recording: true,

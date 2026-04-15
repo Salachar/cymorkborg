@@ -154,9 +154,9 @@ export default function Menu({
                 stroke="rgb(148, 163, 184)"
                 strokeWidth="1.5"
                 opacity="0.7"
-                style={{
-                  animation: 'steam 2s infinite',
-                }}
+                // style={{
+                //   animation: 'steam 2s infinite',
+                // }}
               />
               {/* Steam 2 */}
               <path
@@ -165,9 +165,9 @@ export default function Menu({
                 stroke="rgb(148, 163, 184)"
                 strokeWidth="1.5"
                 opacity="0.7"
-                style={{
-                  animation: 'steam 2s 0.3s infinite',
-                }}
+                // style={{
+                //   animation: 'steam 2s 0.3s infinite',
+                // }}
               />
               {/* Steam 3 */}
               <path
@@ -176,9 +176,9 @@ export default function Menu({
                 stroke="rgb(148, 163, 184)"
                 strokeWidth="1.5"
                 opacity="0.7"
-                style={{
-                  animation: 'steam 2s 0.6s infinite',
-                }}
+                // style={{
+                //   animation: 'steam 2s 0.6s infinite',
+                // }}
               />
             </svg>
           </div>

@@ -105,7 +105,7 @@ export const Compromised = {
 export const Biometric = {
   args: {
     systemName: 'BIOMETRIC RECOGNITION SYSTEM',
-    location: 'Central Plaza Tower — Main Atrium',
+    location: 'Peach Trees — Main Atrium',
     systemVersion: 'v4.2.1',
     lastUpdate: '2 weeks ago',
     confidence: '85%',

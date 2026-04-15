@@ -389,7 +389,6 @@
   height: 2px;
   background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.8), transparent);
   box-shadow: 0 0 8px rgba(0, 255, 136, 0.6);
-  animation: scan-move 3s linear infinite;
   pointer-events: none;
 }
 

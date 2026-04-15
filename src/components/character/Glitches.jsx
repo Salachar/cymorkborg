@@ -74,16 +74,16 @@ export default function GlitchesTracker({
       </div>
 
       {/* Dice Roller (unlocked only) */}
-      {!locked && (
+      {/* {!locked && ( */}
         <div className="p-3 bg-gray-900/50 border border-gray-800">
-          <div className="text-xs text-gray-400 mb-2">Roll Starting Glitches:</div>
+          <div className="text-xs text-gray-400 mb-2">Roll Glitches:</div>
           <SegmentedDice
             dice={glitchDie}
             onRollComplete={handleRollComplete}
             character_id={character.id}
           />
         </div>
-      )}
+      {/* )} */}
     </div>
   );
 }

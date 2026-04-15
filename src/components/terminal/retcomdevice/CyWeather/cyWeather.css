@@ -9,7 +9,6 @@
 /* Warning animation */
 .cy-weather-warning-icon {
   font-size: 1.25rem;
-  animation: cy-weather-pulse-warning 2s ease-in-out infinite;
 }
 
 @keyframes cy-weather-pulse-warning {

@@ -6,21 +6,13 @@ import {
   PASSWORD_STORAGE_KEY,
   TREE_STORAGE_KEY,
   LIST_INDENT_KEY,
+  BATTERY_SAVER_KEY,
   getDiscoveredPasswords,
   saveDiscoveredPasswords,
 } from '@utils/localStorage';
 
 import TerminalHeader from '@terminal/retcomdevice/Basic/TerminalHeader/TerminalHeader';
 import List from '@terminal/retcomdevice/Basic/List/List';
-
-const CAMPAIGN_COMMANDS = {
-  ...CY_CITY_COMMANDS,
-};
-
-const CAMPAIGN_COMMANDS_LIST = Object.entries(CAMPAIGN_COMMANDS).map(([id, def]) => ({
-  id,
-  ...def,
-}));
 
 export default function RetComDevice() {
   const [discoveredPasswords, setDiscoveredPasswords] = useState({});
@@ -103,7 +95,6 @@ export default function RetComDevice() {
 
   return (
     <div
-      // className="flex-1 flex flex-col overflow-hidden font-mono"
       className={`flex-1 flex flex-col overflow-hidden font-mono${batterySaver ? ' stop-animations' : ''}`}
       style={{ backgroundColor: 'rgb(19, 23, 34)' }}
     >
@@ -132,7 +123,7 @@ export default function RetComDevice() {
           }}
         >
           <List
-            campaignCommandList={CAMPAIGN_COMMANDS_LIST}
+            campaignCommandList={CY_CITY_COMMANDS}
             discoveredPasswords={discoveredPasswords}
             expandedRows={expandedRows}
             indent={indent}

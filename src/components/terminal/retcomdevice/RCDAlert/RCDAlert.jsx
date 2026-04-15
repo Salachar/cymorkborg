@@ -4,31 +4,23 @@ import { useState, useEffect } from 'react';
  * RCDAlert - Jailbroken RCD injecting tactical intel
  *
  * Sits visually apart from native terminal UI — foreign insert feel.
- * Purple = standard intel. Pink = critical.
+ * Purple = standard intel.
  *
  * Props:
  * - message: String — main alert text
  * - details: Array of strings — secondary info lines
- * - critical: Boolean — escalates color and glow
  * - children: ReactNode (optional)
  */
+
 export default function RCDAlert({
   message,
   details = [],
-  critical = false,
   children,
 }) {
-  const [blink, setBlink] = useState(true);
 
-  useEffect(() => {
-    if (!critical) return;
-    const interval = setInterval(() => setBlink(prev => !prev), 500);
-    return () => clearInterval(interval);
-  }, [critical]);
-
-  const color    = critical ? 'rgb(236, 72, 153)'        : 'rgb(168, 85, 247)';
-  const colorDim = critical ? 'rgba(236, 72, 153, 0.3)'  : 'rgba(168, 85, 247, 0.3)';
-  const glow     = critical ? 'rgba(236, 72, 153, 0.35)' : 'rgba(168, 85, 247, 0.25)';
+  const color    = 'rgb(168, 85, 247)';
+  const colorDim = 'rgba(168, 85, 247, 0.3)';
+  const glow     = 'rgba(168, 85, 247, 0.25)';
 
   return (
     <div style={{
@@ -57,19 +49,6 @@ export default function RCDAlert({
         }}>
           ◈ RCD-7_INTEL.SYS
         </span>
-
-        {critical && (
-          <span style={{
-            color,
-            fontSize: '0.65rem',
-            fontWeight: 'bold',
-            marginLeft: 'auto',
-            opacity: blink ? 1 : 0,
-            textShadow: `0 0 8px ${color}`,
-          }}>
-            [!] CRITICAL
-          </span>
-        )}
       </div>
 
       {/* Divider */}

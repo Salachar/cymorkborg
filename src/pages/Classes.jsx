@@ -185,12 +185,12 @@ export default function Classes() {
                 onUpdate();
               }}
             />
-            {isBuilder && (
+            {/* {isBuilder && (
               <AppDataExportImport
                 character={currentCharacter}
                 onUpdate={onUpdate}
               />
-            )}
+            )} */}
           </div>
         )}
 

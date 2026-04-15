@@ -25,7 +25,7 @@ import Nightlife from '@mui/icons-material/Nightlife';
 import Taxi from '@mui/icons-material/LocalTaxi';
 import Traffic from '@mui/icons-material/Traffic';
 import Trophy from '@mui/icons-material/EmojiEvents';
-import RipperDoc from '@mui/icons-material/Vaccines';
+import Vaccines from '@mui/icons-material/Vaccines';
 import Warehouse from '@mui/icons-material/Warehouse';
 import Hotel from '@mui/icons-material/Hotel';
 import LAN from '@mui/icons-material/Lan';
@@ -72,6 +72,12 @@ import DeckIcon from '@mui/icons-material/Deck';
 import DevicesOtherIcon from '@mui/icons-material/DevicesOther';
 import KitchenIcon from '@mui/icons-material/Kitchen';
 import TableRestaurantIcon from '@mui/icons-material/TableRestaurant';
+import HelpIcon from '@mui/icons-material/Help';
+import ChurchIcon from '@mui/icons-material/Church';
+import FactoryIcon from '@mui/icons-material/Factory';
+import WaterDropIcon from '@mui/icons-material/WaterDrop';
+import ConstructionIcon from '@mui/icons-material/Construction';
+import ShieldIcon from '@mui/icons-material/Shield';
 
 const TEAL = { fontSize: 20, color: 'rgb(79, 209, 197)' };
 const YELLOW = { fontSize: 20, color: 'rgb(251, 191, 36)' };
@@ -79,6 +85,13 @@ const RED = { fontSize: 20, color: 'rgb(252, 129, 129)' };
 const SLATE = { fontSize: 20, color: 'rgb(148, 163, 184)' };
 
 const Icons = {
+  Drugs: () => <Vaccines style={TEAL} />,
+  Shield: () => <ShieldIcon style={TEAL} />,
+  Weapons: () => <ConstructionIcon style={TEAL} />,
+  Water: () => <WaterDropIcon style={TEAL} />,
+  Factory: () => <FactoryIcon style={TEAL} />,
+  Church: () => <ChurchIcon style={TEAL} />,
+  Help: () => <HelpIcon style={TEAL} />,
   Furniture: () => <TableRestaurantIcon style={TEAL} />,
   Fridge: () => <KitchenIcon style={TEAL} />,
   Devices: () => <DevicesOtherIcon style={TEAL} />,
@@ -126,12 +139,13 @@ const Icons = {
   Food: () => <Food style={TEAL} />,
   ATM: () => <ATM style={YELLOW} />,
   LAN: () => <LAN style={TEAL} />,
-  RipperDoc: () => <RipperDoc style={TEAL} />,
+  RipperDoc: () => <Vaccines style={TEAL} />,
   Trophy: () => <Trophy style={YELLOW} />,
   Traffic: () => <Traffic style={TEAL} />,
   Taxi: () => <Taxi style={TEAL} />,
   Nightlife: () => <Nightlife style={YELLOW} />,
   Alert: () => <WarningAmberIcon style={YELLOW} />,
+  Warning: () => <WarningAmberIcon style={TEAL} />,
   BurnchurchHex: () => <WhatshotIcon style={RED} />,
   Prison: () => <GavelIcon style={YELLOW} />,
   Pin: () => <FmdGoodIcon style={RED} />,

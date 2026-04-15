@@ -6,12 +6,10 @@ import {
   NodePreview,
 } from '@terminal/TerminalComponents';
 
-import CityPortal from './CityPortal';
+import {
+  Message,
+} from "@terminal/retcomdevice"
 
-import BIGMOSSE_PORTS_COMMANDS from "../bigmosse_ports/bigmosse_ports";
-import THE_INBETWEENS_DISTRICT from '../the_inbetweens/the_inbetweens';
-import CENTRAL_DISTRICT from '../central_district/central_district';
-import SOUTH_CENTRAL_DISTRICT_COMMANDS from '../south_central_district/south_central_district';
 
 import TerminalWallet from '@terminal/retcomdevice/Basic/TerminalWallet/TerminalWallet';
 import GamesBanner from '@terminal/retcomdevice/Games/GamesBanner/GamesBanner';
@@ -19,19 +17,24 @@ import MinesweeperGame from '@terminal/retcomdevice/Games/MinesweeperGame/Minesw
 import MemoryGame from '@terminal/retcomdevice/Games/MemoryGame/MemoryGame';
 import CyberPoker from '@terminal/retcomdevice/Games/CyberPoker/CyberPoker';
 
-import { CY_CITY_NETWORK } from "./cy_public";
+import { CY_CITY_NETWORK } from './cy_public';
+import { STREET_GUIDE_COMMANDS } from './street_guide';
 
-// Central District - <Line span cyan> · Corporate towers. White collar crime. SecCorps on every corner.</Line>
-// The Inbetweens - <Line span smoke> · Endless tenements. Cubicle zombies. Ads on every surface.</Line>
-// Bigmosse - <Line span red> · Gang wars. Cult activity. G0 scars that never healed.</Line>
-// Ports - <Line span yellow> · Black market. Hedonism. Gunfights drowned out by bass.</Line>
-// The Hills / Galgbacken - <Line span cyan> · Gated villas. Old money. The people who built this mess.</Line>
-// Mosscroft / Industrial - <Line span smoke> · Toxic smog. Factory drones. Industry feeding Cy's consumption.</Line>
-// The Fringe - <Line span red> · Unregistered. Unmapped. Where the city bleeds into wasteland.</Line>
-// South Central - <Line span yellow> · Alliansen territory. Corporate law. Chrome and concrete.</Line>
-// The 55 - <Line span cyan> · Vertical city within a city. 55 floors of everything.</Line>
+import BRIEFINGS_COMMANDS from './briefings';
+
+import G0_COMMANDS from '../districts/g0/g0';
+import NORTH_CENTRAL_COMMANDS from '../districts/north_central/north_central';
+import PORTS_COMMANDS from "../districts/ports/ports";
+import SOUTH_CENTRAL_COMMANDS from '../districts/south_central/south_central';
+import THE_HILLS_COMMANDS from '../districts/the_hills/the_hills';
+import THE_INBETWEENS_COMMANDS from '../districts/the_inbetweens/the_inbetweens';
+import THE_INDUSTRIES_COMMANDS from '../districts/the_industries/the_industries';
+import THE_SLUMS_COMMANDS from '../districts/the_slums/the_slums';
+import UNDERSJON_COMMANDS from '../districts/undersjon/undersjon';
+import WATERWAYS_COMMANDS from '../districts/waterways/waterways';
 
 export const CY_CITY_PORTAL = {
+  ...BRIEFINGS_COMMANDS,
   "Wallet": {
     favicon: <Icons.Wallet />,
     preview: (
@@ -41,6 +44,29 @@ export const CY_CITY_PORTAL = {
       </NodePreview>
     ),
     content: <TerminalWallet />,
+  },
+  "Cy City District Network": {
+    favicon: <Icons.Map />,
+    preview: (
+      <NodePreview>
+        <Line>
+          City district access. Each district contains local networks, facilities, and secured nodes.
+        </Line>
+        <Line teal top>Select a district to begin.</Line>
+      </NodePreview>
+    ),
+    related_commands: {
+      ...NORTH_CENTRAL_COMMANDS,
+      ...SOUTH_CENTRAL_COMMANDS,
+      ...PORTS_COMMANDS,
+      ...THE_INBETWEENS_COMMANDS,
+      ...THE_SLUMS_COMMANDS,
+      ...THE_HILLS_COMMANDS,
+      ...THE_INDUSTRIES_COMMANDS,
+      ...UNDERSJON_COMMANDS,
+      ...WATERWAYS_COMMANDS,
+      ...G0_COMMANDS,
+    },
   },
   "Cy Public": {
     favicon: <Icons.City />,
@@ -55,155 +81,105 @@ export const CY_CITY_PORTAL = {
       </NodePreview>
     ),
     content: (
-      <CityPortal
-        cityName="CY"
-        cityId="MEGACITY-SE-EUR-01"
-        tagline="The city that shouldn't exist. But it does. And it's consuming everything."
-        population="2.8 million (official) / 4+ million (estimated)"
-        yearFounded="Pre-Incident (exact date lost)"
-        threatLevel="CRITICAL"
-        majorThreats={[
-          "G0 - Nanomantic plague zone. Quarantine failing. Infection spreading.",
-          "Corporate warfare - Megacorps fight proxy wars through gangs, SecCorps, and market manipulation",
-          "Gang conflicts - Virid Vipers, Heirs of Kergoz, Stone Eels, and dozens more in endless violence",
-          "Infrastructure collapse - Pre-Incident systems failing. No one knows how to fix them.",
-          "The Incident aftermath - Radiation, nano-contamination, reality distortions. The city remembers.",
-        ]}
-        atmosphere="Cy shouldn't exist. The Incident should have killed it. Instead, it metastasized.
-        Pre-Incident ruins tower over post-Incident brutalism. Corporate glass reflects slum fires.
-        The rich ascend into climate-controlled penthouses while the poor drown in nanomold-infested basements.
-        It's a vertical hierarchy made literal: the higher you live, the longer you survive.
-        The city consumes everything - hope, humanity, history - and excretes chrome, concrete, and corpses.
-        Welcome to Cy. You were born here. You'll die here. There is no escape."
+      <div
+        style={{
+          border: '1.5px solid rgba(239,68,68,0.4)',
+          borderRadius: 'var(--border-radius-lg)',
+          overflow: 'hidden',
+          fontFamily: 'var(--font-mono)',
+        }}
       >
-        <InsetBox title="THE INCIDENT (Year Zero):">
-          <Line red bold>Nobody knows what happened.</Line>
-          <Line smoke>
-            Official story: Industrial accident at Cy Labs. Nanomantic containment breach.
-            Localized disaster. City quarantined. Rebuilt. Success story.
-          </Line>
-          <Line yellow style={{ marginTop: '0.5rem' }}>
-            Unofficial story: Reality tore open. Something came through. The Incident wasn't an accident - it was an arrival.
-            G0 isn't contamination - it's occupied territory. The city survived, but it's not the same city anymore.
-          </Line>
-          <Line red style={{ marginTop: '0.5rem' }}>
-            What really happened: [DATA CORRUPTED - SECTOR CLEARANCE REQUIRED]
-          </Line>
-        </InsetBox>
+        {/* Header */}
+        <div
+          style={{
+            background: 'var(--color-background-secondary)',
+            padding: '1rem 1.25rem',
+            borderBottom: '1px solid rgba(239,68,68,0.3)',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'baseline',
+              justifyContent: 'space-between',
+            }}
+          >
+            <div
+              style={{
+                fontSize: 'clamp(2rem, 8vw, 3rem)',
+                fontWeight: 500,
+                color: 'rgb(239,68,68)',
+                letterSpacing: '0.1em',
+              }}
+            >
+              CY
+            </div>
+            <div style={{ textAlign: 'right' }}>
+              <div
+                style={{
+                  fontSize: '11px',
+                  color: 'var(--color-text-tertiary)',
+                  marginBottom: '2px',
+                }}
+              >
+                POPULATION
+              </div>
+              <div
+                style={{
+                  fontSize: '0.9rem',
+                  fontWeight: 500,
+                  color: 'var(--color-text-primary)',
+                }}
+              >
+                2.8M official · 4M+ estimated
+              </div>
+            </div>
+          </div>
+          <div
+            style={{
+              fontSize: '0.8rem',
+              color: 'var(--color-text-secondary)',
+              fontStyle: 'italic',
+              marginTop: '0.25rem',
+            }}
+          >
+            "A city of limitless opportunity."
+          </div>
+        </div>
 
-        <InsetBox title="ECONOMIC STRATIFICATION:">
-          <Line neon bold>The Higher You Live, The Longer You Survive</Line>
-          <Line cyan>• THE PEAKS (Ultra-wealthy): Pre-Incident villas, penthouse clouds. Climate controlled. Private security. Immortality research.</Line>
-          <Line cyan>• THE HEIGHTS (Corporate): Executive suites, corporate towers. Clean air. Premium healthcare. Genetic optimization.</Line>
-          <Line yellow>• THE MIDDLE (Salary workers): Mid-rise apartments, The 55's upper floors. Filtered air. Basic healthcare. Chrome loans.</Line>
-          <Line yellow>• THE LOWS (Service workers): Capsule coffins, basement levels. Recycled air. Street clinics. Survival mode.</Line>
-          <Line red>• THE DEPTHS (The expendable): Slums, underground, fringe camps. Toxic air. No healthcare. Life expectancy: 35.</Line>
-        </InsetBox>
-
-        <InsetBox title="CORPORATE DOMINANCE:">
-          <Line neon>The megacorps don't just own Cy - they ARE Cy.</Line>
-          <Line cyan>• Alliansen Inc. - Manufacturing, weapons, chrome, real estate. Everywhere.</Line>
-          <Line cyan>• TG Labs - Research, biotech, AI, nanomantic containment (allegedly). The Enemy.</Line>
-          <Line cyan>• Spectral FT Banks - Finance, insurance, debt collection. They own your debt. They own you.</Line>
-          <Line cyan>• Cynergy Water & Power - Utilities monopoly. Turn off your water. Turn off your life.</Line>
-          <Line cyan>• And 200+ others fighting for dominance in an endless corporate war.</Line>
-        </InsetBox>
-
-        <InsetBox title="SURVIVAL GUIDE:">
-          <Line yellow>1. Don't go to G0. Ever. No exceptions. No heroics. Just death.</Line>
-          <Line yellow>2. Pay your protection money. Gang, SecCorps, building manager - doesn't matter. Pay or die.</Line>
-          <Line yellow>3. Chrome is survival. But chrome is debt. But debt is death. Choose carefully.</Line>
-          <Line yellow>4. Trust no one. Especially people offering help. Especially people with money.</Line>
-          <Line yellow>5. The higher floors have cleaner air but higher rent. The lower floors have cheaper rent but toxic air. Pick your poison.</Line>
-          <Line yellow>6. If the Heirs of Kergoz invite you to something, RUN. Cult recruiters don't take no for an answer.</Line>
-          <Line yellow>7. The feeds lie. The corps lie. The government lies. Reality itself might be lying. Believe nothing.</Line>
-          <Line yellow>8. There is no escape. The city won't let you leave. Accept it or break trying.</Line>
-        </InsetBox>
-
-        <Line smoke small style={{ fontStyle: 'italic', textAlign: 'center' }}>
-          "Cy is a wound that won't heal. We're all just maggots feeding on the rot."
-          - Unknown street preacher, found dead shortly after broadcast
-        </Line>
-      </CityPortal>
+        {/* Permanent advisories */}
+        <div
+          style={{
+            padding: '0.85rem 1.25rem',
+            borderBottom: '0.5px solid var(--color-border-tertiary)',
+          }}
+        >
+          <div
+            style={{
+              fontSize: '10px',
+              color: 'var(--color-text-tertiary)',
+              letterSpacing: '0.1em',
+              marginBottom: '0.5rem',
+            }}
+          >
+            PERMANENT ADVISORIES
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+            <div style={{ fontSize: '0.75rem', color: 'rgb(251,191,36)' }}>
+              • WATER — Potability varies by district. Cynergy filtered tiers recommended. Canal water not suitable for consumption.
+            </div>
+            <div style={{ fontSize: '0.75rem', color: 'rgb(251,191,36)' }}>
+              • AIR — Respirator use advised in Mosscroft and surrounding industrial zones at all times.
+            </div>
+            <div style={{ fontSize: '0.75rem', color: 'rgb(239,68,68)' }}>
+              • G0 PERIMETER — Permanent quarantine zone. Do not approach the wall. Trespassers will not be recovered.
+            </div>
+          </div>
+        </div>
+      </div>
     ),
     related_commands: {
       ...CY_CITY_NETWORK,
-    },
-  },
-  "Cy City Network": {
-    favicon: <Icons.Map />,
-    preview: (
-      <NodePreview>
-        <Line>
-          <Line teal span bold>7 districts · 40+ nodes</Line>
-          {' '}— corps, gangs, black markets, and worse.
-        </Line>
-        <Line top>
-          Expand a district to find locations. Locations have{' '}
-          <Line yellow span>secured nodes</Line>
-          {' '}— hack smart systems, crack safes, access cameras, find hidden credits and items. Some are password locked. Some need ICE broken first.
-        </Line>
-        <Line teal top>Pick a district and start digging. Everything useful is behind something.</Line>
-      </NodePreview>
-    ),
-    content: (
-      <CityPortal
-        cityName="Districts"
-        cityId="MEGACITY-SE-EUR-01"
-        districts={[
-          {
-            name: "Central District",
-            description: "Where money lives and chrome shines. Corporate towers, penthouses, and SecCorps on every corner.",
-            population: "~200,000"
-          },
-          {
-            name: "The Inbetweens",
-            description: "Mid-tier sprawl. The 55 dominates. Endless tenements, hyperlocal gentrification, and desperate commerce.",
-            population: "~800,000"
-          },
-          {
-            name: "The Slums (Bigmosse & Others)",
-            description: "G0 scars. Gang wars. Cult activity. Where the Incident hit hardest and never healed.",
-            population: "~600,000"
-          },
-          {
-            name: "Ports District",
-            description: "Black market paradise. Hedonism meets desperation. Where goods and bodies are trafficked freely.",
-            population: "~400,000"
-          },
-          {
-            name: "The Hills (Galgbacken)",
-            description: "Pre-Incident villas. Ultra-wealthy enclaves. Where Cy's true elite hide from the city they created.",
-            population: "~50,000"
-          },
-          {
-            name: "Industrial Zones",
-            description: "Automated factories, data centers, corporate campuses. More machines than people.",
-            population: "~100,000 workers"
-          },
-          {
-            name: "The Fringe",
-            description: "Unregistered settlements. Squatter camps. Where the city bleeds into the wasteland.",
-            population: "Unknown (estimates 500k+)"
-          },
-        ]}
-      >
-        <InsetBox title="ACCESS MAJOR DISTRICTS:">
-          <Line neon>→ Central District - Where money rules</Line>
-          <Line neon>→ The Inbetweens - Where most people survive</Line>
-          <Line neon>→ Bigmosse & Ports - Where danger thrives</Line>
-          <Line neon>→ The 55 (Stack #95563) - Vertical city within a city</Line>
-          <Line smoke small style={{ marginTop: '0.75rem' }}>
-            Select a district to access detailed information, locations, and navigation.
-          </Line>
-        </InsetBox>
-      </CityPortal>
-    ),
-    related_commands: {
-      ...BIGMOSSE_PORTS_COMMANDS,
-      ...SOUTH_CENTRAL_DISTRICT_COMMANDS,
-      ...THE_INBETWEENS_DISTRICT,
-      ...CENTRAL_DISTRICT,
     },
   },
   "Cy Games": {
@@ -254,6 +230,47 @@ export const CY_CITY_PORTAL = {
         ),
       },
     }
+  },
+  ...STREET_GUIDE_COMMANDS,
+  "Help": {
+    favicon: <Icons.Help />,
+    preview: (
+      <NodePreview>
+        <Line smoke> · Tips and guidance for using the RetCom Device</Line>
+      </NodePreview>
+    ),
+    content: (
+      <Message
+        title="RCD-7"
+        subtitle="QUICK REFERENCE"
+        message="RetCom Device User Guide"
+        theme="casual"
+      >
+        <InsetBox title="NAVIGATION">
+          <Line cyan>• Tap any node to expand or collapse it</Line>
+          <Line cyan>• Nodes with ▶ contain sub-nodes inside</Line>
+          <Line cyan>• Eye icon toggles content visibility without closing</Line>
+          <Line cyan>• Double-tap any content panel to expand from partial to full</Line>
+        </InsetBox>
+        <InsetBox title="WALLET">
+          <Line yellow>• Tracks all extracted credits and items</Line>
+          <Line yellow>• TAKE / CLAIM items individually or use the section button for all</Line>
+          <Line yellow>• Open Wallet and TRANSFER to move assets into a character's inventory</Line>
+          <Line yellow>• CLEAR wipes the wallet without transferring</Line>
+        </InsetBox>
+        <InsetBox title="BATTERY SAVER">
+          <Line neon>• Tap the battery icon in the header to toggle Battery Saver</Line>
+          <Line neon>• Disables all animations site-wide — useful on older devices</Line>
+          <Line neon>• Setting is saved and persists between sessions</Line>
+        </InsetBox>
+        <InsetBox title="PASSWORDS & ICE">
+          <Line smoke>• PW nodes require a password — keyboard shows only valid characters</Line>
+          <Line smoke>• Decoy keys are flagged when present</Line>
+          <Line smoke>• ICE nodes use a hacking minigame — difficulty varies</Line>
+          <Line smoke>• Bypassed nodes stay unlocked across sessions</Line>
+        </InsetBox>
+      </Message>
+    ),
   },
 };
 

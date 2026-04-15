@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
 
-import { Line, Divider, Section, InsetBox } from '@terminal/TerminalComponents';
+import { Line, Divider, InsetBox } from '@terminal/TerminalComponents';
 import Extractable from '../../Extractable/Extractable';
 
 export default function ArcadeCabinet({
@@ -20,16 +20,6 @@ export default function ArcadeCabinet({
   lastPlayed = 'Unknown',
   user = 'GUEST',
 }) {
-  const [blinkState, setBlinkState] = useState(true);
-
-  // Blinking animation for attract mode
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setBlinkState((prev) => !prev);
-    }, 800);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <div style={{ position: 'relative' }}>
       {/* Cabinet container */}

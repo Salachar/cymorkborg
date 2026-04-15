@@ -20,7 +20,6 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.1), transparent);
-  animation: shimmer 3s infinite;
 }
 
 @keyframes shimmer {
@@ -59,7 +58,6 @@
 .games-banner-icon {
   font-size: 2rem;
   color: rgb(251, 191, 36);
-  animation: pulse-glow 2s ease-in-out infinite;
   text-shadow:
     0 0 10px rgba(251, 191, 36, 0.8),
     0 0 20px rgba(251, 191, 36, 0.6),
@@ -90,7 +88,6 @@
     0 0 20px rgba(139, 92, 246, 0.6),
     0 0 30px rgba(139, 92, 246, 0.4);
   letter-spacing: 0.1em;
-  animation: text-flicker 4s infinite;
 }
 
 @keyframes text-flicker {
@@ -126,7 +123,6 @@
 
 .games-banner-disclaimer-icon {
   font-size: 1rem;
-  animation: blink 2s infinite;
 }
 
 @keyframes blink {

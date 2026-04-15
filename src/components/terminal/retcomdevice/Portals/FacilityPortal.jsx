@@ -14,9 +14,8 @@ export default function FacilityPortal({
   warnings = [],
   theme = 'corporate',
   children,
+  signalStrength = 3,
 }) {
-  const [signalStrength, setSignalStrength] = useState(3);
-
   // Theme configurations
   const themeConfig = {
     corporate: {
@@ -58,15 +57,6 @@ export default function FacilityPortal({
     return levels[securityLevel] || 'rgb(148, 163, 184)';
   };
 
-  // Signal strength fluctuation
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSignalStrength(Math.floor(Math.random() * 2) + 2); // 2-3 bars
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <div
       style={{
@@ -102,7 +92,6 @@ export default function FacilityPortal({
               transparent 1px,
               transparent 40px
             )`,
-            animation: 'slide 20s linear infinite',
           }}
         />
 

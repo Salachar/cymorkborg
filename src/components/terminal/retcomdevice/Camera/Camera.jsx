@@ -53,7 +53,6 @@ export default function Camera({
                 height: '40px',
                 border: '2px solid rgb(77, 167, 188)',
                 borderRadius: '50%',
-                animation: isOnline ? 'cam-spin 12s linear infinite' : 'none',
               }}>
                 <div style={{ position: 'absolute', top: '-2px', left: '50%', transform: 'translateX(-50%)', width: '2px', height: '6px', backgroundColor: 'rgb(79, 209, 197)' }} />
                 <div style={{ position: 'absolute', bottom: '-2px', left: '50%', transform: 'translateX(-50%)', width: '2px', height: '6px', backgroundColor: 'rgb(79, 209, 197)' }} />
@@ -78,7 +77,6 @@ export default function Camera({
                   backgroundColor: isOnline ? (recording ? 'rgb(252, 129, 129)' : 'rgb(79, 209, 197)') : 'rgb(148, 163, 184)',
                   borderRadius: '50%',
                   boxShadow: isOnline ? `0 0 8px ${recording ? 'rgb(252, 129, 129)' : 'rgb(79, 209, 197)'}` : 'none',
-                  animation: isOnline && recording ? 'cam-blink 3s ease-in-out infinite' : 'none',
                 }} />
               </div>
             </div>
@@ -108,7 +106,6 @@ export default function Camera({
               width: '7px', height: '7px',
               backgroundColor: statusColor,
               borderRadius: '50%',
-              animation: isOnline ? 'cam-pulse 2s infinite' : 'none',
             }} />
             <span style={{ fontSize: '0.75rem', fontWeight: 'bold', color: statusColor, fontFamily: 'monospace', letterSpacing: '0.05em' }}>
               {status}

@@ -80,7 +80,6 @@
   border-radius: 50%;
   background: rgb(239, 68, 68);
   box-shadow: 0 0 8px rgb(239, 68, 68);
-  animation: cy-sports-pulse 2s ease-in-out infinite;
 }
 
 @keyframes cy-sports-pulse {

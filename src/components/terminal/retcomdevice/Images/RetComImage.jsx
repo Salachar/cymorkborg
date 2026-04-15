@@ -140,7 +140,6 @@ export default function RetComImage({
           height: '2px',
           background: `linear-gradient(90deg, transparent, ${t.beam}, transparent)`,
           boxShadow: `0 0 8px ${t.beamShadow}`,
-          animation: 'retcom-scan 3s linear infinite',
           pointerEvents: 'none',
         }}
       />

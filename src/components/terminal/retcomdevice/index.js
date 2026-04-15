@@ -19,14 +19,12 @@ import Extractable from "./Extractable/Extractable";
 import FacilityPortal from "./Portals/FacilityPortal";
 import GameConsole from "./Devices/GameConsole/GameConsole";
 import HoursBanner from "./HoursBanner/HoursBanner";
-import IceBreaker from "./Blockers/IceBreaker/IceBreaker";
 import IncidentLog from "./IncidentLog/IncidentLog";
 import Jukebox from "./Devices/Jukebox/Jukebox";
 import LiveCameraFeed from "./Camera/LiveCameraFeed";
 import LocalAd from "./LocalAd/LocalAd";
 import Locked from "./Blockers/Locked/Locked";
 import MaintenanceAccess from "./MaintenanceAccess/MaintenanceAccess";
-import MastermindHack from "./Blockers/MastermindHack/MastermindHack";
 import Menu from "./Menu/Menu";
 import Message from "./Basic/Message/Message";
 import NetworkDevices from "./NetworkDevices/NetworkDevices";
@@ -47,6 +45,7 @@ import Tenet from "./Tenet/Tenet";
 import VendingMachine from "./Devices/VendingMachine/VendingMachine";
 import VIPList from "./VIPList/VIPList";
 import Workstation from "./Workstation/Workstation";
+import Inventory from "./Inventory";
 
 export {
   ArcadeCabinet,
@@ -70,14 +69,13 @@ export {
   FacilityPortal,
   GameConsole,
   HoursBanner,
-  IceBreaker,
   IncidentLog,
+  Inventory,
   Jukebox,
   LiveCameraFeed,
   LocalAd,
   Locked,
   MaintenanceAccess,
-  MastermindHack,
   Menu,
   Message,
   NetworkDevices,

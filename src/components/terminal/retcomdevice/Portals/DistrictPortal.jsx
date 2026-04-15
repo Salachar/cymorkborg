@@ -6,489 +6,226 @@ export default function DistrictPortal({
   districtId,
   tagline,
   region,
-  population,
   corporatePresence,
-  crimeThreat = 'MEDIUM',
-  securityResponse = 'STANDARD',
-  accessPoints = [],
+  crimeThreat = '',
+  securityResponse = '',
   warnings = [],
   atmosphere,
-  theme = 'district',
   children,
 }) {
-  // Theme configurations for different district types
-  const themeConfig = {
-    district: {
-      primary: 'rgb(79, 209, 197)',
-      secondary: 'rgb(133, 175, 231)',
-      accent: 'rgb(251, 191, 36)',
-      bg: 'rgba(20, 25, 35, 0.85)',
-      glow: 'rgba(79, 209, 197, 0.3)',
-    },
-    slums: {
-      primary: 'rgb(251, 146, 60)',
-      secondary: 'rgb(239, 68, 68)',
-      accent: 'rgb(251, 191, 36)',
-      bg: 'rgba(25, 20, 20, 0.85)',
-      glow: 'rgba(251, 146, 60, 0.3)',
-    },
-    corporate: {
-      primary: 'rgb(79, 209, 197)',
-      secondary: 'rgb(168, 85, 247)',
-      accent: 'rgb(236, 72, 153)',
-      bg: 'rgba(20, 25, 35, 0.85)',
-      glow: 'rgba(79, 209, 197, 0.3)',
-    },
-    industrial: {
-      primary: 'rgb(251, 191, 36)',
-      secondary: 'rgb(148, 163, 184)',
-      accent: 'rgb(251, 146, 60)',
-      bg: 'rgba(30, 25, 20, 0.85)',
-      glow: 'rgba(251, 191, 36, 0.3)',
-    },
-  };
+  const primary = 'rgb(79, 209, 197)';
+  const primaryFaint = 'rgba(79, 209, 197, 0.15)';
+  const primaryBorder = 'rgba(79, 209, 197, 0.35)';
 
-  const colors = themeConfig[theme] || themeConfig.district;
+  const threatColor = {
+    LOW: 'rgb(34, 197, 94)',
+    MEDIUM: 'rgb(251, 191, 36)',
+    HIGH: 'rgb(251, 146, 60)',
+    EXTREME: 'rgb(239, 68, 68)',
+    CRITICAL: 'rgb(220, 38, 38)',
+  }[crimeThreat] ?? 'rgb(251, 191, 36)';
 
-  // Threat level colors
-  const getThreatColor = () => {
-    const levels = {
-      'LOW': 'rgb(34, 197, 94)',
-      'MEDIUM': 'rgb(251, 191, 36)',
-      'HIGH': 'rgb(251, 146, 60)',
-      'EXTREME': 'rgb(239, 68, 68)',
-      'CRITICAL': 'rgb(220, 38, 38)',
-    };
-    return levels[crimeThreat] || 'rgb(251, 191, 36)';
-  };
+  const threatFaint = threatColor.replace('rgb', 'rgba').replace(')', ', 0.1)');
 
   return (
     <div
       style={{
-        border: `3px solid ${colors.primary}`,
-        borderRadius: '8px',
-        backgroundColor: colors.bg,
+        border: `1.5px solid ${primaryBorder}`,
+        borderRadius: 'var(--border-radius-lg)',
         overflow: 'hidden',
-        boxShadow: `0 0 30px ${colors.glow}, inset 0 0 20px rgba(0, 0, 0, 0.5)`,
-        position: 'relative',
+        fontFamily: 'var(--font-mono)',
       }}
     >
-      {/* Header banner with grid pattern */}
+      {/* Header: name left, stats right */}
       <div
         style={{
-          background: `linear-gradient(135deg, ${colors.primary}40 0%, ${colors.secondary}30 100%)`,
-          borderBottom: `3px solid ${colors.primary}`,
-          padding: 'clamp(0.75rem, 3vw, 1.5rem)',
-          position: 'relative',
-          overflow: 'hidden',
+          display: 'grid',
+          gridTemplateColumns: '3fr 2fr',
+          // borderBottom: `1px solid ${primaryBorder}`,
         }}
       >
-        {/* Grid pattern overlay */}
+        {/* Left — name + tagline */}
         <div
           style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundImage: `
-              linear-gradient(${colors.primary}15 1px, transparent 1px),
-              linear-gradient(90deg, ${colors.primary}15 1px, transparent 1px)
-            `,
-            backgroundSize: '20px 20px',
-            opacity: 0.3,
+            padding: '1rem 1.25rem',
+            // borderRight: `1px solid ${primaryBorder}`,
           }}
-        />
-
-        {/* District header */}
-        <div style={{ position: 'relative', zIndex: 1 }}>
+        >
           <div
             style={{
-              fontSize: '0.75rem',
-              color: colors.secondary,
-              fontFamily: 'monospace',
-              letterSpacing: '0.2em',
-              marginBottom: '0.5rem',
+              fontSize: '11px',
+              color: 'var(--color-text-tertiary)',
+              letterSpacing: '0.15em',
+              marginBottom: '0.4rem',
             }}
           >
             CY CITY DISTRICT ACCESS
           </div>
-
           <div
             style={{
-              fontSize: 'clamp(1.1rem, 5vw, 2rem)',
-              fontWeight: 'bold',
-              color: colors.primary,
-              fontFamily: 'monospace',
+              fontSize: 'clamp(1rem, 4vw, 1.5rem)',
+              fontWeight: 500,
+              color: primary,
               letterSpacing: '0.05em',
               textTransform: 'uppercase',
-              marginBottom: '0.75rem',
-              textShadow: `0 0 15px ${colors.primary}, 0 0 30px ${colors.primary}60`,
-              display: 'flex',
-              justifyContent: 'space-between',
+              marginBottom: '0.5rem',
             }}
           >
-            <span>▂▃▅▇</span>
-            <span>{districtName}</span>
-            <span>▇▅▃▂</span>
+            {districtName}
           </div>
-
           {districtId && (
             <div
               style={{
-                fontSize: '0.875rem',
-                color: colors.secondary,
-                fontFamily: 'monospace',
-                marginBottom: '0.5rem',
-                opacity: 0.8,
+                fontSize: '11px',
+                color: 'var(--color-text-tertiary)',
+                marginBottom: '0.35rem',
               }}
             >
-              ID: {districtId}
+              {districtId}
             </div>
           )}
+          {tagline && (
+            <div
+              style={{
+                fontSize: '0.8rem',
+                color: 'var(--color-text-secondary)',
+                fontStyle: 'italic',
+              }}
+            >
+              "{tagline}"
+            </div>
+          )}
+        </div>
 
+        {/* Right — 2x2 stat grid */}
+        <div
+          style={{
+            padding: '0.75rem 1rem',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
           <div
             style={{
-              fontSize: '1rem',
-              color: colors.accent,
-              fontFamily: 'monospace',
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '6px',
+              width: '100%',
+            }}
+          >
+            {region && (
+              <div
+                style={{
+                  background: 'var(--color-background-primary)',
+                  border: '0.5px solid var(--color-border-tertiary)',
+                  borderRadius: 'var(--border-radius-md)',
+                  padding: '0.4rem 0.6rem',
+                }}
+              >
+                <div style={{ fontSize: '10px', color: 'var(--color-text-tertiary)', letterSpacing: '0.1em' }}>REGION</div>
+                <div style={{ fontSize: '0.75rem', fontWeight: 500, color: 'var(--color-text-primary)' }}>{region}</div>
+              </div>
+            )}
+            {corporatePresence && (
+              <div
+                style={{
+                  background: 'var(--color-background-primary)',
+                  border: '0.5px solid var(--color-border-tertiary)',
+                  borderRadius: 'var(--border-radius-md)',
+                  padding: '0.4rem 0.6rem',
+                }}
+              >
+                <div style={{ fontSize: '10px', color: 'var(--color-text-tertiary)', letterSpacing: '0.1em' }}>CORPS</div>
+                <div style={{ fontSize: '0.75rem', fontWeight: 500, color: 'var(--color-text-primary)' }}>{corporatePresence}</div>
+              </div>
+            )}
+            {crimeThreat && (
+              <div
+                style={{
+                  background: threatFaint,
+                  border: `0.5px solid ${threatColor}`,
+                  borderRadius: 'var(--border-radius-md)',
+                  padding: '0.4rem 0.6rem',
+                }}
+              >
+                <div style={{ fontSize: '10px', color: 'var(--color-text-tertiary)', letterSpacing: '0.1em' }}>THREAT</div>
+                <div style={{ fontSize: '0.75rem', fontWeight: 500, color: threatColor }}>{crimeThreat}</div>
+              </div>
+            )}
+            {securityResponse && (
+              <div
+                style={{
+                  background: 'var(--color-background-primary)',
+                  border: '0.5px solid var(--color-border-tertiary)',
+                  borderRadius: 'var(--border-radius-md)',
+                  padding: '0.4rem 0.6rem',
+                }}
+              >
+                <div style={{ fontSize: '10px', color: 'var(--color-text-tertiary)', letterSpacing: '0.1em' }}>SECURITY</div>
+                <div style={{ fontSize: '0.75rem', fontWeight: 500, color: primary }}>{securityResponse}</div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Atmosphere */}
+      {atmosphere && (
+        <div style={{ padding: '0.85rem 1.25rem', borderBottom: `0.5px solid var(--color-border-tertiary)` }}>
+          <div
+            style={{
+              fontSize: '0.8rem',
+              color: 'var(--color-text-secondary)',
               fontStyle: 'italic',
+              lineHeight: 1.6,
+              borderLeft: `2px solid ${primaryBorder}`,
+              paddingLeft: '0.75rem',
             }}
           >
-            "{tagline}"
+            {atmosphere}
           </div>
         </div>
-      </div>
+      )}
 
-      {/* Content area */}
-      <div style={{ padding: 'clamp(0.75rem, 3vw, 1.5rem)' }}>
-        {/* District info grid */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-            gap: '0.75rem',
-          }}
-        >
-          {/* Region info */}
+      {/* Warnings */}
+      {warnings.length > 0 && (
+        <div style={{ padding: '0.75rem 1.25rem', borderBottom: `0.5px solid var(--color-border-tertiary)` }}>
           <div
             style={{
-              padding: '0.75rem',
-              backgroundColor: `${colors.primary}10`,
-              border: `1px solid ${colors.primary}40`,
-              borderRadius: '4px',
+              fontSize: '10px',
+              color: 'var(--color-text-tertiary)',
+              letterSpacing: '0.1em',
+              marginBottom: '0.4rem',
             }}
           >
-            <div
-              style={{
-                fontSize: '0.7rem',
-                color: colors.secondary,
-                opacity: 0.8,
-              }}
-            >
-              REGION
-            </div>
-            <div
-              style={{
-                fontSize: '1rem',
-                color: colors.primary,
-                fontWeight: 'bold',
-                fontFamily: 'monospace',
-              }}
-            >
-              {region}
-            </div>
+            ACTIVE WARNINGS
           </div>
-
-          {/* Population */}
-          {population && (
-            <div
-              style={{
-                padding: '0.75rem',
-                backgroundColor: `${colors.primary}10`,
-                border: `1px solid ${colors.primary}40`,
-                borderRadius: '4px',
-              }}
-            >
-              <div
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+            {warnings.map((w, i) => (
+              <span
+                key={i}
                 style={{
-                  fontSize: '0.7rem',
-                  color: colors.secondary,
-                  opacity: 0.8,
+                  fontSize: '11px',
+                  background: 'rgba(239, 68, 68, 0.08)',
+                  color: 'rgb(220, 38, 38)',
+                  border: '0.5px solid rgba(239, 68, 68, 0.3)',
+                  borderRadius: 'var(--border-radius-md)',
+                  padding: '2px 8px',
                 }}
               >
-                POPULATION
-              </div>
-              <div
-                style={{
-                  fontSize: '1rem',
-                  color: colors.primary,
-                  fontWeight: 'bold',
-                  fontFamily: 'monospace',
-                }}
-              >
-                {population}
-              </div>
-            </div>
-          )}
-
-          {/* Corporate presence */}
-          {corporatePresence && (
-            <div
-              style={{
-                padding: '0.75rem',
-                backgroundColor: `${colors.primary}10`,
-                border: `1px solid ${colors.primary}40`,
-                borderRadius: '4px',
-              }}
-            >
-              <div
-                style={{
-                  fontSize: '0.7rem',
-                  color: colors.secondary,
-                  opacity: 0.8,
-                }}
-              >
-                CORPORATE
-              </div>
-              <div
-                style={{
-                  fontSize: '1rem',
-                  color: colors.primary,
-                  fontWeight: 'bold',
-                  fontFamily: 'monospace',
-                }}
-              >
-                {corporatePresence}
-              </div>
-            </div>
-          )}
-        </div>
-
-        <Spacer />
-
-        {/* Threat assessment */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: '0.75rem',
-          }}
-        >
-          <div
-            style={{
-              padding: '0.75rem',
-              backgroundColor: `${getThreatColor()}15`,
-              border: `2px solid ${getThreatColor()}`,
-              borderRadius: '4px',
-            }}
-          >
-            <div
-              style={{
-                fontSize: '0.7rem',
-                color: colors.secondary,
-              }}
-            >
-              THREAT LEVEL
-            </div>
-            <div
-              style={{
-                fontSize: 'clamp(0.875rem, 3vw, 1rem)',
-                fontWeight: 'bold',
-                color: getThreatColor(),
-                fontFamily: 'monospace',
-                letterSpacing: '0.05em',
-              }}
-            >
-              {crimeThreat}
-            </div>
-          </div>
-
-          <div
-            style={{
-              padding: '0.75rem',
-              backgroundColor: `${colors.accent}15`,
-              border: `2px solid ${colors.accent}`,
-              borderRadius: '4px',
-            }}
-          >
-            <div
-              style={{
-                fontSize: '0.7rem',
-                color: colors.secondary,
-              }}
-            >
-              SECURITY
-            </div>
-            <div
-              style={{
-                fontSize: 'clamp(0.875rem, 3vw, 1rem)',
-                fontWeight: 'bold',
-                color: colors.accent,
-                fontFamily: 'monospace',
-                letterSpacing: '0.05em',
-              }}
-            >
-              {securityResponse}
-            </div>
+                {w}
+              </span>
+            ))}
           </div>
         </div>
+      )}
 
-        <Spacer />
-
-        {/* Atmosphere */}
-        {atmosphere && (
-          <>
-            <Spacer />
-            <Line
-              cyan
-              bold
-              style={{
-                margin: 0,
-                marginBottom: '0.5rem',
-                fontSize: '0.9rem',
-              }}
-            >
-              DISTRICT ATMOSPHERE:
-            </Line>
-            <div
-              style={{
-                padding: '0.75rem',
-                backgroundColor: 'rgba(0, 0, 0, 0.3)',
-                border: `1px solid ${colors.secondary}40`,
-                borderLeft: `3px solid ${colors.accent}`,
-                borderRadius: '3px',
-              }}
-            >
-              <Line
-                style={{
-                  margin: 0,
-                  fontSize: '0.875rem',
-                  color: colors.secondary,
-                  fontStyle: 'italic',
-                }}
-              >
-                {atmosphere}
-              </Line>
-            </div>
-          </>
-        )}
-
-        {/* Warnings */}
-        {warnings.length > 0 && (
-          <>
-            <Spacer />
-            <div
-              style={{
-                padding: '0.75rem',
-                backgroundColor: 'rgba(239, 68, 68, 0.1)',
-                border: '2px solid rgba(239, 68, 68, 0.4)',
-                borderRadius: '4px',
-              }}
-            >
-              <Line
-                red
-                bold
-                style={{
-                  margin: 0,
-                  marginBottom: '0.5rem',
-                  fontSize: '0.875rem',
-                }}
-              >
-                ⚠ DISTRICT WARNINGS:
-              </Line>
-              {warnings.map((warning, i) => (
-                <Line
-                  key={i}
-                  yellow
-                  style={{
-                    fontSize: '0.8rem',
-                    margin: 0,
-                    marginBottom: i < warnings.length - 1 ? '0.35rem' : 0,
-                    paddingLeft: '1rem',
-                  }}
-                >
-                  • {warning}
-                </Line>
-              ))}
-            </div>
-          </>
-        )}
-
-        {/* Access points */}
-        {accessPoints.length > 0 && (
-          <>
-            <Spacer />
-            <Line
-              neon
-              bold
-              style={{
-                margin: 0,
-                marginBottom: '0.75rem',
-                fontSize: '1rem',
-                textShadow: `0 0 10px ${colors.primary}`,
-              }}
-            >
-              AVAILABLE ACCESS POINTS:
-            </Line>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              {accessPoints.map((point, i) => (
-                <div
-                  key={i}
-                  style={{
-                    padding: '0.75rem',
-                    backgroundColor: `${colors.primary}10`,
-                    border: `1px solid ${colors.primary}`,
-                    borderLeft: `4px solid ${colors.accent}`,
-                    borderRadius: '3px',
-                    transition: 'all 0.2s',
-                  }}
-                >
-                  <Line
-                    neon
-                    style={{
-                      margin: 0,
-                      fontSize: '0.875rem',
-                      fontWeight: 500,
-                    }}
-                  >
-                    ▸ {point}
-                  </Line>
-                </div>
-              ))}
-            </div>
-          </>
-        )}
-
-        {/* Children content */}
-        {Boolean(children) && (
-          <>
-            {children}
-          </>
-        )}
-
-        {/* Footer */}
-        <Spacer />
-        <div
-          style={{
-            textAlign: 'center',
-            fontSize: '0.7rem',
-            color: colors.secondary,
-            fontFamily: 'monospace',
-            opacity: 0.6,
-          }}
-        >
-          CY_NET DISTRICT PORTAL v2.4.1 | All transmissions monitored
+      {/* Children */}
+      {children && (
+        <div style={{ padding: '0.75rem 1.25rem', borderBottom: `0.5px solid var(--color-border-tertiary)` }}>
+          {children}
         </div>
-      </div>
-
-      {/* CSS animations */}
-      <style>{`
-        @keyframes district-pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.4; }
-        }
-      `}</style>
+      )}
     </div>
   );
 }

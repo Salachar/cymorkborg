@@ -13,7 +13,7 @@ export const PenthousePartyVIPs = {
   name: 'Penthouse Party VIP List',
   args: {
     eventName: "Steel Jackhammer's Recovery Party",
-    location: "Central Plaza Tower - Unit 4201",
+    location: "Peach Trees - Unit 4201",
     date: "Nov 16-18, 2067 (Ongoing)",
     vips: [
       {

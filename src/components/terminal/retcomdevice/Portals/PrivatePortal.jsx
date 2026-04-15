@@ -120,7 +120,6 @@ export default function PrivatePortal({
               borderRadius: '50%',
               backgroundColor: t.pulse,
               boxShadow: `0 0 6px ${t.pulse}`,
-              animation: 'pulse 3s ease-in-out infinite',
             }} />
             <span style={{
               color: t.secondary,
@@ -220,8 +219,6 @@ export default function PrivatePortal({
                       borderRadius: '50%',
                       backgroundColor: t.pulse,
                       boxShadow: `0 0 4px ${t.pulse}`,
-                      animation: 'pulse 3s ease-in-out infinite',
-                      animationDelay: `${i * 0.4}s`,
                       flexShrink: 0,
                     }} />
                     <span style={{

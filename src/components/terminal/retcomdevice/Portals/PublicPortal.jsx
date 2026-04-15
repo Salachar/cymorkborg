@@ -13,8 +13,6 @@ export default function PublicPortal({
   theme = 'friendly',
   children,
 }) {
-  const [signalBlink, setSignalBlink] = useState(true);
-
   const themeConfig = {
     friendly: {
       primary: 'rgb(79, 209, 197)',
@@ -44,14 +42,6 @@ export default function PublicPortal({
   };
 
   const colors = themeConfig[theme] || themeConfig.friendly;
-
-  // Signal blink animation
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSignalBlink(prev => !prev);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   const getSignalBars = () => {
     const bars = {
@@ -177,7 +167,6 @@ export default function PublicPortal({
           color: getStatusColor(),
           fontWeight: 'bold',
           letterSpacing: '0.1em',
-          textShadow: signalBlink ? `0 0 6px ${getStatusColor()}` : 'none',
         }}>
           ● CONNECTED
         </span>
@@ -208,7 +197,6 @@ export default function PublicPortal({
                   style={{
                     color: getStatusColor(),
                     fontWeight: 'bold',
-                    textShadow: signalBlink ? `0 0 8px ${getStatusColor()}` : 'none',
                   }}
                 >
                   {status}

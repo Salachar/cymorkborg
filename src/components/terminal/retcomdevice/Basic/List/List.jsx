@@ -3,8 +3,6 @@ import { useState } from 'react';
 import CommandRow from '@terminal/retcomdevice/Basic/CommandRow/CommandRow';
 import {
   PasswordPrompt,
-  MastermindHack,
-  IceBreaker,
 } from '@terminal/retcomdevice';
 
 import {
@@ -56,13 +54,28 @@ function ContentPanel({ children, size, onToggleSize, style = {} }) {
       </div>
 
       {isPartial && (
-        <div style={{
-          position: 'absolute',
-          bottom: 0, left: 0, right: 0,
-          height: '60px',
-          background: `linear-gradient(to bottom, transparent, ${FADE_COLOR})`,
-          pointerEvents: 'none',
-        }} />
+        <>
+          <div style={{
+            position: 'absolute',
+            bottom: 0, left: 0, right: 0,
+            height: '60px',
+            background: `linear-gradient(to bottom, transparent, ${FADE_COLOR})`,
+            pointerEvents: 'none',
+          }} />
+          <div style={{
+            position: 'absolute',
+            bottom: '0.4rem',
+            left: 0, right: 0,
+            textAlign: 'center',
+            fontSize: '0.6rem',
+            fontFamily: 'monospace',
+            letterSpacing: '0.08em',
+            color: 'rgba(79, 209, 197, 0.8)',
+            pointerEvents: 'none',
+          }}>
+            Double tap to expand and collapse
+          </div>
+        </>
       )}
     </div>
   );
@@ -89,9 +102,9 @@ function CommandNode({
   const isBypassed = Boolean(discoveredPasswords[path]);
   const bypassValue = discoveredPasswords[path] ?? null;
 
-  const contentSize = contentSizes[path] ?? 'full';
+  const contentSize = contentSizes[path] ?? 'partial';
 
-  const hasBlocker = Boolean(def.password || def.mastermind || def.icebreaker);
+  const hasBlocker = Boolean(def.password);
   const isLocked = hasBlocker && !isBypassed;
 
   const resolvedContent = typeof def.content === 'function'
@@ -106,19 +119,7 @@ function CommandNode({
   const isExpandable = isLocked || hasContent || hasChildren;
   const rowVariant = def.backdoor ? 'backdoor' : def.internal ? 'internal' : 'default';
 
-  const blockerType = def.mastermind
-    ? 'mastermind'
-    : def.icebreaker
-    ? 'icebreaker'
-    : def.password
-    ? 'password'
-    : null;
-
-  const bypassLabel = blockerType === 'mastermind' || blockerType === 'icebreaker'
-    ? 'ICE'
-    : blockerType === 'password'
-    ? 'PW'
-    : null;
+  const bypassLabel = 'PW';
 
   const childEntries = hasChildren ? Object.entries(def.related_commands) : [];
   const showContentPanel = isExpanded && contentSize !== 'hidden' && (isLocked || hasContent);
@@ -132,27 +133,7 @@ function CommandNode({
   };
 
   const renderBlocker = () => {
-    if (blockerType === 'mastermind') {
-      return (
-        <MastermindHack
-          command={path}
-          commandDef={def}
-          difficulty={def.mastermind.difficulty}
-          onSuccess={(cmdPath, cmdDef, answer) => onUnlock(cmdPath, answer)}
-        />
-      );
-    }
-    if (blockerType === 'icebreaker') {
-      return (
-        <IceBreaker
-          command={path}
-          commandDef={def}
-          difficulty={def.icebreaker.difficulty}
-          onSuccess={(cmdPath) => onUnlock(cmdPath, 'CRACKED')}
-        />
-      );
-    }
-    if (blockerType === 'password') {
+    if (hasBlocker) {
       return (
         <PasswordPrompt
           key={path}
@@ -290,12 +271,12 @@ export default function List({
       flexDirection: 'column',
       gap: '0.5rem',
     }}>
-      {campaignCommandList.map(({ id, ...def }) => (
+      {Object.keys(campaignCommandList).map((command_id) => (
         <CommandNode
-          key={id}
-          id={id}
-          def={def}
-          path={id}
+          key={command_id}
+          id={command_id}
+          def={campaignCommandList[command_id]}
+          path={command_id}
           depth={0}
           discoveredPasswords={discoveredPasswords}
           expandedRows={expandedRows}

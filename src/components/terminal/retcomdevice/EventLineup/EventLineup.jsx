@@ -212,7 +212,6 @@ export default function EventLineup({
                         border: `1px solid ${themeColor.primary}`,
                         borderRadius: '2px',
                         textTransform: 'uppercase',
-                        animation: 'pulse 2s infinite',
                       }}
                     >
                       Live Now

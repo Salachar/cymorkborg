@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { CLASSES } from "../data/builder";
+
+import AppDataExportImport from "../components/CharacterExportImport";
+
 import { CLASS_BUTTONS_STORAGE_KEY } from '@utils/localStorage';
 
 function getOpen() {
@@ -35,79 +38,83 @@ export default function ClassButtons({
       {/* Subtle toggle header */}
       <button
         onClick={handleToggle}
-        className="w-full flex items-center justify-between px-4 py-2 text-left"
+        className="w-full flex items-center justify-between px-4 py-4 text-left"
         style={{ backgroundColor: 'transparent' }}
       >
-        <span className="text-xs font-bold uppercase tracking-widest text-gray-600">
+        <span className="text-xs font-bold uppercase tracking-widest text-white">
           Classes
         </span>
-        <span className="text-xs text-gray-700">
+        <span className="text-xs text-white">
           {isOpen ? '▲' : '▼'}
         </span>
       </button>
 
       {/* Collapsible content */}
       {isOpen && (
-        <div className="px-4 pb-4">
-          <div className="grid grid-cols-4 md:grid-cols-7 gap-2">
-            {CLASSES.map((character_class, index) => {
-              const ci = character_class.instance;
-              const isActive = currentIndex === index;
+        <>
+          <div className="px-4 pb-4">
+            <div className="grid grid-cols-4 md:grid-cols-7 gap-2">
+              {CLASSES.map((character_class, index) => {
+                const ci = character_class.instance;
+                const isActive = currentIndex === index;
 
-              return (
-                <div key={`class_${index}`} className="relative group">
-                  {/* Main Class Button */}
-                  <button
-                    onClick={() => onClick({ ...character_class, index })}
-                    className="relative w-full h-20 flex flex-col items-center justify-center border-2 transition-all duration-200 overflow-hidden"
-                    style={{
-                      backgroundColor: isActive ? `${ci.color}15` : 'rgb(17, 17, 17)',
-                      borderColor: isActive ? ci.color : 'rgb(40, 40, 40)',
-                      opacity: typeof currentIndex === "number" ? (isActive ? 1 : 0.55) : 0.75,
-                      boxShadow: isActive ? `0 0 16px ${ci.color}30` : 'none',
-                    }}
-                  >
-                    {/* Background pattern */}
-                    <div
-                      className="absolute inset-0 opacity-5"
+                return (
+                  <div key={`class_${index}`} className="relative group">
+                    {/* Main Class Button */}
+                    <button
+                      onClick={() => onClick({ ...character_class, index })}
+                      className="relative w-full h-20 flex flex-col items-center justify-center border-2 transition-all duration-200 overflow-hidden"
                       style={{
-                        backgroundImage: `repeating-linear-gradient(45deg, ${ci.color} 0, ${ci.color} 2px, transparent 2px, transparent 10px)`,
-                      }}
-                    />
-
-                    {/* Class Name */}
-                    <span
-                      className="relative z-10 text-xs font-bold uppercase tracking-wider text-center px-1"
-                      style={{
-                        color: isActive ? ci.color : '#6b7280',
-                        textShadow: isActive ? `0 0 8px ${ci.color}60` : 'none',
+                        backgroundColor: isActive ? `${ci.color}15` : 'rgb(17, 17, 17)',
+                        borderColor: isActive ? ci.color : 'rgb(40, 40, 40)',
+                        opacity: typeof currentIndex === "number" ? (isActive ? 1 : 0.55) : 0.75,
+                        boxShadow: isActive ? `0 0 16px ${ci.color}30` : 'none',
                       }}
                     >
-                      {ci.class}
-                    </span>
-
-                    {/* Active Indicator */}
-                    {isActive && (
+                      {/* Background pattern */}
                       <div
-                        className="absolute bottom-0 left-0 right-0 h-0.5"
-                        style={{ backgroundColor: ci.color }}
+                        className="absolute inset-0 opacity-5"
+                        style={{
+                          backgroundImage: `repeating-linear-gradient(45deg, ${ci.color} 0, ${ci.color} 2px, transparent 2px, transparent 10px)`,
+                        }}
                       />
-                    )}
-                  </button>
 
-                  {/* Add Character Button */}
-                  <button
-                    onClick={() => onAdd({ ...character_class, index })}
-                    className="absolute -top-2 -right-2 z-20 w-6 h-6 flex items-center justify-center bg-gray-900 border border-gray-700 text-gray-500 font-bold text-sm rounded-full transition-all duration-200 shadow-lg hover:border-cy-green hover:text-cy-green"
-                    title={`Create new ${ci.class}`}
-                  >
-                    +
-                  </button>
-                </div>
-              );
-            })}
+                      {/* Class Name */}
+                      <span
+                        className="relative z-10 text-xs font-bold uppercase tracking-wider text-center px-1"
+                        style={{
+                          color: isActive ? ci.color : '#6b7280',
+                          textShadow: isActive ? `0 0 8px ${ci.color}60` : 'none',
+                        }}
+                      >
+                        {ci.class}
+                      </span>
+
+                      {/* Active Indicator */}
+                      {isActive && (
+                        <div
+                          className="absolute bottom-0 left-0 right-0 h-0.5"
+                          style={{ backgroundColor: ci.color }}
+                        />
+                      )}
+                    </button>
+
+                    {/* Add Character Button */}
+                    <button
+                      onClick={() => onAdd({ ...character_class, index })}
+                      className="absolute -top-2 -right-2 z-20 w-6 h-6 flex items-center justify-center bg-gray-900 border border-gray-700 text-gray-500 font-bold text-sm rounded-full transition-all duration-200 shadow-lg hover:border-cy-green hover:text-cy-green"
+                      title={`Create new ${ci.class}`}
+                    >
+                      +
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
+
+          <AppDataExportImport />
+        </>
       )}
     </div>
   );

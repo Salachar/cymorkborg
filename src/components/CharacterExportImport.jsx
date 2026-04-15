@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 
 export default function AppDataExportImport({
-  character,
+  character = null,
   onUpdate = () => {},
 }) {
   const fileInputRef = useRef(null);
@@ -138,16 +138,18 @@ export default function AppDataExportImport({
           />
         </label>
 
-        <button
-          onClick={() => {
-            character.toggleLock();
-            onUpdate();
-          }}
-          className={buttonClass}
-          style={buttonStyles}
-        >
-          {character.locked ? "Locked" : "Unlocked"}
-        </button>
+        {Boolean(character) && (
+          <button
+            onClick={() => {
+              character.toggleLock();
+              onUpdate();
+            }}
+            className={buttonClass}
+            style={buttonStyles}
+          >
+            {character.locked ? "Locked" : "Unlocked"}
+          </button>
+        )}
       </div>
 
       {/* Success Message */}

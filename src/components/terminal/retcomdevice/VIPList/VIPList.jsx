@@ -5,7 +5,7 @@ import { Line, Divider } from '@terminal/TerminalComponents';
  *
  * Props:
  * - eventName: String (e.g., "Steel Jackhammer's Penthouse Party")
- * - location: String (e.g., "Central Plaza Tower - Unit 4201")
+ * - location: String (e.g., "Peach Trees - Unit 4201")
  * - date: String (optional, e.g., "Nov 16, 2067")
  * - vips: Array of VIP objects
  *   - name: String

@@ -5,19 +5,11 @@ export default function GameConsole({
   model = 'CyberDeck Pro X',
   owner = 'Player1',
   gameLoaded,
+  rgbColor = 0,
   friends = [],
 }) {
-  const [rgbColor, setRgbColor] = useState(0);
   const [systemStatus, setSystemStatus] = useState('IDLE');
   const [fanSpeed, setFanSpeed] = useState('LOW');
-
-  // RGB cycle animation
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setRgbColor((prev) => (prev + 1) % 360);
-    }, 50);
-    return () => clearInterval(interval);
-  }, []);
 
   // Get RGB color based on hue
   const getRgbColor = () => {
@@ -66,7 +58,6 @@ export default function GameConsole({
               borderRadius: '50%',
               backgroundColor: getRgbColor(),
               boxShadow: `0 0 10px ${getRgbColor()}`,
-              animation: 'pulse 2s infinite',
             }}
           />
 

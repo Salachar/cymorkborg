@@ -17,20 +17,6 @@ export default function TerminalHeader({
   onIndent = () => {},
   onBatterySaver = () => {},
 }) {
-  const [adsBlocked, setAdsBlocked] = useState(47);
-
-  useEffect(() => {
-    const adInterval = setInterval(() => {
-      if (Math.random() > 0.7) {
-        setAdsBlocked(prev => prev + Math.floor(Math.random() * 5) + 1);
-      }
-    }, 8000);
-
-    return () => {
-      clearInterval(adInterval);
-    };
-  }, []);
-
   return (
     <div
       style={{
@@ -45,40 +31,6 @@ export default function TerminalHeader({
         fontFamily: 'monospace',
       }}
     >
-      {/* Spinning eye — identity piece */}
-      <div style={{ position: 'relative', width: '36px', height: '36px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{
-          position: 'absolute',
-          width: '36px',
-          height: '36px',
-          border: `2px solid ${BORDER}`,
-          borderRadius: '50%',
-          animation: 'rcd-spin 8s linear infinite',
-        }}>
-          <div style={{ position: 'absolute', top: '-2px', left: '50%', transform: 'translateX(-50%)', width: '2px', height: '5px', backgroundColor: TEAL }} />
-          <div style={{ position: 'absolute', bottom: '-2px', left: '50%', transform: 'translateX(-50%)', width: '2px', height: '5px', backgroundColor: TEAL }} />
-          <div style={{ position: 'absolute', left: '-2px', top: '50%', transform: 'translateY(-50%)', width: '5px', height: '2px', backgroundColor: TEAL }} />
-          <div style={{ position: 'absolute', right: '-2px', top: '50%', transform: 'translateY(-50%)', width: '5px', height: '2px', backgroundColor: TEAL }} />
-        </div>
-        <div style={{
-          width: '18px', height: '18px',
-          border: `2px solid ${TEAL}`,
-          borderRadius: '50%',
-          backgroundColor: `rgba(79, 209, 197, 0.08)`,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          animation: 'rcd-pulse 2s ease-in-out infinite',
-        }}>
-          <div style={{
-            width: '7px', height: '7px',
-            backgroundColor: GREEN,
-            borderRadius: '50%',
-            boxShadow: `0 0 8px ${GREEN}`,
-            animation: 'rcd-blink 3s ease-in-out infinite',
-          }} />
-        </div>
-      </div>
-
-      {/* Device ID */}
       <div style={{ flexShrink: 0 }}>
         <div style={{ fontSize: '0.8rem', fontWeight: 'bold', color: TEAL, letterSpacing: '0.1em', textShadow: `0 0 8px rgba(79, 209, 197, 0.4)`, lineHeight: 1 }}>
           RCD-7
@@ -90,11 +42,6 @@ export default function TerminalHeader({
 
       {/* Divider */}
       <div style={{ width: '1px', height: '32px', backgroundColor: BORDER, opacity: 0.4, flexShrink: 0 }} />
-
-      {/* Live stats ticker */}
-      <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', flex: 1 }}>
-        <Stat label="ADS BLOCKED" value={adsBlocked.toLocaleString()} color={GREEN} />
-      </div>
 
       {/* Header controls */}
       <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '0.25rem', marginBottom: '0.25rem' }}>
@@ -158,19 +105,6 @@ export default function TerminalHeader({
           <BatteryChargingFullIcon style={{ fontSize: 16 }} />
         </button>
       )}
-    </div>
-  );
-}
-
-function Stat({ label, value, color }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.1rem' }}>
-      <span style={{ fontSize: '0.55rem', color: DIM, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-        {label}
-      </span>
-      <span style={{ fontSize: '0.95rem', fontWeight: 'bold', color, letterSpacing: '0.05em', lineHeight: 1 }}>
-        {value}
-      </span>
     </div>
   );
 }

@@ -154,7 +154,6 @@ export default function CCTV({
                 height: '8px',
                 backgroundColor: 'rgb(239, 68, 68)',
                 borderRadius: '50%',
-                animation: 'cctv-blink 2s infinite',
               }}
             />
             <span

@@ -15,26 +15,9 @@ export default function Workstation({
   recentFiles = [],
   emails = 0,
   productivity = 50,
+  cpuUsage = 30,
+  uptime = '4d 12h 37m',
 }) {
-  const [cpuUsage, setCpuUsage] = useState(12);
-  const [uptime, setUptime] = useState('4d 12h 37m');
-  const [mouseJiggler, setMouseJiggler] = useState(false);
-
-  // Simulate CPU fluctuation
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCpuUsage(Math.floor(Math.random() * 30) + 10);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Check for mouse jiggler detection
-  useEffect(() => {
-    if (status === 'AWAY' && productivity > 80) {
-      setMouseJiggler(true);
-    }
-  }, [status, productivity]);
-
   const getStatusColor = () => {
     const colors = {
       'LOCKED': 'rgb(239, 68, 68)',
@@ -256,22 +239,6 @@ export default function Workstation({
           </span>
         </div>
       </div>
-
-      {/* Mouse jiggler detection */}
-      {mouseJiggler && (
-        <div
-          style={{
-            padding: '0.5rem',
-            backgroundColor: 'rgba(251, 191, 36, 0.15)',
-            border: '1px solid rgb(251, 191, 36)',
-            borderRadius: '3px',
-          }}
-        >
-          <Line yellow style={{ fontSize: '0.75rem', margin: 0 }}>
-            ⚠ Suspicious activity: Mouse jiggler software detected
-          </Line>
-        </div>
-      )}
     </div>
   );
 }
