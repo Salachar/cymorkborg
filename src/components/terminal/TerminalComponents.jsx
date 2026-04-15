@@ -44,6 +44,7 @@ export const Line = ({
   loading = false,
   style = {},
   span = false,
+  br = false,
   children,
 }) => {
   let appliedClassname = className;
@@ -87,11 +88,17 @@ export const Line = ({
 
   if (span) {
     return (
-      <span className={appliedClassname} style={appliedStyles}>{children}{loading ? "..." : ""}</span>
+      <>
+        <span className={appliedClassname} style={appliedStyles}>{children}{loading ? "..." : ""}</span>
+        {br && <br />}
+      </>
     );
   } else {
     return (
-      <div className={appliedClassname} style={appliedStyles}>{children}{loading ? "..." : ""}</div>
+      <>
+        <div className={appliedClassname} style={appliedStyles}>{children}{loading ? "..." : ""}</div>
+        {br && <br />}
+      </>
     );
   }
 };

@@ -23,6 +23,8 @@ export const THE_SLUMS_COMMANDS = {
     preview: (
       <NodePreview>
         <Line span red> · G0 scars. Gang wars. Cults. Honest people dreaming of a different future.</Line>
+        <Line span smoke br> · Bigmosse · Lilypond · Laketon · Barnyard Fields</Line>
+        <Line span yellow> · Lucky Flight Casino · CY_Sanitation HQ</Line>
       </NodePreview>
     ),
     content: (

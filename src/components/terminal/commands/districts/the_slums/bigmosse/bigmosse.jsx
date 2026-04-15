@@ -25,9 +25,7 @@ export const BIGMOSSE_COMMANDS = {
     favicon: <Icons.Pin />,
     preview: (
       <NodePreview>
-        <Line span red> · Gang wars. Cult activity. G0 scars that never healed.</Line>
-        <Line span yellow> · Black market. Hedonism. Gunfights drowned out by bass.</Line>
-        <br />
+        <Line span smoke br> · Slums at the edge of the Ports. The most alive district you can die in.</Line>
         <Line span yellow> · Lucky Flight Casino</Line> open 24/7!
       </NodePreview>
     ),

@@ -258,11 +258,6 @@ export const CY_CITY_PORTAL = {
           <Line yellow>• Open Wallet and TRANSFER to move assets into a character's inventory</Line>
           <Line yellow>• CLEAR wipes the wallet without transferring</Line>
         </InsetBox>
-        <InsetBox title="BATTERY SAVER">
-          <Line neon>• Tap the battery icon in the header to toggle Battery Saver</Line>
-          <Line neon>• Disables all animations site-wide — useful on older devices</Line>
-          <Line neon>• Setting is saved and persists between sessions</Line>
-        </InsetBox>
         <InsetBox title="PASSWORDS & ICE">
           <Line smoke>• PW nodes require a password — keyboard shows only valid characters</Line>
           <Line smoke>• Decoy keys are flagged when present</Line>

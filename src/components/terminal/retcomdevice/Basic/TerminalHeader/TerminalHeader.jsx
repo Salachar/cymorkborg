@@ -12,10 +12,8 @@ const DIM = 'rgb(148, 163, 184)';
 
 export default function TerminalHeader({
   indent = 1,
-  batterySaver = false,
   onClear = () => {},
   onIndent = () => {},
-  onBatterySaver = () => {},
 }) {
   return (
     <div
@@ -83,26 +81,6 @@ export default function TerminalHeader({
           }}
         >
           <CloseFullscreenIcon style={{ fontSize: 16, color: YELLOW }} />
-        </button>
-      )}
-
-      {onBatterySaver && (
-        <button
-          onClick={() => onBatterySaver(!batterySaver)}
-          title={batterySaver ? 'Battery saver on' : 'Battery saver off'}
-          style={{
-            padding: '0.35rem',
-            border: `1px solid ${batterySaver ? 'rgba(34, 197, 94, 0.4)' : 'rgba(148, 163, 184, 0.2)'}`,
-            borderRadius: '3px',
-            backgroundColor: batterySaver ? 'rgba(34, 197, 94, 0.1)' : 'transparent',
-            color: batterySaver ? GREEN : DIM,
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <BatteryChargingFullIcon style={{ fontSize: 16 }} />
         </button>
       )}
     </div>

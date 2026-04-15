@@ -6,7 +6,6 @@ import {
   PASSWORD_STORAGE_KEY,
   TREE_STORAGE_KEY,
   LIST_INDENT_KEY,
-  BATTERY_SAVER_KEY,
   getDiscoveredPasswords,
   saveDiscoveredPasswords,
 } from '@utils/localStorage';
@@ -27,14 +26,6 @@ export default function RetComDevice() {
     }
   });
 
-  const [batterySaver, setBatterySaver] = useState(() => {
-    try {
-      return localStorage.getItem(BATTERY_SAVER_KEY) === 'true';
-    } catch {
-      return false;
-    }
-  });
-
   useEffect(() => {
     setDiscoveredPasswords(getDiscoveredPasswords());
     try {
@@ -50,13 +41,6 @@ export default function RetComDevice() {
       saveDiscoveredPasswords(discoveredPasswords);
     }
   }, [discoveredPasswords]);
-
-  const handleBatterySaver = (val) => {
-    setBatterySaver(val);
-    try {
-      localStorage.setItem(BATTERY_SAVER_KEY, String(val));
-    } catch (e) {}
-  };
 
   const handleToggle = (path) => {
     setExpandedRows(prev => {
@@ -95,15 +79,13 @@ export default function RetComDevice() {
 
   return (
     <div
-      className={`flex-1 flex flex-col overflow-hidden font-mono${batterySaver ? ' stop-animations' : ''}`}
+      className={`flex-1 flex flex-col overflow-hidden font-mono`}
       style={{ backgroundColor: 'rgb(19, 23, 34)' }}
     >
       <TerminalHeader
         indent={indent}
-        batterySaver={batterySaver}
         onClear={handleReset}
         onIndent={handleSetIndent}
-        onBatterySaver={handleBatterySaver}
       />
       <div
         style={{

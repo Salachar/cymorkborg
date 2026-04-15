@@ -7,7 +7,8 @@ export const BARNYARD_FIELDS_COMMANDS = {
     favicon: <Icons.Pin />,
     preview: (
       <NodePreview>
-        <Line span red> · Heirs of Kergoz territory. Blood rites. Do not enter.</Line>
+        <Line span smoke br> · Slums at the southern edge. The Heirs own this ground in blood and ritual.</Line>
+        <Line span red> · CY_Sanitation HQ</Line> — quarantined.
       </NodePreview>
     ),
     content: (
