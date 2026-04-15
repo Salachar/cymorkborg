@@ -4,25 +4,36 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import './commandRow.css';
 
+const FAVICON_SIZE = '12px';
+
 function Favicon({ favicon }) {
   if (!favicon) return null;
 
   if (typeof favicon === 'object' && React.isValidElement(favicon)) {
-    return (
-      <span style={{ width: '22px', height: '22px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        {favicon}
-      </span>
-    );
-  }
-
-  if (typeof favicon === 'string' && (favicon.startsWith('/') || favicon.startsWith('http'))) {
-    return (
-      <img src={favicon} alt="" style={{ width: '22px', height: '22px', flexShrink: 0, objectFit: 'contain', borderRadius: '2px' }} />
-    );
+    // return (
+    //   <span style={{
+    //     width: FAVICON_SIZE,
+    //     height: FAVICON_SIZE,
+    //     flexShrink: 0,
+    //     display: 'flex',
+    //     alignItems: 'center',
+    //     justifyContent: 'center',
+    //     fontSize: '12px',
+    //   }}>
+    //     {favicon}
+    //   </span>
+    // );
+    return favicon;
   }
 
   return (
-    <span style={{ fontSize: '1.1rem', flexShrink: 0, lineHeight: 1, width: '22px', textAlign: 'center' }}>
+    <span style={{
+      fontSize: '1.1rem',
+      flexShrink: 0,
+      lineHeight: 1,
+      width: FAVICON_SIZE,
+      textAlign: 'center',
+    }}>
       {favicon}
     </span>
   );
@@ -112,15 +123,15 @@ export default function CommandRow({
       <div className="cr-strip">
         {favicon && <Favicon favicon={favicon} />}
 
-        {hasChildren ? (
+        {/* {hasChildren ? (
           <ChevronRightIcon
             className={`cr-chevron ${isExpanded ? 'cr-chevron-expanded' : 'cr-chevron-collapsed'}`}
           />
         ) : (
           <span style={{ width: '18px', flexShrink: 0 }} />
-        )}
+        )} */}
 
-        <span className={`cr-name cr-depth-${depth === 0 ? 0 : 1}`}>
+        <span className={`cr-name cr-depth-${depth === 0 ? 0 : 1} pl-2`}>
           {displayName}
         </span>
 
@@ -148,7 +159,7 @@ export default function CommandRow({
 
       {preview && (
         <div
-          onClick={(e) => e.stopPropagation()}
+          // onClick={(e) => e.stopPropagation()}
           className={`cr-preview cr-preview-depth-${depth === 0 ? 0 : 1}`}
         >
           {preview}

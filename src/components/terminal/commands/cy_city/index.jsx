@@ -49,10 +49,8 @@ export const CY_CITY_PORTAL = {
     favicon: <Icons.Map />,
     preview: (
       <NodePreview>
-        <Line>
-          City district access. Each district contains local networks, facilities, and secured nodes.
-        </Line>
-        <Line teal top>Select a district to begin.</Line>
+        <Line smoke> · Population 2.8M official, 4M+ estimated · Pre-Incident ruins. Corporate glass. Slum fires.</Line>
+        <Line> · City district access. Each district contains local networks, facilities, and secured nodes.</Line>
       </NodePreview>
     ),
     related_commands: {
@@ -72,12 +70,7 @@ export const CY_CITY_PORTAL = {
     favicon: <Icons.City />,
     preview: (
       <NodePreview>
-        <Line red span bold>THREAT: CRITICAL</Line>
-        <Line smoke span style={{ fontSize: '0.6rem' }}> · Population 2.8M official, 4M+ estimated · Pre-Incident ruins. Corporate glass. Slum fires.</Line>
-        <Line top>
-          Public access terminal. City news, weather, corp announcements.{' '}
-          <Line span style={{ opacity: 0.6 }}>No secured nodes — just what they want you to know.</Line>
-        </Line>
+        <Line> · Public access terminal. City news, weather, corp announcements.</Line>
       </NodePreview>
     ),
     content: (
@@ -186,9 +179,9 @@ export const CY_CITY_PORTAL = {
     favicon: <Icons.Games />,
     preview: (
       <NodePreview>
-        <span style={{ color: 'rgb(0, 255, 65)' }}>3 games</span>
+        <span style={{ color: 'rgb(0, 255, 65)' }}> · 3 games</span>
         {' '}available — Nanobomb Defusal, Netrunner Memory Deck, and Cyber Poker.
-        <Line red top>* Games are not small tablet/phone friendly at the moment</Line>
+        <Line red> · Games are not small tablet/phone friendly at the moment</Line>
       </NodePreview>
     ),
     content: (

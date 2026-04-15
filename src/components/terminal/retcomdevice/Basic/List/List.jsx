@@ -101,10 +101,9 @@ function CommandNode({
   const isBypassed = Boolean(discoveredPasswords[path]);
   const bypassValue = discoveredPasswords[path] ?? null;
 
-  const contentSize = contentSizes[path] ?? 'partial';
-
   const hasBlocker = Boolean(def.password);
   const isLocked = hasBlocker && !isBypassed;
+  const contentSize = hasBlocker ? 'full' : contentSizes[path] ?? 'partial';
 
   const resolvedContent = typeof def.content === 'function'
     ? def.content()
@@ -128,6 +127,7 @@ function CommandNode({
   };
 
   const handleToggleSize = () => {
+    if (hasBlocker) return;
     onSetContentSize(path, contentSize === 'full' ? 'partial' : 'full');
   };
 

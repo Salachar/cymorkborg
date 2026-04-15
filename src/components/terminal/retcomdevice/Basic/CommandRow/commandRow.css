@@ -86,9 +86,9 @@
   flex-shrink: 0;
 }
 
-.cr-preview {
+/* .cr-preview {
   padding-top: 0.65rem;
-}
+} */
 
 .cr-preview-depth-0 { padding-left: 1rem; padding-right: 1rem; padding-bottom: 0.8rem; }
 .cr-preview-depth-1 { padding-left: 0.9rem; padding-right: 0.9rem; padding-bottom: 0.65rem; }
@@ -132,13 +132,13 @@
   color: rgb(251, 191, 36);
 }
 
-.cr-variant-default .cr-preview {
+/* .cr-variant-default .cr-preview {
   border-top: 1px solid rgba(79, 209, 197, 0.35);
 }
 
 .cr-variant-default.cr-locked .cr-preview {
   border-top: 1px solid rgba(251, 191, 36, 0.35);
-}
+} */
 
 .cr-variant-default .cr-vis-btn {
   border: 1px solid rgba(79, 209, 197, 0.35);
@@ -190,9 +190,9 @@
   color: rgb(79, 209, 197);
 }
 
-.cr-variant-internal .cr-preview {
+/* .cr-variant-internal .cr-preview {
   border-top: 1px solid rgba(79, 209, 197, 0.25);
-}
+} */
 
 .cr-variant-internal .cr-vis-btn {
   border: 1px solid rgba(79, 209, 197, 0.3);
@@ -244,9 +244,9 @@
   color: rgb(168, 85, 247);
 }
 
-.cr-variant-backdoor .cr-preview {
+/* .cr-variant-backdoor .cr-preview {
   border-top: 1px solid rgba(168, 85, 247, 0.25);
-}
+} */
 
 .cr-variant-backdoor .cr-vis-btn {
   border: 1px solid rgba(168, 85, 247, 0.3);

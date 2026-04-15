@@ -100,7 +100,7 @@ export default function RetComDevice() {
           className="flex-1 overflow-y-auto"
           style={{
             backgroundColor: 'rgba(29, 35, 50, 0.7)',
-            padding: '0.75rem',
+            padding: '0.75rem 48px',
             minHeight: 0,
           }}
         >
