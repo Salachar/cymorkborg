@@ -65,7 +65,6 @@ export const GOLDEN_SPIRE_COMMANDS = {
         ),
       },
       "Internal Access": {
-        internal: true,
         favicon: <Icons.LAN />,
         content: (
           <Node

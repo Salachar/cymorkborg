@@ -1,9 +1,32 @@
-/* ─── CommandRow ──────────────────────────────────────────────────────────── */
-
 .cr-root {
   border-radius: 4px;
-  overflow: hidden;
-  transition: background-color 0.15s;
+  /* overflow: hidden; */
+  /* transition: background-color 0.15s; */
+  background-color: rgba(29, 35, 50, 0.4);
+  position: relative;
+}
+
+.cr-root.cr-locked {
+  border: 1px solid rgba(251, 191, 36, 0.35);
+}
+
+.cr-root.cr-unlocked {
+  border: 1px solid rgba(79, 209, 197, 0.35);
+}
+
+/* Lock indicator — sits on left border */
+.cr-lock-indicator {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  width: 1rem !important;
+  height: 1rem !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  color: rgb(251, 191, 36)
 }
 
 .cr-meta {
@@ -22,10 +45,15 @@
   text-overflow: ellipsis;
 }
 
+.cr-breadcrumb-sep { color: rgba(79, 209, 197, 0.25); }
+.cr-breadcrumb-near { color: rgb(79, 209, 197); }
+.cr-breadcrumb-far { color: rgba(79, 209, 197, 0.35); }
+
 .cr-child-count {
   font-size: 0.65rem;
   font-family: monospace;
   flex-shrink: 0;
+  color: rgb(79, 209, 197);
 }
 
 .cr-strip {
@@ -41,25 +69,15 @@
   font-weight: bold;
   letter-spacing: 0.05em;
   font-family: monospace;
+  color: rgb(79, 209, 197);
+}
+
+.cr-locked .cr-name {
+  color: rgb(251, 191, 36);
 }
 
 .cr-depth-0 { font-size: 0.92rem; }
 .cr-depth-1 { font-size: 0.84rem; }
-
-.cr-chevron {
-  flex-shrink: 0;
-  height: 1rem !important;
-  font-size: 18px !important;
-  transition: transform 0.15s;
-}
-
-.cr-chevron-expanded {
-  transform: rotate(90deg);
-}
-
-.cr-chevron-collapsed {
-  transform: rotate(0deg);
-}
 
 .cr-badge {
   font-size: 0.62rem;
@@ -68,6 +86,12 @@
   padding: 0.2rem 0.5rem;
   border-radius: 2px;
   flex-shrink: 0;
+}
+
+.cr-badge-bypassed {
+  color: rgb(79, 209, 197);
+  border: 1px solid rgba(79, 209, 197, 0.35);
+  background-color: rgba(79, 209, 197, 0.12);
 }
 
 .cr-controls {
@@ -84,186 +108,16 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  border: 1px solid rgba(79, 209, 197, 0.35);
+  background-color: rgba(79, 209, 197, 0.12);
+  color: rgb(79, 209, 197);
 }
 
-/* .cr-preview {
-  padding-top: 0.65rem;
-} */
+.cr-locked .cr-vis-btn {
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  background-color: rgba(251, 191, 36, 0.08);
+  color: rgb(251, 191, 36);
+}
 
 .cr-preview-depth-0 { padding-left: 1rem; padding-right: 1rem; padding-bottom: 0.8rem; }
 .cr-preview-depth-1 { padding-left: 0.9rem; padding-right: 0.9rem; padding-bottom: 0.65rem; }
-
-/* ─── Variant: default ────────────────────────────────────────────────────── */
-
-.cr-variant-default {
-  background-color: rgba(29, 35, 50, 0.4);
-}
-
-/* .cr-variant-default.cr-expanded {
-  background-color: rgba(79, 209, 197, 0.12);
-} */
-
-.cr-variant-default.cr-locked {
-  border: 1px solid rgba(251, 191, 36, 0.35);
-}
-
-/* .cr-variant-default.cr-locked.cr-expanded {
-  background-color: rgba(251, 191, 36, 0.08);
-} */
-
-.cr-variant-default.cr-unlocked {
-  border: 1px solid rgba(79, 209, 197, 0.35);
-}
-
-.cr-variant-default .cr-name,
-.cr-variant-default .cr-child-count {
-  color: rgb(79, 209, 197);
-}
-
-.cr-variant-default.cr-locked .cr-name {
-  color: rgb(251, 191, 36);
-}
-
-.cr-variant-default .cr-chevron {
-  color: rgb(79, 209, 197);
-}
-
-.cr-variant-default.cr-locked .cr-chevron {
-  color: rgb(251, 191, 36);
-}
-
-/* .cr-variant-default .cr-preview {
-  border-top: 1px solid rgba(79, 209, 197, 0.35);
-}
-
-.cr-variant-default.cr-locked .cr-preview {
-  border-top: 1px solid rgba(251, 191, 36, 0.35);
-} */
-
-.cr-variant-default .cr-vis-btn {
-  border: 1px solid rgba(79, 209, 197, 0.35);
-  background-color: rgba(79, 209, 197, 0.12);
-  color: rgb(79, 209, 197);
-}
-
-.cr-variant-default.cr-locked .cr-vis-btn {
-  border: 1px solid rgba(251, 191, 36, 0.35);
-  background-color: rgba(251, 191, 36, 0.08);
-  color: rgb(251, 191, 36);
-}
-
-.cr-variant-default .cr-badge-locked {
-  color: rgb(251, 191, 36);
-  border: 1px solid rgba(251, 191, 36, 0.35);
-  background-color: rgba(251, 191, 36, 0.08);
-}
-
-.cr-variant-default .cr-badge-bypassed {
-  color: rgb(79, 209, 197);
-  border: 1px solid rgba(79, 209, 197, 0.35);
-  background-color: rgba(79, 209, 197, 0.12);
-}
-
-/* ─── Variant: internal ───────────────────────────────────────────────────── */
-
-.cr-variant-internal {
-  background-color: rgba(10, 25, 35, 0.7);
-}
-/*
-.cr-variant-internal.cr-expanded {
-  background-color: rgba(79, 209, 197, 0.08);
-} */
-
-.cr-variant-internal.cr-unlocked,
-.cr-variant-internal.cr-locked {
-  border: 1px solid rgba(79, 209, 197, 0.5);
-  box-shadow: 0 0 10px rgba(79, 209, 197, 0.05);
-}
-
-.cr-variant-internal .cr-name,
-.cr-variant-internal .cr-child-count {
-  color: rgb(79, 209, 197);
-  text-shadow: 0 0 8px rgba(79, 209, 197, 0.35);
-}
-
-.cr-variant-internal .cr-chevron {
-  color: rgb(79, 209, 197);
-}
-
-/* .cr-variant-internal .cr-preview {
-  border-top: 1px solid rgba(79, 209, 197, 0.25);
-} */
-
-.cr-variant-internal .cr-vis-btn {
-  border: 1px solid rgba(79, 209, 197, 0.3);
-  background-color: rgba(79, 209, 197, 0.08);
-  color: rgb(79, 209, 197);
-}
-
-.cr-variant-internal .cr-badge-locked {
-  color: rgb(79, 209, 197);
-  border: 1px solid rgba(79, 209, 197, 0.3);
-  background-color: rgba(79, 209, 197, 0.08);
-}
-
-.cr-variant-internal .cr-badge-bypassed {
-  color: rgb(79, 209, 197);
-  border: 1px solid rgba(79, 209, 197, 0.5);
-  background-color: rgba(79, 209, 197, 0.15);
-}
-
-/* ─── Variant: backdoor ───────────────────────────────────────────────────── */
-
-.cr-variant-backdoor {
-  background-color: rgb(12, 8, 18);
-  border-radius: 0 4px 4px 0;
-}
-
-/* .cr-variant-backdoor.cr-expanded {
-  background-color: rgba(168, 85, 247, 0.07);
-} */
-
-.cr-variant-backdoor.cr-unlocked,
-.cr-variant-backdoor.cr-locked {
-  border: 1px solid rgba(168, 85, 247, 0.3);
-  border-left-width: 4px;
-  border-left-color: rgb(168, 85, 247);
-  box-shadow: 0 0 18px rgba(168, 85, 247, 0.15), 0 2px 8px rgba(0, 0, 0, 0.5);
-}
-
-.cr-variant-backdoor .cr-name {
-  color: rgb(255, 255, 255);
-  letter-spacing: 0.04em;
-}
-
-.cr-variant-backdoor .cr-child-count {
-  color: rgb(168, 85, 247);
-}
-
-.cr-variant-backdoor .cr-chevron {
-  color: rgb(168, 85, 247);
-}
-
-/* .cr-variant-backdoor .cr-preview {
-  border-top: 1px solid rgba(168, 85, 247, 0.25);
-} */
-
-.cr-variant-backdoor .cr-vis-btn {
-  border: 1px solid rgba(168, 85, 247, 0.3);
-  background-color: rgba(168, 85, 247, 0.1);
-  color: rgb(168, 85, 247);
-}
-
-.cr-variant-backdoor .cr-badge-locked {
-  color: rgb(168, 85, 247);
-  border: 1px solid rgba(168, 85, 247, 0.35);
-  background-color: rgba(168, 85, 247, 0.1);
-  text-shadow: 0 0 6px rgba(168, 85, 247, 0.5);
-}
-
-.cr-variant-backdoor .cr-badge-bypassed {
-  color: rgb(168, 85, 247);
-  border: 1px solid rgba(168, 85, 247, 0.5);
-  background-color: rgba(168, 85, 247, 0.15);
-  text-shadow: 0 0 6px rgba(168, 85, 247, 0.5);
-}

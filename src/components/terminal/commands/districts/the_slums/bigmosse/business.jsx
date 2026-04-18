@@ -282,7 +282,6 @@ export const BUSINESS_COMMANDS = {
       },
 
       "Internal Access": {
-        internal: true,
         favicon: <Icons.LAN />,
         password: {
           pw: "boxesboxesboxes",
@@ -1142,7 +1141,6 @@ export const BUSINESS_COMMANDS = {
       },
 
       "Internal Access": {
-        internal: true,
         favicon: <Icons.LAN />,
         password: {
           pw: "debug",

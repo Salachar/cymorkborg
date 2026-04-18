@@ -62,6 +62,7 @@ export const BIGMOSSE_COMMANDS = {
         favicon: <Icons.Camera />,
         content: (
           <Camera
+            location="Bigmosse City Streets CCTV"
             cctv={bigmosse_ports_cctv}
           />
         ),

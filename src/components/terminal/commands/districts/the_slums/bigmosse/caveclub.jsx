@@ -134,7 +134,6 @@ export const STONE_EELS_COMMANDS = {
       },
 
       "Management Network": {
-        internal: true,
         favicon: <Icons.LAN />,
         password: {
           pw: "python",

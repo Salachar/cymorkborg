@@ -103,35 +103,6 @@ export default function Camera({
             overflow: 'hidden',
             marginBottom: '0.75rem',
           }}>
-            {/* Feed header */}
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.6rem',
-              padding: '0.5rem 0.75rem',
-              backgroundColor: 'rgba(79, 209, 197, 0.1)',
-              borderBottom: '1px solid rgba(79, 209, 197, 0.3)',
-            }}>
-              <div style={{
-                width: '8px', height: '8px', borderRadius: '50%',
-                backgroundColor: 'rgb(252, 129, 129)',
-                boxShadow: '0 0 8px rgba(252, 129, 129, 0.8)',
-              }} />
-              <span style={{
-                fontSize: '0.72rem', fontWeight: 'bold',
-                color: 'rgb(79, 209, 197)', fontFamily: 'monospace',
-                letterSpacing: '0.08em',
-              }}>
-                LIVE — {location.toUpperCase()}
-              </span>
-              <span style={{
-                marginLeft: 'auto', fontSize: '0.65rem',
-                color: 'rgba(79, 209, 197, 0.5)', fontFamily: 'monospace',
-              }}>
-                UNDETECTED
-              </span>
-            </div>
-
             {/* Feed body */}
             {cctv ? (
               <div style={{ position: 'relative' }}>

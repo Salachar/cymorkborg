@@ -142,7 +142,6 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
       },
 
       "Internal Access": {
-        internal: true,
         favicon: <Icons.LAN />,
         password: {
           pw: "administraitor",

@@ -257,7 +257,6 @@ export const BODEGA_COMMANDS = {
       },
 
       "Internal Access": {
-        internal: true,
         favicon: <Icons.LAN />,
         password: {
           pw: "payday",

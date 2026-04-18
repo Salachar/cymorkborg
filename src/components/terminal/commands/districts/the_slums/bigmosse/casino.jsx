@@ -233,7 +233,6 @@ export const LUCKY_FLIGHT_CASINO = {
       },
 
       "Internal Access": {
-        internal: true,
         favicon: <Icons.LAN />,
         password: {
           pw: "loaded dice",

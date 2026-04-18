@@ -185,7 +185,6 @@ export const GLASS_GARDENS_COMMANDS = {
       },
 
       "Internal Access": {
-        internal: true,
         favicon: <Icons.LAN />,
         password: {
           pw: "glass salad",

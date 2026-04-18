@@ -58,7 +58,6 @@ export const CARMACK_ANTIQUITIES_COMMANDS = {
       },
 
       "Internal Access": {
-        internal: true,
         favicon: <Icons.LAN />,
         password: {
           pw: "asr33",
