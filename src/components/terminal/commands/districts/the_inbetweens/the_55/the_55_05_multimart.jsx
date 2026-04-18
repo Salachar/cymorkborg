@@ -4,12 +4,10 @@ import {
 } from "@terminal/TerminalComponents";
 
 import {
-  CCTV,
+  Camera,
   HoursBanner,
-  Locked,
-  MaintenanceAccess,
+  Node,
   Menu,
-  Message,
   PublicPortal,
 } from "@terminal/retcomdevice";
 
@@ -37,18 +35,15 @@ export const THE_55_MULTIMART_COMMANDS = {
     related_commands: {
       "CityCam": {
         content: (
-          <CCTV
-            src={cctv_image}
-            cameraId="CAM-CC-MAIN"
-            theme="amber"
-            height={500}
+          <Camera
+            cctv={cctv_image}
           />
         ),
       },
 
       "Vendor Directory": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[MULTIMART VENDOR DIRECTORY]"
             deviceModel="Merchant Registry System"
             deviceId="VENDOR-DIR-01"
@@ -72,12 +67,12 @@ export const THE_55_MULTIMART_COMMANDS = {
               <Line smoke>Replacing what was lost in The REC</Line>
               <Line smoke>Free access to all residents</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
         related_commands: {
           "Guillotine Row": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[GUILLOTINE ROW]"
                 deviceModel="Vendor Zone"
                 deviceId="GUILLOTINE-103"
@@ -107,13 +102,13 @@ export const THE_55_MULTIMART_COMMANDS = {
                   <Line yellow>Some tech may be "recently liberated" from corpo suits</Line>
                   <Line smoke>Warranty: None | Installation: Extra 200¤</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Zed's Pawn Shop": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[ZED'S PAWN SHOP]"
                 deviceModel="General Store"
                 deviceId="ZEDS-108"
@@ -144,13 +139,13 @@ export const THE_55_MULTIMART_COMMANDS = {
                   <Line neon>Used gear: 30-50% off retail</Line>
                   <Line neon>"Liberated" corpo gear: Negotiable</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Seams Shrine": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[SEAMS SHRINE]"
                 deviceModel="Clothing & Armor Shop"
                 deviceId="SEAMS-106"
@@ -181,7 +176,7 @@ export const THE_55_MULTIMART_COMMANDS = {
                   <Line neon>• Corporate knockoffs (look the part without the price)</Line>
                   <Line neon>• Climate adaptive materials</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
@@ -218,7 +213,7 @@ export const THE_55_MULTIMART_COMMANDS = {
 
           "Monday Morning Medicine": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[MONDAY MORNING MEDICINE]"
                 deviceModel="Pharmaceutical Vendor"
                 deviceId="MEDICINE-109"
@@ -251,13 +246,13 @@ export const THE_55_MULTIMART_COMMANDS = {
                   <Line yellow>Quality varies - buyer beware</Line>
                   <Line yellow>No refunds on "experimental" items</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Carlyle's Cars": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[CARLYLE'S CARS]"
                 deviceModel="Auto Shop"
                 deviceId="CARLYLES-115"
@@ -288,7 +283,7 @@ export const THE_55_MULTIMART_COMMANDS = {
                   <Line>Can handle cars, bikes, small transport vehicles</Line>
                   <Line yellow>Currently facing aggressive corporate buyout offers</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
@@ -330,7 +325,7 @@ export const THE_55_MULTIMART_COMMANDS = {
 
           "Bio Court": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[BIO COURT]"
                 deviceModel="Biological Marketplace"
                 deviceId="BIO-111"
@@ -355,13 +350,13 @@ export const THE_55_MULTIMART_COMMANDS = {
                   <Line yellow>Non-mutated fish cost extra (rare in The City)</Line>
                   <Line smoke>Gene-spliced pets require special care instructions</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Blaster's Hoverboards": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[BLASTER'S HOVERBOARDS]"
                 deviceModel="Custom Vehicle Shop"
                 deviceId="BLASTER-119"
@@ -391,7 +386,7 @@ export const THE_55_MULTIMART_COMMANDS = {
                   <Line yellow>Homemade and dangerous</Line>
                   <Line smoke>Waiver required. Blaster not responsible for injuries.</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
         },
@@ -401,13 +396,12 @@ export const THE_55_MULTIMART_COMMANDS = {
         password: {
           pw: "multimart",
           hint: "The name of this shopping area",
-          difficulty: "easy",
-          content: <Locked theme="terminal" title="VENDOR NETWORK" />
+          lockType: 'terminal',
         },
         content: (
-          <Message
+          <Node
             title="MULTIMART VENDOR NETWORK"
-            message="VENDOR ACCESS GRANTED"
+            subtitle="VENDOR ACCESS GRANTED"
             note="Shared vendor systems - Authorized merchants only"
             theme="limeade"
           />
@@ -415,7 +409,7 @@ export const THE_55_MULTIMART_COMMANDS = {
         related_commands: {
           "Vendor Communications": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[VENDOR COMMUNICATIONS]"
                 deviceModel="Message Board System"
                 deviceId="VENDOR-MSG-01"
@@ -456,13 +450,13 @@ export const THE_55_MULTIMART_COMMANDS = {
                   <Line>"Corporate buyout pressure getting worse. They're threatening to cut our supply lines. Anyone have contacts outside The 55?"</Line>
                   <Line yellow>12 vendors offered support</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Collective Inventory": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[SHARED INVENTORY SYSTEM]"
                 deviceModel="Cross-Vendor Stock Tracking"
                 deviceId="INVENTORY-01"
@@ -493,7 +487,7 @@ export const THE_55_MULTIMART_COMMANDS = {
                   <Line neon>• Luxury vehicle parts - Carlyle's Cars (from wealthy district)</Line>
                   <Line neon>• Designer clothing (knockoffs) - Seams Shrine</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
@@ -501,11 +495,10 @@ export const THE_55_MULTIMART_COMMANDS = {
             password: {
               pw: "vendors",
               hint: "What the merchants in the Multimart are called",
-              difficulty: "easy",
-              content: <Locked theme="terminal" title="SALES RECORDS" />
+              lockType: 'terminal',
             },
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[SALES RECORDS]"
                 deviceModel="Revenue Tracking System"
                 deviceId="SALES-01"
@@ -543,13 +536,13 @@ export const THE_55_MULTIMART_COMMANDS = {
                   <Line cyan>• Community Centre driving more residents to Multimart</Line>
                   <Line cyan>• Increased demand from upper level workers (Kaytell, TG Labs)</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Security Incidents": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[SECURITY INCIDENT LOG]"
                 deviceModel="Incident Reporting System"
                 deviceId="SEC-LOG-01"
@@ -600,7 +593,7 @@ export const THE_55_MULTIMART_COMMANDS = {
                   <Line yellow>Details: Corpo rep threatened legal action over buyout refusal</Line>
                   <Line smoke>Resolution: Security escorted corpo rep out, no further action</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
         },

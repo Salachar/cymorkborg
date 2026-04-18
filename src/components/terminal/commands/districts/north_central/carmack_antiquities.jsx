@@ -8,8 +8,7 @@ import {
 import {
   CommunityBoard,
   Inventory,
-  Locked,
-  MaintenanceAccess,
+  Node,
   PersonnelFile,
   PublicPortal,
 } from "@terminal/retcomdevice"
@@ -64,14 +63,11 @@ export const CARMACK_ANTIQUITIES_COMMANDS = {
         password: {
           pw: "asr33",
           hint: "The terminal model in the back room",
-          content: <Locked theme="terminal" title="STAFF ACCESS" />
+          lockType: 'terminal',
         },
         content: (
-          <MaintenanceAccess
-            variant="internal"
+          <Node
             title="Carmack Antiquities"
-            deviceId="CARMACK-INT-01"
-            systemStatus="OPERATIONAL"
             notes={[
               "Back room accessible via staff door — stacked floor to ceiling",
               "Active legacy data jacks along west wall",

@@ -35,7 +35,6 @@ export const VIRID_VIPERS_COMMANDS = {
             "Presence all over south Cy, minor branches in nearly every district",
             "At war with the Heirs of Kergoz",
           ]}
-          critical
         />
       </FacilityPortal>
     ),

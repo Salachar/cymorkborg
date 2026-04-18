@@ -4,8 +4,7 @@ import {
 } from "@terminal/TerminalComponents";
 
 import {
-  Locked,
-  MaintenanceAccess,
+  Node,
   PublicPortal,
 } from "@terminal/retcomdevice";
 
@@ -31,7 +30,7 @@ export const THE_BASE_COMMANDS = {
     related_commands: {
       "Base Directory": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[THE BASE - FACILITY DIRECTORY]"
             deviceModel="Foundation Infrastructure"
             deviceId="BASE-DIR-01"
@@ -94,12 +93,12 @@ export const THE_BASE_COMMANDS = {
               <Line neon>20. Body Compactor</Line>
               <Line smoke>Gang-goons dispose of bodies here</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
         related_commands: {
           "The Reactor": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[THE REACTOR - 'THE DEVIL']"
                 deviceModel="Nuclear Power System"
                 deviceId="REACTOR-B11"
@@ -137,18 +136,17 @@ export const THE_BASE_COMMANDS = {
                   <Line red>Shielded but not perfectly safe</Line>
                   <Line red>Workers rotate shifts to minimize exposure</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
             related_commands: {
               "Reactor Monitoring": {
                 password: {
                   pw: "reactor_admin",
                   hint: "Nuclear power system administrator access",
-                  difficulty: "hard",
-                  content: <Locked theme="terminal" title="REACTOR MONITORING" />
+                  lockType: 'terminal',
                 },
                 content: (
-                  <MaintenanceAccess
+                  <Node
                     title="[REACTOR MONITORING SYSTEM]"
                     deviceModel="Nuclear Control Interface"
                     deviceId="REACTOR-MON-01"
@@ -176,7 +174,7 @@ export const THE_BASE_COMMANDS = {
                       <Line red>5. Contact corporate nuclear response team</Line>
                       <Line yellow>Stack can run 72 hours on backup power</Line>
                     </InsetBox>
-                  </MaintenanceAccess>
+                  </Node>
                 ),
               },
             },
@@ -184,7 +182,7 @@ export const THE_BASE_COMMANDS = {
 
           "Kergoz Compound": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[KERGOZ COMPOUND]"
                 deviceModel="Location Survey"
                 deviceId="BASE-KERGOZ-01"
@@ -220,13 +218,13 @@ export const THE_BASE_COMMANDS = {
                   <Line>Hidden behind altar in main tent</Line>
                   <Line>Heavily guarded by Heir of Kergoz</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Crypto Racks": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[CRYPTO RACKS]"
                 deviceModel="Mining Operation"
                 deviceId="BASE-CRYPTO-01"
@@ -263,13 +261,13 @@ export const THE_BASE_COMMANDS = {
                   <Line cyan>• Steal RATCOIN (heavily guarded)</Line>
                   <Line cyan>• Sabotage for rival gang</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "The Rot": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[THE ROT]"
                 deviceModel="Biohazard Zone"
                 deviceId="BASE-ROT-01"
@@ -299,13 +297,13 @@ export const THE_BASE_COMMANDS = {
                   <Line yellow>Symptoms appear within 24 hours</Line>
                   <Line smoke>Medical treatment required if infected</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Utility Corridors": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[UTILITY CORRIDOR MAP]"
                 deviceModel="Maintenance Network"
                 deviceId="BASE-UTIL-01"
@@ -337,7 +335,7 @@ export const THE_BASE_COMMANDS = {
                   <Line cyan>• Access restricted areas undetected</Line>
                   <Line cyan>• Fastest route between distant levels (if you know the way)</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
@@ -345,11 +343,10 @@ export const THE_BASE_COMMANDS = {
             password: {
               pw: "sealed",
               hint: "What dangerous base areas are",
-              difficulty: "medium",
-              content: <Locked theme="terminal" title="SEALED AREAS" />
+              lockType: 'terminal',
             },
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[SEALED AREAS - BASE LEVELS]"
                 deviceModel="Quarantine Management"
                 deviceId="BASE-SEALED-01"
@@ -385,7 +382,7 @@ export const THE_BASE_COMMANDS = {
                   <Line>Old records and documents (mostly worthless)</Line>
                   <Line smoke>Occasional salvage opportunity</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
         },
@@ -393,7 +390,7 @@ export const THE_BASE_COMMANDS = {
 
       "Crypt Rooms": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[CRYPT ROOMS]"
             deviceModel="Residential Zone"
             deviceId="BASE-CRYPT-01"
@@ -426,13 +423,13 @@ export const THE_BASE_COMMANDS = {
               <Line>High turnover rate</Line>
               <Line>Minimal community (survival mode)</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
 
       "VIP Parking": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[VIP PARKING]"
             deviceModel="Premium Vehicle Storage"
             deviceId="BASE-VIP-PARK-01"
@@ -456,7 +453,7 @@ export const THE_BASE_COMMANDS = {
               <Line cyan>Mix of sports cars, luxury sedans, armored SUVs</Line>
               <Line smoke>Owners: Corporate executives from upper levels</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
     },

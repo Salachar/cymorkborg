@@ -4,7 +4,7 @@ import {
 } from "@terminal/TerminalComponents";
 
 import {
-  MaintenanceAccess,
+  Node,
   PublicPortal,
 } from "@terminal/retcomdevice";
 
@@ -30,7 +30,7 @@ export const FOUR_COURT_COMMANDS = {
     related_commands: {
       "Court Directory": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[FOUR COURT DIRECTORY]"
             deviceModel="Public Zone Mapping"
             deviceId="COURT-DIR-01"
@@ -61,12 +61,12 @@ export const FOUR_COURT_COMMANDS = {
               <Line neon>8. Community Outreach Booth</Line>
               <Line smoke>Volunteers protecting The 55 (jobs available, low/no pay)</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
         related_commands: {
           "Court Market": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[COURT MARKET]"
                 deviceModel="Merchant Zone"
                 deviceId="COURT-MARKET-01"
@@ -98,13 +98,13 @@ export const FOUR_COURT_COMMANDS = {
                   <Line yellow>C.O.P. booth nearby but rarely intervenes</Line>
                   <Line smoke>Vendors watch each others' stalls</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Food Stalls": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[FOUR COURT FOOD STALLS]"
                 deviceModel="Vendor Zone"
                 deviceId="COURT-FOOD-01"
@@ -136,13 +136,13 @@ export const FOUR_COURT_COMMANDS = {
                   <Line smoke>Homemade alcohol of questionable origin</Line>
                   <Line yellow>You'll regret it</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "C.O.P. Booth": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[CORPORATE ORDER POLICE BOOTH]"
                 deviceModel="Security Station"
                 deviceId="COURT-COP-01"
@@ -179,13 +179,13 @@ export const FOUR_COURT_COMMANDS = {
                   <Line>Known to harass lower-level residents</Line>
                   <Line yellow>Reporting crimes may lead to being hassled yourself</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Community Outreach Booth": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[55 COMMUNITY OUTREACH BOOTH]"
                 deviceModel="Volunteer Organization"
                 deviceId="COURT-OUTREACH-01"
@@ -217,13 +217,13 @@ export const FOUR_COURT_COMMANDS = {
                   <Line cyan>• Universal basic income fund (12% funded)</Line>
                   <Line cyan>• Corporate expansion resistance</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Fideistic Transformation Kiosk": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[FIDEISTIC TRANSFORMATION KIOSK]"
                 deviceModel="Religious Recruitment Station"
                 deviceId="COURT-FIDEIS-01"
@@ -253,7 +253,7 @@ export const FOUR_COURT_COMMANDS = {
                   <Line yellow>Ego continuance unknown</Line>
                   <Line yellow>Body rental means your corpse is corporate property</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
         },

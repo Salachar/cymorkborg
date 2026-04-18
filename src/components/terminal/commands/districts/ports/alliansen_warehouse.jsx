@@ -14,13 +14,10 @@ import {
   VendingMachine,
   FacilityPortal,
   HoursBanner,
-  Message,
   IncidentLog,
   RCDAlert,
   NetworkDevices,
   CommunityBoard,
-  MaintenanceAccess,
-  Locked,
   NetworkTrafficMonitor,
 } from "@terminal/retcomdevice"
 
@@ -74,13 +71,8 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
       "Shipping Manifests": {
         favicon: <Icons.Files />,
         content: (
-          <MaintenanceAccess
+          <Node
             title="[SHIPPING DATABASE]"
-            deviceModel="Logistics Management System"
-            deviceId="SHIP-DB-47"
-            firmwareVersion="v6.2.1"
-            systemStatus="OPERATIONAL"
-            uptime="89 days, 14 hours"
             notes={[
               "Public shipping records available (last 30 days)",
               "Classified shipments require SecOps authorization",
@@ -101,19 +93,15 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
               <Line red>01:00 → [CLASSIFIED] - Military-grade cargo</Line>
               <Line yellow>↑ Requires Level 3 clearance to view details</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
 
       "Employee Roster": {
         favicon: <Icons.Person />,
         content: (
-          <MaintenanceAccess
+          <Node
             title="[PERSONNEL DATABASE]"
-            deviceModel="HR Management System"
-            deviceId="HR-WH47"
-            firmwareVersion="v4.1.0"
-            systemStatus="OPERATIONAL"
             notes={[
               "Current shift: Night crew (22:00 - 06:00)",
               "On duty tonight: 6 personnel total",
@@ -127,12 +115,8 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
       "Floor Plan (Public)": {
         favicon: <Icons.Files />,
         content: (
-          <MaintenanceAccess
+          <Node
             title="[FACILITY LAYOUT]"
-            deviceModel="Facility Management System"
-            deviceId="FAC-MAP-47"
-            firmwareVersion="v2.0.0"
-            systemStatus="OPERATIONAL"
             notes={[
               "Basic floor plan (fire safety documentation)",
               "Main areas: Administrative offices, warehouse floor, loading dock",
@@ -153,7 +137,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
               <Line yellow>→ Side exit (east warehouse)</Line>
               <Line yellow>→ Emergency exit (south, alarm)</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
 
@@ -163,17 +147,11 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
         password: {
           pw: "administraitor",
           hint: "What you get when an admin turns on you",
-          content: <Locked theme="terminal" title="EMPLOYEE NETWORK" />
+          lockType: 'terminal',
         },
         content: (
-          <MaintenanceAccess
-            variant="internal"
+          <Node
             title="[ALLIANSEN WAREHOUSE NETWORK]"
-            deviceModel="Corporate Network Gateway"
-            deviceId="NET-WH47-MAIN"
-            firmwareVersion="v7.3.2"
-            systemStatus="OPERATIONAL"
-            uptime="156 days, 8 hours"
             notes={[
               "All access logged to corporate security",
               "Connection: RCD-#8834",
@@ -187,13 +165,8 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
           "Facility Operations": {
             favicon: <Icons.Query />,
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[WAREHOUSE OPERATIONS]"
-                deviceModel="Facility Management System"
-                deviceId="OPS-WH47"
-                firmwareVersion="v5.1.0"
-                systemStatus="OPERATIONAL"
-                uptime="234 days, 11 hours"
                 notes={[
                   "Current shift: Night (6 personnel)",
                   "Climate control: Active (temperature-sensitive cargo)",
@@ -209,7 +182,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
                   <Line cyan>Loading dock: Available</Line>
                   <Line yellow>Forklift #3: Scheduled maintenance tomorrow</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
@@ -265,7 +238,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
             password: {
               pw: "werehouse",
               hint: "What do you get when a wolf bits a house?",
-              content: <Locked theme="terminal" title="SUPERVISOR WORKSTATION" />
+              lockType: 'terminal',
             },
             content: (
               <Workstation
@@ -294,12 +267,8 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
               "Personnel Records": {
                 favicon: <Icons.Person />,
                 content: (
-                  <MaintenanceAccess
+                  <Node
                     title="[PERSONNEL FILES]"
-                    deviceModel="HR Database"
-                    deviceId="HR-STAFF-47"
-                    firmwareVersion="v4.1.0"
-                    systemStatus="OPERATIONAL"
                     notes={[
                       "Night shift employees - Detailed records",
                       "6 personnel on duty tonight",
@@ -465,12 +434,10 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
               "Classified Shipment Manifest": {
                 favicon: <Icons.Files />,
                 content: (
-                  <Message
-                    title="SECURE CARGO"
-                    subtitle="SEC-2082-0147"
-                    message="SecOps Authorization Required — Level 3"
-                    note="Pickup window: 08:00 tomorrow — Supervisor Webb or SecOps direct override only"
-                    theme="secure"
+                  <Node
+                    title="SECURE CARGO - SEC-2082-0147"
+                    subtitle="SecOps Authorization Required — Level 3"
+                    footer="Pickup window: 08:00 tomorrow — Supervisor Webb or SecOps direct override only"
                   >
                     <InsetBox title="SHIPMENT DETAILS:">
                       <Line cyan>Origin: TechCore Industries (Military Division)</Line>
@@ -495,7 +462,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
                       <Line red>High-value cargo may be targeted — maintain heightened vigilance</Line>
                       <Line red>Unauthorized access: Immediate SecOps notification required</Line>
                     </InsetBox>
-                  </Message>
+                  </Node>
                 ),
               },
 
@@ -504,7 +471,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
                 password: {
                   pw: "phishing",
                   hint: "Hackers favorite hobby",
-                  content: <Locked theme="safe" title="SUPERVISOR SAFE" />
+                  lockType: 'safe',
                 },
                 content: (
                   <Safe
@@ -685,9 +652,6 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
                         id="alliansen-warehouse-external"
                         location="Alliansen Warehouse - Front entrance (exterior)"
                         coverage="Main gate, parking area, front entrance"
-                        status="ACTIVE"
-                        recording={true}
-                        storage="Alliansen corporate cloud"
                         timeline={[
                           "18:00 → Day shift departs (8 personnel)",
                           "19:30 → Delivery truck arrives, unloads routine supplies",
@@ -707,9 +671,6 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
                         id="alliansen-warehouse-main"
                         location="Alliansen Warehouse - Main warehouse floor"
                         coverage="Warehouse floor, aisles, loading dock interior"
-                        status="ACTIVE"
-                        recording={true}
-                        storage="Local server + cloud backup"
                         timeline={[
                           "22:00 → Night shift begins, guards take positions",
                           "22:15 → Supervisor enters Main Office",
@@ -729,9 +690,6 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
                         id="alliansen-warehouse-securecargo"
                         location="Alliansen Warehouse - Secure Cargo area (interior)"
                         coverage="High-value storage, electronics lab, security checkpoint"
-                        status="ACTIVE"
-                        recording={true}
-                        storage="Encrypted local server (air-gapped)"
                         timeline={[
                           "22:00 → Guards 4 & 5 report to Secure Cargo",
                           "22:45 → Target crate logged into inventory",

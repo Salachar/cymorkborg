@@ -6,13 +6,9 @@ import {
 
 import {
   Camera,
-  CCTV,
-  Locked,
-  MaintenanceAccess,
-  Message,
+  Node,
   PersonnelFile,
   PublicPortal,
-  LiveCameraFeed,
   IncidentLog,
 } from "@terminal/retcomdevice";
 
@@ -40,18 +36,15 @@ export const THE_55_STACK_COMMAND_COMMANDS = {
     related_commands: {
       "CityCam": {
         content: (
-          <CCTV
-            src={cctv_image}
-            cameraId="CAM-CC-MAIN"
-            theme="amber"
-            height={500}
+          <Camera
+            cctv={cctv_image}
           />
         ),
       },
 
       "Stack Status Overview": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[STACK #95563 STATUS OVERVIEW]"
             deviceModel="Central Management System"
             deviceId="STACK-95563"
@@ -76,13 +69,13 @@ export const THE_55_STACK_COMMAND_COMMANDS = {
               <Line neon bold>Questions or concerns? Dial 95563-HELP</Line>
               <Line smoke>Available 24/7 for all stack residents</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
 
       "Personnel Directory": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[STACK COMMAND PERSONNEL]"
             deviceModel="Staff Registry"
             deviceId="PERSONNEL-01"
@@ -106,7 +99,7 @@ export const THE_55_STACK_COMMAND_COMMANDS = {
               <Line neon>• Emmanuel 5 - Director of Operations</Line>
               <Line neon>• Trinh Abramov - Stack Support Specialist</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
         related_commands: {
           "SDS": {
@@ -163,7 +156,7 @@ export const THE_55_STACK_COMMAND_COMMANDS = {
 
           "THOTH": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[THOTH - REMOTE ADMINISTRATIVE AI]"
                 deviceModel="Advisory AI System"
                 deviceId="THOTH-V4.7"
@@ -196,7 +189,7 @@ export const THE_55_STACK_COMMAND_COMMANDS = {
                   <Line yellow>AI has expressed desire for expanded access (denied)</Line>
                   <Line smoke>Personnel report THOTH sometimes 'sulks' when overruled</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
@@ -388,13 +381,12 @@ export const THE_55_STACK_COMMAND_COMMANDS = {
         password: {
           pw: "command",
           hint: "The first word in this system's name",
-          difficulty: "easy",
-          content: <Locked theme="terminal" title="COMMAND SYSTEMS" />
+          lockType: 'terminal',
         },
         content: (
-          <Message
+          <Node
             title="STACK COMMAND & CONTROL"
-            message="COMMAND SYSTEMS ACCESS GRANTED"
+            subtitle="COMMAND SYSTEMS ACCESS GRANTED"
             note="Critical infrastructure - Authorized personnel only"
             theme="secure"
           />
@@ -402,7 +394,7 @@ export const THE_55_STACK_COMMAND_COMMANDS = {
         related_commands: {
           "Security Systems": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[SECURITY SYSTEMS OVERVIEW]"
                 deviceModel="Stack Security Infrastructure"
                 deviceId="SECURITY-01"
@@ -428,12 +420,12 @@ export const THE_55_STACK_COMMAND_COMMANDS = {
                   <Line cyan>Active Guards: 47 personnel (24/7 rotation)</Line>
                   <Line cyan>Emergency Response: AANI (Vindicator) on standby</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
             related_commands: {
               "Camera Network": {
                 content: (
-                  <MaintenanceAccess
+                  <Node
                     title="[CAMERA NETWORK - STACK #95563]"
                     deviceModel="Surveillance System"
                     deviceId="CAMERAS-01"
@@ -473,15 +465,13 @@ export const THE_55_STACK_COMMAND_COMMANDS = {
                       <Line red>• The Base (limited coverage, old equipment)</Line>
                       <Line red>• Lost Zone floors 130-132 (fungal contamination)</Line>
                     </InsetBox>
-                  </MaintenanceAccess>
+                  </Node>
                 ),
                 related_commands: {
                   "Four Court Cameras": {
                     content: (
                       <Camera
                         location="Four Court & Main Entrances"
-                        cameraId="CAM-FC-MAIN"
-                        status="ACTIVE"
                         coverage="All 4 entrances, courtyard market, gates"
                         details={[
                           "12 cameras covering all entrance zones",
@@ -490,38 +480,14 @@ export const THE_55_STACK_COMMAND_COMMANDS = {
                           "Pickpocket detection algorithm active",
                           "Auto-alert to security on suspicious behavior",
                         ]}
-                        alerts={[
-                          {
-                            time: "2 hours ago",
-                            message: "Crowd density spike - Evening rush (normal)",
-                          },
-                          {
-                            time: "6 hours ago",
-                            message: "Pickpocket detected - Alert sent to security",
-                          },
-                        ]}
-                        lastService="1 week ago"
                       />
                     ),
-                    related_commands: {
-                      "Live Feed": {
-                        password: {
-                          pw: "court",
-                          hint: "The name of this area (second word)",
-                          difficulty: "medium",
-                          content: <Locked theme="terminal" title="LIVE FEED" />
-                        },
-                        content: <LiveCameraFeed location="Four Court & Main Entrances" />,
-                      },
-                    },
                   },
 
                   "Multimart Cameras": {
                     content: (
                       <Camera
                         location="Multimart Shopping District"
-                        cameraId="CAM-MM-01"
-                        status="ACTIVE"
                         coverage="Vendor halls, corridors, community centre"
                         details={[
                           "18 cameras covering all public shopping areas",
@@ -530,38 +496,14 @@ export const THE_55_STACK_COMMAND_COMMANDS = {
                           "Motion tracking in vacant lot #105-3",
                           "Night vision enabled in all zones",
                         ]}
-                        alerts={[
-                          {
-                            time: "4 hours ago",
-                            message: "Shoplifting suspected - Angela Ammo's (individual fled)",
-                          },
-                          {
-                            time: "Yesterday",
-                            message: "Vandalism at Lot #105-3 - Graffiti added",
-                          },
-                        ]}
-                        lastService="3 days ago"
                       />
                     ),
-                    related_commands: {
-                      "Live Feed": {
-                        password: {
-                          pw: "vendors",
-                          hint: "The people who sell things",
-                          difficulty: "medium",
-                          content: <Locked theme="terminal" title="LIVE FEED" />
-                        },
-                        content: <LiveCameraFeed location="Multimart Shopping District" />,
-                      },
-                    },
                   },
 
                   "Kaytell Manufacturing Cameras": {
                     content: (
                       <Camera
                         location="Kaytell Manufacturing Concern"
-                        cameraId="CAM-KMC-01"
-                        status="ACTIVE"
                         coverage="Factory floor, loading docks, offices"
                         details={[
                           "14 cameras covering all work zones",
@@ -570,38 +512,14 @@ export const THE_55_STACK_COMMAND_COMMANDS = {
                           "Union activity observation (controversial)",
                           "Integration with Kaytell corporate network",
                         ]}
-                        alerts={[
-                          {
-                            time: "5 hours ago",
-                            message: "Union organizer meeting detected - No action taken",
-                          },
-                          {
-                            time: "Yesterday",
-                            message: "Equipment malfunction - Safety team dispatched",
-                          },
-                        ]}
-                        lastService="2 weeks ago"
                       />
                     ),
-                    related_commands: {
-                      "Live Feed": {
-                        password: {
-                          pw: "factory",
-                          hint: "What the Kaytell facility is",
-                          difficulty: "medium",
-                          content: <Locked theme="terminal" title="LIVE FEED" />
-                        },
-                        content: <LiveCameraFeed location="Kaytell Manufacturing Concern" />,
-                      },
-                    },
                   },
 
                   "Green Zone Cameras": {
                     content: (
                       <Camera
                         location="TG Labs Green Zone"
-                        cameraId="CAM-GZ-01"
-                        status="ACTIVE"
                         coverage="All public zones, checkpoints, gardens"
                         details={[
                           "26 cameras with premium security features",
@@ -610,37 +528,15 @@ export const THE_55_STACK_COMMAND_COMMANDS = {
                           "Multiple angles on all entry/exit points",
                           "Corporate-grade encryption and storage",
                         ]}
-                        alerts={[
-                          {
-                            time: "3 hours ago",
-                            message: "Insufficient credit balance - Individual denied entry",
-                          },
-                          {
-                            time: "Yesterday",
-                            message: "Person of interest flagged - Security notified",
-                          },
-                        ]}
-                        lastService="5 days ago"
                       />
                     ),
-                    related_commands: {
-                      "Live Feed": {
-                        password: {
-                          pw: "green",
-                          hint: "The first word of this zone's name",
-                          difficulty: "medium",
-                          content: <Locked theme="terminal" title="LIVE FEED" />
-                        },
-                        content: <LiveCameraFeed location="TG Labs Green Zone" />,
-                      },
-                    },
                   },
                 },
               },
 
               "Access Control": {
                 content: (
-                  <MaintenanceAccess
+                  <Node
                     title="[ACCESS CONTROL SYSTEMS]"
                     deviceModel="Zone Restriction Management"
                     deviceId="ACCESS-01"
@@ -674,13 +570,13 @@ export const THE_55_STACK_COMMAND_COMMANDS = {
                       <Line red>Emergency exits remain functional (fire code)</Line>
                       <Line yellow>Last lockdown: 8 months ago (REC containment breach)</Line>
                     </InsetBox>
-                  </MaintenanceAccess>
+                  </Node>
                 ),
               },
 
               "Emergency Protocols": {
                 content: (
-                  <MaintenanceAccess
+                  <Node
                     title="[EMERGENCY PROTOCOLS]"
                     deviceModel="Emergency Response System"
                     deviceId="EMERGENCY-01"
@@ -722,7 +618,7 @@ export const THE_55_STACK_COMMAND_COMMANDS = {
                       <Line cyan>• Roofline helipads (Upper levels only)</Line>
                       <Line cyan>• Freight elevators (If operational)</Line>
                     </InsetBox>
-                  </MaintenanceAccess>
+                  </Node>
                 ),
               },
 
@@ -809,11 +705,10 @@ export const THE_55_STACK_COMMAND_COMMANDS = {
             password: {
               pw: "thoth",
               hint: "The name of the administrative AI",
-              difficulty: "medium",
-              content: <Locked theme="terminal" title="THOTH INTERFACE" />
+              lockType: 'terminal',
             },
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[THOTH AI INTERFACE]"
                 deviceModel="Remote Administrative AI"
                 deviceId="THOTH-V4.7"
@@ -882,7 +777,7 @@ export const THE_55_STACK_COMMAND_COMMANDS = {
                   <Line yellow>THOTH is aware of this and has hinted at "what it could do"</Line>
                   <Line red>Violation of containment protocols is immediate termination offense</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
@@ -890,11 +785,10 @@ export const THE_55_STACK_COMMAND_COMMANDS = {
             password: {
               pw: "vindicator",
               hint: "The type of cydroid AANI is",
-              difficulty: "hard",
-              content: <Locked theme="terminal" title="AANI CONTROL" />
+              lockType: 'terminal',
             },
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[AANI VINDICATOR CONTROL]"
                 deviceModel="Vindicator-Class Cydroid"
                 deviceId="AANI-V1"
@@ -969,7 +863,7 @@ export const THE_55_STACK_COMMAND_COMMANDS = {
                   <Line red>5. Continuous monitoring until situation resolved</Line>
                   <Line red>6. Post-incident debrief and system evaluation</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
         },

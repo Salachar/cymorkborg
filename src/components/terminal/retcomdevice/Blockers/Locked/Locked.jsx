@@ -124,20 +124,10 @@ export default function Locked({
         '--glow-color': config.glowColor,
       }}
     >
-      {/* Scanline effect */}
-      <div className="locked-scanlines" />
-
-      {/* Content */}
       <div className="locked-content">
-        {/* Lock visual */}
         <div className="locked-visual">
-          <div className="locked-icon">
-            {config.icon}
-          </div>
-          <div className="locked-ring" />
+          {config.icon}
         </div>
-
-        {/* Text */}
         <div className="locked-text">
           <div className="locked-title">{title}</div>
           <div className="locked-message">{message}</div>

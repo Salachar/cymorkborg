@@ -14,8 +14,7 @@ import {
   Safe,
   Camera,
   Menu,
-  MaintenanceAccess,
-  Message,
+  Node,
   PersonnelFile,
   CommunityBoard,
   CoffeeMachine,
@@ -23,8 +22,6 @@ import {
   Radio,
   ArcadeCabinet,
   DigitalWallet,
-  Locked,
-  LiveCameraFeed,
 } from "@terminal/retcomdevice"
 
 import BatusBodegaAd from './bodega_ad'
@@ -146,7 +143,7 @@ export const BODEGA_COMMANDS = {
               hint: "What you do to restock the machine",
             },
             content: (
-              <MaintenanceAccess />
+              <Node />
             ),
             related_commands: {
               "VendWallet": {
@@ -161,15 +158,13 @@ export const BODEGA_COMMANDS = {
               },
               "DebugMode": {
                 content: (
-                  <Message
-                    title="VENDING MACHINE"
-                    message="DEBUG MODE ACTIVATED"
-                    note="Dispense drinks via main interface - no charge"
-                    theme="corporate"
+                  <Node
+                    title="VENDING MACHINE - DEBUG MODE ACTIVATED"
+                    footer="Dispense drinks via main interface - no charge"
                   >
                     <Line yellow large>FREE VEND MODE ENABLED</Line>
                     <Line cyan>All payment verification disabled</Line>
-                  </Message>
+                  </Node>
                 ),
               },
             },
@@ -180,12 +175,10 @@ export const BODEGA_COMMANDS = {
       "Deals!": {
         favicon: <Icons.Deals />,
         content: (
-          <Message
-            title="BODEGA"
-            subtitle="TODAY'S SPECIALS"
-            message="Updated: 3 days ago"
-            note={'"Fair prices. No questions." - Batu'}
-            theme="casual"
+          <Node
+            title="BODEGA - TODAY'S SPECIALS"
+            subtitle="Updated: 3 days ago"
+            footer={'"Fair prices. No questions." - Batu'}
           >
             <InsetBox title="WEEKLY DEALS:">
               <Line neon>• Synth-Ramen 6-pack → 12¤ (was 18¤)</Line>
@@ -206,7 +199,7 @@ export const BODEGA_COMMANDS = {
               <Line cyan>✓ Bathroom access (regulars only)</Line>
               <Line cyan>✓ Free WiFi</Line>
             </InsetBox>
-          </Message>
+          </Node>
         ),
       },
 
@@ -271,17 +264,11 @@ export const BODEGA_COMMANDS = {
           hint: "Niece's favorite day and candybar",
           showFirst: true,
           showCount: true,
-          content: <Locked theme="terminal" />
+          lockType: 'terminal',
         },
         content: (
-          <MaintenanceAccess
-            variant="internal"
+          <Node
             title="[BODEGA INTERNAL NETWORK]"
-            deviceModel="Small Business Router"
-            deviceId="BODEGA-NET-01"
-            firmwareVersion="v2.1.8"
-            systemStatus="OPERATIONAL"
-            uptime="156 days, 3 hours"
             notes={[
               "Owner: Batu Khamidov",
               "Connected devices: 3 (security camera, POS terminal, office PC)",
@@ -290,7 +277,7 @@ export const BODEGA_COMMANDS = {
             ]}
           >
             <Line yellow>Note from Batu (cloud sync): "Zara - Please restock the vending machine"</Line>
-          </MaintenanceAccess>
+          </Node>
         ),
         related_commands: {
           "Security Camera - Main Shop": {
@@ -299,9 +286,6 @@ export const BODEGA_COMMANDS = {
               <Camera
                 id="bodega-main-cam"
                 location="Batu's Bodega - Main room (above counter)"
-                status="ACTIVE"
-                recording={true}
-                storage="Local"
                 timeline={[
                   "19:15 → Batu closes register (earlier than usual)",
                   "19:30 → Last customers exit",
@@ -322,26 +306,15 @@ export const BODEGA_COMMANDS = {
                 ]}
               />
             ),
-            related_commands: {
-              "Live Feed": {
-                password: {
-                  pw: "livefeed",
-                  content: <Locked theme="terminal" title="LIVE FEED" />
-                },
-                content: <LiveCameraFeed location="Bodega" />,
-              },
-            },
           },
 
           "Personnel Files": {
             favicon: <Icons.Person />,
             content: (
-              <Message
-                title="BODEGA"
-                subtitle="PERSONNEL RECORDS"
-                message="EMPLOYEE ACCESS GRANTED"
-                note="Internal network maintained by Batu"
-                theme="corporate"
+              <Node
+                title="BODEGA - PERSONNEL RECORDS"
+                subtitle="EMPLOYEE ACCESS GRANTED"
+                footer="Internal network maintained by Batu"
               >
                 <Line smoke large bold>[PERSONNEL RECORDS]</Line>
                 <Line cyan>Active employees: 2</Line>
@@ -349,7 +322,7 @@ export const BODEGA_COMMANDS = {
                   <Line neon>→ Batu (Owner/Operator)</Line>
                   <Line neon>→ Zara (Part-time)</Line>
                 </InsetBox>
-              </Message>
+              </Node>
             ),
             related_commands: {
               "Batu": {
@@ -418,12 +391,10 @@ export const BODEGA_COMMANDS = {
           "Inventory Status": {
             favicon: <Icons.Inventory />,
             content: (
-              <Message
-                title="BODEGA"
-                subtitle="INVENTORY MANAGEMENT"
-                message="Last updated: 3 days ago (pre-closure)"
-                note="Free wifi still active"
-                theme="casual"
+              <Node
+                title="BODEGA - INVENTORY MANAGEMENT"
+                subtitle="Last updated: 3 days ago (pre-closure)"
+                footer="Free wifi still active"
               >
                 <InsetBox title="CURRENT STOCK STATUS:">
                   <Line red>Significant inventory loss detected</Line>
@@ -441,7 +412,7 @@ export const BODEGA_COMMANDS = {
                   <Line cyan>✓ Security system: Online</Line>
                   <Line cyan>✓ Under-counter storage: Intact</Line>
                 </InsetBox>
-              </Message>
+              </Node>
             ),
           },
 

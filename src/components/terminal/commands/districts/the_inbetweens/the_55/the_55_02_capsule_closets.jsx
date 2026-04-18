@@ -4,10 +4,8 @@ import {
 } from "@terminal/TerminalComponents";
 
 import {
-  CCTV,
-  Locked,
-  MaintenanceAccess,
-  Message,
+  Camera,
+  Node,
   PersonnelFile,
   PublicPortal,
   Tenet,
@@ -37,11 +35,8 @@ export const THE_55_CAPSULE_CLOSETS_COMMANDS = {
     related_commands: {
       "CityCam": {
         content: (
-          <CCTV
-            src={cctv_image}
-            cameraId="CAM-CC-MAIN"
-            theme="amber"
-            height={500}
+          <Camera
+            cctv={cctv_image}
           />
         ),
       },
@@ -233,12 +228,8 @@ export const THE_55_CAPSULE_CLOSETS_COMMANDS = {
 
       "The Shades": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[THE SHADES - CLONE COMMUNITY]"
-            deviceModel="Community Network"
-            deviceId="SHADES-FLOOR-23"
-            firmwareVersion="v1.0.0"
-            systemStatus="ACTIVE"
             notes={[
               "Floor 23",
               "Escaped clone collective",
@@ -265,18 +256,14 @@ export const THE_55_CAPSULE_CLOSETS_COMMANDS = {
               <Line yellow>Some possess fragments of Shade's memories</Line>
               <Line smoke>Occasionally perform together (wearing masks)</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
 
       "Remote Hall": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[REMOTE HALL - UPLOAD COMMUNITY]"
-            deviceModel="Upload Network"
-            deviceId="REMOTE-FLOOR-35"
-            firmwareVersion="v1.0.0"
-            systemStatus="OPERATIONAL"
             notes={[
               "Floor 35",
               "Uploaded consciousness collective",
@@ -307,18 +294,14 @@ export const THE_55_CAPSULE_CLOSETS_COMMANDS = {
               <Line neon>• Data processing</Line>
               <Line smoke>Payment goes to maintain life support systems</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
 
       "The Serpent's Nest": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[THE SERPENT'S NEST - VIRID VIPERS]"
-            deviceModel="Gang Territory"
-            deviceId="VIPERS-FLOOR-17"
-            firmwareVersion="v1.0.0"
-            systemStatus="CONTROLLED"
             notes={[
               "Floor 17",
               "Entire floor occupied by Virid Vipers gang",
@@ -345,18 +328,14 @@ export const THE_55_CAPSULE_CLOSETS_COMMANDS = {
               <Line neon>Members: ~30 active gang members</Line>
               <Line smoke>Relatively honorable - keep their word</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
 
       "Eco Hall": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[ECO HALL - COMMUNITY GARDENS]"
-            deviceModel="Agricultural Network"
-            deviceId="ECO-FLOOR-40"
-            firmwareVersion="v1.0.0"
-            systemStatus="GROWING"
             notes={[
               "Floor 40",
               "Fresh produce cultivation",
@@ -385,7 +364,7 @@ export const THE_55_CAPSULE_CLOSETS_COMMANDS = {
               <Line neon>Gardeners accept volunteers and donations</Line>
               <Line yellow>Water redirection technically illegal</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
 
@@ -393,13 +372,12 @@ export const THE_55_CAPSULE_CLOSETS_COMMANDS = {
         password: {
           pw: "closets",
           hint: "What the capsule units are called (second word)",
-          difficulty: "easy",
-          content: <Locked theme="terminal" title="CAPSULE MAINTENANCE" />
+          lockType: 'terminal',
         },
         content: (
-          <Message
+          <Node
             title="CAPSULE CLOSETS MAINTENANCE"
-            message="MAINTENANCE ACCESS GRANTED"
+            subtitle="MAINTENANCE ACCESS GRANTED"
             note="Building systems - Authorized personnel only"
             theme="limeade"
           />
@@ -407,12 +385,8 @@ export const THE_55_CAPSULE_CLOSETS_COMMANDS = {
         related_commands: {
           "Resident Personnel Files": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[CAPSULE CLOSETS RESIDENT DIRECTORY]"
-                deviceModel="Residential Management System"
-                deviceId="CAPSULE-DIR-01"
-                firmwareVersion="v1.0.0"
-                systemStatus="OPERATIONAL"
                 notes={[
                   "6,240 total capsule units",
                   "5,847 occupied (94%)",
@@ -432,7 +406,7 @@ export const THE_55_CAPSULE_CLOSETS_COMMANDS = {
                   <Line red>• Capsule 43-103 - Ghost containment</Line>
                   <Line red>• Capsule 18-367 - G0 infection (sealed)</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
             related_commands: {
               "The Circuit Witch": {
@@ -654,12 +628,8 @@ export const THE_55_CAPSULE_CLOSETS_COMMANDS = {
 
           "Sealed Units": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[SEALED/QUARANTINED CAPSULES]"
-                deviceModel="Quarantine Management"
-                deviceId="SEALED-UNITS-01"
-                firmwareVersion="v1.0.0"
-                systemStatus="MONITORING"
                 notes={[
                   "32 units currently sealed",
                   "Various threat levels",
@@ -695,18 +665,14 @@ export const THE_55_CAPSULE_CLOSETS_COMMANDS = {
                   <Line red>BREACH WOULD CONTAMINATE ENTIRE FLOOR</Line>
                   <Line yellow>Corporate containment team monitors remotely</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Unit Registry": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[CAPSULE UNIT REGISTRY]"
-                deviceModel="Unit Management System"
-                deviceId="REGISTRY-01"
-                firmwareVersion="v1.0.0"
-                systemStatus="OPERATIONAL"
                 notes={[
                   "Levels 79-132 (54 floors)",
                   "6,240 total capsule units",
@@ -731,18 +697,14 @@ export const THE_55_CAPSULE_CLOSETS_COMMANDS = {
                   <Line red>• 1,204 units have broken climate control</Line>
                   <Line red>• 89 units structurally compromised</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Maintenance Logs": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[MAINTENANCE LOG]"
-                deviceModel="Work Order System"
-                deviceId="MAINT-LOG-01"
-                firmwareVersion="v1.0.0"
-                systemStatus="BACKLOGGED"
                 notes={[
                   "Last 30 days of service calls",
                   "High volume of requests",
@@ -781,7 +743,7 @@ export const THE_55_CAPSULE_CLOSETS_COMMANDS = {
                   <Line red>Resolution: URGENT - Additional welding required</Line>
                   <Line yellow>Contained entities becoming more aggressive</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
@@ -789,16 +751,11 @@ export const THE_55_CAPSULE_CLOSETS_COMMANDS = {
             password: {
               pw: "sealed",
               hint: "What dangerous capsules are",
-              difficulty: "medium",
-              content: <Locked theme="terminal" title="QUARANTINE PROTOCOLS" />
+              lockType: 'terminal',
             },
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[QUARANTINE PROTOCOLS]"
-                deviceModel="Containment Management"
-                deviceId="QUARANTINE-01"
-                firmwareVersion="v1.0.0"
-                systemStatus="ACTIVE"
                 notes={[
                   "Sealed unit management procedures",
                   "32 units currently under quarantine",
@@ -836,7 +793,7 @@ export const THE_55_CAPSULE_CLOSETS_COMMANDS = {
                   <Line neon>4. Deploy available security (Virid Vipers if needed)</Line>
                   <Line neon>5. Await corporate response team</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
         },

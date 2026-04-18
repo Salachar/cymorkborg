@@ -4,10 +4,8 @@ import {
 } from "@terminal/TerminalComponents";
 
 import {
-  CCTV,
-  Locked,
-  MaintenanceAccess,
-  Message,
+  Camera,
+  Node,
   PublicPortal,
 } from "@terminal/retcomdevice";
 
@@ -35,18 +33,15 @@ export const THE_55_LOST_ZONE_COMMANDS = {
     related_commands: {
       "CityCam": {
         content: (
-          <CCTV
-            src={cctv_image}
-            cameraId="CAM-CC-MAIN"
-            theme="amber"
-            height={500}
+          <Camera
+            cctv={cctv_image}
           />
         ),
       },
 
       "Zone Overview": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[THE LOST ZONE]"
             deviceModel="Hazard Assessment System"
             deviceId="LOST-ZONE-01"
@@ -89,13 +84,13 @@ export const THE_55_LOST_ZONE_COMMANDS = {
               <Line yellow>• Gang-Goons (occasional hideouts)</Line>
               <Line yellow>• Urban explorers (thrill-seekers)</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
 
       "Zone Map": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[LOST ZONE FLOOR BREAKDOWN]"
             deviceModel="Zone Navigation System"
             deviceId="ZONE-MAP-01"
@@ -106,7 +101,7 @@ export const THE_55_LOST_ZONE_COMMANDS = {
         related_commands: {
           "Contaminated Zone": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[CONTAMINATED ZONE]"
                 deviceModel="Biohazard Monitoring System"
                 deviceId="CONTAMINATION-148-150"
@@ -141,13 +136,13 @@ export const THE_55_LOST_ZONE_COMMANDS = {
                   <Line>No cleanup planned (too expensive, low priority)</Line>
                   <Line>Plan: Leave sealed indefinitely, wait for fungus to die naturally</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "C.R.A.W.L.E.R. Robots": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[C.R.A.W.L.E.R. CONSTRUCTION ROBOTS]"
                 deviceModel="Autonomous Construction Units"
                 deviceId="CRAWLER-SERIES-7"
@@ -187,13 +182,13 @@ export const THE_55_LOST_ZONE_COMMANDS = {
                   <Line neon>Capture teams active in upper Lost Zone</Line>
                   <Line neon>Offering bounty: 50k¤ per disabled robot (intact)</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "United Citadel Operations": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[UNITED CITADEL CORPORATE OPERATIONS]"
                 deviceModel="Security Zone"
                 deviceId="UC-OPS-166-174"
@@ -239,7 +234,7 @@ export const THE_55_LOST_ZONE_COMMANDS = {
                   <Line red>Trespassers detained and prosecuted</Line>
                   <Line yellow>Corporate lawyers aggressively defend operations</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
         },
@@ -247,7 +242,7 @@ export const THE_55_LOST_ZONE_COMMANDS = {
 
       "Salvage Opportunities": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[SALVAGE OPPORTUNITIES]"
             deviceModel="Resource Catalog"
             deviceId="SALVAGE-01"
@@ -296,13 +291,13 @@ export const THE_55_LOST_ZONE_COMMANDS = {
               <Line neon>• Mark your route (easy to get lost)</Line>
               <Line neon>• Don't venture into upper zone (corporate security)</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
 
       "Squatter Camps": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[SQUATTER COMMUNITIES]"
             deviceModel="Population Monitoring"
             deviceId="SQUATTER-01"
@@ -357,7 +352,7 @@ export const THE_55_LOST_ZONE_COMMANDS = {
               <Line cyan>Respect their camps, they'll respect you</Line>
               <Line yellow>A few are dangerous (criminals hiding out)</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
 
@@ -365,13 +360,12 @@ export const THE_55_LOST_ZONE_COMMANDS = {
         password: {
           pw: "abandoned",
           hint: "What the Lost Zone construction project was",
-          difficulty: "easy",
-          content: <Locked theme="terminal" title="CONSTRUCTION SYSTEMS" />
+          lockType: 'terminal',
         },
         content: (
-          <Message
+          <Node
             title="LOST ZONE CONSTRUCTION SYSTEMS"
-            message="LEGACY SYSTEM ACCESS"
+            subtitle="LEGACY SYSTEM ACCESS"
             note="Outdated systems - Limited functionality"
             theme="limeade"
           />
@@ -379,7 +373,7 @@ export const THE_55_LOST_ZONE_COMMANDS = {
         related_commands: {
           "Construction Plans": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[ORIGINAL CONSTRUCTION PLANS]"
                 deviceModel="Archived Blueprints"
                 deviceId="PLANS-01"
@@ -413,7 +407,7 @@ export const THE_55_LOST_ZONE_COMMANDS = {
                   <Line yellow>Eventually declared lost cause, sealed off</Line>
                   <Line red>Total loss: ~200 million credits invested</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
@@ -421,11 +415,10 @@ export const THE_55_LOST_ZONE_COMMANDS = {
             password: {
               pw: "robots",
               hint: "What the C.R.A.W.L.E.R. units are",
-              difficulty: "medium",
-              content: <Locked theme="terminal" title="ROBOT CONTROL" />
+              lockType: 'terminal',
             },
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[C.R.A.W.L.E.R. CONTROL SYSTEM]"
                 deviceModel="Robot Management Interface"
                 deviceId="CRAWLER-CTRL-01"
@@ -444,13 +437,13 @@ export const THE_55_LOST_ZONE_COMMANDS = {
                   <Line neon>Contact: United Citadel Operations</Line>
                   <Line yellow>Extremely dangerous - many have died attempting</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Quarantine Protocols": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[CONTAMINATED ZONE QUARANTINE]"
                 deviceModel="Containment Management"
                 deviceId="QUARANTINE-148-150"
@@ -495,13 +488,13 @@ export const THE_55_LOST_ZONE_COMMANDS = {
                   <Line red>4. Medical screening for all exposed individuals</Line>
                   <Line red>5. Extended quarantine of affected persons</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Salvage Records": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[SALVAGE OPERATION RECORDS]"
                 deviceModel="Scavenging Activity Log"
                 deviceId="SALVAGE-LOG-01"
@@ -534,7 +527,7 @@ export const THE_55_LOST_ZONE_COMMANDS = {
                   <Line red>• 1 C.R.A.W.L.E.R. attack (survivor, severe injuries)</Line>
                   <Line yellow>Actual numbers likely higher (unreported incidents)</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
         },

@@ -9,14 +9,12 @@ import {
 import {
   Safe,
   Jukebox,
-  MaintenanceAccess,
+  Node,
   PublicPortal,
   FacilityPortal,
   HoursBanner,
   Menu,
   PersonnelFile,
-  Locked,
-  CoffeeMachine,
 } from "@terminal/retcomdevice"
 
 export const SOUTH_CENTRAL_FUN_COMMANDS = {
@@ -71,15 +69,11 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
         password: {
           pw: "olympus",
           hint: "The highest membership tier",
-          content: <Locked theme="terminal" title="MEMBER RECORDS" />
+          lockType: 'terminal',
         },
         content: (
-          <MaintenanceAccess
+          <Node
             title="[MEMBER DIRECTORY]"
-            deviceModel="Membership Database"
-            deviceId="GOLDENRATIO-MEMBERS"
-            firmwareVersion="v2.0.0"
-            systemStatus="OPERATIONAL"
             notes={[
               "Total members: 487 (Platinum: 412, Diamond: 65, Olympus: 10)",
               "Waiting list: 1,847 applications",
@@ -100,7 +94,7 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
               <Line yellow>Annual dues: 250,000¤</Line>
               <Line smoke small>Names withheld for privacy (ultra-wealthy demand discretion)</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
 
@@ -109,7 +103,7 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
         password: {
           pw: "platinum",
           hint: "The most common membership tier",
-          content: <Locked theme="safe" title="MEMBER LOCKER" />
+          lockType: 'safe',
         },
         content: (
           <Safe
@@ -263,7 +257,7 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
         password: {
           pw: "union",
           hint: "What the workers at this bar believe in",
-          content: <Locked theme="safe" title="BAR SAFE" />
+          lockType: 'safe',
         },
         content: (
           <Safe
@@ -371,15 +365,11 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
         password: {
           pw: "fragmentation",
           hint: "What happens to the grenade. And you.",
-          content: <Locked theme="terminal" title="DUTY ROSTER" />
+          lockType: 'terminal',
         },
         content: (
-          <MaintenanceAccess
+          <Node
             title="[DUTY ROSTER - CURRENT SHIFT]"
-            deviceModel="Personnel Management"
-            deviceId="UCS-SC07-ROSTER"
-            firmwareVersion="v3.0.0"
-            systemStatus="OPERATIONAL"
             notes={[
               "Current shift: Day (06:00 - 18:00)",
               "Personnel on duty: 16 officers",
@@ -403,7 +393,7 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
               <Line cyan>12:45 - Platinum contract medical emergency - Responded, EMS called</Line>
               <Line red>14:20 - Non-contract assault call - IGNORED (not our jurisdiction)</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
 
@@ -412,15 +402,11 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
         password: {
           pw: "ballistic",
           hint: "Going this is another way of losing your mind",
-          content: <Locked theme="vault" title="EVIDENCE STORAGE" />
+          lockType: 'vault',
         },
         content: (
-          <MaintenanceAccess
+          <Node
             title="[EVIDENCE LOCKER]"
-            deviceModel="Secure Storage"
-            deviceId="UCS-SC07-EVIDENCE"
-            firmwareVersion="v2.0.0"
-            systemStatus="OPERATIONAL"
             notes={[
               "Biometric access required",
               "All access logged",
@@ -439,7 +425,7 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
               <Line red>Case #2844: Chrome cyberware - Missing (officer under investigation)</Line>
             </InsetBox>
             <Line smoke small>Corruption? In MY SecCorps? More likely than you'd think.</Line>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
     },

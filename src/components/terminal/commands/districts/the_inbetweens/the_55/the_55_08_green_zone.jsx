@@ -4,10 +4,8 @@ import {
 } from "@terminal/TerminalComponents";
 
 import {
-  CCTV,
-  Locked,
-  MaintenanceAccess,
-  Message,
+  Camera,
+  Node,
   PersonnelFile,
   PublicPortal,
 } from "@terminal/retcomdevice";
@@ -36,18 +34,15 @@ export const THE_55_GREEN_ZONE_COMMANDS = {
     related_commands: {
       "CityCam": {
         content: (
-          <CCTV
-            src={cctv_image}
-            cameraId="CAM-CC-MAIN"
-            theme="amber"
-            height={500}
+          <Camera
+            cctv={cctv_image}
           />
         ),
       },
 
       "Green Zone Overview": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[TG LABS GREEN ZONE]"
             deviceModel="Access Control System"
             deviceId="GREEN-ZONE-01"
@@ -88,13 +83,13 @@ export const THE_55_GREEN_ZONE_COMMANDS = {
               <Line red>• Quick response teams (2 minutes anywhere in zone)</Line>
               <Line red>• Direct line to TG Labs corporate security</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
 
       "Access Procedures": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[GREEN ZONE ACCESS PROCEDURES]"
             deviceModel="Entry Verification System"
             deviceId="ACCESS-PROC-01"
@@ -136,13 +131,13 @@ export const THE_55_GREEN_ZONE_COMMANDS = {
               <Line neon>Sponsor liable for visitor's conduct</Line>
               <Line yellow>Rarely granted to lower-level residents</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
 
       "Notable Locations": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[GREEN ZONE LOCATIONS]"
             deviceModel="Facility Directory"
             deviceId="LOCATIONS-01"
@@ -158,7 +153,7 @@ export const THE_55_GREEN_ZONE_COMMANDS = {
         related_commands: {
           "The Enrichment Centre": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[THE ENRICHMENT CENTRE]"
                 deviceModel="Research Facility"
                 deviceId="ENRICHMENT-238-249"
@@ -203,13 +198,13 @@ export const THE_55_GREEN_ZONE_COMMANDS = {
                   <Line>NDAs and non-compete agreements standard</Line>
                   <Line yellow>Whistleblowers have "accidents"</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Azure Dining": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[AZURE DINING]"
                 deviceModel="Premium Restaurant"
                 deviceId="AZURE-214"
@@ -255,7 +250,7 @@ export const THE_55_GREEN_ZONE_COMMANDS = {
                   <Line>Spectral Luxvitae penthouse dwellers</Line>
                   <Line>Occasional celebrity sightings</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
         },
@@ -263,7 +258,7 @@ export const THE_55_GREEN_ZONE_COMMANDS = {
 
       "Personnel Directory": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[GREEN ZONE PERSONNEL]"
             deviceModel="Staff Registry"
             deviceId="PERSONNEL-01"
@@ -291,7 +286,7 @@ export const THE_55_GREEN_ZONE_COMMANDS = {
               <Line neon>• Dr. Aria Blackwell - Research Scientist (TG Labs)</Line>
               <Line neon>• Victoria Sterling - Corporate Lawyer (Eden Apartments)</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
         related_commands: {
           "Director Chen Wei": {
@@ -456,13 +451,12 @@ export const THE_55_GREEN_ZONE_COMMANDS = {
         password: {
           pw: "credit",
           hint: "What you need a balance of to access the Green Zone",
-          difficulty: "easy",
-          content: <Locked theme="terminal" title="GREEN ZONE SECURITY" />
+          lockType: 'terminal',
         },
         content: (
-          <Message
+          <Node
             title="GREEN ZONE SECURITY SYSTEMS"
-            message="SECURITY ACCESS GRANTED"
+            subtitle="SECURITY ACCESS GRANTED"
             note="Access control systems - Authorized personnel only"
             theme="secure"
           />
@@ -470,7 +464,7 @@ export const THE_55_GREEN_ZONE_COMMANDS = {
         related_commands: {
           "Access Control Logs": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[ACCESS CONTROL LOGS]"
                 deviceModel="Entry/Exit Tracking System"
                 deviceId="ACCESS-LOG-01"
@@ -515,7 +509,7 @@ export const THE_55_GREEN_ZONE_COMMANDS = {
                   <Line neon>Victoria Sterling: 3 entries/exits (corporate lawyer)</Line>
                   <Line smoke>VIP access flagged for security priority</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
@@ -523,11 +517,10 @@ export const THE_55_GREEN_ZONE_COMMANDS = {
             password: {
               pw: "balance",
               hint: "What the system checks in your account",
-              difficulty: "medium",
-              content: <Locked theme="terminal" title="CREDIT VERIFICATION" />
+              lockType: 'terminal',
             },
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[CREDIT VERIFICATION DATABASE]"
                 deviceModel="Financial Screening System"
                 deviceId="CREDIT-VER-01"
@@ -567,7 +560,7 @@ export const THE_55_GREEN_ZONE_COMMANDS = {
                   <Line yellow>Highest denial day: 89 denials (3.7%)</Line>
                   <Line smoke>Denial rate increasing 0.3% month-over-month</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
@@ -575,11 +568,10 @@ export const THE_55_GREEN_ZONE_COMMANDS = {
             password: {
               pw: "enrichment",
               hint: "The name of TG Labs' research facility",
-              difficulty: "hard",
-              content: <Locked theme="terminal" title="MISSING PERSONS" />
+              lockType: 'terminal',
             },
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[MISSING PERSONS - GREEN ZONE RELATED]"
                 deviceModel="Investigation Database"
                 deviceId="MISSING-01"
@@ -645,13 +637,13 @@ export const THE_55_GREEN_ZONE_COMMANDS = {
                   <Line red>DO NOT enter Enrichment Centre under any circumstances</Line>
                   <Line red>REPORT suspicious recruitment to Community Outreach</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Security Patrol Routes": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[SECURITY PATROL ROUTES]"
                 deviceModel="Guard Management System"
                 deviceId="PATROL-01"
@@ -696,7 +688,7 @@ export const THE_55_GREEN_ZONE_COMMANDS = {
                   <Line yellow>Lunch breaks: 12:00-13:00 (reduced coverage)</Line>
                   <Line yellow>Weekend staffing: -20% (budget cuts)</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
         },

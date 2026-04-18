@@ -6,8 +6,6 @@ import {
   Divider,
 } from '@terminal/TerminalComponents';
 
-import { Message } from "@terminal/retcomdevice";
-
 import {
   WEAPONS_FOR_SALE,
   AMMO_BOOSTERS,
@@ -96,11 +94,9 @@ export const STREET_GUIDE_COMMANDS = {
       </NodePreview>
     ),
     content: (
-      <Message
+      <Node
         title="STREET GUIDE"
         subtitle="Pirated fixer doc — circulating on the Net"
-        message="KNOW YOUR PRICES. KNOW YOUR OPTIONS."
-        theme="casual"
       />
     ),
     related_commands: {
@@ -108,10 +104,9 @@ export const STREET_GUIDE_COMMANDS = {
       "Weapons": {
         favicon: <Icons.Weapons />,
         content: (
-          <Message
+          <Node
             title="WEAPONS"
             subtitle="⚠ = Illegal / requires SecOps license. Without it, SecOps shoot to kill."
-            theme="casual"
           >
             <Divider />
             <Line cyan bold>MELEE</Line>
@@ -148,14 +143,14 @@ export const STREET_GUIDE_COMMANDS = {
               })}
             />
             <Line smoke small>a = capable of autofire</Line>
-          </Message>
+          </Node>
         ),
       },
 
       "Armor": {
         favicon: <Icons.Shield />,
         content: (
-          <Message title="ARMOR" theme="casual">
+          <Node title="ARMOR">
             <Table
               headers={["ARMOR", "TIER", "PROTECTION", "COST", "NOTES"]}
               rows={ARMOR_TABLE.map(a => [
@@ -166,17 +161,16 @@ export const STREET_GUIDE_COMMANDS = {
                 a.description,
               ])}
             />
-          </Message>
+          </Node>
         ),
       },
 
       "Ammo & Boosters": {
         favicon: <Icons.Warehouse />,
         content: (
-          <Message
+          <Node
             title="AMMO & BOOSTERS"
             subtitle="Single-use booster mods modify one shot. Can be used with most modern firearms."
-            theme="casual"
           >
             <Line smoke small>After combat: roll d8 per fired weapon (d6 if autofire). 1–3 = out of ammo. Regular ammo = 10% of weapon price.</Line>
             <Divider />
@@ -184,49 +178,46 @@ export const STREET_GUIDE_COMMANDS = {
               headers={["BOOSTER", "COST", "EFFECT"]}
               rows={AMMO_BOOSTERS.map(a => [a.label, a.cost, a.description])}
             />
-          </Message>
+          </Node>
         ),
       },
 
       "Drugs": {
         favicon: <Icons.Drugs />,
         content: (
-          <Message
+          <Node
             title="DRUGS"
             subtitle="Price format: Full dose / Weaker recreational dose"
-            theme="casual"
           >
             <Table
               headers={["DRUG", "COST", "EFFECT"]}
               rows={DRUGS.map(d => [d.label, d.cost, d.description])}
             />
-          </Message>
+          </Node>
         ),
       },
 
       "Cybertech": {
         favicon: <Icons.Tech />,
         content: (
-          <Message
+          <Node
             title="CYBERTECH"
             subtitle="Implants and body modifications. Installation requires a clinic."
-            theme="casual"
           >
             <Table
               headers={["IMPLANT", "DMG", "COST", "EFFECT"]}
               rows={CYBERTECH.map(c => [c.label, c.die || '—', c.cost, c.description])}
             />
-          </Message>
+          </Node>
         ),
       },
 
       "Services & Transportation": {
         favicon: <Icons.Bulletin />,
         content: (
-          <Message
+          <Node
             title="SERVICES & PRICES"
             subtitle="⚠ = Illegal. Prices vary by district and vendor."
-            theme="casual"
           >
             <Line cyan bold>PROFESSIONAL SERVICES</Line>
             <Table
@@ -250,17 +241,16 @@ export const STREET_GUIDE_COMMANDS = {
                 ["VIP chef restaurant, real meat", "40¤+"],
               ]}
             />
-          </Message>
+          </Node>
         ),
       },
 
       "Housing": {
         favicon: <Icons.House />,
         content: (
-          <Message
+          <Node
             title="HOUSING"
             subtitle="One night / Monthly / Own it"
-            theme="casual"
           >
             <Table
               headers={["TYPE", "ONE NIGHT", "MONTHLY", "OWN IT"]}
@@ -277,7 +267,7 @@ export const STREET_GUIDE_COMMANDS = {
             <Line smoke small style={{ marginTop: '0.5rem' }}>
               The higher you live, the longer you survive. The lower you live, the cheaper it is to die there.
             </Line>
-          </Message>
+          </Node>
         ),
       },
 

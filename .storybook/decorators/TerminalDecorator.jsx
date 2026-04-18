@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import HistoryEntryWrapper from "../../src/components/terminal/retcomdevice/Basic/HistoryEntryWrapper/HistoryEntryWrapper";
+// import HistoryEntryWrapper from "../../src/components/terminal/retcomdevice/Basic/HistoryEntryWrapper/HistoryEntryWrapper";
 
 const COLORS = {
   bg: {
@@ -31,14 +31,7 @@ export const TerminalDecorator = (Story, context) => {
         color: COLORS.text.terminal,
       }}
     >
-      <HistoryEntryWrapper
-        entryId={entryId}
-        commandPath={commandPath}
-        onRemove={() => {}}
-        collapsedState={[isCollapsed, setIsCollapsed]}
-      >
-        <Story />
-      </HistoryEntryWrapper>
+      <Story />
     </div>
   );
 };

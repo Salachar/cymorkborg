@@ -4,14 +4,14 @@ import {
 } from "@terminal/TerminalComponents";
 
 import {
-  MaintenanceAccess,
+  Node,
   PersonnelFile,
 } from "@terminal/retcomdevice";
 
 export const THE_SNYK_COMMANDS = {
   "[A050 - B021] The Synk": {
     content: (
-      <MaintenanceAccess
+      <Node
         title="[THE SYNK]"
         deviceModel="Hazard Zone Monitoring"
         deviceId="SYNK"
@@ -45,12 +45,12 @@ export const THE_SNYK_COMMANDS = {
           <Line red>No light sources - total darkness in most areas</Line>
           <Line red>Toxic water</Line>
         </InsetBox>
-      </MaintenanceAccess>
+      </Node>
     ),
     related_commands: {
       "Sewage Chasm": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[SEWAGE CHASM]"
             deviceModel="Location Survey"
             deviceId="SYNK-CHASM-01"
@@ -72,13 +72,13 @@ export const THE_SNYK_COMMANDS = {
               <Line yellow>Demand toll: Useful gear or supplies</Line>
               <Line smoke>Will attack if refused or if group appears weak</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
 
       "The Offertory": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[THE OFFERTORY]"
             deviceModel="Location Survey"
             deviceId="SYNK-OFFERTORY-01"
@@ -124,7 +124,7 @@ export const THE_SNYK_COMMANDS = {
 
       "The Dead Queen": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[THE DEAD QUEEN]"
             deviceModel="Threat Assessment"
             deviceId="SYNK-THREAT-01"
@@ -151,13 +151,13 @@ export const THE_SNYK_COMMANDS = {
               <Line>Vaguely humanoid shape (barely recognizable)</Line>
               <Line>Constantly shifting and writhing</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
 
       "Medieval Ruins": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[MEDIEVAL RUINS]"
             deviceModel="Location Survey"
             deviceId="SYNK-RUINS-01"
@@ -185,13 +185,13 @@ export const THE_SNYK_COMMANDS = {
               <Line>Secret entrance from Kergoz Compound (B15)</Line>
               <Line>Heavily guarded by Heir of Kergoz</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
 
       "Crypto Mine": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[CRYPTO MINE]"
             deviceModel="Location Survey"
             deviceId="SYNK-CRYPTO-01"
@@ -215,7 +215,7 @@ export const THE_SNYK_COMMANDS = {
               <Line yellow>Poorly armed but determined</Line>
               <Line yellow>Will negotiate before violence</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
     },

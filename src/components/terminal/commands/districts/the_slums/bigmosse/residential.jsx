@@ -12,8 +12,7 @@ import {
   GameConsole,
   Camera,
   Tenet,
-  Locked,
-  MaintenanceAccess,
+  Node,
   PublicPortal,
   IncidentLog,
   NetworkDevices,
@@ -56,12 +55,8 @@ export const RESIDENTIAL_COMMANDS = {
       "Resident Directory": {
         favicon: <Icons.Group />,
         content: (
-          <MaintenanceAccess
+          <Node
             title="[RESIDENT DIRECTORY - PUBLIC ACCESS]"
-            deviceModel="Directory System"
-            deviceId="DIR-TORRES-01"
-            firmwareVersion="v1.4.2"
-            systemStatus="OPERATIONAL"
             notes={[
               "Partial listing — many residents opt for privacy",
               "Full directory: Building manager only (Unit 1A)",
@@ -72,7 +67,7 @@ export const RESIDENTIAL_COMMANDS = {
             <InsetBox title="LISTED RESIDENTS (SELECTED):">
               <Line smoke small>Showing public listings only.</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
         related_commands: {
           "Unit 1A - Floor 1": {
@@ -95,7 +90,7 @@ export const RESIDENTIAL_COMMANDS = {
                 password: {
                   pw: "mendez",
                   hint: "The manager's last name",
-                  content: <Locked theme="safe" title="PERSONAL SAFE" />
+                  lockType: 'safe',
                 },
                 content: (
                   <Safe
@@ -174,7 +169,7 @@ export const RESIDENTIAL_COMMANDS = {
                 password: {
                   pw: "maintenance",
                   hint: "The resident's department at the casino",
-                  content: <Locked theme="safe" title="PERSONAL SAFE" />
+                  lockType: 'safe',
                 },
                 content: (
                   <Safe
@@ -289,7 +284,7 @@ export const RESIDENTIAL_COMMANDS = {
                 password: {
                   pw: "localhost",
                   hint: "This terminal doesn't trust the outside world",
-                  content: <Locked theme="safe" title="PERSONAL SAFE" />
+                  lockType: 'safe',
                 },
                 content: (
                   <Safe
@@ -381,7 +376,7 @@ export const RESIDENTIAL_COMMANDS = {
                 password: {
                   pw: "dealer",
                   hint: "The resident's job at the casino",
-                  content: <Locked theme="safe" title="PERSONAL SAFE" />
+                  lockType: 'safe',
                 },
                 content: (
                   <Safe
@@ -527,9 +522,6 @@ export const RESIDENTIAL_COMMANDS = {
                 id="torres-lobby-cam"
                 location="Torres Apartments - Entrance lobby"
                 coverage="Front entrance, mailboxes, stairs"
-                status="ACTIVE"
-                recording={true}
-                storage="Local server (basement)"
                 timeline={[
                   "Yesterday, 18:45 → Resident entered with groceries",
                   "Yesterday, 20:15 → Pizza delivery (Unit 4B)",
@@ -547,9 +539,6 @@ export const RESIDENTIAL_COMMANDS = {
                 id="torres-fl2-cam"
                 location="Torres Apartments - Floor 2 Hallway"
                 coverage="Units 2A, 2B, 2C, 2D and stairwell access"
-                status="ACTIVE"
-                recording={true}
-                storage="Local server (basement)"
                 timeline={[
                   "Yesterday, 22:30 → Noise complaint hour — residents seen in hallway",
                   "Yesterday, 20:00 → Several people arriving at Unit 2B (poker night)",
@@ -612,15 +601,11 @@ export const RESIDENTIAL_COMMANDS = {
         password: {
           pw: "blind",
           hint: "You pay before you see",
-          content: <Locked theme="terminal" title="BUILDING MANAGEMENT" />
+         lockType: 'terminal',
         },
         content: (
-          <MaintenanceAccess
+          <Node
             title="[BUILDING MANAGEMENT SYSTEM]"
-            deviceModel="Property Management Software"
-            deviceId="BLD-MGMT-TORRES"
-            firmwareVersion="v3.1.0"
-            systemStatus="OPERATIONAL"
             notes={[
               "Manager Access: Rosa Mendez",
               "Upcoming maintenance: HVAC inspection (next week)",
@@ -639,7 +624,7 @@ export const RESIDENTIAL_COMMANDS = {
               <Line cyan>Unit 6A: Musician (occasional noise complaints)</Line>
               <Line cyan>Unit 3D: Quiet, pays early, model tenant</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
 

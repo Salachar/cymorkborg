@@ -6,15 +6,13 @@ import {
 } from '@terminal/TerminalComponents';
 
 import {
-  BiometricLog,
   Camera,
   CoffeeMachine,
   CommunityBoard,
   DigitalWallet,
   Extractable,
   HoursBanner,
-  Locked,
-  MaintenanceAccess,
+  Node,
   Menu,
   PublicPortal,
   SmartFridge,
@@ -131,16 +129,11 @@ export const DOC_JOY_CLINIC_COMMANDS = {
             password: {
               pw: "suppressor",
               hint: "Polite murder accessory",
-              content: <Locked theme="terminal" title="VENDING MAINTENANCE" />
+              lockType: 'terminal',
             },
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[VENDING MACHINE MAINTENANCE]"
-                deviceModel="MediSnack Pro"
-                deviceId="VM-DOCJOY-01"
-                firmwareVersion="v2.1.0"
-                systemStatus="OPERATIONAL"
-                uptime="47 days, 12 hours"
                 notes={[
                   "Last service: 1 week ago",
                   "Next service: Due in 2 weeks",
@@ -174,21 +167,22 @@ export const DOC_JOY_CLINIC_COMMANDS = {
           showFirst: true,
           showCount: true,
           hint: "What Doc Joy calls his specialty contract jobs",
-          content: <Locked theme="terminal" title="STAFF ACCESS" />
+          lockType: 'terminal',
         },
         content: (
-          <MaintenanceAccess
-            variant="internal"
+          <Node
             title="Doc Joy's Clinic"
-            deviceModel="Surgical Suite"
-            deviceId="CLINIC-OP-01"
-            firmwareVersion="v3.1.0"
-            systemStatus="OPERATIONAL"
             notes={[
               "Chrome installation tools on nearby tray",
               "Medical equipment operational, standby mode",
               "Vibrant skull graffiti on floor",
               "Side walkways for equipment storage"
+            ]}
+            scans={[
+              "Doc Joy%98",
+              "Doc Joy%97",
+              "Unknown Individual%FAILED",
+              "SECURITY BREACH%DENIED",
             ]}
           >
             <InsetBox title="EQUIPMENT STATUS:">
@@ -198,7 +192,7 @@ export const DOC_JOY_CLINIC_COMMANDS = {
               <Line neon>• Anesthetic dispenser: LOADED</Line>
               <Line neon>• Emergency defibrillator: CHARGED</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
         related_commands: {
           "Security Footage": {
@@ -208,9 +202,6 @@ export const DOC_JOY_CLINIC_COMMANDS = {
                 cameraId="CAM-DOCJOY-01"
                 location="Doc Joy's Clinic — Main Floor & Storage"
                 status="ACTIVE"
-                recording={true}
-                storage="7-day loop"
-                coverage="Operating room, entrance, waiting area, secure storage corridor"
                 details={[
                   "Resolution: 1080p HD",
                   "Night vision: Enabled",
@@ -218,56 +209,13 @@ export const DOC_JOY_CLINIC_COMMANDS = {
                   "Biometric scanner on storage door (upgraded post-breach)",
                 ]}
                 alerts={[
-                  { time: "Today, 20:00", message: "Doc Joy arrived for night shift" },
-                  { time: "Today, 18:30", message: "Suspicious individual — hooded, no treatment, departed after 3 min" },
-                  { time: "Nov 15, 03:15", message: "Unauthorized storage access attempt — alarm triggered, suspect fled" },
-                  { time: "Nov 2, 14:20", message: "Intel confirmed: stolen design spotted on Steel Jackhammer" },
-                  { time: "Oct 28, 03:47", message: "BREACH — Chrome leg prototype stolen. Footage corrupted by malware. Biometrics bypassed." },
+                  "Doc Joy arrived for night shift",
+                  "Suspicious individual — hooded, no treatment, departed after 3 min",
+                  "Unauthorized storage access attempt — alarm triggered, suspect fled",
+                  "Intel confirmed: stolen design spotted on Steel Jackhammer",
+                  "BREACH — Chrome leg prototype stolen. Footage corrupted by malware. Biometrics bypassed.",
                 ]}
-                lastService="1 week ago (security upgrade post-breach)"
-              >
-                <BiometricLog
-                  confidence="95%"
-                  scans={[
-                    {
-                      timestamp: "Today, 20:00",
-                      source: "Storage Access Scanner",
-                      name: "Doc Joy",
-                      result: "MATCHED",
-                      confidence: 98,
-                      details: "Retinal scan + fingerprint verified",
-                      notes: "Evening inventory check — retrieved medical supplies",
-                    },
-                    {
-                      timestamp: "Today, 08:30",
-                      source: "Storage Access Scanner",
-                      name: "Doc Joy",
-                      result: "MATCHED",
-                      confidence: 97,
-                      details: "Retinal scan + fingerprint verified",
-                      notes: "Morning equipment check — chrome components inventory",
-                    },
-                    {
-                      timestamp: "Nov 15, 03:15",
-                      source: "Storage Access Scanner",
-                      name: "Unknown Individual",
-                      result: "FAILED",
-                      confidence: 0,
-                      details: "No biometric match in database",
-                      notes: "ALERT — Unauthorized access attempt, alarm triggered, suspect fled",
-                    },
-                    {
-                      timestamp: "Oct 28, 03:47",
-                      source: "Storage Access Scanner",
-                      name: "SECURITY BREACH",
-                      result: "FAILED",
-                      confidence: 0,
-                      details: "System bypassed — lock picked, scanner disabled",
-                      notes: "⚠ CRITICAL — Chrome leg prototype stolen, footage corrupted. Security upgraded post-incident.",
-                    },
-                  ]}
-                />
-              </Camera>
+              />
             ),
           },
 
@@ -276,7 +224,7 @@ export const DOC_JOY_CLINIC_COMMANDS = {
             password: {
               pw: "prototype",
               hint: "What was stolen from the lab",
-              content: <Locked theme="vault" title="SECURE STORAGE" />
+              lockType: 'vault',
             },
             content: (
               <Extractable
@@ -319,7 +267,7 @@ export const DOC_JOY_CLINIC_COMMANDS = {
             password: {
               pw: "iceicebaby",
               hint: "Gotta keep everything nice and Vanilla Ice cold",
-              content: <Locked theme="safe" title="MEDICAL STORAGE" />
+              lockType: 'safe',
             },
             content: (
               <SmartFridge
@@ -387,7 +335,7 @@ export const DOC_JOY_CLINIC_COMMANDS = {
             password: {
               pw: "reaperdoc",
               hint: "Best job in the business",
-              content: <Locked theme="terminal" title="OFFICE COMPUTER" />
+              lockType: 'terminal',
             },
             content: (
               <Workstation

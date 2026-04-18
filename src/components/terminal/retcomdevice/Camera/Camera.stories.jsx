@@ -5,56 +5,72 @@ export default {
   component: Camera,
 };
 
-export const Basic = {
+export const Active = {
   args: {
-    id: 'CAM-BODEGA-01',
-    location: 'Lucky Star Bodega — Main Entrance',
+    id: 'CAM-01',
+    location: 'Main Entrance',
     status: 'ACTIVE',
-    recording: true,
-    storage: 'Local server (basement office)',
-    timeline: [
-      '23:15 — Figure enters, face obscured by hood',
-      '23:17 — Register drawer opened forcefully',
-      '23:18 — ⚠ Glass shattered, partial struggle visible',
-      '23:19 — Signal lost briefly',
-      '23:21 — Signal restored, store empty',
-    ],
-    lastService: 'March 15, 2067',
   },
 };
 
 export const Offline = {
   args: {
-    id: 'CAM-ALLEY-02',
-    location: 'Stone Street Alley — North Entrance',
+    id: 'CAM-02',
+    location: 'Back Corridor',
     status: 'OFFLINE',
-    recording: false,
-    storage: 'Local server (connection lost)',
-    timeline: [
-      '20:42 — ⚠ Feed becomes unstable',
-      '20:45 — SIGNAL LOST',
-    ],
-    lastService: 'October 5, 2067',
   },
 };
 
-export const Commercial = {
+export const WithCoverage = {
   args: {
-    cameraId: 'CAM-CPT-FOYER',
-    location: 'Peach Trees — Ground Floor Atrium',
-    coverage: 'Main entrance, security desk, elevator bank',
+    id: 'CAM-03',
+    location: 'Operating Room',
     status: 'ACTIVE',
-    recording: true,
-    storage: 'Encrypted server (30-day retention)',
-    details: [
-      '4K resolution, 120° wide angle',
-      'Night vision: Active',
-      'Motion detection: Enabled',
+    coverage: 'Full room coverage — entrance, surgical suite, storage corridor',
+  },
+};
+
+export const WithNotes = {
+  args: {
+    id: 'CAM-04',
+    location: 'Storage Room',
+    status: 'ACTIVE',
+    coverage: 'Storage shelves, door, rear wall',
+    notes: [
+      'Night vision enabled',
+      'Motion detection active',
+      'Blind spot: bottom-left corner behind shelving',
+    ],
+  },
+};
+
+export const WithAlerts = {
+  args: {
+    id: 'CAM-05',
+    location: 'Staff Entrance',
+    status: 'ACTIVE',
+    alerts: [
+      'Doc Joy arrived for night shift',
+      'Unknown individual — hooded, no treatment, departed after 3 min',
+      'Unauthorized access attempt — alarm triggered, suspect fled',
+    ],
+  },
+};
+
+export const WithEverything = {
+  args: {
+    id: 'CAM-06',
+    location: 'Clinic Main Floor',
+    status: 'ACTIVE',
+    coverage: 'Operating room, entrance, waiting area',
+    notes: [
+      'Night vision enabled',
+      'Upgraded post-breach Oct 28',
     ],
     alerts: [
-      { time: '14:32', message: 'High foot traffic — Unit 4201 party guests' },
-      { time: '09:45', message: 'Delivery authorization logged — Unit 4201' },
+      'Doc Joy arrived for night shift',
+      'Suspicious individual — departed without treatment',
+      'BREACH — footage corrupted, biometrics bypassed',
     ],
-    lastService: 'November 10, 2067',
   },
 };

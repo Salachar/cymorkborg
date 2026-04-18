@@ -17,7 +17,6 @@ export default function RCDAlert({
   details = [],
   children,
 }) {
-
   const color    = 'rgb(168, 85, 247)';
   const colorDim = 'rgba(168, 85, 247, 0.3)';
   const glow     = 'rgba(168, 85, 247, 0.25)';

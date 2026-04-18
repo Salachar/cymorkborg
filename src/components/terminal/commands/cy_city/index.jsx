@@ -6,11 +6,6 @@ import {
   NodePreview,
 } from '@terminal/TerminalComponents';
 
-import {
-  Message,
-} from "@terminal/retcomdevice"
-
-
 import TerminalWallet from '@terminal/retcomdevice/Basic/TerminalWallet/TerminalWallet';
 import GamesBanner from '@terminal/retcomdevice/Games/GamesBanner/GamesBanner';
 import MinesweeperGame from '@terminal/retcomdevice/Games/MinesweeperGame/MinesweeperGame';
@@ -233,11 +228,9 @@ export const CY_CITY_PORTAL = {
       </NodePreview>
     ),
     content: (
-      <Message
-        title="RCD-7"
-        subtitle="QUICK REFERENCE"
-        message="RetCom Device User Guide"
-        theme="casual"
+      <Node
+        title="RCD-7 - QUICK REFERENCE"
+        subtitle="RetCom Device User Guide"
       >
         <InsetBox title="NAVIGATION">
           <Line cyan>• Tap any node to expand or collapse it</Line>
@@ -257,7 +250,7 @@ export const CY_CITY_PORTAL = {
           <Line smoke>• ICE nodes use a hacking minigame — difficulty varies</Line>
           <Line smoke>• Bypassed nodes stay unlocked across sessions</Line>
         </InsetBox>
-      </Message>
+      </Node>
     ),
   },
 };

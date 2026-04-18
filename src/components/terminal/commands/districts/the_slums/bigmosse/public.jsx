@@ -10,7 +10,7 @@ import {
 import {
   LocalAd,
   HoursBanner,
-  MaintenanceAccess,
+  Node,
   PublicPortal,
 } from "@terminal/retcomdevice"
 
@@ -67,12 +67,8 @@ export const PUBLIC_COMMANDS = {
   "Canal Water Taxi Network": {
     favicon: <Icons.Taxi />,
     content: (
-      <MaintenanceAccess
+      <Node
         title="[PORTS CANAL TRANSIT]"
-        deviceModel="Transit Information System"
-        deviceId="TRANSIT-CANAL-01"
-        firmwareVersion="v2.5.0"
-        systemStatus="OPERATIONAL"
         notes={[
           "Operating: 24/7 (all docks)",
           "Peak hours: 06:00-09:00, 17:00-20:00",
@@ -98,7 +94,7 @@ export const PUBLIC_COMMANDS = {
           <Line yellow>Tip expected for after-hours or special requests</Line>
         </InsetBox>
         <Line pink>"Cleanest water transport in Ports. That's not saying much."</Line>
-      </MaintenanceAccess>
+      </Node>
     ),
   },
 
@@ -236,12 +232,8 @@ export const PUBLIC_COMMANDS = {
   "Traffic Signal Control (Innovation & 7th)": {
     favicon: <Icons.Traffic />,
     content: (
-      <MaintenanceAccess
+      <Node
         title="[TRAFFIC SIGNAL - INNOVATION AVE & 7TH ST]"
-        deviceModel="Traffic Control System"
-        deviceId="TRAFFIC-INNO7-01"
-        firmwareVersion="v6.0.3"
-        systemStatus="OPERATIONAL"
         notes={[
           "Operation Mode: AUTOMATED (adaptive timing)",
           "Cycle Time: 80 seconds (adjusts to traffic)",
@@ -261,7 +253,7 @@ export const PUBLIC_COMMANDS = {
           <Line cyan>Emergency vehicle overrides: 1</Line>
           <Line cyan>Average wait time: 32 seconds</Line>
         </InsetBox>
-      </MaintenanceAccess>
+      </Node>
     ),
   },
 

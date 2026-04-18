@@ -2,21 +2,15 @@ import Icons from '@utils/icons';
 
 import {
   Line,
-  Divider,
   InsetBox,
   NodePreview,
 } from '@terminal/TerminalComponents';
 
 import {
-  Safe,
-  Jukebox,
-  MaintenanceAccess,
+  Node,
   PublicPortal,
   FacilityPortal,
-  HoursBanner,
-  Menu,
   PersonnelFile,
-  Locked,
   CoffeeMachine,
 } from "@terminal/retcomdevice"
 
@@ -51,12 +45,8 @@ export const GOLDEN_SPIRE_COMMANDS = {
       "Reception Area": {
         favicon: <Icons.Atrium />,
         content: (
-          <MaintenanceAccess
+          <Node
             title="[RECEPTION - FLOOR 18]"
-            deviceModel="Client Services Area"
-            deviceId="GMT-RECEPTION-18"
-            firmwareVersion="v3.0.0"
-            systemStatus="OPERATIONAL"
             notes={[
               "Marble floors, leather furniture",
               "Armed security guard at desk",
@@ -71,20 +61,15 @@ export const GOLDEN_SPIRE_COMMANDS = {
               <Line red>• Panic buttons at reception desk</Line>
               <Line red>• Direct line to UCS SecCorps (2-minute response)</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
       "Internal Access": {
         internal: true,
         favicon: <Icons.LAN />,
         content: (
-          <MaintenanceAccess
-            variant="internal"
+          <Node
             title="Gravf|Mellberg|Tosk Law Offices"
-            deviceId="NET-GATEWAY-MAIN"
-            firmwareVersion="v2.7.3"
-            systemStatus="OPERATIONAL"
-            uptime="42 days, 11 hours"
           />
         ),
         related_commands: {

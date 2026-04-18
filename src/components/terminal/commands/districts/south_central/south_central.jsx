@@ -7,7 +7,7 @@ import {
 } from '@terminal/TerminalComponents';
 
 import {
-  CCTV,
+  Camera,
   DistrictPortal,
 } from "@terminal/retcomdevice"
 
@@ -59,12 +59,8 @@ export const SOUTH_CENTRAL_COMMANDS = {
       "South Central CityCam": {
         favicon: <Icons.Camera />,
         content: (
-          <CCTV
-            src={south_central_cctv}
-            cameraId="CAM-CPT-FOYER"
-            location="Entrance"
-            theme="amber"
-            height={500}
+          <Camera
+            cctv={south_central_cctv}
           />
         ),
       },

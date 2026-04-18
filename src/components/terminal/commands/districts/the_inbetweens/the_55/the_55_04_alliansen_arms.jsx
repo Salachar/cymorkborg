@@ -4,10 +4,8 @@ import {
 } from "@terminal/TerminalComponents";
 
 import {
-  CCTV,
-  Locked,
-  MaintenanceAccess,
-  Message,
+  Camera,
+  Node,
   PersonnelFile,
   PublicPortal,
   Tenet,
@@ -37,11 +35,8 @@ export const THE_55_ALLIANSEN_ARMS_COMMANDS = {
     related_commands: {
       "CityCam": {
         content: (
-          <CCTV
-            src={cctv_image}
-            cameraId="CAM-CC-MAIN"
-            theme="amber"
-            height={500}
+          <Camera
+            cctv={cctv_image}
           />
         ),
       },
@@ -353,7 +348,7 @@ export const THE_55_ALLIANSEN_ARMS_COMMANDS = {
 
       "Tenant Directory": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[ALLIANSEN ARMS TENANT DIRECTORY]"
             deviceModel="Residential Management System"
             deviceId="ALLIANSEN-DIR-01"
@@ -623,7 +618,7 @@ export const THE_55_ALLIANSEN_ARMS_COMMANDS = {
 
           "Unit 7121 Quarantine": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[APARTMENT #7121 - REDACTED]"
                 deviceModel="Quarantine Zone"
                 deviceId="APT-7121"
@@ -643,7 +638,7 @@ export const THE_55_ALLIANSEN_ARMS_COMMANDS = {
                   <Line yellow>Breaking seal may release contamination</Line>
                   <Line yellow>Corporate monitoring active</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
@@ -856,7 +851,7 @@ export const THE_55_ALLIANSEN_ARMS_COMMANDS = {
 
           "Apt. 8799": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[APARTMENT #8799]"
                 deviceModel="Unknown Configuration"
                 deviceId="APT-8799"
@@ -882,7 +877,7 @@ export const THE_55_ALLIANSEN_ARMS_COMMANDS = {
                   <Line red>No response to knocking or messages</Line>
                   <Line yellow>Breaking in may trigger unknown countermeasures</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
         },
@@ -890,7 +885,7 @@ export const THE_55_ALLIANSEN_ARMS_COMMANDS = {
 
       "Community Board": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[COMMUNITY OUTREACH BOARD]"
             deviceModel="Community Organization"
             deviceId="OUTREACH-64"
@@ -938,7 +933,7 @@ export const THE_55_ALLIANSEN_ARMS_COMMANDS = {
               <Line yellow>• Escort vulnerable residents through dangerous areas</Line>
               <Line yellow>• Gather evidence against corrupt corpo operations</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
 
@@ -946,13 +941,12 @@ export const THE_55_ALLIANSEN_ARMS_COMMANDS = {
         password: {
           pw: "alliansen",
           hint: "The name of this apartment building (first word)",
-          difficulty: "easy",
-          content: <Locked theme="terminal" title="BUILDING MANAGEMENT" />
+          lockType: 'terminal',
         },
         content: (
-          <Message
+          <Node
             title="ALLIANSEN ARMS MANAGEMENT"
-            message="BUILDING MANAGEMENT ACCESS"
+            subtitle="BUILDING MANAGEMENT ACCESS"
             note="Property systems - Authorized personnel only"
             theme="corporate"
           />
@@ -960,7 +954,7 @@ export const THE_55_ALLIANSEN_ARMS_COMMANDS = {
         related_commands: {
           "Lease Records": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[LEASE RECORDS]"
                 deviceModel="Property Management System"
                 deviceId="LEASE-SYSTEM-01"
@@ -999,13 +993,13 @@ export const THE_55_ALLIANSEN_ARMS_COMMANDS = {
                   <Line smoke>• Apt. #7529 (Kincaid) - Fire safety hazard</Line>
                   <Line smoke>• Apt. #7733 (Signal) - Hoarding violation</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Maintenance Requests": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[MAINTENANCE REQUESTS]"
                 deviceModel="Work Order System"
                 deviceId="MAINT-REQ-01"
@@ -1045,13 +1039,13 @@ export const THE_55_ALLIANSEN_ARMS_COMMANDS = {
                   <Line red>Priority given to safety hazards only</Line>
                   <Line yellow>Non-urgent requests may take weeks</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Security Incidents": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[SECURITY INCIDENT LOG]"
                 deviceModel="Incident Reporting System"
                 deviceId="SEC-LOG-01"
@@ -1101,7 +1095,7 @@ export const THE_55_ALLIANSEN_ARMS_COMMANDS = {
                   <Line cyan>Details: 3 people seen entering, never seen leaving</Line>
                   <Line smoke>Resolution: Ongoing monitoring, no further action</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
         },

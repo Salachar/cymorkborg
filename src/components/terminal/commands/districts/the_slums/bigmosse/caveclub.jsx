@@ -15,10 +15,8 @@ import {
   CommunityBoard,
   IncidentLog,
   HoursBanner,
-  MaintenanceAccess,
-  Message,
+  Node,
   VIPList,
-  Locked,
 } from "@terminal/retcomdevice";
 
 import StoneEelsAd from './caveclub_ad';
@@ -141,17 +139,11 @@ export const STONE_EELS_COMMANDS = {
         password: {
           pw: "python",
           hint: "Gives the best hugs",
-          content: <Locked theme="terminal" title="CAVE CLUB NETWORK" />
+          lockType: 'terminal',
         },
         content: (
-          <MaintenanceAccess
-            variant="internal"
+          <Node
             title="[CAVE CLUB INTERNAL NETWORK]"
-            deviceModel="Stone Eels Secure Network"
-            deviceId="CAVE-NET-MAIN"
-            firmwareVersion="v3.2.1"
-            systemStatus="OPERATIONAL"
-            uptime="234 days, 18 hours"
             notes={[
               "Network maintained by Stone Eels tech crew",
               "Security level: Gang-grade encryption",
@@ -165,13 +157,8 @@ export const STONE_EELS_COMMANDS = {
           "Security Systems": {
             favicon: <Icons.Security />,
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[SECURITY SYSTEMS]"
-                deviceModel="Cave Club Security Network"
-                deviceId="SEC-SYS-MAIN"
-                firmwareVersion="v4.0.3"
-                systemStatus="OPERATIONAL"
-                uptime="156 days, 9 hours"
                 notes={[
                   "Main floor: Full camera coverage (4 cameras)",
                   "VIP areas: NO cameras (privacy policy)",
@@ -188,7 +175,7 @@ export const STONE_EELS_COMMANDS = {
             password: {
               pw: "constrictor",
               hint: "The walls are closing in",
-              content: <Locked theme="terminal" title="VIP GUEST SYSTEM" />
+              lockType: 'terminal',
             },
             content: (
               <VIPList
@@ -294,7 +281,7 @@ export const STONE_EELS_COMMANDS = {
               pw: "ekans or arbok",
               hint: "Favorite pokemon, its one of two...",
               decoyLetters: "r,b,o,x,z,h",
-              content: <Locked theme="safe" title="MANAGEMENT SAFE" />
+              lockType: 'safe',
             },
             content: (
               <Safe
@@ -344,11 +331,9 @@ export const STONE_EELS_COMMANDS = {
           "Territory Status": {
             favicon: <Icons.Query />,
             content: (
-              <Message
-                title="STONE EELS"
-                subtitle="TERRITORY OPS"
-                message="PORTS EASTERN SECTOR — OPERATIONAL"
-                theme="casual"
+              <Node
+                title="STONE EELS - TERRITORY OPS"
+                subtitle="PORTS EASTERN SECTOR — OPERATIONAL"
               >
                 <DataTable data={[
                   { label: "Territory", value: "Ports, eastern section" },
@@ -369,19 +354,15 @@ export const STONE_EELS_COMMANDS = {
                   { label: "Arms", value: "Vetted buyers, council sign-off required" },
                   { label: "Intel", value: "Cave Club neutral ground — everyone talks here" },
                 ]} />
-              </Message>
+              </Node>
             ),
           },
 
           "Personnel Files": {
             favicon: <Icons.Person />,
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[PERSONNEL FILES]"
-                deviceModel="Gang Personnel Database"
-                deviceId="GANG-HR-01"
-                firmwareVersion="v2.5.0"
-                systemStatus="OPERATIONAL"
                 notes={[
                   "Saša + Council of 5",
                   "Enforcers: 8-10",

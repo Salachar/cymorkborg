@@ -13,14 +13,11 @@ import {
   EncryptedMessage,
   Extractable,
   Jukebox,
-  Locked,
-  MaintenanceAccess,
-  Message,
+  Node,
   NetworkDevices,
   NetworkTrafficMonitor,
   RCDAlert,
   RetComImage,
-  RoomAccess,
   Safe,
   SmartFridge,
   VIPList,
@@ -40,14 +37,12 @@ export const STEEL_PENTHOUSE_COMMANDS = {
       pw: 'unkillable',
       hint: "Can't take down the champ!",
       decoyLetters: "p,r,m",
-      content: <Locked theme="home" />
+      lockType: 'home',
     },
     content: (
-      <Message
-        title="PENTHOUSE SMART HOME"
-        message="NETWORK ACCESS ESTABLISHED"
-        note="Connected to JACKHAMMER_HOME | Welcome to the most over-engineered apartment in Central District"
-        theme="casual"
+      <Node
+        title="PENTHOUSE SMART HOME - NETWORK ACCESS ESTABLISHED"
+        footer="Connected to JACKHAMMER_HOME | Welcome to the most over-engineered apartment in Central District"
       >
         <RCDAlert
           message="High-density RCD activity detected in vicinity"
@@ -58,22 +53,18 @@ export const STEEL_PENTHOUSE_COMMANDS = {
             "Dealer RCDs cycling frequently (rotating stock)",
           ]}
         />
-      </Message>
+      </Node>
     ),
     related_commands: {
       "Building Services": {
         favicon: <Icons.Services />,
         password: {
           pw: 'steel4201',
-          content: <Locked theme="terminal" />
+          lockType: 'terminal',
         },
         content: (
-          <MaintenanceAccess
+          <Node
             title="[BUILDING SYSTEMS - UNIT 4201]"
-            deviceModel="Integrated Building Services"
-            deviceId="BLDG-SVC-4201"
-            firmwareVersion="v5.1.2"
-            systemStatus="OPERATIONAL"
             notes={[
               "Inherited from Tower Block 7 infrastructure",
               "HVAC, lighting, fire suppression",
@@ -84,18 +75,14 @@ export const STEEL_PENTHOUSE_COMMANDS = {
             <InsetBox title="SYSTEM STATUS">
               <Line red bold pulse>Check Climate Control Systems</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
         related_commands: {
           "HVAC & Climate": {
             favicon: <Icons.Maintenance />,
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[CLIMATE & LIGHTING CONTROL]"
-                deviceModel="Smart Home Environmental System"
-                deviceId="CLIMATE-4201"
-                firmwareVersion="v4.0.0"
-                systemStatus="STRUGGLING"
                 notes={[
                   "Set temperature: 22°C",
                   "Actual temperature: 24°C (party heat exceeding capacity)",
@@ -109,19 +96,15 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                   <Line yellow>Vent windows/balcony door remotely</Line>
                 </InsetBox>
                 <Line smoke small>Climate manipulation takes 10-15 minutes to have noticeable effect.</Line>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Fire Suppression": {
             favicon: <Icons.Maintenance />,
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[FIRE SUPPRESSION SYSTEM]"
-                deviceModel="AutoSafe Fire Control"
-                deviceId="FIRE-SUP-4201"
-                firmwareVersion="v3.2.0"
-                systemStatus="STANDBY"
                 notes={[
                   "Sprinkler system armed",
                   "Smoke detectors active (8 units)",
@@ -133,19 +116,15 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                   <Line neon>Sprinkler heads: 12 total</Line>
                   <Line neon>Water pressure: GOOD</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Emergency Systems": {
             favicon: <Icons.Maintenance />,
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[EMERGENCY SYSTEMS]"
-                deviceModel="Building Safety Integration"
-                deviceId="EMERGENCY-4201"
-                firmwareVersion="v2.0.0"
-                systemStatus="ARMED"
                 notes={[
                   "Smoke alarms active",
                   "Emergency exit lighting functional",
@@ -156,7 +135,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                   <Line yellow>Alert: Building security + SecCorps</Line>
                   <Line yellow>Response time: ~3 minutes</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
         },
@@ -170,16 +149,11 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           showFirst: true,
           showCount: true,
           hint: "The actual amount that weren't drugged",
-          content: <Locked theme="terminal" />
+          lockType: 'terminal',
         },
         content: (
-          <MaintenanceAccess
-            variant="internal"
+          <Node
             title="[SECURITY SYSTEMS HUB]"
-            deviceModel="Integrated Security Platform"
-            deviceId="SECURITY-MAIN-4201"
-            firmwareVersion="v6.0.3"
-            systemStatus="RECORDING"
           />
         ),
         related_commands: {
@@ -364,12 +338,8 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           "Camera System": {
             favicon: <Icons.Camera />,
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[SECURITY CAMERA GRID]"
-                deviceModel="Surveillance System"
-                deviceId="CAM-GRID-4201"
-                firmwareVersion="v3.0.0"
-                systemStatus="RECORDING"
                 notes={[
                   "All cameras recording 24/7",
                   "No one actively monitoring (party chaos)",
@@ -385,7 +355,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                   <Line neon>Spa</Line>
                   <Line neon>Main Balcony (exterior)</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
             related_commands: {
               "Main Living Area Camera": {
@@ -395,9 +365,6 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                     id="cam-penthouse-living"
                     location="Main Living Area"
                     coverage="Central party space, rounded table, Cyber-Lich painting, connections to kitchen, tiger room, balcony"
-                    status="ACTIVE"
-                    recording={true}
-                    storage="Local NAS (30 day retention)"
                     timeline={[
                       "Now → 8-10 people visible, gaming tournament active",
                       "14:32 → New guests arrived, joined game",
@@ -415,9 +382,6 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                     id="cam-penthouse-kitchen"
                     location="Kitchen"
                     coverage="Appliances, counters, entry from main area"
-                    status="ACTIVE"
-                    recording={true}
-                    storage="Local NAS (30 day retention)"
                     timeline={[
                       "Now → 1 guest raiding fridge",
                       "14:20 → Someone made coffee (finally)",
@@ -435,9 +399,6 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                     id="cam-penthouse-tigers"
                     location="Tiger Room (Modified Guest Room)"
                     coverage="Cage structure, cage gate, opening to main living area"
-                    status="ACTIVE"
-                    recording={true}
-                    storage="Local NAS (30 day retention)"
                     timeline={[
                       "Now → Stripe sleeping near back wall, Shade pacing along cage front",
                       "14:15 → Someone fed cats through bars (not recommended)",
@@ -455,9 +416,6 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                     id="cam-penthouse-master"
                     location="Master Bedroom"
                     coverage="Full room, closet door, private balcony door"
-                    status="ACTIVE"
-                    recording={true}
-                    storage="Local NAS (30 day retention)"
                     timeline={[
                       "Today, 14:45 → Room empty (Steel at party)",
                       "Today, 13:20 → Someone entered briefly, checked closet",
@@ -475,9 +433,6 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                     id="cam-penthouse-gym"
                     location="Gym"
                     coverage="Equipment, sparring ring, mirror wall"
-                    status="ACTIVE"
-                    recording={true}
-                    storage="Local NAS (30 day retention)"
                     timeline={[
                       "Now → Empty (cydroid in standby)",
                       "Yesterday, 18:00 → Steel training session (2 hours)",
@@ -494,9 +449,6 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                     id="cam-penthouse-spa"
                     location="Spa"
                     coverage="Hot tub, sauna entrance, relaxation area"
-                    status="ACTIVE"
-                    recording={true}
-                    storage="Local NAS (30 day retention)"
                     timeline={[
                       "Now → 4 guests in hot tub, 2 in sauna",
                       "14:00 → Someone fell asleep in hot tub (woken by friend)",
@@ -513,9 +465,6 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                     id="cam-penthouse-balcony"
                     location="Main Balcony"
                     coverage="Pool/hot tub area, outdoor seating, balcony perimeter"
-                    status="ACTIVE"
-                    recording={true}
-                    storage="Local NAS (30 day retention)"
                     timeline={[
                       "Now → 3 guests in pool, 2 at seating area",
                       "13:50 → Someone smoking alone near edge",
@@ -533,12 +482,8 @@ export const STEEL_PENTHOUSE_COMMANDS = {
       "Smart Appliances": {
         favicon: <Icons.Devices />,
         content: (
-          <MaintenanceAccess
+          <Node
             title="[SMART APPLIANCE NETWORK]"
-            deviceModel="IoT Appliance Hub"
-            deviceId="APPLIANCE-HUB-4201"
-            firmwareVersion="v3.0.0"
-            systemStatus="OPERATIONAL"
             notes={[
               "All kitchen and spa appliances networked",
               "High power consumption (party mode)",
@@ -596,12 +541,8 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           "Sparring Cydroid": {
             favicon: <Icons.Fitness />,
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[SPARRING CYDROID CONTROL]"
-                deviceModel="CombatTrain Pro-X"
-                deviceId="CYDROID-GYM"
-                firmwareVersion="v3.0.0"
-                systemStatus="ACTIVE / STANDBY"
                 notes={[
                   "Set to MAXIMUM DIFFICULTY (10/10)",
                   "Programmed with Steel's fighting style",
@@ -617,7 +558,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                   <Line yellow>Activate outside ring (chaos mode)</Line>
                 </InsetBox>
                 <Line red>WARNING: Activating outside ring will cause extreme chaos and injuries</Line>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
@@ -644,12 +585,8 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           "Holo Projectors": {
             favicon: <Icons.Computer />,
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[HOLO PROJECTOR CONTROL]"
-                deviceModel="Multi-Room Holographic System"
-                deviceId="HOLO-PROJ-01"
-                firmwareVersion="v5.0.0"
-                systemStatus="ACTIVE"
                 notes={[
                   "11 projectors total across penthouse",
                   "Currently displaying party content",
@@ -671,7 +608,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                 </InsetBox>
                 <Line red>WARNING: Extreme holo interference may cause panic or investigation</Line>
                 <Line smoke small>Half the party guests are holo-avatars. Real guests in flesh.</Line>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
@@ -782,12 +719,8 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           "Spa Controls": {
             favicon: <Icons.Maintenance />,
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[SPA CONTROL SYSTEMS]"
-                deviceModel="Wellness Equipment Hub"
-                deviceId="SPA-CONTROLS"
-                firmwareVersion="v2.0.0"
-                systemStatus="ACTIVE"
                 notes={[
                   "Hot tub and sauna both running",
                   "High power consumption",
@@ -807,7 +740,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                   <Line yellow>Current occupancy: 2 guests</Line>
                   <Line yellow>Override: Can adjust temp, disable steam</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
         },
@@ -816,22 +749,25 @@ export const STEEL_PENTHOUSE_COMMANDS = {
       "Room Systems": {
         favicon: <Icons.Room />,
         content: (
-          <RoomAccess
+          <Node
             title="ROOM-BY-ROOM STATUS"
-            network="JACKHAMMER_HOME"
-            status="MONITORING"
-            stats={{ occupancy: "20+ guests", power: "HIGH", noise: "HIGH" }}
+            table={{
+              occupancy: "20+ guests",
+              power: "HIGH",
+              noise: "HIGH",
+            }}
           />
         ),
         related_commands: {
           "Hallway": {
             favicon: <Icons.Room />,
             content: (
-              <RoomAccess
+              <Node
                 title="HALLWAY"
-                network="JACKHAMMER_HOME"
-                status="HIGH TRAFFIC"
-                stats={{ occupancy: "Constant flow", noise: "HIGH" }}
+                table={{
+                  occupancy: "Constant flow",
+                  noise: "HIGH",
+                }}
               >
                 <InsetBox title="CURRENT ACTIVITY:">
                   <Line cyan>Constant flow of party guests</Line>
@@ -840,25 +776,23 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                   <Line cyan>Mix of flesh guests and holo-avatars</Line>
                   <Line smoke small>As soon as one dealer leaves, another shows up</Line>
                 </InsetBox>
-              </RoomAccess>
+              </Node>
             ),
           },
 
           "Guest Room": {
             favicon: <Icons.Room />,
             content: (
-              <RoomAccess
+              <Node
                 title="GUEST ROOM"
-                network="JACKHAMMER_HOME"
-                status="UNUSED"
-                stats={{ occupancy: "Empty" }}
+                table={{ occupancy: "Empty" }}
               >
                 <InsetBox title="CLOSET:">
                   <Line smoke>• Pots and pans</Line>
                   <Line smoke>• Old books </Line>
                   <Line smoke>• Tuxedo</Line>
                 </InsetBox>
-              </RoomAccess>
+              </Node>
             ),
             related_commands: {
               "Drawer Storage": {
@@ -889,11 +823,9 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           "Tiger Room": {
             favicon: <Icons.Room />,
             content: (
-              <RoomAccess
+              <Node
                 title="TIGER ROOM"
-                network="JACKHAMMER_HOME"
-                status="ACTIVE"
-                stats={{ occupancy: "2 cats", noise: "LOW" }}
+                table={{ occupancy: "2 cats", noise: "LOW" }}
               >
                 <InsetBox title="OCCUPANTS:">
                   <Line red bold>STRIPE — multi-colored striped fur, currently sleeping</Line>
@@ -905,17 +837,15 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                   <Line smoke>Structural modification approved</Line>
                   <Line yellow>⚠ Cage inspection overdue (see building maintenance log)</Line>
                 </InsetBox>
-              </RoomAccess>
+              </Node>
             ),
           },
 
           "Main Balcony": {
             favicon: <Icons.Room />,
             content: (
-              <RoomAccess
+              <Node
                 title="MAIN BALCONY"
-                network="JACKHAMMER_HOME"
-                status="OCCUPIED"
                 stats={{ occupancy: "5 guests", temp: "Outdoor" }}
               >
                 <InsetBox title="FEATURES:">
@@ -925,17 +855,15 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                   <Line cyan>No holo projectors — flesh guests only</Line>
                   <Line yellow>⚠ Building disclaimer: Glazing stress fracture logged (see maintenance)</Line>
                 </InsetBox>
-              </RoomAccess>
+              </Node>
             ),
           },
 
           "Master Bedroom": {
             favicon: <Icons.Room />,
             content: (
-              <RoomAccess
+              <Node
                 title="MASTER BEDROOM"
-                network="JACKHAMMER_HOME"
-                status="EMPTY"
                 stats={{ occupancy: "Empty", temp: "22°C", noise: "MUFFLED" }}
               >
                 <InsetBox title="ROOM FEATURES:">
@@ -946,7 +874,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                   <Line cyan>Clothes scattered everywhere</Line>
                   <Line smoke small>Smells of incense and cleaning detergent</Line>
                 </InsetBox>
-              </RoomAccess>
+              </Node>
             ),
             related_commands: {
               "Wall Safe": {
@@ -954,7 +882,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                 password: {
                   pw: 'password',
                   hint: "Default",
-                  content: <Locked theme="safe" />
+                  lockType: 'safe',
                 },
                 content: (
                   <Safe
@@ -981,10 +909,8 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           "Main Living Area": {
             favicon: <Icons.Room />,
             content: (
-              <RoomAccess
+              <Node
                 title="MAIN LIVING AREA"
-                network="JACKHAMMER_HOME"
-                status="PARTY MODE ACTIVE"
                 stats={{ occupancy: "8-10 guests", noise: "LOUD", power: "HIGH" }}
               >
                 <InsetBox title="ENTERTAINMENT SYSTEMS:">
@@ -992,22 +918,21 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                   <Line neon>Holo projectors</Line>
                   <Line neon>Game console (GameBox Elite Pro)</Line>
                 </InsetBox>
-              </RoomAccess>
+              </Node>
             ),
             related_commands: {
               "Cyber-Lich Holo Painting": {
                 favicon: <Icons.Room />,
                 content: (
-                  <RoomAccess
+                  <Node
                     title="CYBER-LICH HOLO PAINTING"
-                    network="JACKHAMMER_HOME"
                   >
                     <RetComImage
                       theme="purple"
                       src={cyberlich_painting_image}
                       alt="Steel Jackhammer Penthouse Cyberlich Painting"
                     />
-                  </RoomAccess>
+                  </Node>
                 ),
                 related_commands: {
                   "Holo Display Memory": {
@@ -1048,10 +973,8 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           "Balcony": {
             favicon: <Icons.Room />,
             content: (
-              <RoomAccess
+              <Node
                 title="PRIVATE BALCONY"
-                network="JACKHAMMER_HOME"
-                status="OPERATIONAL"
                 stats={{ occupancy: "2 guests", temp: "Outdoor" }}
               >
                 <InsetBox title="FEATURES:">
@@ -1061,7 +984,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                   <Line cyan>Private area for conversations</Line>
                   <Line yellow>⚠ Building insurance disclaimer: Not responsible for structural failures</Line>
                 </InsetBox>
-              </RoomAccess>
+              </Node>
             ),
           },
         },

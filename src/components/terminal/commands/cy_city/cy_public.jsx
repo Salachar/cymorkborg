@@ -12,7 +12,7 @@ import {
   EventFeed,
   CyWeather,
   CySports,
-  Message,
+  Node,
   RetComImage
 } from "@terminal/retcomdevice"
 
@@ -62,11 +62,9 @@ export const CY_CITY_NETWORK = {
       "Cy Traffic (Real-Time)": {
         favicon: <Icons.Traffic />,
         content: (
-          <Message
-            title="CY TRAFFIC"
-            subtitle="ACGS CHARIOT AI"
-            message="Live route updates — plan your route, save your life"
-            theme="corporate"
+          <Node
+            title="CY TRAFFIC - ACGS CHARIOT AI"
+            subtitle="Live route updates — plan your route, save your life"
           >
             <InsetBox title="MAJOR ROUTES:">
               <Line red>Central Bridge (North-South): GRIDLOCK</Line>
@@ -85,18 +83,16 @@ export const CY_CITY_NETWORK = {
               <Line yellow>⚠ CAUTION: Mosscroft West (chemical leak, respirators required)</Line>
             </InsetBox>
             <Line pink small>"Plan your route. Save your life. Trust ACGS."</Line>
-          </Message>
+          </Node>
         ),
       },
 
       "Cy Entertainment Guide": {
         favicon: <Icons.Entertainment />,
         content: (
-          <Message
-            title="CY ENTERTAINMENT"
-            subtitle="DIRECTORY"
-            message="What's hot in the city tonight"
-            theme="casual"
+          <Node
+            title="CY ENTERTAINMENT - DIRECTORY"
+            subtitle="What's hot in the city tonight"
           >
             <InsetBox title="TRENDING VENUES:">
               <Line pink>HELLSCAPE (Ports) — Industrial nightclub, VIP available</Line>
@@ -116,18 +112,16 @@ export const CY_CITY_NETWORK = {
               <Line cyan>Mind-upload parties (Fideistic Transformation sponsored)</Line>
             </InsetBox>
             <Line yellow small>"Paid placements available. Contact Tulles&deVerte."</Line>
-          </Message>
+          </Node>
         ),
       },
 
       "Cy Survival Tips": {
         favicon: <Icons.Tips />,
         content: (
-          <Message
-            title="CY SURVIVAL GUIDE"
-            subtitle="UNOFFICIAL"
-            message="User-contributed wisdom from the streets"
-            theme="casual"
+          <Node
+            title="CY SURVIVAL GUIDE - UNOFFICIAL"
+            subtitle="User-contributed wisdom from the streets"
           >
             <InsetBox title="ESSENTIAL TIPS:">
               <Line neon>1. Never drink canal water (not even filtered)</Line>
@@ -142,19 +136,17 @@ export const CY_CITY_NETWORK = {
               <Line neon>10. The city wants you dead. Prove it wrong.</Line>
             </InsetBox>
             <Line pink small>"Stay smart. Stay alive. Stay cynical."</Line>
-          </Message>
+          </Node>
         ),
       },
 
       "Cy Dating Network": {
         favicon: <Icons.Heart />,
         content: (
-          <Message
-            title="CY-MATCH"
-            subtitle="SOCIAL NETWORK"
-            message="Find Connection in the Disconnected City"
-            note="Platform disclaimer: 78% of profiles may be bots, scams, or law enforcement"
-            theme="casual"
+          <Node
+            title="CY-MATCH - SOCIAL NETWORK"
+            subtitle="Find Connection in the Disconnected City"
+            footer="Platform disclaimer: 78% of profiles may be bots, scams, or law enforcement"
           >
             <InsetBox title="NEARBY PROFILES:">
               <Line pink>"CHROME_QUEEN_23" — 2km away</Line>
@@ -167,18 +159,16 @@ export const CY_CITY_NETWORK = {
               <Line neon>"Not looking for love, just someone to split rent"</Line>
             </InsetBox>
             <Line cyan small>"Love in the time of corporate dystopia. Good luck."</Line>
-          </Message>
+          </Node>
         ),
       },
 
       "Cy Food Delivery App": {
         favicon: <Icons.Food />,
         content: (
-          <Message
-            title="CY-EATS"
-            subtitle="DELIVERY SERVICE"
-            message="Hot food. Cold city. Fast delivery (eventually)."
-            theme="casual"
+          <Node
+            title="CY-EATS - DELIVERY SERVICE"
+            subtitle="Hot food. Cold city. Fast delivery (eventually)."
           >
             <InsetBox title="TRENDING RESTAURANTS:">
               <Line neon>Body's Pho — Synthetic Beef Noodle Soup</Line>
@@ -196,19 +186,17 @@ export const CY_CITY_NETWORK = {
               <Line yellow>⚠ Water taxi couriers experiencing fatberg delays</Line>
             </InsetBox>
             <Line pink small>"Hungry? We'll get there. Probably."</Line>
-          </Message>
+          </Node>
         ),
       },
 
       "Cy Horoscope Network": {
         favicon: <Icons.Stars />,
         content: (
-          <Message
-            title="NET ORACLE"
-            subtitle="DAILY HOROSCOPE"
-            message="Cosmic guidance for the cybernetic age"
-            note="Brought to you by Fideistic Transformation — Upload your destiny!"
-            theme="casual"
+          <Node
+            title="NET ORACLE - DAILY HOROSCOPE"
+            subtitle="Cosmic guidance for the cybernetic age"
+            footer="Brought to you by Fideistic Transformation — Upload your destiny!"
           >
             <InsetBox title="TODAY'S READING (ALL SIGNS):">
               <Line pink>The stars align in a pattern of corporate oppression.</Line>
@@ -221,19 +209,17 @@ export const CY_CITY_NETWORK = {
               <Line neon>Wealth: Money is fleeting. Debt is eternal.</Line>
               <Line pink>Overall: The city wants you dead. Don't give it satisfaction.</Line>
             </InsetBox>
-          </Message>
+          </Node>
         ),
       },
 
       "Cy Urban Legends Archive": {
         favicon: <Icons.Files />,
         content: (
-          <Message
-            title="CY URBAN LEGENDS"
-            subtitle="DATABASE"
-            message="Separating fact from fiction (probably)"
-            note="78% of legends have some basis in documented events"
-            theme="casual"
+          <Node
+            title="CY URBAN LEGENDS - DATABASE"
+            subtitle="Separating fact from fiction (probably)"
+            footer="78% of legends have some basis in documented events"
           >
             <InsetBox title="MOST SEARCHED LEGENDS:">
               <Line pink>The Salmon Door — Ultra-exclusive Ports restaurant</Line>
@@ -253,19 +239,17 @@ export const CY_CITY_NETWORK = {
               <Line neon>Hacker collectives whisper of encounters</Line>
             </InsetBox>
             <Line cyan small>"Believe what you want. The city doesn't care."</Line>
-          </Message>
+          </Node>
         ),
       },
 
       "Cy Public Services": {
         favicon: <Icons.Bulletin />,
         content: (
-          <Message
-            title="CY PUBLIC SERVICES"
-            subtitle="CITIZEN PORTAL"
-            message="Citizen resources and emergency information"
-            note="Your safety is our priority. (Terms and conditions apply.)"
-            theme="corporate"
+          <Node
+            title="CY PUBLIC SERVICES - CITIZEN PORTAL"
+            subtitle="Citizen resources and emergency information"
+            footer="Your safety is our priority. (Terms and conditions apply.)"
           >
             <InsetBox title="EMERGENCY CONTACTS:">
               <Line neon>SecOps (Emergency): 911</Line>
@@ -286,19 +270,17 @@ export const CY_CITY_NETWORK = {
               <Line yellow>Barnyard Fields: Avoid area (cult activity)</Line>
               <Line red>G0: QUARANTINE ZONE — Entry prohibited without authorization</Line>
             </InsetBox>
-          </Message>
+          </Node>
         ),
       },
 
       "Cy Job Board": {
         favicon: <Icons.Bulletin />,
         content: (
-          <Message
-            title="CY EMPLOYMENT NETWORK"
-            subtitle="JOB BOARD"
-            message="Your Future. Their Profit."
-            note="All positions subject to background checks and corporate loyalty agreements"
-            theme="corporate"
+          <Node
+            title="CY EMPLOYMENT NETWORK - JOB BOARD"
+            subtitle="Your Future. Their Profit."
+            footer="All positions subject to background checks and corporate loyalty agreements"
           >
             <InsetBox title="FEATURED OPPORTUNITIES:">
               <Line pink>FACTORY WORKER — Kaytell Makers (Mosscroft)</Line>
@@ -332,19 +314,17 @@ export const CY_CITY_NETWORK = {
               <Line neon>Pay: 12,000¤/month + housing | 10+ years food service management</Line>
             </InsetBox>
             <Line pink small>"Work hard. Die young. Leave a profitable corpse."</Line>
-          </Message>
+          </Node>
         ),
       },
 
       "Cy Housing Market": {
         favicon: <Icons.House />,
         content: (
-          <Message
-            title="CY REAL ESTATE"
-            subtitle="LISTINGS"
-            message="Affordable is a relative term."
-            note="All prices subject to market adjustment fees. First/last/security deposit standard (3 months upfront)."
-            theme="corporate"
+          <Node
+            title="CY REAL ESTATE - LISTINGS"
+            subtitle="Affordable is a relative term."
+            footer="All prices subject to market adjustment fees. First/last/security deposit standard (3 months upfront)."
           >
             <InsetBox title="RENTALS — CENTRAL DISTRICT:">
               <Line pink>Luxury 2BR Apartment (South Central) — 8,500¤/month</Line>
@@ -375,19 +355,17 @@ export const CY_CITY_NETWORK = {
               <Line neon>1,200m², zoned industrial, rail access</Line>
             </InsetBox>
             <Line pink small>"Home is where your credchip works."</Line>
-          </Message>
+          </Node>
         ),
       },
 
       "Cy Crime Reports": {
         favicon: <Icons.Police />,
         content: (
-          <Message
-            title="CY CRIME STATISTICS"
-            subtitle="PUBLIC DIGEST"
-            message="Sanitized for public consumption"
-            note="Crime reporting varies by district corporate investment"
-            theme="secure"
+          <Node
+            title="CY CRIME STATISTICS - PUBLIC DIGEST"
+            subtitle="Sanitized for public consumption"
+            footer="Crime reporting varies by district corporate investment"
           >
             <InsetBox title="LAST 24 HOURS — CENTRAL DISTRICT:">
               <Line neon>Reported incidents: 0</Line>
@@ -420,19 +398,17 @@ export const CY_CITY_NETWORK = {
               <Line red>3. [CLASSIFIED] — Corporate espionage</Line>
             </InsetBox>
             <Line pink small>"Stay safe. Stay compliant. Stay profitable."</Line>
-          </Message>
+          </Node>
         ),
       },
 
       "Cy Meme Feed": {
         favicon: <Icons.Ad />,
         content: (
-          <Message
-            title="CY VIRAL CONTENT"
-            subtitle="NETWORK"
-            message="The People's Voice (Probably)"
-            note="Platform moderation provided by ACGS sentiment analysis AI"
-            theme="casual"
+          <Node
+            title="CY VIRAL CONTENT - NETWORK"
+            subtitle="The People's Voice (Probably)"
+            footer="Platform moderation provided by ACGS sentiment analysis AI"
           >
             <InsetBox title="TRENDING NOW:">
               <Line neon>"TAG YOURSELF I'M THE DRONE THAT GOT SHOT DOWN"</Line>
@@ -459,7 +435,7 @@ export const CY_CITY_NETWORK = {
               <Line yellow>[Content removed — corporate complaint]</Line>
             </InsetBox>
             <Line yellow small>"Laugh now. Cry later. Delete before SecOps sees."</Line>
-          </Message>
+          </Node>
         ),
       },
     }

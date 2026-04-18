@@ -1,10 +1,8 @@
 import ArcadeCabinet from "./Devices/ArcadeCabinet/ArcadeCabinet";
 import ATM from "./Extractable/ATM";
-import { BiometricLog } from "./SecureAccessControl/SecureAccessControl";
 import BountyCard from "./BountyCard/BountyCard";
 import Briefing from "./Briefing/Briefing";
 import Camera from "./Camera/Camera";
-import CCTV from "./Camera/CCTV";
 import CoffeeMachine from "./Devices/CoffeeMachine/CoffeeMachine";
 import CommunityBoard from "./CommunityBoard/CommunityBoard";
 import CorpAd from "./CorpAd/CorpAd";
@@ -21,12 +19,8 @@ import GameConsole from "./Devices/GameConsole/GameConsole";
 import HoursBanner from "./HoursBanner/HoursBanner";
 import IncidentLog from "./IncidentLog/IncidentLog";
 import Jukebox from "./Devices/Jukebox/Jukebox";
-import LiveCameraFeed from "./Camera/LiveCameraFeed";
 import LocalAd from "./LocalAd/LocalAd";
-import Locked from "./Blockers/Locked/Locked";
-import MaintenanceAccess from "./MaintenanceAccess/MaintenanceAccess";
 import Menu from "./Menu/Menu";
-import Message from "./Basic/Message/Message";
 import NetworkDevices from "./NetworkDevices/NetworkDevices";
 import NetworkTrafficMonitor from "./NetworkTrafficMonitor/NetworkTrafficMonitor";
 import PasswordPrompt from "./Blockers/PasswordPrompt/PasswordPrompt";
@@ -36,9 +30,8 @@ import PublicPortal from "./Portals/PublicPortal";
 import Radio from "./Devices/Radio/Radio";
 import RCDAlert from "./RCDAlert/RCDAlert";
 import RetComImage from "./Images/RetComImage";
-import RoomAccess from "./MaintenanceAccess/RoomAccess";
 import Safe from "./Extractable/Safe";
-import SecureAccessControl from "./SecureAccessControl/SecureAccessControl";
+import BuildingAccess from "./BuildingAccess/BuildingAccess";
 import ShiftSchedule from "./ShiftSchedule/ShiftSchedule";
 import SmartFridge from "./Devices/SmartFridge/SmartFridge";
 import Tenet from "./Tenet/Tenet";
@@ -46,15 +39,14 @@ import VendingMachine from "./Devices/VendingMachine/VendingMachine";
 import VIPList from "./VIPList/VIPList";
 import Workstation from "./Workstation/Workstation";
 import Inventory from "./Inventory";
+import Node from "./Basic/Node";
 
 export {
   ArcadeCabinet,
   ATM,
-  BiometricLog,
   BountyCard,
   Briefing,
   Camera,
-  CCTV,
   CoffeeMachine,
   CommunityBoard,
   CorpAd,
@@ -72,14 +64,11 @@ export {
   IncidentLog,
   Inventory,
   Jukebox,
-  LiveCameraFeed,
   LocalAd,
-  Locked,
-  MaintenanceAccess,
   Menu,
-  Message,
   NetworkDevices,
   NetworkTrafficMonitor,
+  Node,
   PasswordPrompt,
   PersonnelFile,
   PrivatePortal,
@@ -87,9 +76,8 @@ export {
   Radio,
   RCDAlert,
   RetComImage,
-  RoomAccess,
   Safe,
-  SecureAccessControl,
+  BuildingAccess,
   ShiftSchedule,
   SmartFridge,
   Tenet,

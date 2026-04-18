@@ -11,10 +11,9 @@ import {
 
 import {
   ATM,
-  CCTV,
+  Camera,
   VendingMachine,
   Menu,
-  Message,
   RetComImage,
   PersonnelFile,
   HoursBanner,
@@ -23,10 +22,9 @@ import {
   NetworkDevices,
   VIPList,
   IncidentLog,
-  MaintenanceAccess,
+  Node,
   NetworkTrafficMonitor,
-  SecureAccessControl,
-  Locked,
+  BuildingAccess,
 } from "@terminal/retcomdevice"
 
 import LuckyFlightAd from './casino_ad'
@@ -51,12 +49,8 @@ export const LUCKY_FLIGHT_CASINO = {
       "Lucky Flight CityCam": {
         favicon: <Icons.Camera />,
         content: (
-          <CCTV
-            src={lfc_cctv}
-            cameraId="CAM-FL42-HALL-A"
-            location="Lobby"
-            theme="amber"
-            height={500}
+          <Camera
+            cctv={lfc_cctv}
           />
         ),
       },
@@ -160,11 +154,9 @@ export const LUCKY_FLIGHT_CASINO = {
       "Available Transportation": {
         favicon: <Icons.Taxi />,
         content: (
-          <Message
-            title="LUCKY FLIGHT CASINO"
-            subtitle="TRANSPORT OPTIONS"
-            message="Multiple arrival options available — pre-approval required for water taxi"
-            theme="corporate"
+          <Node
+            title="LUCKY FLIGHT CASINO - TRANSPORT OPTIONS"
+            subtitle="Multiple arrival options available — pre-approval required for water taxi"
           >
             <InsetBox title="MAIN ENTRANCE:">
               <Line neon>Car bridge or broken escalators</Line>
@@ -175,7 +167,7 @@ export const LUCKY_FLIGHT_CASINO = {
               <Line neon>Docks at basement level (Green Room)</Line>
               <Line yellow pulse>Must be pre-approved with security</Line>
             </InsetBox>
-          </Message>
+          </Node>
         ),
       },
 
@@ -204,13 +196,8 @@ export const LUCKY_FLIGHT_CASINO = {
               hint: "Top selling soda",
             },
             content: (
-             <MaintenanceAccess
+             <Node
                 title="[NUKACOLA DISPENSER 3000 - MAINTENANCE]"
-                deviceModel="NukaCola Dispenser 3000"
-                deviceId="LFC-VEND-LOBBY-01"
-                firmwareVersion="v4.1.0"
-                systemStatus="OPERATIONAL"
-                uptime="47 days, 3 hours"
                 notes={[
                   "Last restocked: 3 days ago",
                   "No faults logged",
@@ -231,15 +218,13 @@ export const LUCKY_FLIGHT_CASINO = {
               "DebugMode": {
                 favicon: <Icons.Debug />,
                 content: (
-                  <Message
-                    title="VENDING MACHINE"
-                    message="DEBUG MODE ACTIVATED"
-                    note="Dispense drinks via main interface - no charge"
-                    theme="corporate"
+                  <Node
+                    title="VENDING MACHINE - DEBUG MODE ACTIVATED"
+                    footer="Dispense drinks via main interface - no charge"
                   >
                     <Line yellow large>FREE VEND MODE ENABLED</Line>
                     <Line cyan>All payment verification disabled</Line>
-                  </Message>
+                  </Node>
                 ),
               },
             },
@@ -256,14 +241,8 @@ export const LUCKY_FLIGHT_CASINO = {
           decoyLetters: 'y,z',
         },
         content: (
-          <MaintenanceAccess
-            variant="internal"
+          <Node
             title="[CASINO INTERNAL NETWORK]"
-            deviceModel="Lucky Flight Systems Gateway"
-            deviceId="NET-GATEWAY-MAIN"
-            firmwareVersion="v2.7.3"
-            systemStatus="OPERATIONAL"
-            uptime="42 days, 11 hours"
             notes={[
               "Access Level: Peripheral systems only",
               "Camera feeds, operations data, and public terminals accessible",
@@ -279,12 +258,8 @@ export const LUCKY_FLIGHT_CASINO = {
               hint: "What blueprints are a form of",
             },
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[LUCKY FLIGHT CASINO — FACILITY FILES]"
-                deviceModel="Architectural Database System"
-                deviceId="LFC-ARCH-DB-01"
-                firmwareVersion="v2.0.0"
-                systemStatus="OPERATIONAL"
                 notes={[
                   "3 floors on record: Basement, Floor 1, Floor 2",
                   "Last updated: 20X2.08.14",
@@ -297,17 +272,15 @@ export const LUCKY_FLIGHT_CASINO = {
                   <Line neon>Floor 1 — casino floor, gaming</Line>
                   <Line neon>Floor 2 — VIP, management, vault</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
             related_commands: {
               "Blueprint: Basement": {
                 favicon: <Icons.Files />,
                 content: (
-                  <Message
-                    title="LUCKY FLIGHT CASINO - BASEMENT BLUEPRINT"
-                    subtitle="CLASSIFIED // SECURITY CLEARANCE 3"
-                    message="Basement Layout and Intel"
-                    theme="corporate"
+                  <Node
+                    title="LUCKY FLIGHT CASINO - BASEMENT BLUEPRINT - CLASSIFIED // SECURITY CLEARANCE 3"
+                    subtitle="Basement Layout and Intel"
                   >
                     <RetComImage
                       src={basementImage}
@@ -325,18 +298,16 @@ export const LUCKY_FLIGHT_CASINO = {
                       <Line neon>• Power Core</Line>
                     </InsetBox>
                     <Line yellow>⚠ Power Core presents explosion risk if tampered with</Line>
-                  </Message>
+                  </Node>
                 ),
               },
 
               "Blueprint: Floor 1": {
                 favicon: <Icons.Files />,
                 content: (
-                  <Message
-                    title="LUCKY FLIGHT CASINO - FLOOR 1 BLUEPRINT"
-                    subtitle="CLASSIFIED // SECURITY CLEARANCE 3"
-                    message="Floor 1 Layout and Intel"
-                    theme="corporate"
+                  <Node
+                    title="LUCKY FLIGHT CASINO - FLOOR 1 BLUEPRINT - CLASSIFIED // SECURITY CLEARANCE 3"
+                    subtitle="Floor 1 Layout and Intel"
                   >
                     <RetComImage
                       src={floor1Image}
@@ -355,17 +326,15 @@ export const LUCKY_FLIGHT_CASINO = {
                     </InsetBox>
                     <Line red>Full camera coverage on this floor</Line>
                     <Line yellow>Cleaning drones active 07:00-10:00 (closed hours)</Line>
-                  </Message>
+                  </Node>
                 ),
               },
               "Blueprint: Floor 2": {
                 favicon: <Icons.Files />,
                 content: (
-                  <Message
-                    title="LUCKY FLIGHT CASINO - FLOOR 2 BLUEPRINT"
-                    subtitle="CLASSIFIED // SECURITY CLEARANCE 3"
-                    message="Floor 2 Layout and Intel"
-                    theme="corporate"
+                  <Node
+                    title="LUCKY FLIGHT CASINO - FLOOR 2 BLUEPRINT - CLASSIFIED // SECURITY CLEARANCE 3"
+                    subtitle="Floor 2 Layout and Intel"
                   >
                     <RetComImage
                       src={floor2Image}
@@ -386,7 +355,7 @@ export const LUCKY_FLIGHT_CASINO = {
                     <Line red pulse bod>REDACTED</Line>
                     <Line red pulse bod>REDACTED</Line>
                     <Line red pulse bod>REDACTED</Line>
-                  </Message>
+                  </Node>
                 ),
               },
             },
@@ -398,13 +367,8 @@ export const LUCKY_FLIGHT_CASINO = {
               hint: "Lucky number Kelevra",
             },
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[HR DATABASE]"
-                deviceModel="Personnel Management System"
-                deviceId="HR-DB-MAIN"
-                firmwareVersion="v4.1.2"
-                systemStatus="OPERATIONAL"
-                uptime="89 days, 4 hours"
                 notes={[
                   "Access Level: Standard HR queries",
                   "Management: 2 active employees",
@@ -588,12 +552,8 @@ export const LUCKY_FLIGHT_CASINO = {
               hint: "What cameras are used for",
             },
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[LUCKY FLIGHT CASINO — SECURITY DATABASE]"
-                deviceModel="Security Management System"
-                deviceId="LFC-SEC-DB-01"
-                firmwareVersion="v3.2.0"
-                systemStatus="OPERATIONAL"
                 notes={[
                   "Camera coverage and blind spots",
                   "Patrol schedules and rotation times",
@@ -609,30 +569,21 @@ export const LUCKY_FLIGHT_CASINO = {
                 password: {
                   pw: "keycard",
                   hint: "What employees swipe to get in",
-                  content: <Locked theme="terminal" title="ACCESS CONTROL" />
+                  lockType: 'terminal',
                 },
                 content: (
-                  <SecureAccessControl
-                    systemName="ACCESS CONTROL SYSTEM"
-                    location="Lucky Flight Casino"
-                    systemVersion="v4.2.1"
-                    lastUpdate="2 weeks ago"
-                    accessPoints={[
+                  <BuildingAccess
+                    title="ACCESS CONTROL — LUCKY FLIGHT CASINO"
+                    points={[
                       {
-                        name: "Vault (Floor 2)",
-                        status: "SEALED",
-                        security: "BIOMETRIC + RETINAL SCAN + DUAL KEY",
-                        lastAccess: "3 days ago (Vaska Jordan)",
-                        accessCount: 2,
-                        flags: ["ENHANCED SECURITY", "DATABASE DETAINED"],
+                        location: "Vault (Floor 2)",
+                        access: ["Biometric + Retinal Scan + Dual Key"],
+                        notes: ["Last access: 3 days ago — Vaska Jordan", "Enhanced security active", "Database: DETAINED"],
                       },
                       {
-                        name: "Manager's Office (Vaska, Floor 2)",
-                        status: "UNLOCKED",
-                        security: "KEYCARD",
-                        authorized: "Management",
-                        lastAccess: "4 hours ago (Vaska Jordan)",
-                        accessCount: 8
+                        location: "Manager's Office — Vaska (Floor 2)",
+                        access: ["Keycard — management only"],
+                        notes: ["Last access: 4 hours ago — Vaska Jordan"],
                       },
                     ]}
                   />
@@ -704,12 +655,8 @@ export const LUCKY_FLIGHT_CASINO = {
               hint: "What casino uses to control neighborhood",
             },
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[LUCKY FLIGHT CASINO — FINANCIAL DATABASE]"
-                deviceModel="Financial Records System"
-                deviceId="LFC-FIN-DB-01"
-                firmwareVersion="v3.1.0"
-                systemStatus="OPERATIONAL"
                 notes={[
                   "Neighborhood debt ledger on file",
                   "High roller stats and transaction history",
@@ -722,19 +669,17 @@ export const LUCKY_FLIGHT_CASINO = {
               "Debt Ledger": {
                 favicon: <Icons.Files />,
                 content: (
-                  <Message
-                    title="DEBT LEDGER"
-                    subtitle="FINANCIAL RECORDS"
-                    message="MISSION TARGET - DESTROY TO COMPLETE OBJECTIVE"
-                    theme="secure"
-                    note="Backup status: None (offline database)"
+                  <Node
+                    title="DEBT LEDGER - FINANCIAL RECORDS"
+                    subtitle="MISSION TARGET - DESTROY TO COMPLETE OBJECTIVE"
+                    footer="Backup status: None (offline database)"
                   >
                     <DataTable data={[
                       { label: "Total Owed", value: "2,847,350¤" },
                       { label: "Accounts", value: "247 residents" },
                       { label: "Default Rate", value: "89%" },
                     ]} />
-                  </Message>
+                  </Node>
                 ),
               },
               "High Roller List": {
@@ -769,7 +714,7 @@ export const LUCKY_FLIGHT_CASINO = {
             password: {
               pw: "packets",
               hint: "What travels across a network",
-              content: <Locked theme="terminal" title="NETWORK MONITOR" />
+              lockType: 'terminal',
             },
             content: (
               <NetworkTrafficMonitor
@@ -795,13 +740,8 @@ export const LUCKY_FLIGHT_CASINO = {
           "Operations": {
             favicon: <Icons.Files />,
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[OPERATIONS DASHBOARD]"
-                deviceModel="Security Operations Terminal"
-                deviceId="SEC-OPS-MAIN"
-                firmwareVersion="v3.1.4"
-                systemStatus="OPERATIONAL"
-                uptime="6 days, 2 hours"
                 notes={[
                   "Last login: Wattana (Security Chief) - 2 hours ago",
                   "Active alerts: 3 pending review",
@@ -866,13 +806,8 @@ export const LUCKY_FLIGHT_CASINO = {
                   hint: "Condition of Room 16",
                 },
                 content: (
-                  <MaintenanceAccess
+                  <Node
                     title="[POWER CORE - ROOM 16]"
-                    deviceModel="Military-Grade Power Node (Modified)"
-                    deviceId="PWR-CORE-B1-016"
-                    firmwareVersion="v1.8.2-CUSTOM"
-                    systemStatus="ERROR"
-                    uptime="127 days, 14 hours"
                     notes={[
                       "CRITICAL LOAD: 99% capacity",
                       "Illegal modifications detected",
@@ -894,7 +829,7 @@ export const LUCKY_FLIGHT_CASINO = {
                         EXTREME HAZARD - AUTHORIZED PERSONNEL ONLY
                       </Line>
                     </div>
-                  </MaintenanceAccess>
+                  </Node>
                 ),
               },
             },

@@ -1,5 +1,5 @@
 import PasswordPrompt from './PasswordPrompt';
-import DigitalWallet from '../DigitalWallet/DigitalWallet';
+import DigitalWallet from '../../Extractable/DigitalWallet';
 
 export default {
   title: 'Terminal/PasswordPrompt',

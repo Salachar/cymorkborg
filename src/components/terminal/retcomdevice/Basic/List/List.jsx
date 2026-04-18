@@ -144,6 +144,7 @@ function CommandNode({
           showFirst={def.password.showFirst}
           showFrequency={def.password.showFrequency}
           decoyLetters={def.password.decoyLetters}
+          lockType={def.password.lockType}
           onSubmit={(cmdPath, cmdDef, password) => onUnlock(cmdPath, password)}
         >
           {def.password?.content ?? null}

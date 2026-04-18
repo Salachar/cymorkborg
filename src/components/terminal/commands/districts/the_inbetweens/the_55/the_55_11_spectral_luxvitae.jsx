@@ -4,10 +4,8 @@ import {
 } from "@terminal/TerminalComponents";
 
 import {
-  CCTV,
-  Locked,
-  MaintenanceAccess,
-  Message,
+  Camera,
+  Node,
   PersonnelFile,
   PublicPortal,
   Tenet,
@@ -37,18 +35,15 @@ export const THE_55_SPECTRAL_LUXVITAE_COMMANDS = {
     related_commands: {
       "CityCam": {
         content: (
-          <CCTV
-            src={cctv_image}
-            cameraId="CAM-CC-MAIN"
-            theme="amber"
-            height={500}
+          <Camera
+            cctv={cctv_image}
           />
         ),
       },
 
       "Luxvitae Overview": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[SPECTRAL LUXVITAE]"
             deviceModel="Premium Residential Tower"
             deviceId="LUXVITAE-01"
@@ -96,14 +91,14 @@ export const THE_55_SPECTRAL_LUXVITAE_COMMANDS = {
               <Line red>• Direct line to private security company</Line>
               <Line red>• Background checks on all staff and visitors</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
 
       "Resident Directory": {
         // Ultra-private residents - minimal info
         content: (
-          <MaintenanceAccess />
+          <Node />
         ),
         related_commands: {
           "Unit 301-302": {
@@ -276,7 +271,7 @@ export const THE_55_SPECTRAL_LUXVITAE_COMMANDS = {
 
       "Notable Residents": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[SPECTRAL LUXVITAE RESIDENT DIRECTORY]"
             deviceModel="Resident Registry"
             deviceId="RESIDENT-DIR-01"
@@ -397,7 +392,7 @@ export const THE_55_SPECTRAL_LUXVITAE_COMMANDS = {
 
           '"Mr. Silk"': {
             content: (
-              <MaintenanceAccess
+              <Node
                 title='["MR. SILK"]'
                 deviceModel="High-Risk Individual"
                 deviceId="RESIDENT-331"
@@ -447,7 +442,7 @@ export const THE_55_SPECTRAL_LUXVITAE_COMMANDS = {
                   <Line red>Connections throughout The City</Line>
                   <Line red>Community Outreach advises: avoid at all costs</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
@@ -507,7 +502,7 @@ export const THE_55_SPECTRAL_LUXVITAE_COMMANDS = {
 
       "Amenities & Services": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[LUXVITAE AMENITIES]"
             deviceModel="Premium Services Catalog"
             deviceId="AMENITIES-01"
@@ -563,13 +558,13 @@ export const THE_55_SPECTRAL_LUXVITAE_COMMANDS = {
               <Line yellow>• Invitation to exclusive social events</Line>
               <Line yellow>• Networking with other ultra-wealthy residents</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
 
       "Staff Directory": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[LUXVITAE STAFF DIRECTORY]"
             deviceModel="Personnel Registry"
             deviceId="STAFF-DIR-01"
@@ -594,7 +589,7 @@ export const THE_55_SPECTRAL_LUXVITAE_COMMANDS = {
               <Line neon>• Chef Pierre Laurent - Private Chef (on-call)</Line>
               <Line neon>• 40+ Support Staff (housekeeping, maintenance, etc.)</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
         related_commands: {
           "Geoffrey Sterling": {
@@ -707,13 +702,12 @@ export const THE_55_SPECTRAL_LUXVITAE_COMMANDS = {
         password: {
           pw: "spectral",
           hint: "The first word of this building's name",
-          difficulty: "easy",
-          content: <Locked theme="terminal" title="LUXURY MANAGEMENT" />
+          lockType: 'terminal',
         },
         content: (
-          <Message
+          <Node
             title="SPECTRAL LUXVITAE MANAGEMENT"
-            message="MANAGEMENT ACCESS GRANTED"
+            subtitle="MANAGEMENT ACCESS GRANTED"
             note="Resident systems - Authorized personnel only"
             theme="secure"
           />
@@ -721,7 +715,7 @@ export const THE_55_SPECTRAL_LUXVITAE_COMMANDS = {
         related_commands: {
           "Resident Registry": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[RESIDENT REGISTRY]"
                 deviceModel="Occupancy Management"
                 deviceId="REGISTRY-01"
@@ -757,7 +751,7 @@ export const THE_55_SPECTRAL_LUXVITAE_COMMANDS = {
                   <Line yellow>• Unit 289 - Resident death (Dr. Cross, natural causes)</Line>
                   <Line smoke>  Estate in probate, family dispute over inheritance</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
@@ -765,11 +759,10 @@ export const THE_55_SPECTRAL_LUXVITAE_COMMANDS = {
             password: {
               pw: "luxury",
               hint: "What type of living Spectral Luxvitae provides",
-              difficulty: "medium",
-              content: <Locked theme="terminal" title="FINANCIAL RECORDS" />
+              lockType: 'terminal',
             },
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[FINANCIAL RECORDS]"
                 deviceModel="Revenue Tracking System"
                 deviceId="FINANCE-01"
@@ -811,13 +804,13 @@ export const THE_55_SPECTRAL_LUXVITAE_COMMANDS = {
                   <Line smoke>No outstanding balances (enforcement strict)</Line>
                   <Line smoke>Failure to pay results in immediate eviction proceedings</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Security Protocols": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[SECURITY PROTOCOLS]"
                 deviceModel="Access Control System"
                 deviceId="SECURITY-01"
@@ -863,7 +856,7 @@ export const THE_55_SPECTRAL_LUXVITAE_COMMANDS = {
                   <Line yellow>• Criminal retaliation (Mr. Silk, others)</Line>
                   <Line yellow>• Corporate espionage (executive residents)</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
@@ -871,11 +864,10 @@ export const THE_55_SPECTRAL_LUXVITAE_COMMANDS = {
             password: {
               pw: "penthouse",
               hint: "What the luxury units are called",
-              difficulty: "medium",
-              content: <Locked theme="terminal" title="INCIDENT LOG" />
+              lockType: 'terminal',
             },
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[SECURITY INCIDENT LOG]"
                 deviceModel="Event Tracking System"
                 deviceId="INCIDENTS-01"
@@ -924,13 +916,13 @@ export const THE_55_SPECTRAL_LUXVITAE_COMMANDS = {
                   <Line red>• Dr. Nathaniel Cross (Unit 289): Natural causes, age 78</Line>
                   <Line smoke>  Estate valued at 90M¤, family dispute ongoing</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Concierge Request Log": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[CONCIERGE SERVICE REQUESTS]"
                 deviceModel="Request Tracking System"
                 deviceId="CONCIERGE-LOG-01"
@@ -972,7 +964,7 @@ export const THE_55_SPECTRAL_LUXVITAE_COMMANDS = {
                   <Line smoke>Sensitive requests redacted or coded</Line>
                   <Line yellow>Concierge staff sign extensive NDAs</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
         },

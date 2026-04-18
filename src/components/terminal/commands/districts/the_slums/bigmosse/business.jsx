@@ -12,11 +12,10 @@ import {
   Safe,
   FacilityPortal,
   Jukebox,
-  Locked,
   Menu,
   HoursBanner,
   CommunityBoard,
-  MaintenanceAccess,
+  Node,
   PublicPortal,
   PersonnelFile,
   Workstation,
@@ -26,12 +25,8 @@ export const BUSINESS_COMMANDS = {
   "Fingers' Clinic": {
     favicon: <Icons.RipperDoc />,
     content: (
-      <MaintenanceAccess
+      <Node
         title="[FINGERS' MEDICAL SERVICES]"
-        deviceModel="Clinic Management System"
-        deviceId="CLINIC-FINGERS-01"
-        firmwareVersion="v2.1.0"
-        systemStatus="OPERATIONAL"
         notes={[
           "Walk-ins welcome - Cash preferred",
           "Hours: 24/7 (emergencies always accepted)",
@@ -48,7 +43,7 @@ export const BUSINESS_COMMANDS = {
           <KeyValue label="Medical record services" value="80¤" />
         </InsetBox>
         <Line pink>"Former corporate medic. Credentials don't matter when you're bleeding."</Line>
-      </MaintenanceAccess>
+      </Node>
     ),
     related_commands: {
       "Personnel File": {
@@ -80,15 +75,11 @@ export const BUSINESS_COMMANDS = {
         password: {
           pw: "scalpel",
           hint: "Slicey slicey time tool",
-          content: <Locked theme="terminal" title="PATIENT DATABASE" />
+          lockType: 'terminal',
         },
         content: (
-          <MaintenanceAccess
+          <Node
             title="[PATIENT DATABASE]"
-            deviceModel="Medical Records System"
-            deviceId="MED-REC-FINGERS"
-            firmwareVersion="v1.8.0"
-            systemStatus="OPERATIONAL"
             notes={[
               "Last 30 days of records",
               "Patient identities not recorded per policy",
@@ -109,7 +100,7 @@ export const BUSINESS_COMMANDS = {
               <Line neon>Supplier: Black market medical (no receipts)</Line>
               <Line yellow>Next order: Low on trauma supplies</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
     },
@@ -118,12 +109,8 @@ export const BUSINESS_COMMANDS = {
   "Razor's Garage": {
     favicon: <Icons.Garage />,
     content: (
-      <MaintenanceAccess
+      <Node
         title="[RAZOR'S TECHNICAL SERVICES]"
-        deviceModel="Shop Management System"
-        deviceId="SHOP-RAZOR-01"
-        firmwareVersion="v3.0.2"
-        systemStatus="OPERATIONAL"
         notes={[
           "Modifications. Repairs. Discretion.",
           "Hours: 14:00-02:00 (closed mornings)",
@@ -147,7 +134,7 @@ export const BUSINESS_COMMANDS = {
         </InsetBox>
         <Line pink>"You get what you pay for. Sometimes you get more."</Line>
         <Line red>* All sales final - No refunds or exchanges</Line>
-      </MaintenanceAccess>
+      </Node>
     ),
     related_commands: {
       "Personnel File": {
@@ -183,16 +170,11 @@ export const BUSINESS_COMMANDS = {
         password: {
           pw: "bruteforce",
           hint: "Not elegant. But effective",
-          content: <Locked theme="terminal" title="INVENTORY SYSTEM" />
+          lockType: 'terminal',
         },
         content: (
-          <MaintenanceAccess
+          <Node
             title="[INVENTORY DATABASE]"
-            deviceModel="Shop Inventory System"
-            deviceId="INV-RAZOR-01"
-            firmwareVersion="v2.0.1"
-            systemStatus="OPERATIONAL"
-            uptime="234 days, 6 hours"
             notes={[
               "Current stock - Last updated 2 hours ago",
               "Source: Various (stolen, salvaged, black market)",
@@ -216,7 +198,7 @@ export const BUSINESS_COMMANDS = {
               <Line cyan>Lockpick kits (electronic) - 5 units</Line>
               <Line cyan>Surveillance counter-measures - 4 units</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
     },
@@ -305,17 +287,11 @@ export const BUSINESS_COMMANDS = {
         password: {
           pw: "boxesboxesboxes",
           hint: "So many boxes",
-          content: <Locked theme="terminal" title="SHOP SYSTEMS" />
+          lockType: 'terminal',
         },
         content: (
-          <MaintenanceAccess
-            variant="internal"
+          <Node
             title="[SHOP INTERNAL SYSTEMS]"
-            deviceModel="Retail Management System"
-            deviceId="RETAIL-MIRA-01"
-            firmwareVersion="v1.9.2"
-            systemStatus="OPERATIONAL"
-            uptime="412 days, 3 hours"
             notes={[
               "Last 24h transactions: 47",
               "Revenue: 412¤",
@@ -332,7 +308,7 @@ export const BUSINESS_COMMANDS = {
               <Line neon>Customer package pickups: 3</Line>
               <Line neon>Credchip exchange requests: 2</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
     },
@@ -447,7 +423,7 @@ export const BUSINESS_COMMANDS = {
         password: {
           pw: "crustacean",
           hint: "Crabs and such",
-          content: <Locked theme="safe" title="BAR SAFE" />
+          lockType: 'terminal',
         },
         content: (
           <Safe
@@ -540,7 +516,7 @@ export const BUSINESS_COMMANDS = {
         password: {
           pw: "cashmoney",
           hint: "What everyone wants from an ATM",
-          content: <Locked theme="terminal" title="ATM ACCESS" />
+          lockType: 'terminal',
         },
         content: (
           <ATM
@@ -566,15 +542,11 @@ export const BUSINESS_COMMANDS = {
         password: {
           pw: "thehouse",
           hint: "It always wins",
-          content: <Locked theme="terminal" title="PAWN RECORDS" />
+          lockType: 'terminal',
         },
         content: (
-          <MaintenanceAccess
+          <Node
             title="[PAWN RECORDS DATABASE]"
-            deviceModel="Pawn Shop Management System"
-            deviceId="PAWN-LUCKY-01"
-            firmwareVersion="v2.4.0"
-            systemStatus="OPERATIONAL"
             notes={[
               "Active loans & transaction history",
               "Last 7 days of pawn activity",
@@ -598,7 +570,7 @@ export const BUSINESS_COMMANDS = {
               <Line yellow>Confiscated items (failed loan redemptions)</Line>
               <Line yellow>Lucky's personal collection (not for sale)</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
     },
@@ -658,12 +630,8 @@ export const BUSINESS_COMMANDS = {
       "Shop Inventory": {
         favicon: <Icons.Inventory />,
         content: (
-          <MaintenanceAccess
+          <Node
             title="[INVENTORY DATABASE]"
-            deviceModel="Shop Inventory System"
-            deviceId="INV-SANCHEZ-01"
-            firmwareVersion="v1.3.7"
-            systemStatus="OPERATIONAL"
             notes={[
               "Last updated: 2 hours ago",
               "Back room inventory not tracked here",
@@ -687,7 +655,7 @@ export const BUSINESS_COMMANDS = {
               <Line smoke>Game console — overheating (in progress)</Line>
               <Line smoke>Cyberdeck — unknown fault (customer waiting, frustrated)</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
 
@@ -827,7 +795,7 @@ export const BUSINESS_COMMANDS = {
         password: {
           pw: "listerine",
           hint: "It's a booze cause it's green",
-          content: <Locked theme="safe" title="SHOP SAFE" />
+          lockType: 'terminal',
         },
         content: (
           <Safe
@@ -874,15 +842,11 @@ export const BUSINESS_COMMANDS = {
         password: {
           pw: "deathdogs",
           hint: "They have an absurd amount of nitrates",
-          content: <Locked theme="terminal" title="PAWN RECORDS" />
+          lockType: 'terminal',
         },
         content: (
-          <MaintenanceAccess
+          <Node
             title="[PAWN RECORDS]"
-            deviceModel="Pawn Shop Management System"
-            deviceId="PAWN-ODDITIES-01"
-            firmwareVersion="v2.1.0"
-            systemStatus="OPERATIONAL"
             notes={[
               "Active loans & recent transactions",
               "Last 7 days of pawn activity",
@@ -903,7 +867,7 @@ export const BUSINESS_COMMANDS = {
             <InsetBox title="BACK ROOM (Not For Sale):">
               <Line pink>Golden statue (shop mascot, mysterious origins)</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
     },
@@ -965,7 +929,7 @@ export const BUSINESS_COMMANDS = {
         password: {
           pw: "encryption",
           hint: "What Cipher specializes in for security",
-          content: <Locked theme="terminal" title="WORKSTATION ACCESS" />
+          lockType: 'terminal',
         },
         content: (
           <Workstation
@@ -996,7 +960,7 @@ export const BUSINESS_COMMANDS = {
         password: {
           pw: "decryption",
           hint: "Opposite of encryption",
-          content: <Locked theme="safe" title="OFFICE SAFE" />
+          lockType: 'safe',
         },
         content: (
           <Safe
@@ -1136,7 +1100,7 @@ export const BUSINESS_COMMANDS = {
         password: {
           pw: "algorithm",
           hint: "What programmers write to solve problems",
-          content: <Locked theme="safe" title="BAR SAFE" />
+          lockType: 'safe',
         },
         content: (
           <Safe
@@ -1183,16 +1147,11 @@ export const BUSINESS_COMMANDS = {
         password: {
           pw: "debug",
           hint: "What programmers do when code doesn't work",
-          content: <Locked theme="terminal" title="BAR SYSTEMS" />
+          lockType: 'terminal',
         },
         content: (
-          <MaintenanceAccess
-            variant="internal"
+          <Node
             title="[BAR INTERNAL SYSTEMS]"
-            deviceModel="POS & Inventory System"
-            deviceId="BAR-COMPILER-01"
-            firmwareVersion="v4.2.0"
-            systemStatus="OPERATIONAL"
             notes={[
               "Today's transactions: 67",
               "Revenue: 823¤ (above average for weekday)",
@@ -1210,7 +1169,7 @@ export const BUSINESS_COMMANDS = {
               <Line cyan>This weekend: Live music - "The Exception Handlers"</Line>
               <Line cyan>Next week: Startup pitch night (reserved area)</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
     },
@@ -1221,6 +1180,7 @@ export const BUSINESS_COMMANDS = {
     password: {
       pw: 'royalwestisthebest',
       decoyLetters: "z,p,u,x",
+      lockType: 'terminal',
     },
     content: (
       <FacilityPortal

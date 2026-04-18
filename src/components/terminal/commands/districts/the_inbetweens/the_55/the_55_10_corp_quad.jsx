@@ -4,11 +4,9 @@ import {
 } from "@terminal/TerminalComponents";
 
 import {
-  CCTV,
-  Locked,
-  MaintenanceAccess,
+  Camera,
+  Node,
   Menu,
-  Message,
   PersonnelFile,
   PublicPortal,
 } from "@terminal/retcomdevice";
@@ -37,18 +35,15 @@ export const THE_55_CORP_QUAD_COMMANDS = {
     related_commands: {
       "CityCam": {
         content: (
-          <CCTV
-            src={cctv_image}
-            cameraId="CAM-CC-MAIN"
-            theme="amber"
-            height={500}
+          <Camera
+            cctv={cctv_image}
           />
         ),
       },
 
       "Corp Quad Directory": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[CORP QUAD DIRECTORY]"
             deviceModel="Commercial Zone Management"
             deviceId="CORP-DIR-01"
@@ -71,12 +66,12 @@ export const THE_55_CORP_QUAD_COMMANDS = {
               <Line cyan>• Entertainment and leisure</Line>
               <Line cyan>• Corporate meeting spaces</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
         related_commands: {
           "Exotique": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[EXOTIQUE]"
                 deviceModel="Fashion Boutique"
                 deviceId="EXOTIQUE-220"
@@ -121,13 +116,13 @@ export const THE_55_CORP_QUAD_COMMANDS = {
                   <Line>Spectral Luxvitae and Green Zone residents</Line>
                   <Line yellow>Lower-level residents often followed by security</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Stadium of Prophets Returned": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[STADIUM OF PROPHETS RETURNED]"
                 deviceModel="Religious Facility"
                 deviceId="STADIUM-230-235"
@@ -185,13 +180,13 @@ export const THE_55_CORP_QUAD_COMMANDS = {
                   <Line red>• Allegations of financial mismanagement</Line>
                   <Line red>• Some former members claim cult-like behavior</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Prime Convoys VIP Station": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[PRIME CONVOYS VIP STATION]"
                 deviceModel="Executive Transit Hub"
                 deviceId="CONVOYS-240"
@@ -236,13 +231,13 @@ export const THE_55_CORP_QUAD_COMMANDS = {
                   <Line neon>• Secure communication systems</Line>
                   <Line neon>• Backup vehicle on standby for emergencies</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Founder's Floral Garden": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[FOUNDER'S FLORAL GARDEN]"
                 deviceModel="Botanical Garden"
                 deviceId="GARDEN-245-250"
@@ -280,7 +275,7 @@ export const THE_55_CORP_QUAD_COMMANDS = {
                   <Line>Photography sessions (500¤ per hour)</Line>
                   <Line>Botanical society meetings, children's programs</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
@@ -332,7 +327,7 @@ export const THE_55_CORP_QUAD_COMMANDS = {
 
           "The Platinum Club": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[THE PLATINUM CLUB]"
                 deviceModel="Private Members Club"
                 deviceId="PLATINUM-260"
@@ -382,7 +377,7 @@ export const THE_55_CORP_QUAD_COMMANDS = {
                   <Line yellow>Rumors of political manipulation and corruption</Line>
                   <Line red>Community Outreach considers it emblematic of The 55's problems</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
         },
@@ -390,7 +385,7 @@ export const THE_55_CORP_QUAD_COMMANDS = {
 
       "Hours & Restrictions": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[CORP QUAD OPERATING HOURS]"
             deviceModel="Access Control System"
             deviceId="HOURS-01"
@@ -436,13 +431,13 @@ export const THE_55_CORP_QUAD_COMMANDS = {
               <Line red>Response time: ~3 minutes anywhere in Corp Quad</Line>
               <Line red>Authorized to detain and eject "troublemakers"</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
 
       "Personnel Directory": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[CORP QUAD PERSONNEL]"
             deviceModel="Staff Registry"
             deviceId="PERSONNEL-01"
@@ -467,7 +462,7 @@ export const THE_55_CORP_QUAD_COMMANDS = {
               <Line neon>• Isabella Chen - Prime Convoys Manager</Line>
               <Line neon>• Dr. Helena Yamamoto - Founder's Garden Director</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
         related_commands: {
           "Richard Sterling": {
@@ -631,13 +626,12 @@ export const THE_55_CORP_QUAD_COMMANDS = {
         password: {
           pw: "corporate",
           hint: "What type of businesses are in Corp Quad",
-          difficulty: "easy",
-          content: <Locked theme="terminal" title="CORP SERVICES" />
+          lockType: 'terminal',
         },
         content: (
-          <Message
+          <Node
             title="CORP QUAD SERVICES"
-            message="BUSINESS ACCESS GRANTED"
+            subtitle="BUSINESS ACCESS GRANTED"
             note="Corporate systems - Authorized personnel only"
             theme="corporate"
           />
@@ -645,7 +639,7 @@ export const THE_55_CORP_QUAD_COMMANDS = {
         related_commands: {
           "Revenue Reports": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[CORP QUAD REVENUE REPORTS]"
                 deviceModel="Financial Tracking System"
                 deviceId="REVENUE-01"
@@ -693,13 +687,13 @@ export const THE_55_CORP_QUAD_COMMANDS = {
                   <Line red>• Increasing complaints about discrimination</Line>
                   <Line red>• Community Outreach organizing boycotts</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Security Incidents": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[SECURITY INCIDENT LOG]"
                 deviceModel="Incident Reporting System"
                 deviceId="SEC-LOG-01"
@@ -757,7 +751,7 @@ export const THE_55_CORP_QUAD_COMMANDS = {
                   <Line red>Management response: "Security exercising reasonable discretion"</Line>
                   <Line red>Community Outreach documenting incidents for lawsuit</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
@@ -765,11 +759,10 @@ export const THE_55_CORP_QUAD_COMMANDS = {
             password: {
               pw: "revenue",
               hint: "What businesses generate",
-              difficulty: "medium",
-              content: <Locked theme="terminal" title="TENANT LEASES" />
+              lockType: 'terminal',
             },
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[CORP QUAD TENANT LEASES]"
                 deviceModel="Property Management System"
                 deviceId="LEASES-01"
@@ -800,13 +793,13 @@ export const THE_55_CORP_QUAD_COMMANDS = {
                   <Line yellow>• Small boutique (Level 218) closing (lease termination)</Line>
                   <Line yellow>• Stadium under investigation for tax issues (ongoing)</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Security Patrol Schedules": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[SECURITY PATROL SCHEDULES]"
                 deviceModel="Guard Management System"
                 deviceId="PATROL-01"
@@ -838,7 +831,7 @@ export const THE_55_CORP_QUAD_COMMANDS = {
                   <Line yellow>Service corridors rarely patrolled</Line>
                   <Line yellow>Rooftop and emergency exits not monitored constantly</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
         },

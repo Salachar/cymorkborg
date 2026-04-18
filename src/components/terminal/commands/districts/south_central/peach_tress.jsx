@@ -10,18 +10,16 @@ import {
 import {
   ATM,
   Camera,
-  CCTV,
   DistrictPortal,
   HoursBanner,
-  Locked,
-  MaintenanceAccess,
   Menu,
   NetworkDevices,
+  Node,
   PersonnelFile,
   PublicPortal,
   RetComImage,
   Safe,
-  SecureAccessControl,
+  BuildingAccess,
   Tenet,
   VendingMachine,
 } from '@terminal/retcomdevice';
@@ -107,12 +105,8 @@ export const PEACH_TREES_COMMANDS = {
           "Atrium CityCam": {
             favicon: <Icons.Camera />,
             content: (
-              <CCTV
-                src={central_tower_atrium_cctv_image}
-                cameraId="CAM-CPT-FOYER"
-                location="Entrance"
-                theme="amber"
-                height={500}
+              <Camera
+                cctv={central_tower_atrium_cctv_image}
               />
             ),
           },
@@ -236,15 +230,11 @@ export const PEACH_TREES_COMMANDS = {
                 password: {
                   pw: "chromium",
                   hint: "Such a precious material",
-                  content: <Locked theme="terminal" title="CHROMELUX STAFF PORTAL" />
+                  lockType: 'terminal',
                 },
                 content: (
-                  <MaintenanceAccess
+                  <Node
                     title="[CHROMELUX — STAFF PORTAL]"
-                    deviceModel="Retail Management System"
-                    deviceId="CLX-CPT-MGMT-01"
-                    firmwareVersion="v2.1.4"
-                    systemStatus="OPERATIONAL"
                     notes={[
                       "Peach Trees boutique — Floor 2",
                       "Staff: 4 on shift (2 consultants, 1 surgeon, 1 front desk)",
@@ -271,7 +261,7 @@ export const PEACH_TREES_COMMANDS = {
                       <Line cyan>Average transaction: 36,848¤</Line>
                       <Line smoke small>Q4 target: on track</Line>
                     </InsetBox>
-                  </MaintenanceAccess>
+                  </Node>
                 ),
                 related_commands: {
                   "Personnel File - Dr. Nakamura": {
@@ -355,12 +345,8 @@ export const PEACH_TREES_COMMANDS = {
       "Resident Directory": {
         favicon: <Icons.Group />,
         content: (
-          <MaintenanceAccess
+          <Node
             title="[RESIDENT DIRECTORY - PUBLIC ACCESS]"
-            deviceModel="Directory System"
-            deviceId="DIR-TOWER-01"
-            firmwareVersion="v2.0.1"
-            systemStatus="OPERATIONAL"
             notes={[
               "Partial listing - many residents opt for privacy",
               "Full directory: Building security only",
@@ -372,7 +358,7 @@ export const PEACH_TREES_COMMANDS = {
             <InsetBox title="LISTED RESIDENTS (SELECTED):">
               <Line smoke small>Showing public listings only.</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
         related_commands: {
           "Unit 2204 - Floor 22": {
@@ -448,12 +434,8 @@ export const PEACH_TREES_COMMANDS = {
       "Tower Management": {
         favicon: <Icons.LAN />,
         content: (
-          <MaintenanceAccess
+          <Node
             title="[TOWER MANAGEMENT - FLOOR 51]"
-            deviceModel="Facility Management System"
-            deviceId="MGMT-TOWER-01"
-            firmwareVersion="v5.0.0"
-            systemStatus="OPERATIONAL"
             notes={[
               "Floor 51 - Management and services level",
               "Building operations, Glass Gardens restaurant above (roof)",
@@ -468,18 +450,14 @@ export const PEACH_TREES_COMMANDS = {
               <Line neon>• Service keycard administration</Line>
               <Line neon>• Roof access (helipad + Glass Gardens service entry)</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
         related_commands: {
           "Camera Grid": {
             favicon: <Icons.Camera />,
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[SECURITY CAMERA GRID]"
-                deviceModel="Surveillance System"
-                deviceId="CAM-GRID-01"
-                firmwareVersion="v4.2.1"
-                systemStatus="OPERATIONAL"
                 notes={[
                   "Total cameras: 48",
                   "Resolution: 1080p-4K (varies by location)",
@@ -502,7 +480,7 @@ export const PEACH_TREES_COMMANDS = {
                   <Line neon>• Glass Gardens roof level (3 cameras)</Line>
                   <Line red>• Roof access door (1 camera - OFFLINE)</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
             related_commands: {
               "Floor 42 - Penthouse Hallway": {
@@ -512,9 +490,6 @@ export const PEACH_TREES_COMMANDS = {
                     id="cam-fl42-hall-a"
                     location="Floor 42 - Penthouse Hallway"
                     coverage="Full hallway view including Unit 4201 entrance"
-                    status="ACTIVE"
-                    recording={true}
-                    storage="Local server (30 day retention)"
                     timeline={[
                       "14:32 → Three guests entered Unit 4201 (party traffic)",
                       "14:28 → One guest left, stumbling drunk",
@@ -527,12 +502,8 @@ export const PEACH_TREES_COMMANDS = {
                   "Live Feed": {
                     favicon: <Icons.LiveFeed />,
                     content: (
-                      <MaintenanceAccess
+                      <Node
                         title="[CAM-FL42-HALL-A LIVE FEED]"
-                        deviceModel="Live Surveillance Feed"
-                        deviceId="CAM-FL42-HALL-A"
-                        firmwareVersion="v4.2.1"
-                        systemStatus="STREAMING"
                         notes={[
                           "Floor 42 Penthouse Hallway",
                           "Unit 4201 entrance visible"
@@ -552,7 +523,7 @@ export const PEACH_TREES_COMMANDS = {
                           <Line yellow>Small concealed items likely to pass</Line>
                           <Line yellow>Heavy weapons and explosives will be caught</Line>
                         </InsetBox>
-                      </MaintenanceAccess>
+                      </Node>
                     ),
                   },
                 },
@@ -565,9 +536,6 @@ export const PEACH_TREES_COMMANDS = {
                     id="cam-service-ent"
                     location="Service Entrance - East Side"
                     coverage="Service entrance door and loading area"
-                    status="ACTIVE"
-                    recording={true}
-                    storage="Local server (30 day retention)"
                     timeline={[
                       "Today, 14:10 → Delivery truck departed",
                       "Today, 13:45 → Delivery arrival (building supplies)",
@@ -580,12 +548,8 @@ export const PEACH_TREES_COMMANDS = {
                   "Live Feed": {
                     favicon: <Icons.LiveFeed />,
                     content: (
-                      <MaintenanceAccess
+                      <Node
                         title="[CAM-SERVICE-ENT LIVE FEED]"
-                        deviceModel="Live Surveillance Feed"
-                        deviceId="CAM-SERVICE-ENT"
-                        firmwareVersion="v4.2.1"
-                        systemStatus="STREAMING"
                         notes={[
                           "Service Entrance - East Side",
                           "Unguarded - monitored remotely only"
@@ -602,7 +566,7 @@ export const PEACH_TREES_COMMANDS = {
                           <Line yellow>Service elevator from here reaches all floors including penthouses</Line>
                           <Line yellow>Bypasses lobby weapon scanners entirely</Line>
                         </InsetBox>
-                      </MaintenanceAccess>
+                      </Node>
                     ),
                   },
                 },
@@ -611,12 +575,8 @@ export const PEACH_TREES_COMMANDS = {
               "Roof Access Camera": {
                 favicon: <Icons.Camera />,
                 content: (
-                  <MaintenanceAccess
+                  <Node
                     title="[CAM-ROOF STATUS]"
-                    deviceModel="Security Camera"
-                    deviceId="CAM-ROOF-01"
-                    firmwareVersion="v4.2.1"
-                    systemStatus="OFFLINE"
                     notes={[
                       "Status: MAINTENANCE - Weather damage",
                       "Offline since: 12:00 today",
@@ -630,7 +590,7 @@ export const PEACH_TREES_COMMANDS = {
                       <Line yellow>Helipad and Glass Gardens service access from this level</Line>
                       <Line yellow>Penthouse balconies approx. 9 floors below</Line>
                     </InsetBox>
-                  </MaintenanceAccess>
+                  </Node>
                 ),
               },
             },
@@ -639,66 +599,37 @@ export const PEACH_TREES_COMMANDS = {
           "Building Access": {
             favicon: <Icons.LAN />,
             content: (
-              <SecureAccessControl
-                systemName="BUILDING ACCESS CONTROL"
-                location="Peach Trees"
-                systemVersion="v5.0.2"
-                lastUpdate="2 weeks ago"
-                accessPoints={[
+              <BuildingAccess
+                title="BUILDING ACCESS CONTROL"
+                points={[
                   {
-                    name: "Main Elevators (4 units)",
-                    status: "OPERATIONAL",
-                    security: "Keycard required for floors 40+",
-                    authorized: "Residents + authorized guests",
-                    lastAccess: "Active (constant use)",
-                    accessCount: 847,
-                    notes: "Destination approval required for penthouse floors"
+                    location: "Main Elevators (4 units)",
+                    access: ["Keycard — floors 40+", "All residents + authorized guests"],
+                    notes: ["Destination approval required for penthouse floors"],
                   },
                   {
-                    name: "Service Elevator",
-                    status: "OPERATIONAL",
-                    security: "Staff keycard required (all floors)",
-                    authorized: "Maintenance, delivery, ChromeLux staff",
-                    lastAccess: "20 minutes ago",
-                    accessCount: 47,
-                    flags: ["BYPASSES LOBBY"],
-                    notes: "Direct penthouse access without front desk"
+                    location: "Service Elevator",
+                    access: ["Staff keycard — all floors", "Maintenance, delivery, ChromeLux staff"],
+                    notes: ["Direct penthouse access without front desk", "Bypasses lobby"],
                   },
                   {
-                    name: "Service Entrance - East Side",
-                    status: "LOCKED",
-                    security: "Keycard (maintenance staff)",
-                    authorized: "Building maintenance, delivery crews",
-                    lastAccess: "20 minutes ago (delivery truck)",
-                    accessCount: 12,
-                    flags: ["UNGUARDED"],
-                    notes: "No physical guard - monitored remotely via camera"
+                    location: "Service Entrance — East Side",
+                    access: ["Keycard — maintenance staff only"],
+                    notes: ["No physical guard — remote camera monitoring only"],
                   },
                   {
-                    name: "Roof Access - Floor 51",
-                    status: "LOCKED",
-                    security: "Keycard (maintenance + Glass Gardens staff)",
-                    authorized: "Maintenance staff, Glass Gardens service entrance",
-                    lastAccess: "This morning (routine check)",
-                    accessCount: 2,
-                    flags: ["CAMERA OFFLINE"],
-                    notes: "Camera down for 2 days. Helipad and Glass Gardens accessible from here."
+                    location: "Roof Access — Floor 51",
+                    access: ["Keycard — maintenance + Glass Gardens staff"],
+                    notes: ["Camera offline for 2 days", "Helipad and Glass Gardens accessible from here"],
                   },
                   {
-                    name: "Parking Garage Gates (B1-B3)",
-                    status: "OPERATIONAL",
-                    security: "Resident keycard",
-                    authorized: "Residents only",
-                    lastAccess: "Continuous",
-                    accessCount: 324
+                    location: "Parking Garage (B1–B3)",
+                    access: ["Resident keycard only"],
                   },
                   {
-                    name: "Emergency Stairwell - Penthouse Level",
-                    status: "LOCKED",
-                    security: "One-way exit only (fire code)",
-                    authorized: "Emergency exit - no entry from stairwell",
-                    lastAccess: "Not tracked (exit only)",
-                    notes: "Cannot enter penthouse level from stairwell side"
+                    location: "Emergency Stairwell — Penthouse Level",
+                    access: ["One-way exit only (fire code)"],
+                    notes: ["Cannot enter penthouse level from stairwell side"],
                   },
                 ]}
               />
@@ -708,12 +639,8 @@ export const PEACH_TREES_COMMANDS = {
           "Building Network": {
             favicon: <Icons.Camera />,
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[BUILDING NETWORK ACCESS]"
-                deviceModel="Network Infrastructure"
-                deviceId="NET-TOWER-01"
-                firmwareVersion="v7.2.0"
-                systemStatus="OPERATIONAL"
                 notes={[
                   "Network: TOWER_INTERNAL",
                   "Encryption: WPA3-Enterprise",
@@ -733,18 +660,14 @@ export const PEACH_TREES_COMMANDS = {
                   <Line red>• Unit 4201 smart home (JACKHAMMER_HOME) - private</Line>
                   <Line red>• ChromeLux internal network (CHROMELUX_INTERNAL) - separate</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
             related_commands: {
               "Service Keycard Database": {
                 favicon: <Icons.Database />,
                 content: (
-                  <MaintenanceAccess
+                  <Node
                     title="[SERVICE KEYCARD DATABASE]"
-                    deviceModel="Access Card Management"
-                    deviceId="KEYCARD-DB-01"
-                    firmwareVersion="v3.0.0"
-                    systemStatus="OPERATIONAL"
                     notes={[
                       "Active maintenance and delivery staff credentials",
                       "ChromeLux staff have separate CHROMELUX-tier cards (atrium only)",
@@ -765,7 +688,7 @@ export const PEACH_TREES_COMMANDS = {
                       <Line cyan>DELIV: Service entrance, service elevator (delivery floors only)</Line>
                       <Line cyan>ROOF: Floor 51 stairwell, roof access door</Line>
                     </InsetBox>
-                  </MaintenanceAccess>
+                  </Node>
                 ),
               },
 
@@ -794,12 +717,8 @@ export const PEACH_TREES_COMMANDS = {
           "Facility Information": {
             favicon: <Icons.Files />,
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[BUILDING SPECIFICATIONS]"
-                deviceModel="Tower Management System"
-                deviceId="TOWER-BLOCK-7"
-                firmwareVersion="v5.1.2"
-                systemStatus="OPERATIONAL"
                 notes={[
                   "Address: 2847 Central Plaza, South Central District",
                   "Height: 51 floors (218 meters)",
@@ -829,18 +748,14 @@ export const PEACH_TREES_COMMANDS = {
                   <Line red>• Penthouse residents employ private security (not building staff)</Line>
                   <Line red>• ChromeLux staff armed - operate throughout atrium floors</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
             related_commands: {
               "Penthouse Blueprint": {
                 favicon: <Icons.Files />,
                 content: (
-                  <MaintenanceAccess
+                  <Node
                     title="[UNIT 4201 - MAINTENANCE FILE]"
-                    deviceModel="Building Records"
-                    deviceId="BLUEPRINT-4201"
-                    firmwareVersion="v1.0.0"
-                    systemStatus="ARCHIVED"
                     notes={[
                       "Unit 4201 - Floor 42, Southeast corner",
                       "3-bedroom penthouse suite",
@@ -874,7 +789,7 @@ export const PEACH_TREES_COMMANDS = {
                       <Line red>• Balcony floor - stress fracture reported (under review)</Line>
                       <Line smoke small>Tenant contact: Alliansen Inc. management - direct contact not available</Line>
                     </InsetBox>
-                  </MaintenanceAccess>
+                  </Node>
                 ),
               },
             },
@@ -883,12 +798,8 @@ export const PEACH_TREES_COMMANDS = {
           "HVAC Control": {
             favicon: <Icons.Maintenance />,
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[HVAC CONTROL SYSTEM]"
-                deviceModel="Climate Control"
-                deviceId="HVAC-TOWER-01"
-                firmwareVersion="v4.1.0"
-                systemStatus="OPERATIONAL"
                 notes={[
                   "Building average: 21°C",
                   "Mode: Auto",
@@ -904,19 +815,15 @@ export const PEACH_TREES_COMMANDS = {
                   <Line neon>• Parking Garage</Line>
                   <Line smoke small>Individual units have local thermostats (limited override available)</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Maintenance Log": {
             favicon: <Icons.Files />,
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[BUILDING MAINTENANCE LOG]"
-                deviceModel="Facility Management System"
-                deviceId="MAINT-LOG-01"
-                firmwareVersion="v5.0.0"
-                systemStatus="OPERATIONAL"
                 notes={[
                   "Last full service: Nov 10, 2067",
                   "Next scheduled: Dec 1, 2067",
@@ -936,7 +843,7 @@ export const PEACH_TREES_COMMANDS = {
                   <Line cyan>Inspection pending, safe to use</Line>
                   <Line cyan>Reported: Nov 12</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
         },

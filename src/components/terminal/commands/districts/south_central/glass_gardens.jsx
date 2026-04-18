@@ -6,8 +6,8 @@ import {
 } from '@terminal/TerminalComponents';
 
 import {
-  CCTV,
-  MaintenanceAccess,
+  Camera,
+  Node,
   Menu,
   PrivatePortal,
   VIPList,
@@ -126,12 +126,8 @@ export const GLASS_GARDENS_COMMANDS = {
       "Glass Gardens CityCam": {
         favicon: <Icons.Camera />,
         content: (
-          <CCTV
-            src={glass_gardens_camera_image}
-            cameraId="CAM-GG-FOYER"
-            location="Entrance"
-            theme="amber"
-            height={500}
+          <Camera
+            cctv={glass_gardens_camera_image}
           />
         ),
       },
@@ -178,12 +174,8 @@ export const GLASS_GARDENS_COMMANDS = {
       "Reservation System": {
         favicon: <Icons.Computer />,
         content: (
-          <MaintenanceAccess
+          <Node
             title="[RESERVATION SYSTEM]"
-            deviceModel="TableMaster Pro"
-            deviceId="GLASS-GARDENS-RES"
-            firmwareVersion="v2.0.0"
-            systemStatus="OPERATIONAL"
             notes={[
               "Covers tonight: 17 (5 parties)",
               "Cancellations today: 1 (19:00 slot reallocated)",
@@ -200,15 +192,11 @@ export const GLASS_GARDENS_COMMANDS = {
           showFrequency: true,
           showFirst: true,
           hint: "This veggie dish will cut you up",
+          lockType: 'terminal',
         },
         content: (
-          <MaintenanceAccess
-            variant="internal"
+          <Node
             title="[GLASS GARDENS — INTERNAL ACCESS]"
-            deviceModel="Staff Network"
-            deviceId="GLASS-GARDENS-INT"
-            firmwareVersion="v3.0.0"
-            systemStatus="OPERATIONAL"
             notes={[
               "Staff and management access only",
               "All access logged",
@@ -269,6 +257,7 @@ export const GLASS_GARDENS_COMMANDS = {
         password: {
           pw: "crystalchalice",
           hint: "A Kings cup",
+          lockType: 'terminal',
         },
         content: (
           <PrivatePortal

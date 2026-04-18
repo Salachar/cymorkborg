@@ -4,10 +4,8 @@ import {
 } from "@terminal/TerminalComponents";
 
 import {
-  CCTV,
-  Locked,
-  MaintenanceAccess,
-  Message,
+  Camera,
+  Node,
   PersonnelFile,
   PublicPortal,
   ShiftSchedule,
@@ -36,18 +34,15 @@ export const THE_55_KAYTELL_MANUFACTURING_COMMANDS = {
     related_commands: {
       "CityCam": {
         content: (
-          <CCTV
-            src={cctv_image}
-            cameraId="CAM-CC-MAIN"
-            theme="amber"
-            height={500}
+          <Camera
+            cctv={cctv_image}
           />
         ),
       },
 
       "Facility Overview": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[KAYTELL MANUFACTURING CONCERN]"
             deviceModel="Production Facility"
             deviceId="KAYTELL-FAC-01"
@@ -73,13 +68,13 @@ export const THE_55_KAYTELL_MANUFACTURING_COMMANDS = {
               <Line red>Armed security at main entrance</Line>
               <Line red>Random bag checks and searches</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
 
       "Employee Directory": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[KAYTELL EMPLOYEE DIRECTORY]"
             deviceModel="Personnel Registry"
             deviceId="EMPLOYEE-DIR-01"
@@ -116,7 +111,7 @@ export const THE_55_KAYTELL_MANUFACTURING_COMMANDS = {
               <Line neon>• Rosa Martinez - Cafeteria Manager</Line>
               <Line neon>• Tom "Wrench" Anderson - Senior Maintenance</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
         related_commands: {
           "Gale Lannister": {
@@ -370,13 +365,12 @@ export const THE_55_KAYTELL_MANUFACTURING_COMMANDS = {
         password: {
           pw: "kaytell",
           hint: "The name of the manufacturing company",
-          difficulty: "easy",
-          content: <Locked theme="terminal" title="KAYTELL SYSTEMS" />
+          lockType: 'terminal',
         },
         content: (
-          <Message
+          <Node
             title="KAYTELL MANUFACTURING SYSTEMS"
-            message="EMPLOYEE ACCESS GRANTED"
+            subtitle="EMPLOYEE ACCESS GRANTED"
             note="Production systems - Authorized personnel only"
             theme="corporate"
           />
@@ -384,7 +378,7 @@ export const THE_55_KAYTELL_MANUFACTURING_COMMANDS = {
         related_commands: {
           "Production Schedules": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[PRODUCTION SCHEDULE]"
                 deviceModel="Manufacturing Control System"
                 deviceId="PROD-SCHED-01"
@@ -429,13 +423,13 @@ export const THE_55_KAYTELL_MANUFACTURING_COMMANDS = {
                   <Line yellow>• 20,000 tablets (Due: 1 month)</Line>
                   <Line red>Line 3 delays may cause contract breach</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Quality Control Logs": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[QUALITY CONTROL LOGS]"
                 deviceModel="Product Testing System"
                 deviceId="QC-LOG-01"
@@ -480,13 +474,13 @@ export const THE_55_KAYTELL_MANUFACTURING_COMMANDS = {
                   <Line>"Flagged 47 units with critical defects. Management overrode, shipped anyway."</Line>
                   <Line red>"Documented for liability purposes. Will not take responsibility for shipped defects."</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Safety Incidents": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[SAFETY INCIDENT LOG]"
                 deviceModel="Workplace Safety Tracking"
                 deviceId="SAFETY-LOG-01"
@@ -536,7 +530,7 @@ export const THE_55_KAYTELL_MANUFACTURING_COMMANDS = {
                   <Line>Corrective actions implemented (minimal)</Line>
                   <Line yellow>Workers report conditions have deteriorated since</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
@@ -544,11 +538,10 @@ export const THE_55_KAYTELL_MANUFACTURING_COMMANDS = {
             password: {
               pw: "solidarity",
               hint: "The core principle of union organizing",
-              difficulty: "medium",
-              content: <Locked theme="terminal" title="UNION NETWORK" />
+              lockType: 'terminal',
             },
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[UNOFFICIAL UNION NETWORK]"
                 deviceModel="Worker Organizing Communications"
                 deviceId="UNION-NET-01"
@@ -607,7 +600,7 @@ export const THE_55_KAYTELL_MANUFACTURING_COMMANDS = {
                   <Line yellow>• Coordinate with Community Outreach (The 55)</Line>
                   <Line yellow>• Prepare for possible walkout/strike</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
         },

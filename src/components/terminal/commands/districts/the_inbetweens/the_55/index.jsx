@@ -29,7 +29,8 @@ export const THE_55_COMMANDS = {
   "The 55 [Stack #95563]": {
     favicon: <Icons.Apartment />,
     password: {
-      pw: 'fiftyfivepeachtrees'
+      pw: 'fiftyfivepeachtrees',
+      lockType: 'terminal',
     },
     content: (
       <DistrictPortal

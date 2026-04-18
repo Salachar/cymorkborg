@@ -5,10 +5,8 @@ import {
 } from "@terminal/TerminalComponents";
 
 import {
-  CCTV,
-  Locked,
-  MaintenanceAccess,
-  Message,
+  Camera,
+  Node,
   PublicPortal,
 } from "@terminal/retcomdevice";
 
@@ -35,23 +33,16 @@ export const THE_55_REC_COMMANDS = {
     related_commands: {
       "CityCam": {
         content: (
-          <CCTV
-            src={cctv_image}
-            cameraId="CAM-CC-MAIN"
-            theme="amber"
-            height={500}
+          <Camera
+            cctv={cctv_image}
           />
         ),
       },
 
       "REC Overview": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[THE REC - RECREATION LEVELS]"
-            deviceModel="Hazard Zone Management"
-            deviceId="REC-ZONE-01"
-            firmwareVersion="v1.0.0"
-            systemStatus="SEMI-CONTAINED"
             notes={[
               "Every stack once required 10+ levels of parks and recreation",
               "They never said anything about maintaining them",
@@ -80,18 +71,14 @@ export const THE_55_REC_COMMANDS = {
               <Line neon>100¤ per biological sample from The REC</Line>
               <Line smoke>Interested in mutations, fungal specimens, entity tissue</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
 
       "REC Location Map": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[THE REC - LOCATION MAP]"
-            deviceModel="Facility Directory"
-            deviceId="REC-MAP-01"
-            firmwareVersion="v1.0.0"
-            systemStatus="MONITORING"
             notes={[
               "10 floors of abandoned recreation facilities",
               "12 major locations identified",
@@ -166,7 +153,7 @@ export const THE_55_REC_COMMANDS = {
               <Line smoke>Lots of improvised gardens</Line>
               <Line smoke>Chemmed Gang-Goons live here</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
       },
 
@@ -174,13 +161,12 @@ export const THE_55_REC_COMMANDS = {
         password: {
           pw: "recreation",
           hint: "What REC is short for",
-          difficulty: "easy",
-          content: <Locked theme="terminal" title="REC MONITORING" />
+          lockType: 'terminal',
         },
         content: (
-          <Message
+          <Node
             title="REC MONITORING SYSTEMS"
-            message="CONTAINMENT ACCESS GRANTED"
+            subtitle="CONTAINMENT ACCESS GRANTED"
             note="Hazard zone monitoring - Emergency personnel only"
             theme="secure"
           />
@@ -188,12 +174,8 @@ export const THE_55_REC_COMMANDS = {
         related_commands: {
           "Environmental Sensors": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[REC ENVIRONMENTAL SENSORS]"
-                deviceModel="Hazard Monitoring System"
-                deviceId="ENV-SENS-01"
-                firmwareVersion="v1.0.0"
-                systemStatus="OPERATIONAL"
                 notes={[
                   "Real-time hazard monitoring",
                   "10 floors of contaminated space",
@@ -240,18 +222,14 @@ export const THE_55_REC_COMMANDS = {
                   <Line neon>• Freight Elevator - Sporadic (Rot King ambushes)</Line>
                   <Line neon>• Park (Level 57-58) - Extensive (Blightling infestation)</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Containment Protocols": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[REC CONTAINMENT PROTOCOLS]"
-                deviceModel="Emergency Response System"
-                deviceId="CONTAIN-01"
-                firmwareVersion="v1.0.0"
-                systemStatus="ACTIVE"
                 notes={[
                   "Emergency procedures for breach scenarios",
                   "Last breach: 2 days ago (Level 57-58)",
@@ -300,18 +278,14 @@ export const THE_55_REC_COMMANDS = {
                   <Line yellow>Ventilation sealed to prevent spore spread</Line>
                   <Line yellow>Warning signs posted at all access points</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Bounty Board": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[REC ELIMINATION BOUNTIES]"
-                deviceModel="Community Threat Removal Program"
-                deviceId="BOUNTY-01"
-                firmwareVersion="v1.0.0"
-                systemStatus="ACTIVE"
                 notes={[
                   "Community-funded threat removal",
                   "Last 30 days: 3 Blightlings, 7 samples",
@@ -353,7 +327,7 @@ export const THE_55_REC_COMMANDS = {
                   <Line neon>3. Payment issued immediately upon verification</Line>
                   <Line yellow>No bounty for gang-goons (they're human residents)</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
         },

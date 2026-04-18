@@ -6,10 +6,7 @@ import {
 
 import {
   Camera,
-  CCTV,
-  Locked,
-  MaintenanceAccess,
-  Message,
+  Node,
   PersonnelFile,
   PublicPortal,
 } from "@terminal/retcomdevice";
@@ -38,18 +35,15 @@ export const THE_55_ROOFLINE_COMMANDS = {
     related_commands: {
       "CityCam": {
         content: (
-          <CCTV
-            src={cctv_image}
-            cameraId="CAM-CC-MAIN"
-            theme="amber"
-            height={500}
+          <Camera
+            cctv={cctv_image}
           />
         ),
       },
 
       "Roofline Overview": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[THE ROOFLINE]"
             deviceModel="Infrastructure Management System"
             deviceId="ROOFLINE-01"
@@ -72,12 +66,12 @@ export const THE_55_ROOFLINE_COMMANDS = {
               <Line red>Camera surveillance (limited coverage, blind spots exist)</Line>
               <Line yellow>Purpose: Keep citizens from machinery & vandalism</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
         related_commands: {
           "Construction Crane": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[CONSTRUCTION CRANE]"
                 deviceModel="TitanLift 9000-XL"
                 deviceId="CRANE-340"
@@ -113,13 +107,13 @@ export const THE_55_ROOFLINE_COMMANDS = {
                   <Line cyan>Last week: Lifted armored van to Unit 290-1</Line>
                   <Line yellow>Maintenance scheduled: Next week</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "VIP & Emergency Helipads": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[VIP & EMERGENCY HELIPADS]"
                 deviceModel="Landing Pad System"
                 deviceId="HELIPADS-01"
@@ -158,13 +152,13 @@ export const THE_55_ROOFLINE_COMMANDS = {
                   <Line yellow>Pad Delta: RESERVED (corporate charter, 6 hours)</Line>
                   <Line cyan>Pad Echo: AVAILABLE</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Rooflight System": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[ROOFLIGHT SYSTEM]"
                 deviceModel="Natural Light Infrastructure"
                 deviceId="ROOFLIGHT-01"
@@ -205,13 +199,13 @@ export const THE_55_ROOFLINE_COMMANDS = {
                   <Line cyan>Interior access (Level 214 - locked maintenance doors)</Line>
                   <Line red>Working on Rooflight without safety gear = death</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Solar Field": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[SOLAR FIELD ARRAY]"
                 deviceModel="Power Generation System"
                 deviceId="SOLAR-355-360"
@@ -247,13 +241,13 @@ export const THE_55_ROOFLINE_COMMANDS = {
                   <Line smoke>Critical infrastructure</Line>
                   <Line smoke>Last service: 2 weeks ago | Next maintenance: 4 weeks</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Wind Turbine (Defunct)": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[WIND TURBINE - DEFUNCT]"
                 deviceModel="SkyWind 5000"
                 deviceId="TURBINE-365"
@@ -299,13 +293,13 @@ export const THE_55_ROOFLINE_COMMANDS = {
                   <Line cyan>• Secret meetup spot (hidden behind turbine base)</Line>
                   <Line cyan>• Symbol of corporate green-washing failure</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Graffiti Mural (Floor 350)": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[GRAFFITI MURAL - FLOOR 350]"
                 deviceModel="Cultural Landmark (Unofficial)"
                 deviceId="MURAL-350"
@@ -346,13 +340,13 @@ export const THE_55_ROOFLINE_COMMANDS = {
                   <Line cyan>Tourist attraction for urban explorers</Line>
                   <Line cyan>Historical record of The 55's counter-culture</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Observatory": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[OBSERVATORY]"
                 deviceModel="Observation Platform"
                 deviceId="OBS-365"
@@ -385,13 +379,13 @@ export const THE_55_ROOFLINE_COMMANDS = {
                   <Line neon>Other megablocks visible on horizon</Line>
                   <Line cyan>"Worth the climb" - Universal consensus</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Storage Crates": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[STORAGE CRATES]"
                 deviceModel="Corporate Shipping Containers"
                 deviceId="STORAGE-01"
@@ -436,13 +430,13 @@ export const THE_55_ROOFLINE_COMMANDS = {
                   <Line neon>2 weeks ago: 5 containers removed (contents unknown)</Line>
                   <Line yellow>Urban explorers occasionally break in (rarely caught)</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Control Aerials": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[CONTROL AERIALS]"
                 deviceModel="Antenna Array System"
                 deviceId="AERIALS-01"
@@ -483,13 +477,13 @@ export const THE_55_ROOFLINE_COMMANDS = {
                   <Line yellow>Motion sensors disabled (too many false alarms from wind)</Line>
                   <Line yellow>Access technically restricted (not enforced)</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Project CARV": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[PROJECT CARV]"
                 deviceModel="Vindicator-X Combat VTOL"
                 deviceId="CARV-DELTA"
@@ -542,7 +536,7 @@ export const THE_55_ROOFLINE_COMMANDS = {
                   <Line pink>"Evidence of upcoming corporate war"</Line>
                   <Line pink>"Connected to missing persons from lower levels"</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
         },
@@ -550,7 +544,7 @@ export const THE_55_ROOFLINE_COMMANDS = {
 
       "Security Checkpoint": {
         content: (
-          <MaintenanceAccess
+          <Node
             title="[SECURITY CHECKPOINT]"
             deviceModel="Access Control Station"
             deviceId="CHECKPOINT-340"
@@ -593,7 +587,7 @@ export const THE_55_ROOFLINE_COMMANDS = {
               <Line cyan>Some guards sympathetic to graffiti artists</Line>
               <Line yellow>Bribery possible: 50-200¤ depending on guard and request</Line>
             </InsetBox>
-          </MaintenanceAccess>
+          </Node>
         ),
         related_commands: {
           "Captain Marcus Webb": {
@@ -653,13 +647,12 @@ export const THE_55_ROOFLINE_COMMANDS = {
         password: {
           pw: "roofline",
           hint: "What's this area called?",
-          difficulty: "easy",
-          content: <Locked theme="terminal" title="ROOFLINE SECURITY" />
+          lockType: 'terminal',
         },
         content: (
-          <Message
+          <Node
             title="ROOFLINE SECURITY SYSTEMS"
-            message="SECURITY ACCESS GRANTED"
+            subtitle="SECURITY ACCESS GRANTED"
             note="Checkpoint systems - Guard access only"
             theme="secure"
           />
@@ -667,7 +660,7 @@ export const THE_55_ROOFLINE_COMMANDS = {
         related_commands: {
           "Drone Garage Control": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[DRONE GARAGE - CONTROL SYSTEM]"
                 deviceModel="Stinger-X Drone Fleet"
                 deviceId="DRONE-GARAGE-01"
@@ -707,13 +700,13 @@ export const THE_55_ROOFLINE_COMMANDS = {
                   <Line red>Last week: Drone 6 shot down unauthorized drone (intruder)</Line>
                   <Line cyan>Guards fly drones for fun when bored (against policy)</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
           "Security Camera Network": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[SECURITY CAMERA NETWORK]"
                 deviceModel="Surveillance System"
                 deviceId="CAMSYS-01"
@@ -753,7 +746,7 @@ export const THE_55_ROOFLINE_COMMANDS = {
                   <Line cyan>Last week: Cultists walking to observatory at dusk</Line>
                   <Line yellow>Guards rarely review footage unless incident reported</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
 
@@ -763,17 +756,7 @@ export const THE_55_ROOFLINE_COMMANDS = {
                 id="roofline-checkpoint-main"
                 location="Roofline Security Checkpoint - Main entrance"
                 coverage="Checkpoint entrance, stairwell access, drone garage"
-                status="ACTIVE"
-                recording={true}
-                resolution="4K security-grade"
                 storage="Local server (7-day loop)"
-                features={[
-                  "Night vision",
-                  "Motion detection",
-                  "Facial recognition (linked to authorized list)",
-                  "Zoom capability (50x optical)",
-                  "Audio recording",
-                ]}
                 timeline={[
                   "06:00 → Day shift arrived (6 guards)",
                   "08:30 → Maintenance worker accessed solar field",
@@ -782,20 +765,13 @@ export const THE_55_ROOFLINE_COMMANDS = {
                   "18:00 → Night shift arrived (4 guards - reduced staffing)",
                   "20:30-Present → Quiet, guards on break room duty",
                 ]}
-                accessLog={[
-                  { time: "08:30", user: "Maintenance: J. Martinez", action: "Solar field access" },
-                  { time: "12:00", user: "VIP: Samuel Samson", action: "Helipad access (authorized)" },
-                  { time: "15:45", user: "Unknown (detained)", action: "Unauthorized access attempt" },
-                ]}
-                lastService="1 month ago"
-                notes="Primary security camera - High priority maintenance"
               />
             ),
           },
 
           "Access Log": {
             content: (
-              <MaintenanceAccess
+              <Node
                 title="[CHECKPOINT ACCESS LOG]"
                 deviceModel="Entry Tracking System"
                 deviceId="ACCESS-LOG-01"
@@ -827,7 +803,7 @@ export const THE_55_ROOFLINE_COMMANDS = {
                   <Line smoke>Type: Commercial quadcopter (paparazzi suspected)</Line>
                   <Line smoke>Action: Shot down by Stinger Drone 6 | Debris in evidence locker</Line>
                 </InsetBox>
-              </MaintenanceAccess>
+              </Node>
             ),
           },
         },

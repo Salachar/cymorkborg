@@ -7,7 +7,7 @@ import {
 } from '@terminal/TerminalComponents';
 
 import {
-  CCTV,
+  Camera,
   DistrictPortal,
 } from "@terminal/retcomdevice"
 
@@ -61,10 +61,8 @@ export const BIGMOSSE_COMMANDS = {
       "Bigmosse CityCam": {
         favicon: <Icons.Camera />,
         content: (
-          <CCTV
-            src={bigmosse_ports_cctv}
-            theme="amber"
-            height={500}
+          <Camera
+            cctv={bigmosse_ports_cctv}
           />
         ),
       },

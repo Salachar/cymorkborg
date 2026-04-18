@@ -1,6 +1,6 @@
 import Icons from '@utils/icons';
 import { Line, NodePreview } from '@terminal/TerminalComponents';
-import { DistrictPortal, RCDAlert } from "@terminal/retcomdevice";
+import { DistrictPortal } from "@terminal/retcomdevice";
 
 export const LILYPOND_COMMANDS = {
   "Lilypond": {
