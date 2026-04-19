@@ -15,17 +15,13 @@ export const LAKE_GRAVEL_COMMANDS = {
     favicon: <Icons.Water />,
     preview: (
       <NodePreview>
-        <Line span cyan> · Natural lake. North/South Central boundary. Undersjon beneath it.</Line>
+        <Line span smoke> · Natural lake. North/South Central boundary. Undersjon beneath it.</Line>
       </NodePreview>
     ),
     content: (
       <PublicPortal
         name="LAKE GRAVEL"
         tagline="Natural freshwater lake, Central District."
-        network="LAKE_GRAVEL_PUBLIC"
-        signalStrength="strong"
-        status="✓ ACTIVE"
-        statusColor="neon"
         notes={[
           "Natural lake separating North and South Central",
           "Undersjon retail park currently under construction beneath the lake bed",

@@ -26,7 +26,7 @@ export const STONE_EELS_COMMANDS = {
     favicon: <Icons.Nightlife />,
     preview: (
       <NodePreview>
-        <Line span neon> · Stone Eels territory</Line>
+        <Line span smoke> · Stone Eels territory</Line>
       </NodePreview>
     ),
     content: (
@@ -188,7 +188,6 @@ export const STONE_EELS_COMMANDS = {
                     status: "ARRIVED",
                     notes: "Regular patron. Lucky Flight casino winnings. Extensive cyberware. Mobility assistance required (leg actuators malfunctioning). Drinking: Stone Eel Special (4th)",
                     clearance: "VIP",
-                    arrivalTime: "21:30"
                   },
                   {
                     name: "Saša",
@@ -202,7 +201,6 @@ export const STONE_EELS_COMMANDS = {
                     status: "ARRIVED",
                     notes: "Regular fixer, buying rounds for contacts. Cousin to DJ Scrap.",
                     clearance: "VIP",
-                    arrivalTime: "22:15"
                   },
                   {
                     name: "PHASER/MOB",
@@ -210,7 +208,6 @@ export const STONE_EELS_COMMANDS = {
                     status: "EXPECTED",
                     notes: "Blackened chromecore band. Backstage prep before 22:00 set.",
                     clearance: "GUEST",
-                    arrivalTime: "21:45"
                   },
                   {
                     name: "Zara Khamidova",
@@ -218,7 +215,6 @@ export const STONE_EELS_COMMANDS = {
                     status: "ARRIVED",
                     notes: "Batu's niece. Freelance courier. Checking in with gang contacts.",
                     clearance: "GUEST",
-                    arrivalTime: "23:00"
                   },
                 ]}
               >

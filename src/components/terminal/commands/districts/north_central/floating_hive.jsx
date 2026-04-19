@@ -16,19 +16,15 @@ export const FLOATING_HIVE_COMMANDS = {
     favicon: <Icons.Tower />,
     preview: (
       <NodePreview>
-        <Line span yellow> · Cynergy HQ. They own the water. They own the power. They own you.</Line>
+        <Line span smoke> · Cynergy HQ. They own the water. They own the power. They own you.</Line>
       </NodePreview>
     ),
     content: (
       <FacilityPortal
         companyName="THE FLOATING HIVE"
-        facilityId="NC-FLOATING-HIVE-01"
         tagline="Megacorp posing as public infrastructure"
         location="North Central, Central District"
         owner="Cynergy Water & Power Co"
-        function="Corporate HQ / Infrastructure Command"
-        networkStatus="ACTIVE — Cynergy internal network"
-        securityLevel="MAXIMUM"
         warnings={[
           "Cynergy private security — no public SecCorps jurisdiction",
           "Visitor access by appointment only",
@@ -42,17 +38,13 @@ export const FLOATING_HIVE_COMMANDS = {
         favicon: <Icons.Bulletin />,
         preview: (
           <NodePreview>
-            <Line span yellow> · Public utilities portal. Water. Power. Their terms.</Line>
+            <Line span smoke> · Public utilities portal. Water. Power. Their terms.</Line>
           </NodePreview>
         ),
         content: (
           <PublicPortal
             name="CYNERGY WATER & POWER CO"
             tagline="Keeping Cy Running — Whether You Like It Or Not"
-            network="CYNERGY-PUBLIC-UTILITIES"
-            signalStrength="strong"
-            status="✓ ACTIVE"
-            statusColor="neon"
             notes={[
               "HQ: The Floating Hive, North Central",
               "COO: Dana Azar",

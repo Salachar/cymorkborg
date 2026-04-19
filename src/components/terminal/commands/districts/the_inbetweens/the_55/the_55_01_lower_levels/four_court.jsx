@@ -14,10 +14,6 @@ export const FOUR_COURT_COMMANDS = {
       <PublicPortal
         name="FOUR COURT"
         tagline="Main entrance to The 55"
-        network="FOUR_COURT_PUBLIC"
-        signalStrength="strong"
-        status="✓ OPEN 24/7"
-        statusColor="neon"
         notes={[
           "Ground level",
           "4 large entrances to central courtyard",

@@ -20,10 +20,6 @@ export const THE_55_STACK_COMMAND_COMMANDS = {
       <PublicPortal
         name="STACK COMMAND & CONTROL"
         tagline="The central nervous system of Stack #95563"
-        network="STACK_CONTROL_PUBLIC"
-        signalStrength="strong"
-        status="✓ OPERATIONAL 24/7"
-        statusColor="neon"
         notes={[
           "Central management and monitoring",
           "Almost everything in The 55 can be accessed here",

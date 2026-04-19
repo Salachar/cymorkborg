@@ -43,23 +43,23 @@ export default function PublicPortal({
 
   const colors = themeConfig[theme] || themeConfig.friendly;
 
-  const getSignalBars = () => {
-    const bars = {
-      weak: '██░░░░',
-      medium: '████░░',
-      strong: '██████',
-    };
-    return bars[signalStrength] || bars.strong;
-  };
+  // const getSignalBars = () => {
+  //   const bars = {
+  //     weak: '██░░░░',
+  //     medium: '████░░',
+  //     strong: '██████',
+  //   };
+  //   return bars[signalStrength] || bars.strong;
+  // };
 
-  const getStatusColor = () => {
-    const statusColors = {
-      neon: 'rgb(0, 170, 40)',
-      yellow: 'rgb(251, 191, 36)',
-      red: 'rgb(239, 68, 68)',
-    };
-    return statusColors[statusColor] || statusColors.neon;
-  };
+  // const getStatusColor = () => {
+  //   const statusColors = {
+  //     neon: 'rgb(0, 170, 40)',
+  //     yellow: 'rgb(251, 191, 36)',
+  //     red: 'rgb(239, 68, 68)',
+  //   };
+  //   return statusColors[statusColor] || statusColors.neon;
+  // };
 
   return (
     <div
@@ -157,7 +157,7 @@ export default function PublicPortal({
       </div>
 
       {/* Network handshake */}
-      <div style={{ marginTop: '0.75rem', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      {/* <div style={{ marginTop: '0.75rem', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Line smoke style={{ fontSize: '0.8rem', margin: 0, fontFamily: 'monospace' }}>
           {network}
         </Line>
@@ -170,14 +170,14 @@ export default function PublicPortal({
         }}>
           ● CONNECTED
         </span>
-      </div>
+      </div> */}
 
-      <Divider style={{
+      {/* <Divider style={{
         borderColor: colors.primary,
-      }} />
+      }} /> */}
 
       {/* Network details with signal animation */}
-      <div style={{ marginTop: '0.75rem', marginBottom: '0.75rem' }}>
+      {/* <div style={{ marginTop: '0.75rem', marginBottom: '0.75rem' }}>
         <DataTable
           data={[
             { label: 'SSID', value: network },
@@ -205,34 +205,30 @@ export default function PublicPortal({
             },
           ]}
         />
-      </div>
-
+      </div> */}
 
       {/* Now playing with styled box */}
       {nowPlaying && (
-        <>
-          <div
+        <div
+          style={{
+            backgroundColor: `${colors.secondary}15`,
+            border: `1px solid ${colors.secondary}40`,
+            borderRadius: '4px',
+            marginTop: '0.75rem',
+            marginBottom: '0.75rem',
+          }}
+        >
+          <Line
+            pink
             style={{
-              // padding: '0.5rem',
-              backgroundColor: `${colors.secondary}15`,
-              border: `1px solid ${colors.secondary}40`,
-              borderRadius: '4px',
-              marginTop: '0.75rem',
-              marginBottom: '0.75rem',
+              fontSize: '0.875rem',
+              margin: 0,
+              fontWeight: 'bold',
             }}
           >
-            <Line
-              pink
-              style={{
-                fontSize: '0.875rem',
-                margin: 0,
-                fontWeight: 'bold',
-              }}
-            >
-              Current Steam: {nowPlaying}
-            </Line>
-          </div>
-        </>
+            Current Steam: {nowPlaying}
+          </Line>
+        </div>
       )}
 
       {/* Notes with bullet styling */}

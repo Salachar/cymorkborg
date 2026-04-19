@@ -15,7 +15,6 @@ import {
   Node,
   PublicPortal,
   IncidentLog,
-  NetworkDevices,
 } from "@terminal/retcomdevice"
 
 export const RESIDENTIAL_COMMANDS = {
@@ -30,10 +29,6 @@ export const RESIDENTIAL_COMMANDS = {
       <PublicPortal
         name="TORRES APARTMENTS"
         tagline="Affordable Living Since 2071"
-        network="TORRES_RESIDENT_WIFI"
-        signalStrength="strong"
-        status="✓ ACCEPTING APPLICATIONS"
-        statusColor="neon"
         notes={[
           "24 units (6 floors, 4 per floor)",
           "2 vacancies available",
@@ -504,13 +499,13 @@ export const RESIDENTIAL_COMMANDS = {
       "Security Cameras": {
         favicon: <Icons.Camera />,
         content: (
-          <NetworkDevices
-            networkName="TORRES_SECURITY"
-            devices={[
-              { name: "Lobby Camera", ip: "10.88.1.101", type: "Security Camera", status: "ONLINE", lastSeen: "Just now" },
-              { name: "Floor 2 Hallway", ip: "10.88.1.102", type: "Security Camera", status: "ONLINE", lastSeen: "Just now" },
-              { name: "Floor 4 Hallway", ip: "10.88.1.103", type: "Security Camera", status: "ONLINE", lastSeen: "Just now" },
-              { name: "Floor 6 Hallway", ip: "10.88.1.104", type: "Security Camera", status: "ONLINE", lastSeen: "Just now" },
+          <Node
+            title="[TORRES_SECURITY — CAMERA NETWORK]"
+            notes={[
+              "Lobby — front entrance, mailboxes, stairs",
+              "Floor 2 Hallway — units 2A-2D, stairwell",
+              "Floor 4 Hallway — units 4A-4D, stairwell",
+              "Floor 6 Hallway — units 6A-6D, stairwell",
             ]}
           />
         ),

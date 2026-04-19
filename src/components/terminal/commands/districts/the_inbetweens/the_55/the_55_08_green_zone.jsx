@@ -18,10 +18,6 @@ export const THE_55_GREEN_ZONE_COMMANDS = {
       <PublicPortal
         name="TG LABS GREEN ZONE"
         tagline="Corporate access barrier"
-        network="GREEN_ZONE_PUBLIC"
-        signalStrength="strong"
-        status="✓ RESTRICTED ACCESS"
-        statusColor="yellow"
         notes={[
           "Corporate barrier separating upper and lower stack",
           "Credit balance required for access (10,000¤ minimum)",

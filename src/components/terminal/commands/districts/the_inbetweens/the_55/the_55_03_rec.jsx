@@ -18,10 +18,6 @@ export const THE_55_REC_COMMANDS = {
       <PublicPortal
         name="THE REC"
         tagline="Recreation Levels - Abandoned"
-        network="NONE"
-        signalStrength="weak"
-        status="EXTREME HAZARD - SEALED"
-        statusColor="red"
         notes={[
           "Once required recreational amenities, now abandoned",
           "Multiple hostile entities and environmental hazards",

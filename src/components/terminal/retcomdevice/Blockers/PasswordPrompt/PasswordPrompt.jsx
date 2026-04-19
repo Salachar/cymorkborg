@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
 import Locked from "../Locked/Locked";
-
 import { PASSWORD_ATTEMPTS_STORAGE_KEY } from '@utils/localStorage';
 
 const IS_LOCALHOST = window.location.hostname === 'localhost';
@@ -44,15 +42,106 @@ const saveAttempt = (command, attempt) => {
   }
 };
 
+// RCD-style intel block
+function RCDIntel({ hint, showFirst, password, showFrequency, hasDecoys, decoyCount, passwordHasSpaces, showCount, targetLength, attempts }) {
+  const hasAnything = hint || showFirst || showFrequency || hasDecoys || passwordHasSpaces || showCount || attempts.length > 0;
+  if (!hasAnything) return null;
+
+  return (
+    <div style={{
+      margin: '0.75rem 0',
+      backgroundColor: 'rgba(168, 85, 247, 0.07)',
+      border: '1px solid rgba(168, 85, 247, 0.25)',
+      borderLeft: '3px solid rgb(168, 85, 247)',
+      borderRadius: '0 4px 4px 0',
+      padding: '0.6rem 0.75rem',
+      fontFamily: 'monospace',
+    }}>
+      <div style={{
+        fontSize: '0.58rem',
+        fontWeight: 'bold',
+        letterSpacing: '0.14em',
+        color: 'rgb(168, 85, 247)',
+        marginBottom: '0.5rem',
+        textShadow: '0 0 8px rgba(168, 85, 247, 0.4)',
+      }}>
+        ◈ RCD-7 INTERCEPT — NODE PARTIAL DATA
+      </div>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+
+        {/* Always show keys rule */}
+        <div style={{ fontSize: '0.72rem', color: 'rgba(203, 213, 225, 0.6)' }}>
+          <span style={{ color: 'rgba(168, 85, 247, 0.7)', marginRight: '0.4rem' }}>KEYS</span>
+          {hasDecoys
+            ? `${decoyCount} decoy ${decoyCount === 1 ? 'key' : 'keys'} present — not all keys are used`
+            : 'Keys shown are the only characters in the password'
+          }
+        </div>
+
+        {passwordHasSpaces && (
+          <div style={{ fontSize: '0.72rem', color: 'rgb(251, 191, 36)' }}>
+            <span style={{ color: 'rgb(168, 85, 247)', marginRight: '0.4rem' }}>NOTE</span>
+            Password contains spaces
+          </div>
+        )}
+
+        {showCount && (
+          <div style={{ fontSize: '0.72rem', color: 'rgb(203, 213, 225)' }}>
+            <span style={{ color: 'rgb(168, 85, 247)', marginRight: '0.4rem' }}>LENGTH</span>
+            {targetLength} characters
+          </div>
+        )}
+
+        {showFrequency && (
+          <div style={{ fontSize: '0.72rem', color: 'rgb(203, 213, 225)' }}>
+            <span style={{ color: 'rgb(168, 85, 247)', marginRight: '0.4rem' }}>FREQ</span>
+            Character frequency shown on keys
+          </div>
+        )}
+
+        {showFirst && (
+          <div style={{ fontSize: '0.72rem', color: 'rgb(203, 213, 225)' }}>
+            <span style={{ color: 'rgb(168, 85, 247)', marginRight: '0.4rem' }}>FIRST</span>
+            {password.charAt(0).toUpperCase()}
+          </div>
+        )}
+
+        {hint && (
+          <div style={{ fontSize: '0.72rem', color: 'rgb(203, 213, 225)' }}>
+            <span style={{ color: 'rgb(168, 85, 247)', marginRight: '0.4rem' }}>HINT</span>
+            {hint}
+          </div>
+        )}
+
+        {attempts.length > 0 && (
+          <div style={{ marginTop: '0.35rem', paddingTop: '0.35rem', borderTop: '1px solid rgba(168, 85, 247, 0.2)' }}>
+            <div style={{ fontSize: '0.58rem', fontWeight: 'bold', color: 'rgba(252, 129, 129, 0.7)', letterSpacing: '0.08em', marginBottom: '0.25rem' }}>
+              FAILED ATTEMPTS ({attempts.length})
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.15rem' }}>
+              {attempts.map((a, i) => (
+                <div key={i} style={{ fontSize: '0.75rem', fontWeight: 'bold', letterSpacing: '0.08em', color: 'rgb(252, 129, 129)' }}>
+                  {a || '(empty)'}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function PasswordPrompt({
   command,
   commandDef,
   password,
   hint = "",
-  showCount = false,      // shows character count
-  showFirst = false,      // shows first letter
-  showFrequency = false,  // shows frequency numbers on keys
-  decoyLetters = "",      // adds extra fake keys
+  showCount = false,
+  showFirst = false,
+  showFrequency = false,
+  decoyLetters = "",
   onSubmit,
   children,
   lockType,
@@ -61,15 +150,14 @@ export default function PasswordPrompt({
   const [shuffledKeys, setShuffledKeys] = useState([]);
   const [keyFrequency, setKeyFrequency] = useState({});
   const [hasDecoys, setHasDecoys] = useState(false);
+  const [decoyCount, setDecoyCount] = useState(0);
   const [feedback, setFeedback] = useState("");
   const [clickedKey, setClickedKey] = useState(null);
-  const [showSuccess, setShowSuccess] = useState(false);
   const [attempts, setAttempts] = useState(() => {
     const all = loadAttempts();
     return all[command] || [];
   });
 
-  // Does the password contain spaces?
   const passwordHasSpaces = password.includes(' ');
 
   useEffect(() => {
@@ -77,8 +165,6 @@ export default function PasswordPrompt({
     setKeyFrequency(freq);
 
     let keysToShuffle = Object.keys(freq);
-
-    // Remove space from the shuffled keys — handled separately as a dedicated button
     const spaceIndex = keysToShuffle.indexOf(' ');
     if (spaceIndex !== -1) keysToShuffle.splice(spaceIndex, 1);
 
@@ -86,8 +172,10 @@ export default function PasswordPrompt({
       const decoyArray = decoyLetters.split(',').map(l => l.trim().toUpperCase()).filter(Boolean);
       keysToShuffle = [...keysToShuffle, ...decoyArray];
       setHasDecoys(decoyArray.length > 0);
+      setDecoyCount(decoyArray.length);
     } else {
       setHasDecoys(false);
+      setDecoyCount(0);
     }
 
     setShuffledKeys(shuffleArray(keysToShuffle));
@@ -119,7 +207,6 @@ export default function PasswordPrompt({
 
   const handleSubmit = () => {
     if (currentPassword.toUpperCase() === password.toUpperCase()) {
-      setShowSuccess(true);
       onSubmit(command, commandDef, password);
     } else {
       const updated = saveAttempt(command, currentPassword);
@@ -129,21 +216,8 @@ export default function PasswordPrompt({
   };
 
   const handleOverride = () => {
-    setShowSuccess(true);
     onSubmit(command, commandDef, password);
   };
-
-  const getCharacterCountDisplay = () => {
-    const current = currentPassword.length;
-    const target = password.length;
-    if (current === target) return `${current}/${target}`;
-    if (current > target) return `${current}/${target} (+${current - target})`;
-    return `${current}/${target}`;
-  };
-
-  const showFirstLetter = showFirst;
-  const showFrequencyNumbers = showFrequency;
-  const showCharacterCount = showCount || showFrequency;
 
   return (
     <div
@@ -154,193 +228,163 @@ export default function PasswordPrompt({
       }}
     >
       {/* Header */}
-      <div className="mb-4 pb-2 border-b" style={{ borderColor: 'rgb(77, 167, 188)' }}>
-        <div className="font-bold text-lg" style={{ color: showSuccess ? 'rgb(59, 235, 82)' : 'rgb(133, 175, 231)' }}>
-          {showSuccess ? 'PASSWORD ACCEPTED' : 'PASSWORD ENTRY'}
+      <div
+        className="mb-4 pb-2 border-b font-bold text-md"
+        style={{
+          borderColor: 'rgba(77, 167, 188, 0.5)',
+          color: 'rgb(133, 175, 231)',
+        }}
+      >
+        ENTER PASSWORD
+        {feedback && (
+          <div className="ml-2 text-md inline-block" style={{
+            color: 'rgb(252, 129, 129)',
+          }}>
+            {" - "}{feedback}
+          </div>
+        )}
+      </div>
+
+      {Boolean(lockType) && (
+        <div className="mb-4">
+          <Locked theme={lockType} />
         </div>
-        <div style={{
-          color: 'rgb(148, 163, 184)',
-          fontSize: '0.6rem',
-        }}>
-          {command}
+      )}
+
+      {/* Current Password Display */}
+      <div className="mb-4">
+        <div
+          className="text-xl md:text-2xl font-bold tracking-wider mb-1"
+          style={{ color: 'rgb(79, 209, 197)', minHeight: '2rem' }}
+        >
+          {currentPassword.replace(/ /g, '·') || ''}
+          <span style={{ animation: 'pw-cursor 1s step-end infinite' }}>▌</span>
+        </div>
+        {(showCount || showFrequency) && (
+          <div className="text-sm" style={{ color: 'rgb(148, 163, 184)' }}>
+            {currentPassword.length}/{password.length} characters
+          </div>
+        )}
+      </div>
+
+      {/* Virtual Keyboard */}
+      <div className="mb-4">
+        <div className="flex flex-wrap gap-2">
+          {shuffledKeys.map((key, idx) => (
+            <button
+              key={`${key}-${idx}`}
+              onClick={() => handleKeyClick(key)}
+              className="relative font-bold text-lg rounded transition-all duration-150"
+              style={{
+                backgroundColor: clickedKey === key ? 'rgb(56, 178, 172)' : 'rgb(45, 53, 72)',
+                color: 'rgb(133, 175, 231)',
+                border: '2px solid rgb(77, 167, 188)',
+                fontSize: '1.5rem',
+                padding: '0.5rem 1rem',
+                marginRight: '0.5rem',
+              }}
+            >
+              {key}
+              {showFrequency && keyFrequency[key] > 0 && (
+                <span className="absolute top-0 right-1 text-xs" style={{ color: 'rgb(251, 191, 36)' }}>
+                  {keyFrequency[key]}
+                </span>
+              )}
+            </button>
+          ))}
         </div>
       </div>
 
-      {!showSuccess && (
-        <>
-          {/* Current Password Display */}
-          <div className="mb-4">
-            <div
-              className="text-xl md:text-2xl font-bold tracking-wider mb-1"
-              style={{
-                color: 'rgb(79, 209, 197)',
-                minHeight: '2rem',
-              }}
-            >
-              {currentPassword.replace(/ /g, '·') || ''}
-              <span style={{ animation: 'pw-cursor 1s step-end infinite' }}>▌</span>
-            </div>
-            {showCharacterCount && (
-              <div className="text-sm" style={{ color: 'rgb(148, 163, 184)' }}>
-                {getCharacterCountDisplay()} characters
-              </div>
-            )}
-          </div>
+      {Boolean(children) && (
+        <div className="mb-4">{children}</div>
+      )}
 
-          {/* Rules / notes */}
-          <div className="mb-3 text-xs" style={{ color: 'rgba(148, 163, 184, 0.6)', display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
-            <div>Keys shown are the only characters in the password.</div>
-            {passwordHasSpaces && (
-              <div style={{ color: 'rgb(251, 191, 36)' }}>↳ This password contains spaces.</div>
-            )}
-            {hasDecoys && (
-              <div style={{ color: 'rgb(252, 129, 129)' }}>
-                {`↳ ${decoyLetters.split(',').length} extra keys have been added. Not all keys are used.`}
-              </div>
-            )}
-          </div>
+      {/* RCD Intel block — below keyboard */}
+      <RCDIntel
+        hint={hint}
+        showFirst={showFirst}
+        password={password}
+        showFrequency={showFrequency}
+        hasDecoys={hasDecoys}
+        decoyCount={decoyCount}
+        passwordHasSpaces={passwordHasSpaces}
+        showCount={showCount}
+        targetLength={password.length}
+        attempts={attempts}
+      />
 
-          {/* Virtual Keyboard */}
-          <div className="mb-4">
-            <div className="flex flex-wrap gap-2">
-              {shuffledKeys.map((key, idx) => (
-                <button
-                  key={`${key}-${idx}`}
-                  onClick={() => handleKeyClick(key)}
-                  className="relative px-4 py-2 font-bold text-lg rounded transition-all duration-150"
-                  style={{
-                    backgroundColor: clickedKey === key ? 'rgb(56, 178, 172)' : 'rgb(45, 53, 72)',
-                    color: 'rgb(133, 175, 231)',
-                    border: '2px solid rgb(77, 167, 188)',
-                    minWidth: '48px',
-                  }}
-                >
-                  {key}
-                  {showFrequencyNumbers && keyFrequency[key] > 0 && (
-                    <span className="absolute top-0 right-1 text-xs" style={{ color: 'rgb(251, 191, 36)' }}>
-                      {keyFrequency[key]}
-                    </span>
-                  )}
-                </button>
-              ))}
-            </div>
-          </div>
+      {/* Action Buttons */}
+      <div className="flex flex-wrap gap-2">
+        <button
+          onClick={handleBackspace}
+          className="px-2 md:px-4 py-2 font-bold rounded"
+          style={{
+            backgroundColor: 'rgb(45, 53, 72)',
+            color: 'rgb(133, 175, 231)',
+            border: '2px solid rgb(77, 167, 188)',
+            fontSize: '0.75rem',
+          }}
+        >
+          BACK
+        </button>
+        <button
+          onClick={handleClear}
+          className="px-2 md:px-4 py-2 font-bold rounded"
+          style={{
+            backgroundColor: 'rgb(45, 53, 72)',
+            color: 'rgb(133, 175, 231)',
+            border: '2px solid rgb(77, 167, 188)',
+            fontSize: '0.75rem',
+          }}
+        >
+          CLEAR
+        </button>
 
-          {Boolean(lockType) && (
-            <div className="mb-4">
-              <Locked theme={lockType} />
-            </div>
-          )}
+        <div style={{ flex: 1, minWidth: '140px', display: 'flex', gap: '0.5rem' }}>
+          <button
+            onClick={handleSpace}
+            className="font-bold rounded transition-all duration-150"
+            style={{
+              flex: 1,
+              backgroundColor: clickedKey === 'SPACE' ? 'rgb(56, 178, 172)' : 'rgb(45, 53, 72)',
+              color: 'rgb(133, 175, 231)',
+              border: '2px solid rgb(77, 167, 188)',
+              letterSpacing: '0.1em',
+              fontSize: '0.75rem',
+            }}
+          >
+            SPACE
+          </button>
+          <button
+            onClick={handleSubmit}
+            className="font-bold rounded"
+            style={{
+              flex: 1,
+              backgroundColor: 'rgb(79, 209, 197)',
+              color: 'rgb(19, 23, 34)',
+              border: '2px solid rgb(79, 209, 197)',
+              fontSize: '0.75rem',
+            }}
+          >
+            SUBMIT
+          </button>
+        </div>
 
-          {Boolean(children) && (
-            <div className="mb-4">{children}</div>
-          )}
-
-          {/* Hints */}
-          {(hint || showFirstLetter) && (
-            <div className="mb-4 p-3 rounded" style={{ backgroundColor: 'rgba(45, 53, 72, 0.5)' }}>
-              {hint && (
-                <div className="text-sm mb-1" style={{ color: 'rgb(251, 191, 36)' }}>
-                  <span className="font-bold">Hint:</span> {hint}
-                </div>
-              )}
-              {showFirstLetter && (
-                <div className="text-sm" style={{ color: 'rgb(251, 191, 36)' }}>
-                  <span className="font-bold">First Letter:</span> {password.charAt(0).toUpperCase()}
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Previous Attempts */}
-          {attempts.length > 0 && (
-            <div
-              className="mb-4 p-3 rounded"
-              style={{ backgroundColor: 'rgba(252, 129, 129, 0.05)', border: '1px solid rgba(252, 129, 129, 0.2)' }}
-            >
-              <div className="text-xs font-bold mb-2" style={{ color: 'rgba(252, 129, 129, 0.7)', letterSpacing: '0.08em' }}>
-                FAILED ATTEMPTS ({attempts.length})
-              </div>
-              <div style={{ maxHeight: '80px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
-                {attempts.map((a, i) => (
-                  <div key={i} className="text-sm font-bold tracking-wider" style={{ color: 'rgb(252, 129, 129)' }}>
-                    {a || '(empty)'}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Feedback */}
-          {feedback && (
-            <div className="mb-4 p-2 rounded text-center font-bold" style={{
+        {IS_LOCALHOST && (
+          <button
+            onClick={handleOverride}
+            className="px-4 py-2 font-bold rounded"
+            style={{
               backgroundColor: 'rgba(252, 129, 129, 0.2)',
               color: 'rgb(252, 129, 129)',
-            }}>
-              {feedback}
-            </div>
-          )}
-
-          {/* Action Buttons */}
-          <div className="flex flex-wrap gap-2">
-            <button
-              onClick={handleBackspace}
-              className="px-2 md:px-4 py-2 font-bold rounded text-sm md:text-base"
-              style={{ backgroundColor: 'rgb(45, 53, 72)', color: 'rgb(133, 175, 231)', border: '2px solid rgb(77, 167, 188)' }}
-            >
-              ← Back
-            </button>
-            <button
-              onClick={handleClear}
-              className="px-2 md:px-4 py-2 font-bold rounded text-sm md:text-base"
-              style={{ backgroundColor: 'rgb(45, 53, 72)', color: 'rgb(133, 175, 231)', border: '2px solid rgb(77, 167, 188)' }}
-            >
-              Clear
-            </button>
-
-            {/* Space + Submit — split 50/50 */}
-            <div style={{ flex: 1, minWidth: '140px', display: 'flex', gap: '0.5rem' }}>
-              <button
-                onClick={handleSpace}
-                className="font-bold rounded transition-all duration-150"
-                style={{
-                  flex: 1,
-                  backgroundColor: clickedKey === 'SPACE' ? 'rgb(56, 178, 172)' : 'rgb(45, 53, 72)',
-                  color: 'rgb(133, 175, 231)',
-                  border: '2px solid rgb(77, 167, 188)',
-                  letterSpacing: '0.1em',
-                  fontSize: '0.75rem',
-                }}
-              >
-                SPACE
-              </button>
-              <button
-                onClick={handleSubmit}
-                className="font-bold rounded"
-                style={{
-                  flex: 1,
-                  backgroundColor: 'rgb(79, 209, 197)',
-                  color: 'rgb(19, 23, 34)',
-                  border: '2px solid rgb(79, 209, 197)',
-                }}
-              >
-                Submit
-              </button>
-            </div>
-
-            {/* Override — localhost only */}
-            {IS_LOCALHOST && (
-              <button
-                onClick={handleOverride}
-                className="px-4 py-2 font-bold rounded"
-                style={{ backgroundColor: 'rgba(252, 129, 129, 0.2)', color: 'rgb(252, 129, 129)', border: '2px solid rgb(252, 129, 129)' }}
-              >
-                Override
-              </button>
-            )}
-          </div>
-        </>
-      )}
+              border: '2px solid rgb(252, 129, 129)',
+              fontSize: '0.75rem',
+            }}
+          >
+            OVERRIDE
+          </button>
+        )}
+      </div>
     </div>
   );
 }

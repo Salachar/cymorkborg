@@ -19,10 +19,6 @@ export const THE_55_CORP_QUAD_COMMANDS = {
       <PublicPortal
         name="CORP QUAD"
         tagline="Corporate retail and services"
-        network="CORP_QUAD_PUBLIC"
-        signalStrength="strong"
-        status="✓ OPEN (Limited Hours)"
-        statusColor="neon"
         notes={[
           "Corporate retail and services",
           "High-end stores, luxury brands, exclusive access",

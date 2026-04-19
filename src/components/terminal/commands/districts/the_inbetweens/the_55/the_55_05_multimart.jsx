@@ -19,10 +19,6 @@ export const THE_55_MULTIMART_COMMANDS = {
       <PublicPortal
         name="MULTIMART"
         tagline="One-stop shop for locals"
-        network="MULTIMART_GUEST"
-        signalStrength="medium"
-        status="✓ OPEN 24/7"
-        statusColor="neon"
         notes={[
           "Over 50 vendors",
           "Cash and credchips accepted",

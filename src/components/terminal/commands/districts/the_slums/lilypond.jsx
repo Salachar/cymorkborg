@@ -7,7 +7,7 @@ export const LILYPOND_COMMANDS = {
     favicon: <Icons.Pin />,
     preview: (
       <NodePreview>
-        <Line span yellow> · Armed vigilante brigades. Self-enforced peace. Outsiders unwelcome.</Line>
+        <Line span smoke> · Armed vigilante brigades. Self-enforced peace. Outsiders unwelcome.</Line>
       </NodePreview>
     ),
     content: (

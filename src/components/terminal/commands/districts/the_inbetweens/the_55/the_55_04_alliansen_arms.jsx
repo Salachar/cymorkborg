@@ -19,10 +19,6 @@ export const THE_55_ALLIANSEN_ARMS_COMMANDS = {
       <PublicPortal
         name="ALLIANSEN ARMS"
         tagline="Residential living in The 55"
-        network="ALLIANSEN_RESIDENT"
-        signalStrength="medium"
-        status="✓ RESIDENTIAL"
-        statusColor="neon"
         notes={[
           "Bachelor-style concrete prefab apartments",
           "Many families pooling income to afford rent",

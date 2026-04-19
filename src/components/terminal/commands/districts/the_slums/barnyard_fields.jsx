@@ -8,7 +8,7 @@ export const BARNYARD_FIELDS_COMMANDS = {
     preview: (
       <NodePreview>
         <Line span smoke br> · Slums at the southern edge. The Heirs own this ground in blood and ritual.</Line>
-        <Line span red> · CY_Sanitation HQ</Line> — quarantined.
+        <Line span smoke> · CY_Sanitation HQ</Line> — quarantined.
       </NodePreview>
     ),
     content: (

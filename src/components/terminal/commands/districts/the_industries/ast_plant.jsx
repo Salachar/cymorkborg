@@ -14,19 +14,15 @@ export const AST_PLANT_COMMANDS = {
     favicon: <Icons.Factory />,
     preview: (
       <NodePreview>
-        <Line span yellow> · Biomatter processing. South Mosscroft. The stench is unbearable.</Line>
+        <Line span smoke> · Biomatter processing. South Mosscroft. The stench is unbearable.</Line>
       </NodePreview>
     ),
     content: (
       <FacilityPortal
         companyName="AST ENDLESS SEAS"
-        facilityId="MOSSCROFT-AST-SOUTH-01"
         tagline="From ocean to table. Eventually."
         location="South Mosscroft, Industrial Zone"
         owner="AST Endless Seas — Lakshmi Viswan, Product Manager"
-        function="Fish & Biomatter Processing / Edible & Non-Edible Products"
-        networkStatus="ACTIVE — AST internal network"
-        securityLevel="HIGH"
         warnings={[
           "Extreme odor — respirator strongly recommended",
           "Biomatter contamination risk in southern perimeter",

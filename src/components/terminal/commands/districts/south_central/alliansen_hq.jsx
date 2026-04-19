@@ -15,20 +15,15 @@ export const ALLIANSEN_HQ_COMMANDS = {
     favicon: <Icons.Tower />,
     preview: (
       <NodePreview>
-        <Line span cyan> · Dominant megacorp. South Central. Real estate, security, everything.</Line>
+        <Line span smoke> · Dominant megacorp. South Central. Real estate, security, everything.</Line>
       </NodePreview>
     ),
     content: (
       <FacilityPortal
         companyName="ALLIANSEN INC."
-        facilityId="SC-ALLIANSEN-HQ-01"
         tagline="Securing tomorrow."
         location="South Central, Central District"
         owner="Alliansen Inc. — Mrs. Lia, President of the Board"
-        function="Corporate HQ / Security Operations / Behavioral Analytics"
-        personnel="Jaci F. Ah — Head of Security Operations"
-        networkStatus="ACTIVE — Alliansen secured network"
-        securityLevel="MAXIMUM"
         warnings={[
           "Alliansen private security on all floors",
           "Behavioral analytics active in all public-facing areas",

@@ -14,10 +14,6 @@ export const THE_BASE_COMMANDS = {
       <PublicPortal
         name="THE BASE"
         tagline="Foundation levels of The 55"
-        network="BASE_MAINTENANCE"
-        signalStrength="weak"
-        status="FOUNDATION LEVELS"
-        statusColor="yellow"
         notes={[
           "Levels B20-B1",
           "Maintenance corridors, car parks, cheapest rents",

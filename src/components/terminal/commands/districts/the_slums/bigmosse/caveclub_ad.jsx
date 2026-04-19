@@ -113,19 +113,6 @@ export function StoneEelsAd() {
           <StoneFeature text="Neutral Ground - No Drama" />
           <StoneFeature text="No Corps. No Cops. No Questions." />
         </div>
-
-        <PublicPortal
-          network="CAVE_CLUB_GUEST"
-          signalStrength="medium"
-          status="✓ OPEN (20:00-06:00)"
-          statusColor="neon"
-          nowPlaying="Underground beats - Ports hardcore mix"
-          notes={[
-            "Stone Eels territory - Neutral ground, no drama",
-            "Weapon check at door (non-negotiable)",
-          ]}
-          theme="limeade"
-        />
       </div>
 
       <TechCorner style={{ top: '12px', left: '12px' }} />

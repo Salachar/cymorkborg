@@ -19,10 +19,6 @@ export const THE_55_KAYTELL_MANUFACTURING_COMMANDS = {
       <PublicPortal
         name="KAYTELL MANUFACTURING CONCERN"
         tagline="Production facility in The 55"
-        network="KAYTELL_EMPLOYEE"
-        signalStrength="strong"
-        status="✓ OPERATIONAL"
-        statusColor="neon"
         notes={[
           "Operates 24/7 with rotating shifts",
           "Employs ~200 workers across all shifts",

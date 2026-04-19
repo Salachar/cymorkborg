@@ -17,10 +17,6 @@ export const THE_55_LOST_ZONE_COMMANDS = {
       <PublicPortal
         name="THE LOST ZONE"
         tagline="Abandoned construction zone"
-        network="NONE"
-        signalStrength="weak"
-        status="HAZARDOUS AREA"
-        statusColor="red"
         notes={[
           "Abandoned mid-construction decades ago",
           "Structural instability, environmental hazards",

@@ -97,17 +97,13 @@ export const THE_INBETWEENS_COMMANDS = {
         favicon: <Icons.Pin />,
         preview: (
           <NodePreview>
-            <Line span yellow> · Illegal G0-grown mycobiotic meat. Pop-up stalls. Don't ask questions.</Line>
+            <Line span smoke> · Illegal G0-grown mycobiotic meat. Pop-up stalls. Don't ask questions.</Line>
           </NodePreview>
         ),
         content: (
           <PublicPortal
             name="BURNCHURCH HEX"
             tagline="Eat what you can afford. Don't ask questions."
-            network="BURNCHURCH_PUBLIC"
-            signalStrength="medium"
-            status="✓ OPEN FOR BUSINESS"
-            statusColor="yellow"
             notes={[
               "Pop-up food stalls — mycobiotic meat grown illegally in G0",
               "Surge economy — here today, scattered tomorrow",
@@ -129,13 +125,9 @@ export const THE_INBETWEENS_COMMANDS = {
         content: (
           <FacilityPortal
             companyName="BORGHOLD"
-            facilityId="INBETWEENS-BORGHOLD-01"
             tagline="We know the city by whom we hold in cages."
             location="The Inbetweens, Central Cy"
             owner="Alliansen Inc. (majority control)"
-            function="Prison Complex / Correctional Facility"
-            networkStatus="RESTRICTED — Staff access only"
-            securityLevel="MAXIMUM"
             warnings={[
               "Unauthorized access is illegal — immediate detention",
               "Armed perimeter — drone surveillance 24/7",

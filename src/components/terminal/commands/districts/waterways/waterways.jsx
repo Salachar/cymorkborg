@@ -19,17 +19,13 @@ export const WATERWAYS_COMMANDS = {
     favicon: <Icons.Water />,
     preview: (
       <NodePreview>
-        <Line span cyan> · Canals, lakes, and sea access. The city's veins.</Line>
+        <Line span smoke> · Canals, lakes, and sea access. The city's veins.</Line>
       </NodePreview>
     ),
     content: (
       <PublicPortal
         name="CY WATERWAYS"
         tagline="The city's veins — pumping acidic waters, fetid waste, and commerce."
-        network="CY_WATERWAYS_PUBLIC"
-        signalStrength="medium"
-        status="✓ ACTIVE"
-        statusColor="neon"
         notes={[
           "Canal network connects all major districts — taxi boats, market barges, supertankers",
           "Aquaculture cage maze controls sea access — heavily patrolled",

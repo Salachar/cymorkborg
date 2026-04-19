@@ -2,6 +2,7 @@ import ArcadeCabinet from "./Devices/ArcadeCabinet/ArcadeCabinet";
 import ATM from "./Extractable/ATM";
 import BountyCard from "./BountyCard/BountyCard";
 import Briefing from "./Briefing/Briefing";
+import BuildingServices from "./BuildingServices/BuildingServices";
 import Camera from "./Camera/Camera";
 import CoffeeMachine from "./Devices/CoffeeMachine/CoffeeMachine";
 import CommunityBoard from "./CommunityBoard/CommunityBoard";
@@ -21,8 +22,6 @@ import IncidentLog from "./IncidentLog/IncidentLog";
 import Jukebox from "./Devices/Jukebox/Jukebox";
 import LocalAd from "./LocalAd/LocalAd";
 import Menu from "./Menu/Menu";
-import NetworkDevices from "./NetworkDevices/NetworkDevices";
-import NetworkTrafficMonitor from "./NetworkTrafficMonitor/NetworkTrafficMonitor";
 import PasswordPrompt from "./Blockers/PasswordPrompt/PasswordPrompt";
 import PersonnelFile from "./PersonnelFile/PersonnelFile";
 import PrivatePortal from "./Portals/PrivatePortal";
@@ -40,12 +39,14 @@ import VIPList from "./VIPList/VIPList";
 import Workstation from "./Workstation/Workstation";
 import Inventory from "./Inventory";
 import Node from "./Basic/Node";
+import NetworkActivity from "./NetworkActivity/NetworkActivity";
 
 export {
   ArcadeCabinet,
   ATM,
   BountyCard,
   Briefing,
+  BuildingServices,
   Camera,
   CoffeeMachine,
   CommunityBoard,
@@ -66,8 +67,7 @@ export {
   Jukebox,
   LocalAd,
   Menu,
-  NetworkDevices,
-  NetworkTrafficMonitor,
+  NetworkActivity,
   Node,
   PasswordPrompt,
   PersonnelFile,

@@ -15,7 +15,7 @@ export const G0_COMMANDS = {
     favicon: <Icons.Alert />,
     preview: (
       <NodePreview>
-        <Line span red> · Quarantine zone. Do not approach the wall. Trespassers will not be recovered.</Line>
+        <Line span smoke> · Quarantine zone. Do not approach the wall. Trespassers will not be recovered.</Line>
       </NodePreview>
     ),
     content: (

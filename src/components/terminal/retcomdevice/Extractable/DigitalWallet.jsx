@@ -14,7 +14,7 @@ import './digitalWallet.css';
  */
 export default function DigitalWallet({
   id,
-  accountNumber = "UNKNOWN",
+  accountNumber = "PRIVATE",
   credits = 0,
   accountHolder = "PRIVATE",
   lastTransaction,
@@ -22,16 +22,13 @@ export default function DigitalWallet({
 }) {
   return (
     <div className={`digital-wallet ${isLocked ? 'digital-wallet-locked' : ''}`}>
-
       <div className="wallet-header">
-
         {/* Left: title + lock label */}
         <div className="wallet-title">
           <span className="wallet-title-text">DIGITAL WALLET</span>
           {isLocked && (
             <div className="wallet-title-lock-ui">
               <span className="wallet-lock-title">AUTHENTICATION REQUIRED</span>
-              <span className="wallet-locked-badge">LOCKED</span>
             </div>
           )}
         </div>

@@ -19,10 +19,6 @@ export const THE_55_SPECTRAL_LUXVITAE_COMMANDS = {
       <PublicPortal
         name="SPECTRAL LUXVITAE"
         tagline="Live light. Live life."
-        network="LUXVITAE_GUEST"
-        signalStrength="excellent"
-        status="✓ RESIDENTS ONLY"
-        statusColor="neon"
         notes={[
           "100+ penthouses and condos",
           "Wealthiest residents in The 55",

@@ -93,18 +93,6 @@ export function BatusBodegaAd() {
           <Feature text="Community Bulletin Board" />
           <Feature text="Coffee Always Fresh" />
         </div>
-
-        <PublicPortal
-          network="FREE_BODEGA_5G"
-          signalStrength="strong"
-          status="⚠ Store Currently CLOSED"
-          statusColor="red"
-          notes={[
-            "Free wifi courtesy of Batu - No purchase necessary",
-            "Please respect bandwidth - Community shared connection",
-          ]}
-          theme="friendly"
-        />
       </div>
 
       <Star style={{ top: '16px', left: '16px' }} />

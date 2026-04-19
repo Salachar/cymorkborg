@@ -19,7 +19,7 @@ export const THE_INDUSTRIES_COMMANDS = {
     favicon: <Icons.Pin />,
     preview: (
       <NodePreview>
-        <Line span yellow> · Toxic hellscape. Fume-spewing factories. Industry must feed Cy's eternal consumption.</Line>
+        <Line span smoke> · Toxic hellscape. Fume-spewing factories. Industry must feed Cy's eternal consumption.</Line>
       </NodePreview>
     ),
     content: (

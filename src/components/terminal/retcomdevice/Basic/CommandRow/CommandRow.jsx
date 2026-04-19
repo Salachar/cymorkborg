@@ -60,17 +60,10 @@ export default function CommandRow({
     });
   })() : null;
 
-  const rootClass = [
-    'cr-root',
-    isExpanded ? 'cr-expanded' : '',
-    isLocked ? 'cr-locked' : 'cr-unlocked',
-    isBypassed ? 'cr-bypassed' : '',
-  ].filter(Boolean).join(' ');
-
   return (
     <div
       onClick={onClick}
-      className={rootClass}
+      className='cr-root'
       style={{ cursor: isExpandable ? 'pointer' : 'default', ...style }}
     >
       {(hasBlocker && !isBypassed) && (
@@ -92,20 +85,18 @@ export default function CommandRow({
           </div>
         ) : <div />}
 
-        {!isLocked && hasChildren && childCount > 0 && (
+        {/* {!isLocked && hasChildren && childCount > 0 && (
           <span className="cr-child-count">({childCount} nodes)</span>
-        )}
+        )} */}
       </div>
 
-      {/* Main strip */}
       <div className="cr-strip">
         {favicon && <Favicon favicon={favicon} />}
 
-        <span className={`cr-name cr-depth-${depth === 0 ? 0 : 1} pl-2`}>
+        <span className={`cr-name pl-2`}>
           {displayName}
         </span>
 
-        {/* Bypassed value label */}
         {isBypassed && bypassValue && bypassValue !== 'UNLOCKED' && bypassValue !== 'CRACKED' && (
           <span className="cr-badge cr-badge-bypassed">
             {bypassLabel}:{bypassValue}

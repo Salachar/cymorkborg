@@ -26,7 +26,7 @@ export const BIGMOSSE_COMMANDS = {
     preview: (
       <NodePreview>
         <Line span smoke br> · Slums at the edge of the Ports. The most alive district you can die in.</Line>
-        <Line span yellow> · Lucky Flight Casino</Line> open 24/7!
+        <Line span smoke> · Lucky Flight Casino</Line> open 24/7!
       </NodePreview>
     ),
     content: (

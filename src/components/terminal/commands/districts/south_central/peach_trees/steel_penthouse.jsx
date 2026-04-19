@@ -8,14 +8,14 @@ import {
 
 import {
   ArcadeCabinet,
+  BuildingServices,
   Camera,
   CoffeeMachine,
   EncryptedMessage,
   Extractable,
   Jukebox,
   Node,
-  NetworkDevices,
-  NetworkTrafficMonitor,
+  NetworkActivity,
   RCDAlert,
   RetComImage,
   Safe,
@@ -30,7 +30,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
     favicon: <Icons.House />,
     preview: (
       <NodePreview>
-        <Line span yellow> · Smart Home System</Line>
+        <Line span smoke> · Smart Home System</Line>
       </NodePreview>
     ),
     password: {
@@ -41,7 +41,19 @@ export const STEEL_PENTHOUSE_COMMANDS = {
     },
     content: (
       <Node
-        title="PENTHOUSE SMART HOME - NETWORK ACCESS ESTABLISHED"
+        title="PENTHOUSE SMART HOME — NETWORK ACCESS ESTABLISHED"
+        table={{
+          network: "JACKHAMMER_HOME",
+          occupancy: "20+ guests",
+          load: "85% capacity",
+          power: "HIGH",
+        }}
+        notes={[
+          "Smart fridge auto-reorder disabled — consumption exceeding capacity",
+          "Climate control struggling — party heat exceeding set temperature",
+          "Sparring cydroid: MAXIMUM difficulty, safety protocols disabled",
+          "Holo projectors active — majority of guests are holo-avatars",
+        ]}
         footer="Connected to JACKHAMMER_HOME | Welcome to the most over-engineered apartment in Central District"
       >
         <RCDAlert
@@ -63,82 +75,49 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           lockType: 'terminal',
         },
         content: (
-          <Node
-            title="[BUILDING SYSTEMS - UNIT 4201]"
-            notes={[
-              "Inherited from Tower Block 7 infrastructure",
-              "HVAC, lighting, fire suppression",
-              "Emergency systems operational",
-              "Climate control struggling with party load"
-            ]}
-          >
-            <InsetBox title="SYSTEM STATUS">
-              <Line red bold pulse>Check Climate Control Systems</Line>
-            </InsetBox>
-          </Node>
-        ),
-        related_commands: {
-          "HVAC & Climate": {
-            favicon: <Icons.Maintenance />,
-            content: (
-              <Node
-                title="[CLIMATE & LIGHTING CONTROL]"
-                notes={[
+          <BuildingServices
+            title="UNIT 4201 — BUILDING SYSTEMS"
+            sections={[
+              {
+                title: "HVAC & Climate",
+                notes: [
                   "Set temperature: 22°C",
                   "Actual temperature: 24°C (party heat exceeding capacity)",
                   "Humidity: 45%",
                   "Air quality: POOR (smoke, body heat, party)",
-                ]}
-              >
-                <InsetBox title="OVERRIDE OPTIONS:">
-                  <Line yellow>Drop temperature to minimum (15°C)</Line>
-                  <Line yellow>Kill AC</Line>
-                  <Line yellow>Vent windows/balcony door remotely</Line>
-                </InsetBox>
-                <Line smoke small>Climate manipulation takes 10-15 minutes to have noticeable effect.</Line>
-              </Node>
-            ),
-          },
-
-          "Fire Suppression": {
-            favicon: <Icons.Maintenance />,
-            content: (
-              <Node
-                title="[FIRE SUPPRESSION SYSTEM]"
-                notes={[
+                ],
+                actions: [
+                  "Drop temperature to minimum (15°C)",
+                  "Kill AC",
+                  "Vent windows/balcony door remotely",
+                ],
+                warning: "Climate manipulation takes 10-15 minutes to have noticeable effect.",
+              },
+              {
+                title: "Fire Suppression",
+                notes: [
                   "Sprinkler system armed",
                   "Smoke detectors active (8 units)",
                   "Manual override available",
-                  "Last test: 2 months ago"
-                ]}
-              >
-                <InsetBox title="COVERAGE:">
-                  <Line neon>Sprinkler heads: 12 total</Line>
-                  <Line neon>Water pressure: GOOD</Line>
-                </InsetBox>
-              </Node>
-            ),
-          },
-
-          "Emergency Systems": {
-            favicon: <Icons.Maintenance />,
-            content: (
-              <Node
-                title="[EMERGENCY SYSTEMS]"
-                notes={[
+                  "Last test: 2 months ago",
+                ],
+                actions: [
+                  "Trigger manual sprinkler override",
+                ],
+              },
+              {
+                title: "Emergency Systems",
+                notes: [
                   "Smoke alarms active",
                   "Emergency exit lighting functional",
-                ]}
-              >
-                <InsetBox title="PANIC BUTTON:">
-                  <Line yellow>Location: Master bedroom nightstand</Line>
-                  <Line yellow>Alert: Building security + SecCorps</Line>
-                  <Line yellow>Response time: ~3 minutes</Line>
-                </InsetBox>
-              </Node>
-            ),
-          },
-        },
+                ],
+                actions: [
+                  "Panic button — Master bedroom nightstand — alerts building security + SecCorps (~3 min response)",
+                ],
+              },
+            ]}
+          />
+        ),
       },
 
       "Internal Access": {
@@ -156,102 +135,52 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           />
         ),
         related_commands: {
-          "Network Traffic": {
+          "Network Activiy": {
             favicon: <Icons.Computer />,
             content: (
-              <NetworkTrafficMonitor
-                systemName="JACKHAMMER_HOME NETWORK TRAFFIC"
-                location="Penthouse Network - Unit 4201"
-                bandwidth="847 Mbps / 1 Gbps (85% capacity)"
-                activeConnections={67}
-                transfers={[
-                  {
-                    timestamp: "14:47:33",
-                    status: "ACTIVE",
-                    filename: "holo_avatar_stream_batch_47.dat",
-                    size: "2.3 GB",
-                    source: "External (multiple IPs)",
-                    destination: "Holo Projector Array",
-                    protocol: "HOLO-STREAM-v3",
-                    progress: 78,
-                    notes: "22 concurrent holo-avatar connections"
-                  },
-                  {
-                    timestamp: "14:45:12",
-                    status: "ACTIVE",
-                    filename: "killmatch_champions_tournament_sync.pkg",
-                    size: "847 MB",
-                    source: "GameBox Elite Network",
-                    destination: "Game Console",
-                    protocol: "GAME-SYNC",
-                    progress: 34,
-                    notes: "4-player tournament active"
-                  },
-                  {
-                    timestamp: "14:42:01",
-                    status: "COMPLETE",
-                    filename: "audio_stream_industrial_techno.opus",
-                    size: "156 MB",
-                    source: "Music Streaming Service",
-                    destination: "Jukebox System",
-                    protocol: "AUDIO-STREAM",
-                    notes: "Continuous playback for 3+ days"
-                  },
-                  {
-                    timestamp: "14:38:47",
-                    status: "COMPLETE",
-                    filename: "camera_feed_buffer_dump.vid",
-                    size: "4.1 GB",
-                    source: "Security Camera Array",
-                    destination: "Local NAS Storage",
-                    protocol: "SURVEILLANCE-LOG",
-                    notes: "Automated hourly backup"
-                  },
-                  {
-                    timestamp: "14:15:22",
-                    status: "COMPLETE",
-                    filename: "rcd_messaging_batch_update.enc",
-                    size: "67 MB",
-                    source: "Multiple RCD devices (guests)",
-                    destination: "Network Gateway",
-                    protocol: "RCD-MESH-ENCRYPTED",
-                    notes: "Party guest communications relay"
-                  },
-                  {
-                    timestamp: "13:52:08",
-                    status: "FAILED",
-                    filename: "smart_fridge_auto_reorder.req",
-                    size: "2.3 KB",
-                    source: "Kitchen Smart Fridge",
-                    destination: "Grocery Delivery Service",
-                    protocol: "IOT-ORDER",
-                    notes: "ALERT: Auto-reorder disabled after 47 failed attempts (consumption too high)"
-                  },
-                ]}
-              />
-            ),
-          },
-
-          "Connected Devices": {
-            favicon: <Icons.LAN />,
-            content: (
-              <NetworkDevices
-                networkName="JACKHAMMER_HOME"
+              <NetworkActivity
+                title="JACKHAMMER_HOME"
+                environment={{ temp: "24°C", noise: "HIGH", power: "HIGH" }}
                 devices={[
-                  { name: "Security Console", ip: "192.168.1.10", type: "Security" },
-                  { name: "Camera System", ip: "192.168.1.20-28", type: "Surveillance" },
-                  { name: "NAS Storage", ip: "192.168.1.29", type: "Storage" },
-                  { name: "Entertainment Hub", ip: "192.168.1.30", type: "Media" },
-                  { name: "Jukebox", ip: "192.168.1.31", type: "Audio" },
-                  { name: "Holo Projectors", ip: "192.168.1.40-50", type: "Display" },
-                  { name: "Game Console", ip: "192.168.1.51", type: "Entertainment" },
-                  { name: "Smart Fridge", ip: "192.168.1.60", type: "Appliance" },
-                  { name: "Coffee Machine", ip: "192.168.1.62", type: "Appliance" },
-                  { name: "HVAC Control", ip: "192.168.1.70", type: "Climate" },
-                  { name: "Lighting System", ip: "192.168.1.71", type: "Climate" },
-                  { name: "Gym Equipment Hub", ip: "192.168.1.80", type: "Fitness" },
-                  { name: "Sparring Cydroid", ip: "192.168.1.81", type: "Training" },
-                  { name: "Wall Safe", ip: "192.168.1.90", type: "Security" },
+                  { name: "Security Console" },
+                  {
+                    name: "Camera System",
+                    location: "All rooms",
+                    transfer: {
+                      name: "camera_feed_buffer_dump.vid",
+                      destination: "Local NAS",
+                      size: "4.1 GB",
+                      note: "Automated hourly backup"
+                    }
+                  },
+                  { name: "NAS Storage" },
+                  {
+                    name: "Holo Projectors",
+                    location: "Holo Space",
+                    status: "ACTIVE",
+                    transfer: {
+                      name: "holo_avatar_stream_batch_47.dat",
+                      destination: "External (multiple IPs)",
+                      size: "2.3 GB",
+                      note: "22 concurrent holo-avatar connections"
+                    }
+                  },
+                  {
+                    name: "Smart Fridge",
+                    location: "Kitchen",
+                    transfer: {
+                      name: "smart_fridge_auto_reorder.req",
+                      destination: "Grocery Delivery",
+                      size: "2.3 KB",
+                      note: "FAILED — auto-reorder disabled after 47 attempts"
+                    }
+                  },
+                  { name: "Sparring Cydroid", location: "Gym", status: "ACTIVE" },
+                  { name: "Wall Safe", location: "Master Bedroom" },
+                  { name: "Coffee Machine", location: "Kitchen" },
+                  { name: "HVAC Control", status: "ACTIVE" },
+                  { name: "Game Console", location: "Main Living Area", status: "ACTIVE" },
+                  { name: "Jukebox", status: "ACTIVE" },
                 ]}
               />
             ),
@@ -270,7 +199,6 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                     status: "ARRIVED",
                     clearance: "VIP",
                     notes: "Writer for KILL!KILL!KILL! fan feed. Known for intimate athlete interviews. Often armed.",
-                    arrivalTime: "Nov 16"
                   },
                   {
                     name: "IKHON",
@@ -278,7 +206,6 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                     status: "ARRIVED",
                     clearance: "VIP",
                     notes: "Nano-using athlete with mysterious warlock persona. Heavyweight division. Friendly when substances are available.",
-                    arrivalTime: "Nov 16"
                   },
                   {
                     name: "THUGGER",
@@ -286,7 +213,6 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                     status: "ARRIVED",
                     clearance: "VIP",
                     notes: "11-month win streak (will not stop mentioning this). Electro-taur chromed. Cyberspine enhanced. Extremely cocky.",
-                    arrivalTime: "Nov 16"
                   },
                   {
                     name: "RAZE",
@@ -301,28 +227,24 @@ export const STEEL_PENTHOUSE_COMMANDS = {
                     status: "ARRIVED",
                     clearance: "VIP",
                     notes: "Mech pilot. Rarely recognized without mech. Lightweight build. Upcoming fight vs Thugger scheduled.",
-                    arrivalTime: "Nov 17"
                   },
                   {
                     name: "MASTER CRIMSON",
                     status: "ARRIVED",
                     clearance: "VIP",
                     notes: "Arvtagarna cult member. Nano abilities confirmed. C-list veteran, visibly bored with party scene.",
-                    arrivalTime: "Nov 16"
                   },
                   {
                     name: "GOLIATHESS",
                     status: "ARRIVED",
                     clearance: "VIP",
                     notes: "Up-and-coming heavyweight. StoneSkin chrome. Known for engineering dramatic moments for feed engagement.",
-                    arrivalTime: "Nov 16"
                   },
                   {
                     name: "JADE BOOMSLANG",
                     status: "ARRIVED",
                     clearance: "VIP",
                     notes: "Virid Vipers sponsored. Full-body reptile scale modifications. New to scene, actively seeking connections.",
-                    arrivalTime: "Nov 17"
                   }
                 ]}
               >

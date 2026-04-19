@@ -12,7 +12,7 @@ import {
 } from "@terminal/retcomdevice"
 
 import { DOC_JOY_CLINIC_COMMANDS } from './doc_joy_clinic';
-import { PEACH_TREES_COMMANDS } from './peach_tress';
+import { PEACH_TREES_COMMANDS } from './peach_trees/peach_trees';
 import { SOUTH_CENTRAL_FUN_COMMANDS } from "./fun";
 import { SOUTH_CENTRAL_CORPORATE_COMMANDS } from './corporate';
 import { ALLIANSEN_HQ_COMMANDS } from './alliansen_hq'
@@ -24,7 +24,7 @@ export const SOUTH_CENTRAL_COMMANDS = {
     favicon: <Icons.Pin />,
     preview: (
       <NodePreview>
-        <Line span yellow> · Alliansen territory. Corporate law. Chrome and concrete.</Line>
+        <Line span smoke> · Alliansen territory. Corporate law. Chrome and concrete.</Line>
       </NodePreview>
     ),
     content: (

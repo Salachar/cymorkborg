@@ -18,17 +18,13 @@ export const CARMACK_ANTIQUITIES_COMMANDS = {
     favicon: <Icons.Bulletin />,
     preview: (
       <NodePreview>
-        <Line span cyan> · Pre-nanocomposite tech. Sabbath Square, North Central. Asa Carmack, proprietor.</Line>
+        <Line span smoke> · Pre-nanocomposite tech. Sabbath Square, North Central. Asa Carmack, proprietor.</Line>
       </NodePreview>
     ),
     content: (
       <PublicPortal
         name="CARMACK ANTIQUITIES"
         tagline="Pre-nanocomposite tech. No questions asked."
-        network="SABBATH_SQ_PUBLIC"
-        signalStrength="weak"
-        status="✓ OPEN"
-        statusColor="neon"
         notes={[
           "Antique tech and pre-Incident hardware",
           "Sabbath Square, North Central",

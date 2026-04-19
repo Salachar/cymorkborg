@@ -19,10 +19,6 @@ export const THE_55_ROOFLINE_COMMANDS = {
       <PublicPortal
         name="THE ROOFLINE"
         tagline="Where the tower meets the sky"
-        network="ROOFLINE_PUBLIC"
-        signalStrength="strong"
-        status="RESTRICTED ACCESS"
-        statusColor="yellow"
         notes={[
           "Unfinished floors and infrastructure",
           "Security checkpoints active",

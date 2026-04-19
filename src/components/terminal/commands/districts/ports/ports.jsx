@@ -24,7 +24,7 @@ export const PORTS_DISTRICT_COMMANDS = {
     favicon: <Icons.Pin />,
     preview: (
       <NodePreview>
-        <Line span cyan> · Air, sea, space access. Drugs and guns, clubs and fun.</Line>
+        <Line span smoke> · Air, sea, space access. Drugs and guns, clubs and fun.</Line>
       </NodePreview>
     ),
     content: (
@@ -71,11 +71,6 @@ export const PORTS_DISTRICT_COMMANDS = {
           <PublicPortal
             name="IDOL COFFINS"
             tagline="Sleep like a rock star. Wake up like a legend."
-            network="IDOL_GUEST_WIFI"
-            signalStrength="strong"
-            status="NOW BOOKING"
-            statusColor="neon"
-            nowPlaying="Neon Funeral - The Chrome Idols"
             notes={[
               "Theme changes monthly (currently: 'Chrome Idol' aesthetic)",
               "Located near hottest clubs (moves with trends)",

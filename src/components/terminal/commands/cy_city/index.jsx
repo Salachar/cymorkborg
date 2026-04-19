@@ -6,6 +6,10 @@ import {
   NodePreview,
 } from '@terminal/TerminalComponents';
 
+import {
+  Node,
+} from "@terminal/retcomdevice";
+
 import TerminalWallet from '@terminal/retcomdevice/Basic/TerminalWallet/TerminalWallet';
 import GamesBanner from '@terminal/retcomdevice/Games/GamesBanner/GamesBanner';
 import MinesweeperGame from '@terminal/retcomdevice/Games/MinesweeperGame/MinesweeperGame';
@@ -34,8 +38,8 @@ export const CY_CITY_PORTAL = {
     favicon: <Icons.Wallet />,
     preview: (
       <NodePreview>
-        <Line yellow> · Keeps track of all collected credits and items in the RetComDevice</Line>
-        <Line yellow> · Extracted credits/items are transferable to characters here</Line>
+        <Line smoke> · Keeps track of all collected credits and items in the RetComDevice</Line>
+        <Line smoke> · Extracted credits/items are transferable to characters here</Line>
       </NodePreview>
     ),
     content: <TerminalWallet />,
@@ -45,7 +49,7 @@ export const CY_CITY_PORTAL = {
     preview: (
       <NodePreview>
         <Line smoke> · Population 2.8M official, 4M+ estimated · Pre-Incident ruins. Corporate glass. Slum fires.</Line>
-        <Line> · City district access. Each district contains local networks, facilities, and secured nodes.</Line>
+        <Line smoke> · City district access. Each district contains local networks, facilities, and secured nodes.</Line>
       </NodePreview>
     ),
     related_commands: {
@@ -65,7 +69,7 @@ export const CY_CITY_PORTAL = {
     favicon: <Icons.City />,
     preview: (
       <NodePreview>
-        <Line> · Public access terminal. City news, weather, corp announcements.</Line>
+        <Line smoke> · Public access terminal. City news, weather, corp announcements.</Line>
       </NodePreview>
     ),
     content: (
@@ -174,9 +178,8 @@ export const CY_CITY_PORTAL = {
     favicon: <Icons.Games />,
     preview: (
       <NodePreview>
-        <span style={{ color: 'rgb(0, 255, 65)' }}> · 3 games</span>
-        {' '}available — Nanobomb Defusal, Netrunner Memory Deck, and Cyber Poker.
-        <Line red> · Games are not small tablet/phone friendly at the moment</Line>
+        <Line smoke> · 3 games available — Nanobomb Defusal, Netrunner Memory Deck, and Cyber Poker.</Line>
+        <Line smoke> · Games are not small tablet/phone friendly at the moment</Line>
       </NodePreview>
     ),
     content: (
@@ -188,7 +191,7 @@ export const CY_CITY_PORTAL = {
         content: <MinesweeperGame width={20} height={10} tileSize={2} />,
         preview: (
           <NodePreview>
-            <Line pink> · Minesweeper</Line>
+            <Line smoke> · Minesweeper</Line>
           </NodePreview>
         ),
       },
@@ -198,7 +201,7 @@ export const CY_CITY_PORTAL = {
         content: <MemoryGame gridSize={4} tileSize={4} />,
         preview: (
           <NodePreview>
-            <Line pink> · Memory match </Line>
+            <Line smoke> · Memory match </Line>
           </NodePreview>
         ),
       },
@@ -213,7 +216,7 @@ export const CY_CITY_PORTAL = {
         content: <CyberPoker />,
         preview: (
           <NodePreview>
-            <Line pink> · Luigi Picture Poker clone</Line>
+            <Line smoke> · Luigi Picture Poker clone</Line>
           </NodePreview>
         ),
       },
@@ -243,12 +246,6 @@ export const CY_CITY_PORTAL = {
           <Line yellow>• TAKE / CLAIM items individually or use the section button for all</Line>
           <Line yellow>• Open Wallet and TRANSFER to move assets into a character's inventory</Line>
           <Line yellow>• CLEAR wipes the wallet without transferring</Line>
-        </InsetBox>
-        <InsetBox title="PASSWORDS & ICE">
-          <Line smoke>• PW nodes require a password — keyboard shows only valid characters</Line>
-          <Line smoke>• Decoy keys are flagged when present</Line>
-          <Line smoke>• ICE nodes use a hacking minigame — difficulty varies</Line>
-          <Line smoke>• Bypassed nodes stay unlocked across sessions</Line>
         </InsetBox>
       </Node>
     ),

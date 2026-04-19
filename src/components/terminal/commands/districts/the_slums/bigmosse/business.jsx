@@ -210,10 +210,6 @@ export const BUSINESS_COMMANDS = {
       <PublicPortal
         name="MIRA'S CORNER SHOP"
         tagline="Groceries. Supplies. Gossip."
-        network="MIRA_GUEST_WIFI"
-        signalStrength="strong"
-        status="✓ OPEN"
-        statusColor="neon"
         nowPlaying="Local radio - Ports Community Hour"
         notes={[
           "Free WiFi with purchase",
@@ -319,10 +315,6 @@ export const BUSINESS_COMMANDS = {
       <PublicPortal
         name="THE RUSTY ANCHOR"
         tagline="Cheap drinks. Cheaper conversation."
-        network="ANCHOR_GUEST"
-        signalStrength="medium"
-        status="✓ OPEN"
-        statusColor="neon"
         nowPlaying="Jukebox: Canal Blues - The Ports Drifters"
         notes={[
           "Happy Hour: 17:00-19:00",
@@ -463,10 +455,6 @@ export const BUSINESS_COMMANDS = {
       <PublicPortal
         name="LUCKY'S PAWN & TRADE"
         tagline="Buy. Sell. Trade. No Judgments."
-        network="LUCKY_PAWN_PUBLIC"
-        signalStrength="strong"
-        status="✓ OPEN"
-        statusColor="neon"
         notes={[
           "Valid ID required",
           "All sales final",
@@ -581,10 +569,6 @@ export const BUSINESS_COMMANDS = {
       <PublicPortal
         name="SANCHEZ ELECTRONICS & REPAIR"
         tagline="Interdimensional Selection. Dimensional Prices."
-        network="SANCHEZ_SHOP_GUEST"
-        signalStrength="strong"
-        status="OPEN"
-        statusColor="neon"
         nowPlaying="Interdimensional Cable (signal unstable)"
         notes={[
           "All sales final (seriously, don't even try)",
@@ -752,10 +736,6 @@ export const BUSINESS_COMMANDS = {
       <PublicPortal
         name="GILDED ODDITIES PAWN"
         tagline="Treasures. Trash. Tales."
-        network="PAWN_SHOP_PUBLIC"
-        signalStrength="medium"
-        status="OPEN"
-        statusColor="neon"
         notes={[
           "Free appraisals (first 3 items)",
           "Golden statue NOT for sale",
@@ -878,10 +858,6 @@ export const BUSINESS_COMMANDS = {
       <PublicPortal
         name="CIPHER SOLUTIONS"
         tagline="Data Recovery. System Security. Discretion Guaranteed."
-        network="CIPHER_GUEST"
-        signalStrength="strong"
-        status="ACCEPTING CLIENTS"
-        statusColor="neon"
         notes={[
           "Appointments only",
           "Confidentiality guaranteed",
@@ -999,10 +975,6 @@ export const BUSINESS_COMMANDS = {
       <PublicPortal
         name="THE COMPILER BAR"
         tagline="Where Code Meets Culture."
-        network="COMPILER_GUEST_WIFI"
-        signalStrength="strong"
-        status="OPEN"
-        statusColor="neon"
         nowPlaying="Recursion Blues - The Stack Overflow"
         notes={[
           "Free wifi (gigabit fiber)",
@@ -1183,14 +1155,9 @@ export const BUSINESS_COMMANDS = {
     content: (
       <FacilityPortal
         companyName="ROYAL WEST SHIPPING CO."
-        facilityId="PRIMARY PORTS FACILITY"
         tagline="The Largest. The Best Guarded. The Untouchable."
         location="Ports Industrial District - Waterfront"
         owner="Royal West Shipping Co."
-        function="Import/Export Hub & Secure Storage"
-        personnel="120+ security personnel, 80+ warehouse staff"
-        networkStatus="CORPORATE PRIVATE NETWORK (Externally inaccessible)"
-        securityLevel="MAXIMUM"
         warnings={[
           "EXTREME SECURITY - Armed guards patrol 24/7",
           "Drone surveillance active across entire perimeter",

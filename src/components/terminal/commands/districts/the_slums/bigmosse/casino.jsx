@@ -19,11 +19,10 @@ import {
   HoursBanner,
   EventLineup,
   DigitalWallet,
-  NetworkDevices,
+  NetworkActivity,
   VIPList,
   IncidentLog,
   Node,
-  NetworkTrafficMonitor,
   BuildingAccess,
 } from "@terminal/retcomdevice"
 
@@ -39,7 +38,7 @@ export const LUCKY_FLIGHT_CASINO = {
     favicon: <Icons.Casino />,
     preview: (
       <NodePreview>
-        <Line span neon> · Your favorite 24/7 neighborhood casino!</Line>
+        <Line span smoke> · Your favorite 24/7 neighborhood casino!</Line>
       </NodePreview>
     ),
     content: (
@@ -544,109 +543,53 @@ export const LUCKY_FLIGHT_CASINO = {
               },
             },
           },
-          "Security Coverage": {
-            favicon: <Icons.Security />,
+
+          "Building Access": {
+            favicon: <Icons.Maintenance />,
             password: {
-              pw: "surveillance",
-              hint: "What cameras are used for",
+              pw: "keycard",
+              hint: "What employees swipe to get in",
+              lockType: 'terminal',
             },
             content: (
-              <Node
-                title="[LUCKY FLIGHT CASINO — SECURITY DATABASE]"
-                notes={[
-                  "Camera coverage and blind spots",
-                  "Patrol schedules and rotation times",
-                  "Alarm protocols and trigger conditions",
-                  "Lock systems and access points",
-                  "Entry point assessment",
+              <BuildingAccess
+                title="ACCESS CONTROL — LUCKY FLIGHT CASINO"
+                points={[
+                  {
+                    location: "Vault (Floor 2)",
+                    access: ["Biometric + Retinal Scan + Dual Key"],
+                    notes: ["Last access: 3 days ago — Vaska Jordan", "Enhanced security active", "Database: DETAINED"],
+                  },
+                  {
+                    location: "Manager's Office — Vaska (Floor 2)",
+                    access: ["Keycard — management only"],
+                    notes: ["Last access: 4 hours ago — Vaska Jordan"],
+                  },
+                ]}
+              />
+            )
+          },
+
+          "Camera Coverage": {
+            favicon: <Icons.Camera />,
+            content: (
+              <NetworkActivity
+                title="LUCKY_FLIGHT_CCTV"
+                devices={[
+                  { name: "Entrance", location: "Floor 1" },
+                  { name: "Gaming Floor", location: "Floor 1" },
+                  { name: "Stage Left + Right", location: "Floor 1" },
+                  { name: "Bathrooms", location: "Floor 1" },
+                  { name: "VIP Lounge", location: "Floor 2" },
+                  { name: "Offices x3", location: "Floor 2" },
+                  { name: "Aquarium", location: "Floor 2" },
+                  { name: "Balcony", location: "Floor 2" },
+                  { name: "Basement", status: "OFFLINE — isolated subnet, physical access required" },
                 ]}
               />
             ),
-            related_commands: {
-              "Access Control System": {
-                favicon: <Icons.Maintenance />,
-                password: {
-                  pw: "keycard",
-                  hint: "What employees swipe to get in",
-                  lockType: 'terminal',
-                },
-                content: (
-                  <BuildingAccess
-                    title="ACCESS CONTROL — LUCKY FLIGHT CASINO"
-                    points={[
-                      {
-                        location: "Vault (Floor 2)",
-                        access: ["Biometric + Retinal Scan + Dual Key"],
-                        notes: ["Last access: 3 days ago — Vaska Jordan", "Enhanced security active", "Database: DETAINED"],
-                      },
-                      {
-                        location: "Manager's Office — Vaska (Floor 2)",
-                        access: ["Keycard — management only"],
-                        notes: ["Last access: 4 hours ago — Vaska Jordan"],
-                      },
-                    ]}
-                  />
-                )
-              },
-              "Camera Coverage - Floor 1": {
-                favicon: <Icons.Camera />,
-                content: (
-                  <NetworkDevices
-                    networkName="CCTV_FLOOR_1"
-                    devices={[
-                      { name: "Entrance", ip: "10.0.1.101", type: "Security Camera" },
-                      { name: "Plant 1", ip: "10.0.1.102", type: "Security Camera" },
-                      { name: "Plant 2", ip: "10.0.1.103", type: "Security Camera" },
-                      { name: "Vending Machine", ip: "10.0.1.104", type: "Security Camera" },
-                      { name: "Holo Games 1", ip: "10.0.1.105", type: "Security Camera" },
-                      { name: "Holo Games 2", ip: "10.0.1.106", type: "Security Camera" },
-                      { name: "Bathroom", ip: "10.0.1.107", type: "Security Camera" },
-                      { name: "Stage Left", ip: "10.0.1.108", type: "Security Camera" },
-                      { name: "Stage Right", ip: "10.0.1.109", type: "Security Camera" },
-                    ]}
-                  />
-                ),
-              },
-
-              "Camera Coverage - Floor 2": {
-                favicon: <Icons.Camera />,
-                content: (
-                  <NetworkDevices
-                    networkName="CCTV_FLOOR_2"
-                    devices={[
-                      { name: "Tech 1", ip: "10.0.2.201", type: "Security Camera" },
-                      { name: "Tech 2", ip: "10.0.2.202", type: "Security Camera" },
-                      { name: "Vending Machine", ip: "10.0.2.203", type: "Security Camera" },
-                      { name: "Aquarium 1", ip: "10.0.2.204", type: "Security Camera" },
-                      { name: "Office 1", ip: "10.0.2.205", type: "Security Camera" },
-                      { name: "Office 2", ip: "10.0.2.206", type: "Security Camera" },
-                      { name: "Office 3", ip: "10.0.2.207", type: "Security Camera" },
-                      { name: "Balcony", ip: "10.0.2.208", type: "Security Camera" },
-                      { name: "VIP", ip: "10.0.2.209", type: "Security Camera" },
-                    ]}
-                  />
-                ),
-              },
-
-              "Camera Coverage - Basement": {
-                favicon: <Icons.Camera />,
-                content: (
-                  <>
-                    <NetworkDevices
-                      networkName="CCTV_BASEMENT"
-                      devices={[]}
-                    />
-                    <div style={{ marginTop: '1rem', padding: '1rem', backgroundColor: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgb(239, 68, 68)', borderRadius: '4px' }}>
-                      <Line red pulse bold>ERROR: DIRECT NETWORK ACCESS REQUIRED</Line>
-                      <Line smoke style={{ fontSize: '0.75rem', marginTop: '0.5rem' }}>
-                        Basement CCTV operates on isolated subnet. Physical connection needed.
-                      </Line>
-                    </div>
-                  </>
-                ),
-              },
-            },
           },
+
           "Financial Records": {
             favicon: <Icons.Files />,
             password: {
@@ -708,7 +651,8 @@ export const LUCKY_FLIGHT_CASINO = {
               },
             },
           },
-          "Network Traffic Monitor": {
+
+          "Network Activity": {
             favicon: <Icons.LAN />,
             password: {
               pw: "packets",
@@ -716,26 +660,34 @@ export const LUCKY_FLIGHT_CASINO = {
               lockType: 'terminal',
             },
             content: (
-              <NetworkTrafficMonitor
-                systemName="CASINO NETWORK TRAFFIC"
-                location="Lucky Flight Casino - IT Infrastructure"
-                bandwidth="847 MB/s (High)"
-                activeConnections={142}
-                transfers={[
+              <NetworkActivity
+                title="LUCKY_FLIGHT_CASINO"
+                environment={{ connections: "142", load: "HIGH" }}
+                devices={[
+                  { name: "Vault Access Control", location: "Floor 2", status: "SEALED" },
+                  { name: "Manager's Workstation", location: "Floor 2 Office" },
                   {
-                    timestamp: "23:47",
-                    filename: "debt_ledger_backup_ENCRYPTED.db",
-                    size: "2.4 GB",
-                    source: "10.0.2.205 (Office 2)",
-                    destination: "INTERNAL - 192.168.45.12",
-                    protocol: "ENCRYPTED - TLS 1.3",
+                    name: "Debt Ledger Server",
+                    location: "Office 2, Floor 2",
                     status: "ACTIVE",
-                    progress: 67,
+                    transfer: {
+                      name: "debt_ledger_backup_ENCRYPTED.db",
+                      destination: "Internal — 192.168.45.12",
+                      size: "2.4 GB",
+                      note: "ACTIVE — encrypted backup in progress",
+                    }
                   },
+                  { name: "Camera System — Floor 1", location: "Floor 1" },
+                  { name: "Camera System — Floor 2", location: "Floor 2" },
+                  { name: "Camera System — Basement", status: "OFFLINE — isolated subnet, physical access required" },
+                  { name: "ATM", location: "Main Lobby" },
+                  { name: "Power Core Monitor", location: "Basement Room 16", status: "CRITICAL" },
+                  { name: "Alarm System", status: "ACTIVE" },
                 ]}
               />
-            )
+            ),
           },
+
           "Operations": {
             favicon: <Icons.Files />,
             content: (

@@ -214,7 +214,6 @@ export const GLASS_GARDENS_COMMANDS = {
                     name: "Mr. & Mrs. Sterling",
                     status: "EXPECTED",
                     notes: "Regular. Table 4, window seat on file.",
-                    arrivalTime: "17:30",
                   },
                   {
                     name: "Alliansen Inc.",
@@ -222,27 +221,23 @@ export const GLASS_GARDENS_COMMANDS = {
                     status: "ARRIVED",
                     notes: "4 covers. Corporate account. Private room requested.",
                     clearance: "CORPORATE",
-                    arrivalTime: "18:02",
                   },
                   {
                     name: "Reyes Family",
                     status: "EXPECTED",
                     notes: "Anniversary. Cake arranged with kitchen.",
-                    arrivalTime: "19:00",
                   },
                   {
                     name: "[WITHHELD]",
                     status: "ARRIVED",
                     notes: "Priority fee. No further details on file.",
                     clearance: "VIP",
-                    arrivalTime: "19:54",
                   },
                   {
                     name: "[WITHHELD]",
                     status: "EXPECTED",
                     notes: "Priority fee. Killmatch affiliation noted.",
                     clearance: "VIP",
-                    arrivalTime: "21:00",
                   },
                 ]}
               />

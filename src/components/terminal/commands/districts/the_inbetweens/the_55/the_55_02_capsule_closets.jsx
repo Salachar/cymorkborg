@@ -19,10 +19,6 @@ export const THE_55_CAPSULE_CLOSETS_COMMANDS = {
       <PublicPortal
         name="CAPSULE CLOSETS"
         tagline="Affordable housing in The 55"
-        network="CAPSULE_RESIDENT_NET"
-        signalStrength="weak"
-        status="ALWAYS OPEN"
-        statusColor="neon"
         notes={[
           "Coffin-sized rooms stacked floor to ceiling",
           "Thousands of residents in customized capsules",
@@ -46,10 +42,6 @@ export const THE_55_CAPSULE_CLOSETS_COMMANDS = {
           <PublicPortal
             name="ALLIANSEN ARMS DIRECTORY"
             tagline="800 residential units"
-            network="BUILDING_INTERCOM"
-            signalStrength="medium"
-            status="✓ PUBLIC DIRECTORY"
-            statusColor="cyan"
             notes={[
               "Ring unit buzzer for contact",
               "Building management: Extension 100",

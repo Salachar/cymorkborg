@@ -13,7 +13,6 @@ import { Line, Divider } from '@terminal/TerminalComponents';
  *   - status: String (EXPECTED, ARRIVED, LEFT, BANNED)
  *   - notes: String (brief description/intel)
  *   - clearance: String (optional, VIP/GUEST/STAFF)
- *   - arrivalTime: String (optional)
  */
 export default function VIPList({
   eventName = 'VIP Event',
@@ -83,7 +82,7 @@ export default function VIPList({
                 gap: '0.75rem',
                 padding: '0.75rem',
                 backgroundColor: 'rgba(15, 23, 42, 0.6)',
-                border: '1px solid rgb(71, 85, 105)',
+                borderBottom: '1px solid rgb(71, 85, 105)',
                 borderRadius: '3px',
               }}
             >
@@ -172,21 +171,6 @@ export default function VIPList({
               >
                 {vip.status}
               </div>
-
-              {/* Arrival time (if applicable) */}
-              {vip.arrivalTime && (
-                <div
-                  style={{
-                    fontSize: '0.7rem',
-                    color: 'rgb(148, 163, 184)',
-                    fontFamily: 'monospace',
-                    minWidth: '60px',
-                    textAlign: 'right',
-                  }}
-                >
-                  {vip.arrivalTime}
-                </div>
-              )}
             </div>
           ))}
         </div>
@@ -198,12 +182,6 @@ export default function VIPList({
             {children }
           </div>
         )}
-
-        {/* Footer note */}
-        <Divider />
-        <Line smoke style={{ fontSize: '0.75rem', marginTop: '0.75rem' }}>
-          Total VIPs: {vips.length} | Security clearance required for access
-        </Line>
       </div>
     </div>
   );

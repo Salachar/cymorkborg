@@ -6,6 +6,7 @@ import {
 } from '@terminal/TerminalComponents';
 
 import {
+  Node,
   Camera,
   Safe,
   PersonnelFile,
@@ -16,9 +17,8 @@ import {
   HoursBanner,
   IncidentLog,
   RCDAlert,
-  NetworkDevices,
+  NetworkActivity,
   CommunityBoard,
-  NetworkTrafficMonitor,
 } from "@terminal/retcomdevice"
 
 export const ALLIANSEN_WAREHOUSE_COMMANDS = {
@@ -27,14 +27,9 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
     content: (
       <FacilityPortal
         companyName="Alliansen Inc."
-        facilityId="Facility #47"
         tagline="Ports Industrial District - Storage & Distribution Hub"
         location="Ports industrial district"
         owner="Alliansen Inc."
-        function="Storage & distribution hub"
-        personnel="Night crew (6 personnel)"
-        networkStatus="Corporate WAN (limited external access)"
-        securityLevel="HIGH"
         theme="industrial"
       >
         <RCDAlert
@@ -547,35 +542,37 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
               />
             ),
             related_commands: {
-              "Network Traffic Monitor": {
+              "Network Activity": {
                 favicon: <Icons.LAN />,
                 content: (
-                  <NetworkTrafficMonitor
-                    systemName="WAREHOUSE NETWORK MONITOR"
-                    location="Alliansen Warehouse #47"
-                    bandwidth="124 MB/s (Normal)"
-                    activeConnections={18}
-                    transfers={[
-                      {
-                        timestamp: "22:47",
-                        filename: "Classified_Manifest_SEC-2082.pdf",
-                        size: "1.2 MB",
-                        source: "10.47.1.105 (Supervisor Terminal)",
-                        destination: "SecOps Equipment Division",
-                        protocol: "ENCRYPTED",
-                        status: "COMPLETE"
+                  <NetworkActivity
+                    title="ALLIANSEN_WAREHOUSE_47"
+                    environment={{ shift: "Night", personnel: "6", power: "NORMAL" }}
+                    devices={[
+                      { name: "Supervisor Terminal", location: "Main Office", status: "ACTIVE",
+                        transfer: {
+                          name: "Classified_Manifest_SEC-2082.pdf",
+                          destination: "SecOps Equipment Division",
+                          size: "1.2 MB",
+                          note: "Encrypted — completed 22:47"
+                        }
                       },
-                      {
-                        timestamp: "23:15",
-                        filename: "night_shift_logs.txt",
-                        size: "45 KB",
-                        destination: "Corporate servers",
-                        protocol: "HTTPS",
-                        status: "COMPLETE"
+                      { name: "Security Workstation", location: "Main Security Room", status: "ACTIVE",
+                        transfer: {
+                          name: "night_shift_logs.txt",
+                          destination: "Corporate servers",
+                          size: "45 KB",
+                          note: "Completed 23:15"
+                        }
                       },
+                      { name: "Camera System", location: "All zones" },
+                      { name: "Access Control", location: "All doors" },
+                      { name: "Inventory Management System" },
+                      { name: "Climate Control", location: "Secure Cargo" },
+                      { name: "Alarm System", status: "ARMED" },
                     ]}
                   />
-                )
+                ),
               },
 
               "Security Incident Log": {
@@ -631,15 +628,14 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
               "Camera Network Overview": {
                 favicon: <Icons.Camera />,
                 content: (
-                  <NetworkDevices
-                    networkName="SURVEILLANCE_SYSTEM"
-                    devices={[
-                      { name: "Front Entrance", ip: "10.47.1.101", type: "Security Camera", status: "ONLINE", lastSeen: "Just now" },
-                      { name: "Main Warehouse", ip: "10.47.1.102", type: "Security Camera", status: "ONLINE", lastSeen: "Just now" },
-                      { name: "Loading Dock", ip: "10.47.1.103", type: "Security Camera", status: "ONLINE", lastSeen: "Just now" },
-                      { name: "Rec Room", ip: "10.47.1.104", type: "Security Camera", status: "ONLINE", lastSeen: "Just now" },
-                      { name: "Secure Cargo Gate", ip: "10.47.2.201", type: "Security Camera (Isolated)", status: "ONLINE", lastSeen: "Just now" },
-                      { name: "Secure Cargo Interior", ip: "10.47.2.202", type: "Security Camera (Isolated)", status: "ONLINE", lastSeen: "Just now" },
+                  <Node
+                    title="[SURVEILLANCE SYSTEM]"
+                    notes={[
+                      "6 cameras total — all online",
+                      "Main network: Front entrance, main warehouse, loading dock, rec room",
+                      "Isolated network: Secure cargo gate, secure cargo interior",
+                      "All footage recording — 30-day retention",
+                      "No active monitoring (Chen on holovid)",
                     ]}
                   />
                 ),

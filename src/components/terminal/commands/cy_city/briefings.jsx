@@ -20,7 +20,7 @@ export const BRIEFINGS_COMMANDS = {
     favicon: <Icons.Briefing />,
     preview: (
       <NodePreview>
-        <Line span cyan> · Active contracts and mission briefs. Check before you move.</Line>
+        <Line span smoke> · Active contracts and mission briefs. Check before you move.</Line>
       </NodePreview>
     ),
     related_commands: {
@@ -77,36 +77,57 @@ export const BRIEFINGS_COMMANDS = {
       "Doc Joy's Reaper Contract": {
         favicon: <Icons.Bounty />,
         content: (
-          <BountyCard
-            id="bounty-steel-jackhammer"
-            name="STEEL JACKHAMMER"
-            alias="The Unkillable"
-            image={STEEL_PROFILE}
-            credits={5000}
-            sponsor="Doc Joy (Private Contract)"
-            hp={12}
-            lastSeen="Central District, Tower Block 7, Unit 4201"
-            threat="MEDIUM"
-            notes={[
-              "REAPER CONTRACT RR-2067-1104: Chrome legs only - NOT for termination",
-              "Damage to merchandise will lead to reduction in payment",
-              "Time limit: 36 hours",
-              "OFFERING: 1 cybertech upgrade (limited options) upon delivery",
-              "Target hosting multi-day party - security minimal, likely intoxicated"
+          <Briefing
+            title="Reaper Repo"
+            issuer="Doc Joy — Svärta Reaperdoc"
+            classification="CONFIDENTIAL"
+            primary={[
+              {
+                text: "Steal Steel Jackhammer's chrome legs",
+                note: "Legs only — NOT a termination contract. Damage to merchandise reduces payment.",
+                priority: "critical",
+              },
+            ]}
+            intel={[
+              "Target is hosting a multi-day party — security minimal, likely intoxicated",
+              "Penthouse: Central District, Tower Block 7, Unit 4201",
+              "Layout leaked in uncut reporter video — findable with a deep Net search",
+              "Stage name only — real identity unknown",
+              "Division: Heavyweight Killmatch, Rank #18 (climbing). Record: 24 wins, 8 losses",
+              "Signature Move: Jackhammer Punch — chains attacks on heavy hits",
+              "Chrome legs installed 2 weeks ago by Alliansen Inc. sponsor",
+              "Upcoming match: vs Gargoyle (odds 3:1 against Jackhammer)",
+              "REAPER TARGET: Chrome legs match stolen Doc Joy prototype",
+            ]}
+            payment={[
+              "5,000¤ on delivery",
+              "1 cybertech upgrade on delivery",
+              "Deductions apply for damage to merchandise",
+            ]}
+            warnings={[
+              "VIP guests are professional killmatch athletes — armed and dangerous",
+              "Majority of party guests are holo-avatars, flesh guests will avoid violence",
+              "Two guards on door — checking for heavy weapons on entry",
+              "Target must be incapacitated before legs can be removed — requires tools and knowledge",
+              "Legs must be delivered within 36 hours",
             ]}
           >
-            <InsetBox title="ADDITIONAL INFO:">
-              <Line yellow>Stage name only - real identity unknown</Line>
-              <Line yellow>Division: Heavyweight Killmatch, Rank #18 (climbing)</Line>
-              <Line yellow>Record: 24 wins, 8 losses</Line>
-              <Line yellow>Signature Move: Jackhammer Punch (chained attacks on 5+ damage)</Line>
-              <Line yellow>Recent viral moment: Both legs ripped off by 5 Kroks, continued fighting 30 seconds (50M+ views)</Line>
-              <Line yellow>Chrome legs installed 2 weeks ago by Alliansen Inc. sponsor</Line>
-              <Line yellow>Current status: Day 3+ of recovery party in penthouse</Line>
-              <Line yellow>Upcoming match: vs Gargoyle (odds 3:1 against Jackhammer)</Line>
-              <Line yellow>REAPER TARGET: Chrome legs match stolen Doc Joy prototype</Line>
-            </InsetBox>
-          </BountyCard>
+            <BountyCard
+              id="bounty-steel-jackhammer"
+              name="STEEL JACKHAMMER"
+              alias="The Unkillable"
+              image={STEEL_PROFILE}
+              sponsor="Doc Joy (Private Contract)"
+              hp={12}
+              lastSeen="Central District, Tower Block 7, Unit 4201"
+              threat="MEDIUM"
+              notes={[
+                "REAPER CONTRACT RR-2067-1104: Chrome legs only - NOT for termination",
+                "Recent viral moment: Both legs ripped off by 5 Kroks, continued fighting 30 seconds (50M+ views)",
+                "Current status: Day 3+ of recovery party in penthouse",
+              ]}
+            />
+          </Briefing>
         ),
       },
 

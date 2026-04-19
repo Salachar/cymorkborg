@@ -15,19 +15,15 @@ export const AQUACULTURE_MAZE_COMMANDS = {
     favicon: <Icons.Water />,
     preview: (
       <NodePreview>
-        <Line span cyan> · Sea access chokepoint. Heavily patrolled. All maritime transit monitored.</Line>
+        <Line span smoke> · Sea access chokepoint. Heavily patrolled. All maritime transit monitored.</Line>
       </NodePreview>
     ),
     content: (
       <FacilityPortal
         companyName="AQUACULTURE CAGE MAZE"
-        facilityId="WATERWAYS-AQUACULTURE-01"
         tagline="Cy's archipelagic outlet."
         location="Eastern waterways, sea access zone"
         owner="Multiple — Cynergy Water & Power Co, Royal West Shipping Co"
-        function="Maritime transit control / Aquaculture operations"
-        networkStatus="ACTIVE — Cynergy and Royal West monitoring networks"
-        securityLevel="MAXIMUM"
         warnings={[
           "All maritime transit routed through this zone — no bypass available",
           "Heavily patrolled — armed vessels on continuous rotation",

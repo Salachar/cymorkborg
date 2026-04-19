@@ -29,7 +29,7 @@ export default function BountyCard({
   name,
   alias,
   image = null,
-  credits = 0,
+  credits,
   sponsor,
   hp = 10,
   lastSeen,
@@ -145,33 +145,35 @@ export default function BountyCard({
           </div>
 
           {/* Payment */}
-          <div className="bounty-payment-section">
-            <div className="bounty-amount">
-              <div className="bounty-amount-label">BOUNTY</div>
-              <div
-                className="bounty-amount-value"
-                style={{ color: isClaimed ? 'rgb(148, 163, 184)' : 'rgb(34, 197, 94)' }}
-              >
-                {formatCredits(credits)}
-              </div>
-            </div>
-            <div className="bounty-meta">
-              <div className="bounty-meta-item">
-                <span className="bounty-meta-label">SPONSOR:</span>
-                <span className="bounty-meta-value" style={{ color: 'rgb(79, 209, 197)' }}>{sponsor}</span>
-              </div>
-              <div className="bounty-meta-item">
-                <span className="bounty-meta-label">THREAT:</span>
-                <span className="bounty-meta-value" style={{ color: threatColor, fontWeight: 'bold' }}>{threatLevel}</span>
-              </div>
-              {lastSeen && (
-                <div className="bounty-meta-item">
-                  <span className="bounty-meta-label">LAST SEEN:</span>
-                  <span className="bounty-meta-value" style={{ color: 'rgb(250, 204, 21)' }}>{lastSeen}</span>
+          {credits && (
+            <div className="bounty-payment-section">
+              <div className="bounty-amount">
+                <div className="bounty-amount-label">BOUNTY</div>
+                <div
+                  className="bounty-amount-value"
+                  style={{ color: isClaimed ? 'rgb(148, 163, 184)' : 'rgb(34, 197, 94)' }}
+                >
+                  {formatCredits(credits)}
                 </div>
-              )}
+              </div>
+              <div className="bounty-meta">
+                <div className="bounty-meta-item">
+                  <span className="bounty-meta-label">SPONSOR:</span>
+                  <span className="bounty-meta-value" style={{ color: 'rgb(79, 209, 197)' }}>{sponsor}</span>
+                </div>
+                <div className="bounty-meta-item">
+                  <span className="bounty-meta-label">THREAT:</span>
+                  <span className="bounty-meta-value" style={{ color: threatColor, fontWeight: 'bold' }}>{threatLevel}</span>
+                </div>
+                {lastSeen && (
+                  <div className="bounty-meta-item">
+                    <span className="bounty-meta-label">LAST SEEN:</span>
+                    <span className="bounty-meta-value" style={{ color: 'rgb(250, 204, 21)' }}>{lastSeen}</span>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Durability */}
           <div
@@ -194,16 +196,18 @@ export default function BountyCard({
           )}
 
           {/* Extractable */}
-          <Extractable
-            id={`${id}-bounty-extractable`}
-            digitalItems={[{
-              id: `${id}-bounty-credits-item`,
-              label: 'Bounty Payment',
-              description: `Proof of capture - ${sponsor}`,
-              value: credits,
-              isCredits: true,
-            }]}
-          />
+          {credits && (
+            <Extractable
+              id={`${id}-bounty-extractable`}
+              digitalItems={[{
+                id: `${id}-bounty-credits-item`,
+                label: 'Bounty Payment',
+                description: `Proof of capture - ${sponsor}`,
+                value: credits,
+                isCredits: true,
+              }]}
+            />
+          )}
         </div>
 
         {/* Right — image */}

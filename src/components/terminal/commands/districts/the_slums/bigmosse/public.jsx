@@ -263,10 +263,6 @@ export const PUBLIC_COMMANDS = {
       <PublicPortal
         name="NETBATTLER ARCADE"
         tagline="Jack In. Battle. Win."
-        network="ARCADE_GUEST"
-        signalStrength="strong"
-        status="✓ OPEN"
-        statusColor="neon"
         nowPlaying="NetBattle Tournament Stream (live)"
         notes={[
           "Cost: 5¤ per game, 20¤ for 5 games",
@@ -296,10 +292,6 @@ export const PUBLIC_COMMANDS = {
       <PublicPortal
         name="TRAUMA RESPONSE COORDINATION"
         tagline="Critical Care. Rapid Deployment."
-        network="TRAUMA_PUBLIC"
-        signalStrength="strong"
-        status="ACCEPTING MEMBERS"
-        statusColor="neon"
         notes={[
           "Emergency medical response (platinum tier)",
           "Air & ground ambulance services",

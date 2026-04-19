@@ -159,9 +159,7 @@ export const EVENT_FEED = [
     text: 'Alliansen CEO promises "new era of prosperity" in quarterly earnings call.',
   },
   {
-    id: 'event-025',
     type: 'STREET_INTEL',
-    timestamp: '4 days ago',
     text: 'Ports residents organizing against casino expansion. Meeting at Batu\'s Bodega tonight.',
   },
 ];

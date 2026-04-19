@@ -7,19 +7,15 @@ export const VIRID_VIPERS_COMMANDS = {
     favicon: <Icons.Factory />,
     preview: (
       <NodePreview>
-        <Line span red> · Major drug operation. South Cy and beyond. Council of the 10 Fangs.</Line>
+        <Line span smoke> · Major drug operation. South Cy and beyond. Council of the 10 Fangs.</Line>
       </NodePreview>
     ),
     content: (
       <FacilityPortal
         companyName="VIRID VIPERS"
-        facilityId="SLUMS-VV-HQ-01"
         tagline="[FACILITY RECORD — PRIOR REGISTRATION: MOSSCROFT TEXTILE PROCESSING UNIT 4]"
         location="Bigmosse, South Cy"
         owner="[REGISTRATION LAPSED — LAST OWNER: KAYTELL MAKERS, 2047]"
-        function="[PRIOR USE: TEXTILE PROCESSING] Current use: unknown"
-        networkStatus="ACTIVE — unregistered network detected"
-        securityLevel="MAXIMUM"
         warnings={[
           "Building registration lapsed — no current legal owner on record",
           "Unauthorized occupancy — municipal enforcement pending (indefinitely)",

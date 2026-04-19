@@ -7,7 +7,7 @@ export const LAKETON_COMMANDS = {
     favicon: <Icons.Pin />,
     preview: (
       <NodePreview>
-        <Line span red> · Walls sodden with rot. G0 slurry. Nanomold in the water supply.</Line>
+        <Line span smoke> · Walls sodden with rot. G0 slurry. Nanomold in the water supply.</Line>
       </NodePreview>
     ),
     content: (

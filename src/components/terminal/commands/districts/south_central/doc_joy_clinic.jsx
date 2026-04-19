@@ -27,10 +27,6 @@ export const DOC_JOY_CLINIC_COMMANDS = {
       <PublicPortal
         name="DOC JOY'S CLINIC"
         tagline="Fast fixes, no questions asked"
-        network="DOCJOY_PUBLIC"
-        signalStrength="strong"
-        status="✓ OPEN 24/7"
-        statusColor="neon"
         notes={[
           "Emergency trauma care available",
           "Chrome installation & repairs",

@@ -16,19 +16,15 @@ export const TG_LABS_COMMANDS = {
     favicon: <Icons.Tower />,
     preview: (
       <NodePreview>
-        <Line span cyan> · Science Redefined. Showroom and warehouses. Orbital HQ.</Line>
+        <Line span smoke> · Science Redefined. Showroom and warehouses. Orbital HQ.</Line>
       </NodePreview>
     ),
     content: (
       <FacilityPortal
         companyName="TG LABS"
-        facilityId="PORTS-TGLABS-01"
         tagline="Science Redefined."
         location="Ports District"
         owner="TG Labs — Dr. Daevy, Lead Researcher"
-        function="Research Warehousing / Logistics / Showroom Operations"
-        networkStatus="ACTIVE — TG Labs secure network"
-        securityLevel="HIGH"
         warnings={[
           "Private security on all TG Labs premises",
           "Warehouse access restricted to authorized personnel",
@@ -50,17 +46,13 @@ export const TG_LABS_COMMANDS = {
         favicon: <Icons.Bulletin />,
         preview: (
           <NodePreview>
-            <Line span cyan> · Public showroom. Free tours. Science as spectacle.</Line>
+            <Line span smoke> · Public showroom. Free tours. Science as spectacle.</Line>
           </NodePreview>
         ),
         content: (
           <PublicPortal
             name="TG LABS EXPERIENCE CENTER"
             tagline="Where impossibility ends."
-            network="TGLABS-PUBLIC-EXPERIENCE"
-            signalStrength="strong"
-            status="✓ OPEN"
-            statusColor="neon"
             notes={[
               "Ports District showroom and public experience center",
               "Free tours of nano-engineering demonstrations",

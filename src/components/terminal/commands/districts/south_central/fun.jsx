@@ -24,10 +24,6 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
       <PublicPortal
         name="THE GOLDEN RATIO"
         tagline="Where Excellence Sculpts Excellence"
-        network="GOLDENRATIO_MEMBERS"
-        signalStrength="strong"
-        status="✓ MEMBERS ONLY"
-        statusColor="yellow"
         notes={[
           "Membership: 50,000¤/year (waiting list: 2+ years)",
           "Personal trainers are former olympians",
@@ -152,10 +148,6 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
       <PublicPortal
         name="SHAFT & PISTON"
         tagline="Where the people who make South Central run come to drink"
-        network="SHAFT_PISTON_GUEST"
-        signalStrength="medium"
-        status="OPEN"
-        statusColor="neon"
         nowPlaying="Industrial rock - The Maintenance Crew"
         notes={[
           "Cheap drinks, cheaper conversation",
@@ -307,14 +299,9 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
     content: (
       <FacilityPortal
         companyName="UNITED CITADEL SECURITY"
-        facilityId="STATION-SC-07"
         tagline="Protect. Serve. Profit."
         location="South Central - Street Level Station"
         owner="UCS (United Citadel Security)"
-        function="Private Security & Law Enforcement"
-        personnel="47 officers, 8 support staff"
-        networkStatus="SECOPS_SECURE (Law enforcement network)"
-        securityLevel="MAXIMUM"
         warnings={[
           "Armed security personnel on-site 24/7",
           "Jurisdiction: South Central District only",

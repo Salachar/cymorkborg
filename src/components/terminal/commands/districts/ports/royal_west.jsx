@@ -15,20 +15,15 @@ export const ROYAL_WEST_COMMANDS = {
     favicon: <Icons.Tower />,
     preview: (
       <NodePreview>
-        <Line span cyan> · Largest warehouses in the Ports. Nobody challenges them.</Line>
+        <Line span smoke> · Largest warehouses in the Ports. Nobody challenges them.</Line>
       </NodePreview>
     ),
     content: (
       <FacilityPortal
         companyName="ROYAL WEST SHIPPING CO"
-        facilityId="PORTS-ROYALWEST-HQ-01"
         tagline="Connected horizons."
         location="Ports District — HQ and primary warehouses"
         owner="Royal West Shipping Co — Sri Alraune, CEO"
-        function="Logistics HQ / Warehousing / Port Operations"
-        personnel="NordShip AI — all logistics operations"
-        networkStatus="ACTIVE — Royal West internal network"
-        securityLevel="MAXIMUM"
         warnings={[
           "Largest and most well-guarded warehouses in the Ports",
           "Armed private security — do not approach without authorization",

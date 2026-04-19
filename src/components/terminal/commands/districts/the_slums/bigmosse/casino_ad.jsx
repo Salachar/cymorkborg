@@ -88,18 +88,6 @@ export function LuckyFlightAd() {
           <Feature text="Live Entertainment Nightly" />
           <Feature text="VIP Gaming Pods" />
         </div>
-
-        <PublicPortal
-          network="LUCKY_FLIGHT_GUEST"
-          signalStrength="strong"
-          status="✓ OPEN NOW - Live Music Tonight!"
-          statusColor="neon"
-          nowPlaying="PHASER/MOB (blackened chromecore)"
-          notes={[
-            "Water taxi service available to canal pier!",
-          ]}
-          theme="fancy"
-        />
       </div>
 
       <div style={{
