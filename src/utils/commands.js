@@ -35,3 +35,13 @@ export function deriveExpandedFromFilter(commands, prefix = '') {
   }
   return expanded;
 }
+
+export function collapseSubtree(expandedRows, path) {
+  const next = { ...expandedRows };
+  for (const key of Object.keys(next)) {
+    if (key === path || key.startsWith(path + '/')) {
+      delete next[key];
+    }
+  }
+  return next;
+}

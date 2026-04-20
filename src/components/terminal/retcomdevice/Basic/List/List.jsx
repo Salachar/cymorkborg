@@ -95,6 +95,7 @@ function CommandNode({
   onToggle,
   onUnlock,
   onSetContentSize,
+  onEvent,
   indent = 1,
 }) {
   const isExpanded = Boolean(expandedRows[path]);
@@ -104,10 +105,7 @@ function CommandNode({
   const hasBlocker = Boolean(def.password);
   const isLocked = hasBlocker && !isBypassed;
   const contentSize = (hasBlocker && !isBypassed) ? 'full' : contentSizes[path] ?? 'partial';
-
-  const resolvedContent = typeof def.content === 'function'
-    ? def.content()
-    : def.content ?? null;
+  const resolvedContent = def.content ?? null;
 
   const hasContent = Boolean(resolvedContent);
   const hasChildren = Boolean(
@@ -115,16 +113,9 @@ function CommandNode({
   );
   const childCount = hasChildren ? Object.keys(def.related_commands).length : 0;
   const isExpandable = isLocked || hasContent || hasChildren;
-  const rowVariant = def.backdoor ? 'backdoor' : def.internal ? 'internal' : 'default';
-
-  const bypassLabel = 'PW';
 
   const childEntries = hasChildren ? Object.entries(def.related_commands) : [];
-  const showContentPanel = isExpanded && contentSize !== 'hidden' && (isLocked || hasContent);
-
-  const handleToggleVisibility = () => {
-    onSetContentSize(path, contentSize === 'hidden' ? 'partial' : 'hidden');
-  };
+  const showContentPanel = isExpanded && (isLocked || hasContent);
 
   const handleToggleSize = () => {
     if (hasBlocker && !isBypassed) return;
@@ -158,7 +149,7 @@ function CommandNode({
     <div>
       <div>
         <CommandRow
-          variant={rowVariant}
+          // variant={rowVariant}
           path={path}
           displayName={id}
           favicon={def.favicon ?? null}
@@ -166,7 +157,6 @@ function CommandNode({
           isLocked={isLocked}
           isBypassed={isBypassed}
           hasBlocker={hasBlocker}
-          bypassLabel={bypassLabel}
           bypassValue={bypassValue}
           isExpanded={isExpanded}
           isExpandable={isExpandable}
@@ -175,8 +165,8 @@ function CommandNode({
           depth={depth}
           hasContent={isExpanded && (isLocked || hasContent)}
           contentSize={contentSize}
-          onToggleVisibility={handleToggleVisibility}
           onToggleSize={handleToggleSize}
+          onCollapse={() => onEvent({ type: 'collapse_subtree', path })}
           onClick={() => isExpandable && onToggle(path)}
           style={{
             marginLeft: `${depth * indent}rem`,
@@ -223,6 +213,7 @@ function CommandNode({
                 onUnlock={onUnlock}
                 onSetContentSize={onSetContentSize}
                 indent={indent}
+                onEvent={onEvent}
               />
             );
           })}
@@ -243,6 +234,7 @@ export default function List({
   indent = 1,
   onToggle,
   onUnlock,
+  onEvent,
 }) {
   const [contentSizes, setContentSizes] = useState(() => {
     try {
@@ -285,6 +277,7 @@ export default function List({
           onUnlock={onUnlock}
           onSetContentSize={handleSetContentSize}
           indent={indent}
+          onEvent={onEvent}
         />
       ))}
     </div>

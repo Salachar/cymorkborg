@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import CY_CITY_COMMANDS from '@terminal/commands/cy_city';
+import TerminalHeader from '@terminal/retcomdevice/Basic/TerminalHeader/TerminalHeader';
+import List from '@terminal/retcomdevice/Basic/List/List';
 
 import {
   PASSWORD_STORAGE_KEY,
@@ -10,8 +11,13 @@ import {
   saveDiscoveredPasswords,
 } from '@utils/localStorage';
 
-import TerminalHeader from '@terminal/retcomdevice/Basic/TerminalHeader/TerminalHeader';
-import List from '@terminal/retcomdevice/Basic/List/List';
+import {
+  filterCommands,
+  deriveExpandedFromFilter,
+  collapseSubtree,
+} from '@utils/commands';
+
+import CY_CITY_COMMANDS from '@terminal/commands/cy_city';
 
 export default function RetComDevice() {
   const [discoveredPasswords, setDiscoveredPasswords] = useState({});
@@ -63,17 +69,63 @@ export default function RetComDevice() {
     });
   };
 
-  const handleReset = () => {
-    localStorage.removeItem(TREE_STORAGE_KEY);
-    setExpandedRows({});
-  };
+  // const handleReset = () => {
+  //   localStorage.removeItem(TREE_STORAGE_KEY);
+  //   setExpandedRows({});
+  // };
 
-  const handleSetIndent = (val) => {
-    setIndent(val);
-    try {
-      localStorage.setItem(LIST_INDENT_KEY, String(val));
-    } catch (e) {
-      console.error('Failed to save indent:', e);
+  // const handleSetIndent = (val) => {
+  //   setIndent(val);
+  //   try {
+  //     localStorage.setItem(LIST_INDENT_KEY, String(val));
+  //   } catch (e) {
+  //     console.error('Failed to save indent:', e);
+  //   }
+  // };
+
+  const handleEvent = (event) => {
+    switch (event.type) {
+      // case 'toggle':
+      //   setExpandedRows(prev => {
+      //     const next = { ...prev, [event.path]: !prev[event.path] };
+      //     try { localStorage.setItem(TREE_STORAGE_KEY, JSON.stringify(next)); } catch (e) {}
+      //     return next;
+      //   });
+      //   break;
+
+      // case 'unlock':
+      //   setDiscoveredPasswords(prev => {
+      //     const next = { ...prev, [event.path]: event.value ?? 'UNLOCKED' };
+      //     try { localStorage.setItem(PASSWORD_STORAGE_KEY, JSON.stringify(next)); } catch (e) {}
+      //     return next;
+      //   });
+      //   setExpandedRows(prev => {
+      //     const next = { ...prev, [event.path]: true };
+      //     try { localStorage.setItem(TREE_STORAGE_KEY, JSON.stringify(next)); } catch (e) {}
+      //     return next;
+      //   });
+      //   break;
+
+      case 'collapse_subtree':
+        setExpandedRows(prev => {
+          const next = collapseSubtree(prev, event.path);
+          try { localStorage.setItem(TREE_STORAGE_KEY, JSON.stringify(next)); } catch (e) {}
+          return next;
+        });
+        break;
+
+      case 'reset_tree':
+        localStorage.removeItem(TREE_STORAGE_KEY);
+        setExpandedRows({});
+        break;
+
+      case 'indent_change':
+        setIndent(event.value);
+        try { localStorage.setItem(LIST_INDENT_KEY, String(event.value)); } catch (e) {}
+        break;
+
+      default:
+        console.warn('Unhandled RetCom event:', event);
     }
   };
 
@@ -84,8 +136,7 @@ export default function RetComDevice() {
     >
       <TerminalHeader
         indent={indent}
-        onClear={handleReset}
-        onIndent={handleSetIndent}
+        onEvent={handleEvent}
       />
       <div
         style={{
@@ -111,6 +162,7 @@ export default function RetComDevice() {
             indent={indent}
             onToggle={handleToggle}
             onUnlock={handleUnlock}
+            onEvent={handleEvent}
           />
         </div>
       </div>

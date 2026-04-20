@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
+import CollapseIcon from '@mui/icons-material/UnfoldLess';
 import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 import BatteryChargingFullIcon from '@mui/icons-material/BatteryChargingFull';
+
 import { NewsTicker } from './NewsTicker';
 
 import { EVENT_FEED } from '@data/random/eventFeed';
@@ -15,8 +17,9 @@ const DIM = 'rgb(148, 163, 184)';
 
 export default function TerminalHeader({
   indent = 1,
-  onClear = () => {},
-  onIndent = () => {},
+  // onClear = () => {},
+  // onIndent = () => {},
+  onEvent = () => {},
 }) {
   return (
     <div style={{
@@ -43,13 +46,28 @@ export default function TerminalHeader({
         {/* Divider */}
         <div style={{ width: '1px', height: '32px', backgroundColor: BORDER, opacity: 0.4, flexShrink: 0 }} />
 
-        {/* Header controls */}
-        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '0.25rem', marginBottom: '0.25rem' }}>
-          <span style={{ fontSize: '0.65rem', color: 'rgba(79, 209, 197, 0.5)', fontFamily: 'monospace', marginRight: '0.25rem' }}>INDENT</span>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          alignItems: 'center',
+          gap: '0.25rem',
+          marginBottom: '0.25rem',
+          width: '100%',
+        }}>
+          <span style={{
+            fontSize: '0.65rem',
+            color: 'rgba(79, 209, 197, 0.5)',
+            fontFamily: 'monospace',
+            marginRight: '0.25rem' }}
+          >INDENT</span>
+
           {[0, 1, 1.5].map(val => (
             <button
               key={val}
-              onClick={() => onIndent(val)}
+              onClick={() => onEvent({
+                type: 'indent_change',
+                value: val,
+              })}
               style={{
                 padding: '0.15rem 0.4rem',
                 fontSize: '0.65rem',
@@ -66,25 +84,23 @@ export default function TerminalHeader({
           ))}
         </div>
 
-        {onClear && (
-          <button
-            onClick={onClear}
-            style={{
-              marginLeft: 'auto',
-              padding: '0.35rem',
-              border: `1px solid rgba(251, 191, 36, 0.4)`,
-              borderRadius: '3px',
-              backgroundColor: 'rgba(251, 191, 36, 0.06)',
-              color: YELLOW,
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <CloseFullscreenIcon style={{ fontSize: 16, color: YELLOW }} />
-          </button>
-        )}
+        <button
+          onClick={() => onEvent({ type: 'reset_tree' })}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginLeft: 'auto',
+            padding: '0.35rem',
+            backgroundColor: 'rgba(79, 209, 197, 0.2)',
+            color: 'rgb(79, 209, 197)',
+            border: '1px solid rgba(79, 209, 197, 0.4)',
+            borderRadius: '2px',
+            cursor: 'pointer',
+          }}
+        >
+          <CollapseIcon style={{ fontSize: 16, color: TEAL }} />
+        </button>
       </div>
 
       {EVENT_FEED.length > 0 && <NewsTicker feed={EVENT_FEED} />}

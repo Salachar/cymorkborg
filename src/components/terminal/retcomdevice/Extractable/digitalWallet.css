@@ -10,22 +10,6 @@
   position: relative;
 }
 
-/* Scanline effect */
-.digital-wallet::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(79, 209, 197, 0.03) 0px,
-    transparent 1px,
-    transparent 2px,
-    rgba(79, 209, 197, 0.03) 3px
-  );
-  pointer-events: none;
-  z-index: 1;
-}
-
 /* Locked state */
 .digital-wallet-locked {
   border-color: rgba(239, 68, 68, 0.4);
@@ -91,11 +75,6 @@
   font-weight: 600;
   color: rgba(239, 68, 68, 0.7);
   letter-spacing: 0.08em;
-}
-
-@keyframes pulse-red {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
 }
 
 /* Lock icon — small, inline */

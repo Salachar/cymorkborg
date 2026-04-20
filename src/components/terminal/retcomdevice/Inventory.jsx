@@ -61,7 +61,7 @@ export default function Inventory({
       {/* Column headers */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: '1fr 90px 90px',
+        gridTemplateColumns: '1fr 120px 120px',
         padding: '0.2rem 0.4rem',
         marginBottom: '0.25rem',
       }}>
@@ -82,7 +82,7 @@ export default function Inventory({
             }}>
               <div style={{
                 display: 'grid',
-                gridTemplateColumns: '1fr 90px 90px',
+                gridTemplateColumns: '1fr 120px 120px',
                 alignItems: 'baseline',
               }}>
                 {/* Name */}
@@ -99,6 +99,7 @@ export default function Inventory({
                   textAlign: 'center',
                   fontWeight: 'bold',
                   letterSpacing: '0.05em',
+                  whiteSpace: 'nowrap',
                 }}>
                   {item.condition?.toUpperCase() || 'UNKNOWN'}
                 </span>
@@ -110,6 +111,7 @@ export default function Inventory({
                     : 'rgb(251, 191, 36)',
                   textAlign: 'right',
                   fontWeight: 'bold',
+                  whiteSpace: 'nowrap',
                 }}>
                   {item.price || '—'}
                 </span>

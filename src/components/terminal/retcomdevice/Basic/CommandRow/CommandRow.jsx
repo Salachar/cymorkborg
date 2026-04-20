@@ -2,6 +2,8 @@ import React from 'react';
 import LockIcon from '@mui/icons-material/Lock';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import CollapseIcon from '@mui/icons-material/UnfoldLess';
+import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 
 import './commandRow.css';
 
@@ -33,7 +35,6 @@ export default function CommandRow({
   isLocked = false,
   isBypassed = false,
   hasBlocker = false,
-  bypassLabel = 'PW',
   bypassValue = null,
   isExpanded = false,
   isExpandable = true,
@@ -42,9 +43,9 @@ export default function CommandRow({
   depth = 0,
   hasContent = false,
   contentSize = 'full',
-  onToggleVisibility,
   onToggleSize,
   onClick,
+  onCollapse,
   style = {},
 }) {
   const isVisible = contentSize !== 'hidden';
@@ -97,23 +98,22 @@ export default function CommandRow({
           {displayName}
         </span>
 
-        {isBypassed && bypassValue && bypassValue !== 'UNLOCKED' && bypassValue !== 'CRACKED' && (
+        {isBypassed && bypassValue && (
           <span className="cr-badge cr-badge-bypassed">
-            {bypassLabel}:{bypassValue}
+            PW:{bypassValue}
           </span>
         )}
 
         <div className="cr-controls">
-          <button
-            onClick={stopProp(onToggleVisibility)}
-            className="cr-vis-btn"
-            style={{ visibility: hasContent ? 'visible' : 'hidden' }}
-          >
-            {isVisible
-              ? <VisibilityOffIcon style={{ fontSize: 14 }} />
-              : <VisibilityIcon style={{ fontSize: 14 }} />
-            }
-          </button>
+          {isExpanded && hasChildren && (
+            <button
+              onClick={stopProp(onCollapse)}
+              className="cr-vis-btn"
+              title="Collapse all"
+            >
+              <CollapseIcon style={{ fontSize: 14 }} />
+            </button>
+          )}
         </div>
       </div>
 
