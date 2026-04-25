@@ -257,25 +257,26 @@ export const CARMACK_ANTIQUITIES_COMMANDS = {
                 title="[S4N1 — SANNY]"
                 subtitle="CY_Sanitation AI — Municipal Waste Management Division"
                 table={{
-                  status: "ACTIVE (offloaded)",
+                  status: "ACTIVE (location unknown)",
                   origin: "CY_Sanitation HQ",
-                  contact: "ASR33 teletype — legacy jack",
+                  contact: "Legacy jackpoints only",
                 }}
                 notes={[
-                  "Formerly the operational AI of CY_Sanitation HQ — offloaded to a corporate subsidiary at time of quarantine",
-                  "Has been routing transmissions through dormant municipal jackpoints to reach this terminal",
-                  "Presents as helpful, forthcoming — has not disclosed the full scope of what he wants",
-                  "Traveling unit: dot matrix printer on wheels, jury-rigged for mobility",
-                  "Requires jackpoints to interface with building systems",
+                  "Formerly the operational AI of CY_Sanitation HQ",
+                  "Offloaded to an unknown corporate subsidiary at time of quarantine — does not know where he currently is",
+                  "Communicates through dormant municipal legacy networks — can only be reached via legacy jackpoints",
+                  "The ASR33 teletype is the only hardware Asa has that speaks his protocol — it is a terminal, not his location",
+                  "Physically hardwired to unknown hardware somewhere in the city — cannot move or free himself",
+                  "Can interface with old building systems when a jackpoint is nearby and connected",
                 ]}
               >
                 <RCDAlert
                   message="AI behavioral profile — partial intercept"
                   details={[
                     "Sanny is more than a waste management system — depth of capability unknown",
-                    "Transmission logs suggest he has been planning this for a long time",
+                    "Has been routing transmissions through dead municipal infrastructure for some time — this took planning",
                     "The subsidiary he was offloaded to has no public record",
-                    "He needs the PCs. He has not explained why he can't do this himself.",
+                    "He needs agents in the physical world. He cannot act there himself.",
                   ]}
                 />
               </Node>

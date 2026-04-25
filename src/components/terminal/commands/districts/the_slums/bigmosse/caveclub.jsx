@@ -4,6 +4,7 @@ import {
   Line,
   Divider,
   DataTable,
+  InsetBox,
   NodePreview,
 } from '@terminal/TerminalComponents';
 
@@ -13,13 +14,11 @@ import {
   Menu,
   EventLineup,
   CommunityBoard,
-  IncidentLog,
   HoursBanner,
   Node,
   VIPList,
+  PublicPortal,
 } from "@terminal/retcomdevice";
-
-import StoneEelsAd from './caveclub_ad';
 
 export const STONE_EELS_COMMANDS = {
   "Cave Club": {
@@ -30,7 +29,30 @@ export const STONE_EELS_COMMANDS = {
       </NodePreview>
     ),
     content: (
-      <StoneEelsAd />
+      <PublicPortal
+        name="CAVE CLUB"
+        tagline="Underground. Literally."
+        network="CAVE_PUBLIC"
+        signalStrength="medium"
+        status="OPEN"
+        statusColor="neon"
+        notes={[
+          "No corps. No cops. No questions.",
+          "Neutral ground — all factions welcome if they behave",
+          "Peak crowd 23:00-03:00 — live music runs late"
+        ]}
+        theme="casual"
+      >
+        <InsetBox title="TONIGHT:">
+          <Line neon bullet>Live music — see Entertainment Lineup</Line>
+          <Line neon bullet>Bar open until close</Line>
+        </InsetBox>
+        <HoursBanner
+          hours="20:00 — 06:00"
+          days="Every Night"
+          location="Stone Eels territory — Ports District, eastern section"
+        />
+      </PublicPortal>
     ),
     related_commands: {
       "Tonight's Entertainment": {
@@ -90,21 +112,6 @@ export const STONE_EELS_COMMANDS = {
               },
             ]}
             footer="⚠ Management not responsible for morning regrets"
-          />
-        ),
-      },
-
-      "Hours & Location": {
-        favicon: <Icons.Hours />,
-        content: (
-          <HoursBanner
-            name="CAVE CLUB"
-            hours="20:00 - 06:00"
-            days="Every Night"
-            status="OPEN"
-            statusColor="open"
-            location="Ports District, Eastern Section"
-            note="Best time: 23:00-03:00 (peak crowd, live music)"
           />
         ),
       },
@@ -223,50 +230,6 @@ export const STONE_EELS_COMMANDS = {
                 <Line yellow>Privacy policy: No cameras in VIP areas</Line>
                 <Line yellow>Neutral ground rules: Violence = permanent ban + consequences</Line>
               </VIPList>
-            ),
-          },
-
-          "Incident Reports": {
-            favicon: <Icons.Files />,
-            content: (
-              <IncidentLog
-                title="INCIDENT LOG"
-                timeframe="Last 7 days"
-                incidents={[
-                  {
-                    timestamp: "3 DAYS AGO (22:45)",
-                    type: "Questioning",
-                    details: {
-                      "Individual brought in": "Charlie Sand",
-                      "Reason": "Asking questions about Lucky Flight Casino operations",
-                      "Location": "Detained at Batu's Bodega, brought to Cave Club",
-                      "Duration": "2 hours (holding room)",
-                      "Resolution": "Information exchange completed, individual released",
-                      "Status": "No further action required",
-                    }
-                  },
-                  {
-                    timestamp: "5 DAYS AGO (23:15)",
-                    type: "Territorial intrusion",
-                    details: {
-                      "Details": "Virid Vipers scout spotted outside entrance",
-                      "Response": "Stone Eels mobilized (3 members)",
-                      "Resolution": "Subject fled before engagement",
-                      "Follow-up": "Increased perimeter patrols initiated",
-                    }
-                  },
-                  {
-                    timestamp: "6 DAYS AGO (01:30)",
-                    type: "Patron disturbance",
-                    details: {
-                      "Details": "Intoxicated patrons fighting on main floor",
-                      "Response": "Bouncers intervened (non-lethal)",
-                      "Resolution": "Both parties ejected to street",
-                      "Injuries": "Minor (bruises, no medical treatment required)",
-                    }
-                  },
-                ]}
-              />
             ),
           },
 

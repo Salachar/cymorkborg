@@ -132,11 +132,14 @@ export const BRIEFINGS_COMMANDS = {
       },
 
       "Clean Break — Part 1": {
+        password: {
+          pw: 'toilet trouble',
+        },
         favicon: <Icons.Briefing />,
         content: (
           <Briefing
             title="Up The Down Toilet"
-            issuer="S4N1 — via Asa Carmack, Sabbath Square"
+            issuer="S4N1"
             classification="CONFIDENTIAL"
             primary={[
               {
@@ -155,18 +158,10 @@ export const BRIEFINGS_COMMANDS = {
                 priority: "critical",
               },
             ]}
-            secondary={[
-              {
-                text: "Keep Sanny connected",
-                note: "He travels with you as a dot matrix printer on wheels — plug him into jackpoints as you find them",
-                priority: "high",
-              },
-            ]}
             intel={[
               "Target: CY_Sanitation HQ, Ports/Barnyard Fields border — quarantined, cement wall, sealed in industrial plastic",
-              "Building has been abandoned for decades — Nano-infected staff were never evacuated",
-              "All locked doors require power to hack — generator first",
-              "Jackpoints throughout the building — Sanny can interface once power is restored",
+              "Building has been abandoned for decades, staff were locked inside",
+              "All locked doors require power to hack",
               "Hazard suits provided — protect from Nano infestation while intact",
             ]}
             payment={[
@@ -175,7 +170,6 @@ export const BRIEFINGS_COMMANDS = {
             warnings={[
               "Nano infestation is airborne inside — suits must stay intact",
               "The staff did not all die. Some of them are still in there.",
-              "Sanny has not disclosed the full scope of his plan",
             ]}
           />
         ),

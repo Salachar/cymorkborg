@@ -22,15 +22,39 @@ import {
   Radio,
   ArcadeCabinet,
   DigitalWallet,
+  SmartBin,
+  PublicPortal,
 } from "@terminal/retcomdevice"
-
-import BatusBodegaAd from './bodega_ad'
 
 export const BODEGA_COMMANDS = {
   "Batu's Bodega": {
     favicon: <Icons.Bodega />,
     content: (
-      <BatusBodegaAd />
+      <PublicPortal
+        theme="casual"
+        name="BATU'S BODEGA"
+        tagline="Your Neighborhood Store Since 2067"
+        network="BATUS_WIFI"
+        signalStrength="strong"
+        status="CLOSED — 3 DAYS"
+        statusColor="red"
+        notes={[
+          "Walking distance from Lucky Flight Casino!",
+        ]}
+      >
+        <InsetBox title="SERVICES:">
+          <Line neon bullet>Fair prices — no shortage markup</Line>
+          <Line neon bullet>Market drone drop-off location</Line>
+          <Line neon bullet>Community bulletin board</Line>
+          <Line neon bullet>Coffee always fresh</Line>
+          <Line yellow bold bullet>Free WiFi!</Line>
+        </InsetBox>
+        <HoursBanner
+          hours="06:00 — 23:00"
+          days="Mon-Sat · Sun 08:00-20:00"
+          location="Corner of Drech Ave & 5th Street, Ports/Bigmosse border"
+        />
+      </PublicPortal>
     ),
     preview: (
       <NodePreview>
@@ -45,7 +69,7 @@ export const BODEGA_COMMANDS = {
           <Menu
             title="DAILY SPECIALS"
             subtitle="Batu's Bodega - Corner Store Deals"
-            signType="coffee"
+            signType="sandwich"
             categories={[
               {
                 name: "FOOD & SNACKS:",
@@ -130,10 +154,7 @@ export const BODEGA_COMMANDS = {
       "Vending Machine": {
         favicon: <Icons.Vending />,
         content: (
-          <VendingMachine
-            id="bodega-outside-vending"
-            location="Outside Batu's Bodega - Street side"
-          />
+          <VendingMachine />
         ),
         related_commands: {
           "Maintenance Access": {
@@ -203,36 +224,6 @@ export const BODEGA_COMMANDS = {
         ),
       },
 
-      "Hours of Operation": {
-        favicon: <Icons.Hours />,
-        content: (
-          <HoursBanner
-            name="Batu's Bodega"
-            hours="06:00 - 23:00"
-            days="Monday-Saturday"
-            status="⚠ CLOSED - 3 DAYS"
-            statusColor="closed"
-            location="Corner of Drech Ave & 5th Street, Ports/Bigmosse border"
-            note="Batu sometimes stays open late for regulars"
-          >
-            <Line smoke large bold>[CLOSURE DETAILS]</Line>
-            <Divider />
-            <DataTable data={[
-              { label: "Duration Closed", value: "3 days" },
-              { label: "Last Transaction", value: "72 hours ago (19:47)" },
-              { label: "Owner Contact", value: "NO RESPONSE" },
-              { label: "Sunday Hours", value: "08:00 - 20:00 (when open)" },
-            ]} />
-            <InsetBox title="ADDITIONAL LOCATION INFO:" color="yellow">
-              <Line cyan>4 blocks from Lucky Flight Casino</Line>
-              <Line cyan>Ground floor of old apartment complex</Line>
-            </InsetBox>
-            <Line red>⚠ Store appears damaged - front window broken</Line>
-            <Line yellow>Neighbors report no sign of Batu for 3 days</Line>
-          </HoursBanner>
-        ),
-      },
-
       "Community Bulletin": {
         favicon: <Icons.Bulletin />,
         content: (
@@ -279,6 +270,26 @@ export const BODEGA_COMMANDS = {
           </Node>
         ),
         related_commands: {
+          "SmartBin": {
+            content: (
+              <SmartBin
+                id="sanitation-bin-b7"
+                items={[
+                  {
+                    id: "crumpled_memo",
+                    label: "Crumpled memo",
+                    description: "Partially shredded. Some text still legible.",
+                  },
+                  {
+                    id: "broken_badge",
+                    label: "Staff ID badge",
+                    description: "Snapped in half. Photo still visible.",
+                  },
+                ]}
+              />
+            )
+          },
+
           "Security Camera - Main Shop": {
             favicon: <Icons.Camera />,
             content: (

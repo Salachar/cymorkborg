@@ -104,7 +104,7 @@ function CommandNode({
 
   const hasBlocker = Boolean(def.password);
   const isLocked = hasBlocker && !isBypassed;
-  const contentSize = (hasBlocker && !isBypassed) ? 'full' : contentSizes[path] ?? 'partial';
+  const contentSize = (hasBlocker && !isBypassed) ? 'full' : contentSizes[path] ?? 'full';
   const resolvedContent = def.content ?? null;
 
   const hasContent = Boolean(resolvedContent);

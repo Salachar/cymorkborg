@@ -229,18 +229,7 @@ export const SOUTH_CENTRAL_FUN_COMMANDS = {
       "Jukebox": {
         favicon: <Icons.Radio />,
         content: (
-          <Jukebox
-            model="JB-500"
-            location="Corner by pool table"
-            cost="2¤"
-            songs={[
-              { title: "Grease Monkey Blues", artist: "The Wrenches", genre: "Industrial blues", color: 'orange' },
-              { title: "Overtime", artist: "Union Strong", genre: "Punk rock", color: 'red' },
-              { title: "Elevator to Hell", artist: "Shaft Collapse", genre: "Heavy metal", color: 'yellow' },
-              { title: "Concrete Dreams", artist: "The Builders", genre: "Folk-rock", color: 'cyan' },
-              { title: "Break Time", artist: "Lunch Hour", genre: "Ska-punk", color: 'green' },
-            ]}
-          />
+          <Jukebox />
         ),
       },
 

@@ -280,7 +280,7 @@ export const THE_55_CORP_QUAD_COMMANDS = {
               <Menu
                 title="CELESTIAL CUISINE"
                 subtitle="Fine dining restaurant"
-                signType="food"
+                signType="sandwich"
                 categories={[
                   {
                     name: "APPETIZERS",

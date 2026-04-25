@@ -126,7 +126,7 @@ export default function Briefing({
               {primary.map((obj, i) => (
                 <div key={i} style={{ marginBottom: '0.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                    <span
+                    {/* <span
                       style={{
                         color: obj.priority === 'critical' ? 'rgb(239, 68, 68)' : 'rgb(251, 146, 60)',
                         fontSize: '0.875rem',
@@ -134,7 +134,7 @@ export default function Briefing({
                       }}
                     >
                       {getObjectiveIcon(obj.priority)}
-                    </span>
+                    </span> */}
                     <span
                       style={{
                         color: 'rgb(239, 68, 68)',
@@ -183,7 +183,7 @@ export default function Briefing({
               {secondary.map((obj, i) => (
                 <div key={i} style={{ marginBottom: '0.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                    <span
+                    {/* <span
                       style={{
                         color: 'rgb(251, 191, 36)',
                         fontSize: '0.875rem',
@@ -191,7 +191,7 @@ export default function Briefing({
                       }}
                     >
                       {getObjectiveIcon(obj.priority || 'normal')}
-                    </span>
+                    </span> */}
                     <span
                       style={{
                         color: 'rgb(251, 191, 36)',

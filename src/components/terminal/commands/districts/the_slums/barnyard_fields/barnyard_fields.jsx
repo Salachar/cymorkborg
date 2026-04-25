@@ -2,13 +2,15 @@ import Icons from '@utils/icons';
 import { Line, NodePreview } from '@terminal/TerminalComponents';
 import { DistrictPortal, RCDAlert } from "@terminal/retcomdevice";
 
+import { CY_SANITATION_HQ_COMMANDS } from './abandoned_cy_plant';
+
 export const BARNYARD_FIELDS_COMMANDS = {
   "Barnyard Fields": {
     favicon: <Icons.Pin />,
     preview: (
       <NodePreview>
         <Line span smoke br> · Slums at the southern edge. The Heirs own this ground in blood and ritual.</Line>
-        <Line span smoke> · CY_Sanitation HQ</Line> — quarantined.
+        <Line span yellow> · CY_Sanitation HQ</Line> — quarantined.
       </NodePreview>
     ),
     content: (
@@ -38,7 +40,9 @@ export const BARNYARD_FIELDS_COMMANDS = {
         />
       </DistrictPortal>
     ),
-    related_commands: {},
+    related_commands: {
+      ...CY_SANITATION_HQ_COMMANDS,
+    },
   },
 };
 

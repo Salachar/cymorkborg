@@ -3,16 +3,23 @@ import { Line, Divider, Section } from '@terminal/TerminalComponents';
 export default function Menu({
   title,
   subtitle,
-  signType = 'cocktail',
+  signType,
   categories = [],
   footer,
 }) {
   // Neon sign designs
   const getNeonSign = () => {
+    const styling = {
+      position: 'relative',
+      width: '60px',
+      height: '60px',
+      // margin: '0 auto 1rem',
+    };
+
     switch (signType) {
       case 'cocktail':
         return (
-          <div style={{ position: 'relative', width: '60px', height: '60px', margin: '0 auto 1rem' }}>
+          <div style={styling}>
             {/* Martini glass */}
             <svg width="60" height="60" viewBox="0 0 60 60">
               {/* Glass bowl (triangle) */}
@@ -73,7 +80,7 @@ export default function Menu({
 
       case 'sandwich':
         return (
-          <div style={{ position: 'relative', width: '60px', height: '60px', margin: '0 auto 1rem' }}>
+          <div style={styling}>
             <svg width="60" height="60" viewBox="0 0 60 60">
               {/* Top bun */}
               <path
@@ -125,7 +132,7 @@ export default function Menu({
 
       case 'coffee':
         return (
-          <div style={{ position: 'relative', width: '60px', height: '60px', margin: '0 auto 1rem' }}>
+          <div style={styling}>
             <svg width="60" height="60" viewBox="0 0 60 60">
               {/* Cup */}
               <path
@@ -186,7 +193,7 @@ export default function Menu({
 
       case 'burger':
         return (
-          <div style={{ position: 'relative', width: '60px', height: '60px', margin: '0 auto 1rem' }}>
+          <div style={styling}>
             <svg width="60" height="60" viewBox="0 0 60 60">
               {/* Top bun */}
               <ellipse
@@ -257,29 +264,41 @@ export default function Menu({
           position: 'relative',
         }}
       >
-        {/* Neon sign */}
-        {getNeonSign()}
-
-        {/* Title */}
-        <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-          <Line
-            style={{
-              margin: 0,
-              fontSize: '1.3rem',
-              fontWeight: 'bold',
-              color: 'rgb(251, 146, 60)',
-              textShadow: '0 0 8px rgb(251, 146, 60)',
-              letterSpacing: '0.1em',
-            }}
-          >
-            {title}
-          </Line>
-          {subtitle && (
-            <Line cyan style={{ fontSize: '0.875rem', marginTop: '0.25rem' }}>
-              {subtitle}
-            </Line>
+        <div
+          style={{
+            display: 'flex',
+            marginBottom: '1rem',
+          }}
+        >
+          {/* Neon sign */}
+          {signType && (
+            <div style={{ marginRight: '1rem' }}>
+              {getNeonSign()}
+            </div>
           )}
+
+          {/* Title */}
+          <div>
+            <Line
+              style={{
+                margin: 0,
+                fontSize: '1.3rem',
+                fontWeight: 'bold',
+                color: 'rgb(251, 146, 60)',
+                textShadow: '0 0 8px rgb(251, 146, 60)',
+                letterSpacing: '0.1em',
+              }}
+            >
+              {title}
+            </Line>
+            {subtitle && (
+              <Line cyan style={{ fontSize: '0.875rem', marginTop: '0.25rem' }}>
+                {subtitle}
+              </Line>
+            )}
+          </div>
         </div>
+
 
         <Divider />
 

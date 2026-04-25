@@ -133,11 +133,7 @@ export const PEACH_TREES_COMMANDS = {
           "Vending Machine": {
             favicon: <Icons.Vending />,
             content: (
-              <VendingMachine
-                id="vend-tower-lobby"
-                model="VendLux Elite"
-                location="Peach Trees - Ground Floor Lobby"
-              />
+              <VendingMachine />
             ),
           },
 
@@ -174,7 +170,7 @@ export const PEACH_TREES_COMMANDS = {
                   <Menu
                     title="CHROMELUX"
                     subtitle="Premium Cyberware - By Appointment"
-                    signType="food"
+                    // signType="food"
                     categories={[
                       {
                         name: "NEURAL AUGMENTS",

@@ -181,7 +181,7 @@ export const THE_55_MULTIMART_COMMANDS = {
               <Menu
                 title="ANGELA AMMO'S AUTO-MART"
                 subtitle="Food, drinks, and ammunition"
-                signType="food"
+                signType="sandwich"
                 categories={[
                   {
                     name: "FOOD",
@@ -290,7 +290,7 @@ export const THE_55_MULTIMART_COMMANDS = {
                 <Menu
                   title="SMILE CAFE"
                   subtitle="Best food in the stack"
-                  signType="food"
+                  signType="sandwich"
                   categories={[
                     {
                       name: "FOOD",

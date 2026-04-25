@@ -9,7 +9,6 @@ import {
 
 import {
   CorpAd,
-  EventFeed,
   CyWeather,
   CySports,
   Node,
@@ -29,13 +28,6 @@ export const CY_CITY_NETWORK = {
         src={CY_CITY_MAP}
         theme="red"
       />
-    ),
-  },
-
-  "Cy City News Network": {
-    favicon: <Icons.News />,
-    content: (
-      <EventFeed />
     ),
   },
 

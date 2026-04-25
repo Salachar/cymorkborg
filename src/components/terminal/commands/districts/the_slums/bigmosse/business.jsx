@@ -394,18 +394,7 @@ export const BUSINESS_COMMANDS = {
       "Jukebox Terminal (JB-707-F4)": {
         favicon: <Icons.Radio />,
         content: (
-          <Jukebox
-            model="JB-707"
-            location="Corner near pool table"
-            cost="2¤"
-            songs={[
-              { title: "Rusty Water", artist: "Steel Tide", genre: "Industrial rock", color: 'blue' },
-              { title: "Corporate Collapse", artist: "System Down", genre: "Punk", color: 'red' },
-              { title: "Whiskey Nights", artist: "Dock Workers Union", genre: "Folk", color: 'orange' },
-              { title: "Canal Blues", artist: "The Ports Drifters", genre: "Industrial folk-rock", color: 'cyan' },
-              { title: "Chrome Dreams", artist: "Synapse", genre: "Synthwave", color: 'purple' },
-            ]}
-          />
+          <Jukebox />
         ),
       },
 
@@ -1051,18 +1040,7 @@ export const BUSINESS_COMMANDS = {
       "Bar Jukebox": {
         favicon: <Icons.Radio />,
         content: (
-          <Jukebox
-            model="JB-808"
-            location="Near pool table, corner booth area"
-            cost="2¤"
-            songs={[
-              { title: "Recursion Blues", artist: "The Stack Overflow", genre: "Synthwave-rock fusion", color: 'cyan' },
-              { title: "Infinite Loop", artist: "Compiled Dreams", genre: "Electronic", color: 'purple' },
-              { title: "Garbage Collection", artist: "Memory Leaks", genre: "Industrial", color: 'green' },
-              { title: "404 Not Found", artist: "Error State", genre: "Glitch-hop", color: 'red' },
-              { title: "Binary Sunset", artist: "Digital Horizons", genre: "Ambient synthwave", color: 'orange' },
-            ]}
-          />
+          <Jukebox />
         ),
       },
 

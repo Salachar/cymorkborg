@@ -1,24 +1,6 @@
 import { Line, Divider } from '@terminal/TerminalComponents';
 import Extractable from '../../Extractable/Extractable';
 
-/**
- * SmartFridge - Smart kitchen appliance with inventory tracking
- *
- * Props:
- * - id: String (unique ID for Extractable tracking, e.g., "fridge-penthouse")
- * - model: String (default: "CoolTech Pro-5000")
- * - location: String (optional, e.g., "Kitchen")
- * - temperature: Number (default: 38°F)
- * - physicalItems: Array of item objects (Extractable schema)
- *   - id: String
- *   - label: String
- *   - description: String
- *   - value: Number (optional)
- *   - isCredits: Boolean (optional)
- * - freezerItems: Array of item objects (same Extractable schema)
- * - freezerTemp: Number (default: 0°F)
- * - notes: String (optional, additional info)
- */
 export default function SmartFridge({
   id = 'fridge-unknown',
   model = 'CoolTech Pro-5000',

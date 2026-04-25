@@ -417,45 +417,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
           "Jukebox": {
             favicon: <Icons.Radio />,
             content: (
-              <Jukebox
-                location="Steel Jackhammer's Penthouse - Holo Space"
-                credits={0}
-                theme="club"
-                nowPlaying={{
-                  title: "Chrome Fist Fury",
-                  artist: "Killmatch Anthems Vol. 3",
-                  genre: "Industrial Techno"
-                }}
-                queue={[
-                  { title: "Blood on the Canvas", artist: "Cage Kings", genre: "Heavy Metal" },
-                  { title: "Victory Lap", artist: "Champion Sounds", genre: "Trap" }
-                ]}
-                library={[
-                  {
-                    genre: "Industrial Techno",
-                    songs: [
-                      { title: "Chrome Fist Fury", artist: "Killmatch Anthems Vol. 3" },
-                      { title: "Steel Rain", artist: "Cyber Assault" },
-                      { title: "Hydraulic Pressure", artist: "Machine Gods" }
-                    ]
-                  },
-                  {
-                    genre: "Heavy Metal",
-                    songs: [
-                      { title: "Blood on the Canvas", artist: "Cage Kings" },
-                      { title: "Warrior's Anthem", artist: "Battle Cry" },
-                      { title: "No Mercy", artist: "Killzone" }
-                    ]
-                  },
-                  {
-                    genre: "Synthwave",
-                    songs: [
-                      { title: "Neon Victory", artist: "Retro Fighters" },
-                      { title: "Digital Champion", artist: "ChromeCast" }
-                    ]
-                  }
-                ]}
-              />
+              <Jukebox />
             ),
           },
 
@@ -487,18 +449,7 @@ export const STEEL_PENTHOUSE_COMMANDS = {
             favicon: <Icons.VideoGame />,
             content: (
               <ArcadeCabinet
-                id="console-penthouse-elite"
-                name="GAMEBOX ELITE PRO"
-                location="Steel Jackhammer's Penthouse — Main Living Area"
-                screenState="TOURNAMENT ACTIVE"
-                lastPlayed="Now (4 players)"
-                user="STEEL_J"
-                credits={47500}
-                gamesAvailable={[
-                  "KILLMATCH CHAMPIONS",
-                  "STREET WARS ONLINE",
-                  "CYBER RACING UNLIMITED",
-                ]}
+                credits={475}
               />
             ),
           },

@@ -106,18 +106,7 @@ export const DOC_JOY_CLINIC_COMMANDS = {
       "Vending Machine": {
         favicon: <Icons.Vending />,
         content: (
-          <VendingMachine
-            id="docjoy-waiting-vending"
-            model="MediSnack Pro"
-            location="Doc Joy's Clinic - Waiting Area"
-            drinks={[
-              { name: 'SYNTH-CAF', pattern: 'lines', color: 'yellow', available: true },
-              { name: 'PROTEIN BAR', pattern: 'blocks', color: 'green', available: true },
-              { name: 'ENERGY DRINK', pattern: 'dots', color: 'orange', available: true },
-              { name: 'PAINKILLERS', pattern: 'waves', color: 'blue', available: true },
-              { name: 'STIM-LITE', pattern: 'circles', color: 'purple', available: true },
-            ]}
-          />
+          <VendingMachine />
         ),
         related_commands: {
           "Maintenance Panel": {

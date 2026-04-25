@@ -9,7 +9,6 @@ import {
   Node,
   PersonnelFile,
   PublicPortal,
-  IncidentLog,
 } from "@terminal/retcomdevice";
 
 import cctv_image from '@images/the55/stack_command_cctv.png';
@@ -615,83 +614,6 @@ export const THE_55_STACK_COMMAND_COMMANDS = {
                       <Line cyan>• Freight elevators (If operational)</Line>
                     </InsetBox>
                   </Node>
-                ),
-              },
-
-              "Incident Response Log": {
-                content: (
-                  <IncidentLog
-                    title="STACK SECURITY INCIDENT LOG"
-                    timeframe="Last 30 days"
-                    incidents={[
-                      {
-                        timestamp: "2 DAYS AGO (14:23)",
-                        type: "Containment Breach",
-                        details: {
-                          Location: "The REC - Level 58",
-                          Incident: "Single Blightling escaped containment during maintenance",
-                          Response: "Security team dispatched, AANI placed on standby (not deployed)",
-                          Resolution: "Blightling neutralized, no casualties, containment reinforced",
-                          "Follow-up": "Maintenance protocols updated for REC work",
-                        },
-                      },
-                      {
-                        timestamp: "5 DAYS AGO (22:15)",
-                        type: "Assault",
-                        details: {
-                          Location: "Alliansen Arms - Apt. #6713",
-                          Incident: "Karl Johnson (known NuFascist) attacked neighbor over noise complaint",
-                          Response: "Security intervened, victim treated on-site",
-                          Resolution: "Johnson warned, no arrest (legal technicalities)",
-                          "Follow-up": "Community Outreach increased bounty to 1k¤, monitoring increased",
-                        },
-                      },
-                      {
-                        timestamp: "8 DAYS AGO (03:47)",
-                        type: "Attempted Break-In",
-                        details: {
-                          Location: "Alliansen Arms - Apt. #6815 (Corporate safehouse)",
-                          Incident: "Two individuals attempted breach using electronic tools",
-                          Response: "Safehouse alarms triggered, suspects fled before security arrival",
-                          Resolution: "No entry achieved, safehouse security upgraded",
-                          "Follow-up": "Camera footage under analysis, suspects unidentified",
-                        },
-                      },
-                      {
-                        timestamp: "12 DAYS AGO (19:30)",
-                        type: "Medical Emergency",
-                        details: {
-                          Location: "Multimart - Smile Cafe",
-                          Incident: "Customer collapsed, suspected cardiac event",
-                          Response: "Staff administered first aid, emergency services contacted",
-                          Resolution: "Patient stabilized and transported to medical facility",
-                          "Follow-up": "Full recovery confirmed",
-                        },
-                      },
-                      {
-                        timestamp: "18 DAYS AGO (11:20)",
-                        type: "Fire Alarm",
-                        details: {
-                          Location: "Alliansen Arms - Apt. #7529 (Kincaid)",
-                          Incident: "Electrical fire caused by mech construction project",
-                          Response: "Resident extinguished fire before security arrival",
-                          Resolution: "Minor damage, no injuries, safety inspection pending",
-                          "Follow-up": "Final warning issued, lease violation logged",
-                        },
-                      },
-                      {
-                        timestamp: "25 DAYS AGO (08:15)",
-                        type: "Elevator Malfunction",
-                        details: {
-                          Location: "Elevator #7 - Levels 45-60",
-                          Incident: "Elevator stuck between floors, 6 passengers trapped",
-                          Response: "Engineering team dispatched, passengers evacuated via hatch",
-                          Resolution: "All passengers safe, elevator taken offline for repairs",
-                          "Follow-up": "Still offline, parts on order (3 day ETA)",
-                        },
-                      },
-                    ]}
-                  />
                 ),
               },
             },

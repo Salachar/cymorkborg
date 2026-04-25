@@ -45,6 +45,7 @@ export const Line = ({
   style = {},
   span = false,
   br = false,
+  bullet = false,
   children,
 }) => {
   let appliedClassname = className;
@@ -67,15 +68,6 @@ export const Line = ({
     if (teal) appliedStyles.color = COLOR_MAP.teal;
   }
 
-  // TODO: Cleanup, this is a generalization at the moment
-  // Anything non-string children are typically more "actionable"
-  // So I add a little bit of margin for tablet spacing friendliness
-  // These are usually commands to click, so the spacing helps a ton
-  // if (typeof children !== "string") {
-  //   appliedStyles.marginTop = "0.5rem";
-  //   appliedStyles.marginBottom = "0.5rem";
-  // }
-
   if (top) appliedStyles.marginTop = "0.5rem";
   if (bottom) appliedStyles.marginBottom = "0.5rem";
   if (left) appliedStyles.marginLeft = "0.5rem";
@@ -89,14 +81,14 @@ export const Line = ({
   if (span) {
     return (
       <>
-        <span className={appliedClassname} style={appliedStyles}>{children}{loading ? "..." : ""}</span>
+        <span className={appliedClassname} style={appliedStyles}>{bullet && " · "}{children}{loading ? "..." : ""}</span>
         {br && <br />}
       </>
     );
   } else {
     return (
       <>
-        <div className={appliedClassname} style={appliedStyles}>{children}{loading ? "..." : ""}</div>
+        <div className={appliedClassname} style={appliedStyles}>{bullet && " · "}{children}{loading ? "..." : ""}</div>
         {br && <br />}
       </>
     );

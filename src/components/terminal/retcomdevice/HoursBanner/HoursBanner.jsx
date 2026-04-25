@@ -13,15 +13,17 @@ export default function HoursBanner({
 
   return (
     <div className={`hours-banner${fancy ? ' hours-banner-fancy' : ''}`}>
-      <div className="hours-banner-header">
-        <div className="hours-banner-business">{name}</div>
-      </div>
+      {Boolean(name) && (
+        <div className="hours-banner-header">
+          <div className="hours-banner-business">{name}</div>
+        </div>
+      )}
       <div className="hours-banner-main">
         <div className="hours-banner-label">HOURS OF OPERATION</div>
         <div className="hours-banner-hours">{hours}</div>
         <div className="hours-banner-days">{days}</div>
       </div>
-      {location && (
+      {Boolean(location) && (
         <div className="hours-banner-location">
           <span className="hours-banner-location-label">LOCATION:</span>
           <span>{location}</span>
@@ -32,7 +34,7 @@ export default function HoursBanner({
           {children}
         </div>
       )}
-      {note && (
+      {Boolean(note) && (
         <div className="hours-banner-note">
           {note}
         </div>

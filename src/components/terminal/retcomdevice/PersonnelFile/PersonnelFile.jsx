@@ -304,20 +304,6 @@ export default function PersonnelFile({
             </div>
           )}
         </div>
-
-        {/* Footer */}
-        <div
-          style={{
-            padding: '0.75rem 1rem',
-            borderTop: '1px solid rgb(100, 116, 139)',
-            backgroundColor: 'rgb(51, 65, 85)',
-            textAlign: 'center',
-          }}
-        >
-          <Line red style={{ fontSize: '0.7rem', margin: 0, fontWeight: 'bold' }}>
-            CONFIDENTIAL - INTERNAL USE ONLY
-          </Line>
-        </div>
       </div>
     </div>
   );

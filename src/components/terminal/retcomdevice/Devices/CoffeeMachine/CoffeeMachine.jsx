@@ -1,19 +1,6 @@
 import { useState } from 'react';
 import './coffeeMachine.css';
 
-/**
- * CoffeeMachine - Fancy touchscreen coffee dispenser
- *
- * Sleek interface with preset drink options.
- * Animated brewing state with progress bar.
- *
- * Props:
- * - id: String (machine ID)
- * - model: String (default: "CYBERBEAN AUTOMAT-3000")
- * - location: String (optional)
- * - disabled: Boolean (optional, out of order)
- * - onPour: Function (optional, callback when drink poured)
- */
 export default function CoffeeMachine({
   id = 'coffee-machine-01',
   model = 'CYBERBEAN AUTOMAT-3000',

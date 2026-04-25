@@ -21,12 +21,10 @@ import {
   DigitalWallet,
   NetworkActivity,
   VIPList,
-  IncidentLog,
   Node,
   BuildingAccess,
+  PublicPortal,
 } from "@terminal/retcomdevice"
-
-import LuckyFlightAd from './casino_ad'
 
 import lfc_cctv from '@images/locations/lfc_cctv.png';
 import basementImage from '@images/blueprints/lucky_flight_basement.png';
@@ -42,7 +40,35 @@ export const LUCKY_FLIGHT_CASINO = {
       </NodePreview>
     ),
     content: (
-      <LuckyFlightAd />
+      <PublicPortal
+        name="LUCKY FLIGHT CASINO"
+        tagline="Where Fortune Takes Flight"
+        network="LUCKYFLIGHTCASINO_PUBLIC"
+        signalStrength="strong"
+        status="✓ OPEN 24/7"
+        statusColor="neon"
+        notes={[
+          ,
+          "Water taxi available — canal pier, pre-approval required",
+          "VIP members get 20% off all night",
+        ]}
+        theme="casual"
+      >
+        <InsetBox title="FEATURES:">
+          <Line neon bullet>100+ slot machines</Line>
+          <Line neon bullet>VIP gaming pods</Line>
+          <Line neon bullet>Happy Hour 18:00-22:00</Line>
+          <Line yellow bold bullet>VIP members get 20% off all night</Line>
+        </InsetBox>
+        <HoursBanner
+          hours="10:00 — 07:00"
+          location="Bigmosse — accessible via car bridge or broken escalators"
+          note="Maintenance window: 07:00-10:00 — casino closed, crew on site"
+        >
+          <Line yellow>Casino monitoring increased during current period</Line>
+          <Line cyan>Please do not disturb the maintenance crew</Line>
+        </HoursBanner>
+      </PublicPortal>
     ),
     related_commands: {
       "Lucky Flight CityCam": {
@@ -107,23 +133,6 @@ export const LUCKY_FLIGHT_CASINO = {
             ]}
             footer="★ VIP members get 20% off all night! ★"
           />
-        ),
-      },
-
-      "Hours of Operation": {
-        favicon: <Icons.Time />,
-        content: (
-          <HoursBanner
-            name="Lucky Strike Casino"
-            hours="10:00 AM - 7:00 AM"
-            days="Daily"
-            status="CLOSED"
-            statusColor="closed"
-            note="Maintenance window: 7:00 AM - 10:00 AM"
-          >
-            <Line yellow pulse>Casino Monitoring Increased</Line>
-            <Line cyan>Please do not disturb the maintenance crew</Line>
-          </HoursBanner>
         ),
       },
 
@@ -702,54 +711,6 @@ export const LUCKY_FLIGHT_CASINO = {
               />
             ),
             related_commands: {
-              "Incident Log": {
-                favicon: <Icons.Files />,
-                password: {
-                  pw: "chaos",
-                  hint: "Casino's natural state",
-                },
-                content: (
-                  <IncidentLog
-                    title="RECENT INCIDENTS"
-                    timeframe="Last 24 hours"
-                    incidents={[
-                      {
-                        timestamp: "23:47",
-                        type: "Medical Alert",
-                        details: {
-                          Description: "Patron vomiting black tar",
-                          Location: "Slots section",
-                        }
-                      },
-                      {
-                        timestamp: "22:15",
-                        type: "Theft",
-                        details: {
-                          Description: "Pickpocket at slots",
-                          Location: "Near high roller area",
-                        }
-                      },
-                      {
-                        timestamp: "21:30",
-                        type: "Dispute",
-                        details: {
-                          Description: "Band contract dispute",
-                          Location: "Green room",
-                        }
-                      },
-                      {
-                        timestamp: "20:05",
-                        type: "Violence",
-                        details: {
-                          Description: "Brawl on casino floor",
-                          Location: "Bar area",
-                          Status: "4 patrons ejected"
-                        }
-                      },
-                    ]}
-                  />
-                ),
-              },
               "Power Core Status": {
                 favicon: <Icons.Query />,
                 password: {

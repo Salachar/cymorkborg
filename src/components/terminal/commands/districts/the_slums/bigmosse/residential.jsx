@@ -14,7 +14,6 @@ import {
   Tenet,
   Node,
   PublicPortal,
-  IncidentLog,
 } from "@terminal/retcomdevice"
 
 export const RESIDENTIAL_COMMANDS = {
@@ -145,17 +144,7 @@ export const RESIDENTIAL_COMMANDS = {
               "Game Console": {
                 favicon: <Icons.VideoGame />,
                 content: (
-                  <GameConsole
-                    model="CyberDeck Pro X"
-                    owner="xXShadowHackerXx"
-                    gameLoaded="Cyberpunk 2077: Ultra Edition"
-                    friends={[
-                      { name: 'NoobMaster69', status: 'online', game: 'Call of Cyber' },
-                      { name: 'Elite_Sniper', status: 'offline' },
-                      { name: 'RazorEdge', status: 'online', game: 'Netrunner Arena' },
-                      { name: 'GhostReaper', status: 'offline' },
-                    ]}
-                  />
+                  <GameConsole />
                 )
               },
 
@@ -544,51 +533,6 @@ export const RESIDENTIAL_COMMANDS = {
             ),
           },
         },
-      },
-
-      "Building Incident Log": {
-        favicon: <Icons.Files />,
-        content: (
-          <IncidentLog
-            title="BUILDING INCIDENTS"
-            timeframe="Last 30 days"
-            incidents={[
-              {
-                timestamp: "Jan 15 (22:30)",
-                type: "Noise Complaint",
-                details: {
-                  Unit: "6A (musician)",
-                  Complaint: "Loud music during quiet hours",
-                  Resolution: "Verbal warning issued",
-                  Status: "Resolved"
-                }
-              },
-              {
-                timestamp: "Jan 8 (14:00)",
-                type: "Maintenance",
-                details: {
-                  Unit: "4C",
-                  Issue: "Plumbing leak",
-                  Resolution: "Repaired same day",
-                  Status: "Closed"
-                }
-              },
-              {
-                timestamp: "Jan 3 (09:00)",
-                type: "Payment Issue",
-                details: {
-                  Unit: "5A",
-                  Issue: "Late rent (14 days overdue)",
-                  Resolution: "Payment plan arranged",
-                  Status: "Monitoring"
-                }
-              },
-            ]}
-          >
-            <Line cyan>Overall: Quiet building, minimal issues</Line>
-            <Line yellow>Next maintenance: HVAC inspection (next week)</Line>
-          </IncidentLog>
-        ),
       },
 
       "Building Management": {

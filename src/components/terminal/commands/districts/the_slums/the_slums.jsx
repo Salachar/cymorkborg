@@ -11,11 +11,10 @@ import {
 } from "@terminal/retcomdevice";
 
 import { BIGMOSSE_COMMANDS } from './bigmosse/bigmosse';
-import { BARNYARD_FIELDS_COMMANDS } from './barnyard_fields';
+import { BARNYARD_FIELDS_COMMANDS } from './barnyard_fields/barnyard_fields';
 import { VIRID_VIPERS_COMMANDS } from './virid_vipers';
 import { LILYPOND_COMMANDS } from './lilypond';
 import { LAKETON_COMMANDS } from './laketon';
-import { CY_SANITATION_HQ_COMMANDS } from './abandoned_cy_plant';
 
 export const THE_SLUMS_COMMANDS = {
   "The Slums": {
@@ -24,7 +23,7 @@ export const THE_SLUMS_COMMANDS = {
       <NodePreview>
         <Line span smoke> · G0 scars. Gang wars. Cults. Honest people dreaming of a different future.</Line>
         <Line span smoke br> · Bigmosse · Lilypond · Laketon · Barnyard Fields</Line>
-        <Line span smoke> · Lucky Flight Casino · CY_Sanitation HQ</Line>
+        <Line span yellow> · Lucky Flight Casino · CY_Sanitation HQ</Line>
       </NodePreview>
     ),
     content: (
@@ -55,7 +54,6 @@ export const THE_SLUMS_COMMANDS = {
     related_commands: {
       ...BIGMOSSE_COMMANDS,
       ...BARNYARD_FIELDS_COMMANDS,
-      ...CY_SANITATION_HQ_COMMANDS,
       ...VIRID_VIPERS_COMMANDS,
       ...LILYPOND_COMMANDS,
       ...LAKETON_COMMANDS,

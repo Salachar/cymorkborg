@@ -15,7 +15,6 @@ import {
   VendingMachine,
   FacilityPortal,
   HoursBanner,
-  IncidentLog,
   RCDAlert,
   NetworkActivity,
   CommunityBoard,
@@ -575,56 +574,6 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
                 ),
               },
 
-              "Security Incident Log": {
-                favicon: <Icons.Files />,
-                content: (
-                  <IncidentLog
-                    title="SECURITY INCIDENTS"
-                    timeframe="Last 30 days"
-                    incidents={[
-                      {
-                        timestamp: "Jan 18 (02:15)",
-                        type: "False Alarm",
-                        details: {
-                          Event: "Motion sensor triggered in main warehouse",
-                          Resolution: "Rat infestation - exterminator scheduled",
-                          Status: "Closed - no security threat"
-                        }
-                      },
-                      {
-                        timestamp: "Jan 12 (23:40)",
-                        type: "Delivery Delay",
-                        details: {
-                          Event: "Late shipment arrival (authorized)",
-                          Resolution: "Logged, no security issues",
-                          Status: "Closed"
-                        }
-                      },
-                      {
-                        timestamp: "Jan 7 (01:20)",
-                        type: "Equipment Malfunction",
-                        details: {
-                          Event: "Camera #3 offline for 15 minutes",
-                          Resolution: "Auto-reboot successful",
-                          Status: "Closed"
-                        }
-                      },
-                      {
-                        timestamp: "Jan 3 (03:45)",
-                        type: "Patrol Report",
-                        details: {
-                          Event: "Suspicious vehicle near perimeter",
-                          Resolution: "Driver lost, provided directions",
-                          Status: "Closed - no threat"
-                        }
-                      },
-                    ]}
-                  >
-                    <Line smoke>Last serious incident: 8 months ago (attempted theft)</Line>
-                  </IncidentLog>
-                ),
-              },
-
               "Camera Network Overview": {
                 favicon: <Icons.Camera />,
                 content: (
@@ -702,19 +651,7 @@ export const ALLIANSEN_WAREHOUSE_COMMANDS = {
           "Warehouse Vending Machine": {
             favicon: <Icons.Vending />,
             content: (
-              <VendingMachine
-                id="alliansen-warehouse-vending"
-                model="SynthDrinx 3000"
-                location="Employee rec room, near break tables"
-                drinks={[
-                  { name: 'NRG Blast', pattern: 'lines', color: 'orange', available: true },
-                  { name: 'Synth-Cola', pattern: 'circles', color: 'red', available: true },
-                  { name: 'VitaWater', pattern: 'waves', color: 'blue', available: true },
-                  { name: 'Cyber Coffee', pattern: 'blocks', color: 'yellow', available: false },
-                  { name: 'FocusFuel', pattern: 'dots', color: 'green', available: true },
-                  { name: 'ChillOut Tea', pattern: 'waves', color: 'purple', available: true },
-                ]}
-              />
+              <VendingMachine />
             ),
           },
         },

@@ -12,13 +12,11 @@ import CyWeather from "./CyWeather/CyWeather";
 import DigitalWallet from "./Extractable/DigitalWallet";
 import DistrictPortal from "./Portals/DistrictPortal";
 import EncryptedMessage from "./EncryptedMessage/EncryptedMessage";
-import EventFeed from "./EventFeed/EventFeed";
 import EventLineup from "./EventLineup/EventLineup";
 import Extractable from "./Extractable/Extractable";
 import FacilityPortal from "./Portals/FacilityPortal";
 import GameConsole from "./Devices/GameConsole/GameConsole";
 import HoursBanner from "./HoursBanner/HoursBanner";
-import IncidentLog from "./IncidentLog/IncidentLog";
 import Jukebox from "./Devices/Jukebox/Jukebox";
 import LocalAd from "./LocalAd/LocalAd";
 import Menu from "./Menu/Menu";
@@ -32,6 +30,7 @@ import RetComImage from "./Images/RetComImage";
 import Safe from "./Extractable/Safe";
 import BuildingAccess from "./BuildingAccess/BuildingAccess";
 import ShiftSchedule from "./ShiftSchedule/ShiftSchedule";
+import SmartBin from "./Devices/SmartBin/SmartBin";
 import SmartFridge from "./Devices/SmartFridge/SmartFridge";
 import Tenet from "./Tenet/Tenet";
 import VendingMachine from "./Devices/VendingMachine/VendingMachine";
@@ -56,13 +55,11 @@ export {
   DigitalWallet,
   DistrictPortal,
   EncryptedMessage,
-  EventFeed,
   EventLineup,
   Extractable,
   FacilityPortal,
   GameConsole,
   HoursBanner,
-  IncidentLog,
   Inventory,
   Jukebox,
   LocalAd,
@@ -79,6 +76,7 @@ export {
   Safe,
   BuildingAccess,
   ShiftSchedule,
+  SmartBin,
   SmartFridge,
   Tenet,
   VendingMachine,
