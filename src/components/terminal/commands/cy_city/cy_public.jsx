@@ -8,15 +8,11 @@ import {
 } from '@terminal/TerminalComponents';
 
 import {
-  CorpAd,
-  CyWeather,
-  CySports,
   Node,
   RetComImage
 } from "@terminal/retcomdevice"
 
-import CyCityPublicAccessBanner from '@terminal/retcomdevice/Portals/CyCityPublicPortals';
-import CyCityCorporatePortalsBanner from '@terminal/retcomdevice/Portals/CyCityCorpPortals';
+import CorpAd from "./CorpAd";
 
 import CY_CITY_MAP from '@images/cycity_overview.png';
 
@@ -31,24 +27,91 @@ export const CY_CITY_NETWORK = {
     ),
   },
 
-  "CyWeather": {
-    favicon: <Icons.Cloud />,
-    content: (
-      <CyWeather />
-    ),
-  },
-
-  "CySports Network": {
-    favicon: <Icons.Rugby />,
-    content: (
-      <CySports />
-    ),
-  },
-
   "Public Utilities": {
     favicon: <Icons.Bulletin />,
     content: (
-      <CyCityPublicAccessBanner />
+      <div style={{
+        position: 'relative',
+        backgroundColor: '#0a0e27',
+        border: '2px solid #00d9ff',
+        borderRadius: '3px',
+        padding: '1rem 2rem',
+        overflow: 'hidden',
+        boxShadow: '0 2px 6px rgba(0, 217, 255, 0.2)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: '1.5rem',
+      }}>
+        {/* Left accent */}
+        <div style={{
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          bottom: 0,
+          width: '3px',
+          background: '#00d9ff',
+        }} />
+
+        {/* Icon */}
+        <div style={{ flexShrink: 0 }}>
+          <svg width="40" height="40" viewBox="0 0 40 40">
+            <rect x="5" y="15" width="8" height="15" fill="#00d9ff" opacity="0.7" />
+            <rect x="16" y="8" width="8" height="22" fill="#00d9ff" />
+            <rect x="27" y="18" width="8" height="12" fill="#00d9ff" opacity="0.7" />
+            <line x1="20" y1="8" x2="20" y2="3" stroke="#00d9ff" strokeWidth="2" />
+            <circle cx="20" cy="3" r="1.5" fill="#00d9ff" />
+          </svg>
+        </div>
+
+        {/* Content */}
+        <div style={{ flex: 1 }}>
+          <h3 style={{
+            fontSize: '1.5rem',
+            fontWeight: 900,
+            color: '#00d9ff',
+            letterSpacing: '3px',
+            textTransform: 'uppercase',
+            marginBottom: '0.25rem',
+            lineHeight: 1,
+          }}>
+            CY CITY PUBLIC ACCESS
+          </h3>
+          <p style={{
+            fontSize: '0.625rem',
+            color: '#6b7d8f',
+            letterSpacing: '1px',
+            textTransform: 'uppercase',
+          }}>
+            Official Network Portal • News • Traffic • Services
+          </p>
+        </div>
+
+        {/* Status */}
+        <div style={{
+          flexShrink: 0,
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.5rem',
+        }}>
+          <div style={{
+            width: '8px',
+            height: '8px',
+            borderRadius: '50%',
+            backgroundColor: '#00ff88',
+            boxShadow: '0 0 6px #00ff88',
+          }} />
+          <span style={{
+            fontSize: '0.625rem',
+            color: '#00ff88',
+            letterSpacing: '1px',
+            textTransform: 'uppercase',
+            fontWeight: 'bold',
+          }}>
+            ONLINE
+          </span>
+        </div>
+      </div>
     ),
     related_commands: {
       "Cy Traffic (Real-Time)": {
@@ -436,7 +499,82 @@ export const CY_CITY_NETWORK = {
   "Corporate Portals": {
     favicon: <Icons.Tower />,
     content: (
-      <CyCityCorporatePortalsBanner />
+      <div style={{
+        position: 'relative',
+        backgroundColor: '#0f0f0f',
+        border: '2px solid #c9a961',
+        borderRadius: '3px',
+        padding: '1rem 2rem',
+        overflow: 'hidden',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: '1.5rem',
+      }}>
+        {/* Left accent */}
+        <div style={{
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          bottom: 0,
+          width: '3px',
+          background: 'linear-gradient(180deg, transparent, #c9a961, transparent)',
+        }} />
+
+        {/* Icon */}
+        <div style={{ flexShrink: 0 }}>
+          <svg width="40" height="40" viewBox="0 0 40 40">
+            <rect x="8" y="20" width="6" height="15" fill="#c9a961" opacity="0.7" />
+            <rect x="17" y="10" width="6" height="25" fill="#ffffff" opacity="0.9" />
+            <polygon points="20,5 18,10 22,10" fill="#c9a961" />
+            <rect x="26" y="22" width="6" height="13" fill="#c9a961" opacity="0.7" />
+          </svg>
+        </div>
+
+        {/* Content */}
+        <div style={{ flex: 1 }}>
+          <h3 style={{
+            fontSize: '1.5rem',
+            fontWeight: 900,
+            background: 'linear-gradient(90deg, #c9a961, #ffffff, #c9a961)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            letterSpacing: '3px',
+            textTransform: 'uppercase',
+            marginBottom: '0.25rem',
+            lineHeight: 1,
+          }}>
+            CORPORATE PORTALS
+          </h3>
+          <p style={{
+            fontSize: '0.625rem',
+            color: '#888',
+            letterSpacing: '1px',
+            textTransform: 'uppercase',
+          }}>
+            Major Corporation Public Interfaces
+          </p>
+        </div>
+
+        {/* Status */}
+        <div style={{
+          flexShrink: 0,
+          display: 'flex',
+          gap: '2px',
+        }}>
+          {[1, 2, 3, 4].map((bar) => (
+            <div
+              key={bar}
+              style={{
+                width: '3px',
+                height: `${bar * 3 + 6}px`,
+                backgroundColor: '#c9a961',
+              }}
+            />
+          ))}
+        </div>
+      </div>
     ),
     related_commands: {
       "ACGS": {
@@ -453,7 +591,6 @@ export const CY_CITY_NETWORK = {
             ]}
             cta="LET THE CHARIOT DRIVE YOU"
             theme="cyber"
-            logo="🤖"
           >
             <Line neon>Connecting to corporate network...</Line>
             <Line cyan>[PUBLIC ACCESS GRANTED]</Line>
@@ -492,7 +629,6 @@ export const CY_CITY_NETWORK = {
             ]}
             cta="TRUST IN STRUCTURE. TRUST IN US."
             theme="corporate"
-            logo="🛡️"
           >
             <Line smoke>Leasing infrastructure to 50% of Cy's SecOps divisions</Line>
             <Line red pulse>⚠ Currently in corporate conflict with UCS</Line>
@@ -534,7 +670,6 @@ export const CY_CITY_NETWORK = {
             ]}
             cta="TASTE THE FUTURE"
             theme="green"
-            logo="🐟"
           >
             <Line smoke large bold>SPECIAL: AlgaeBars™ - Buy 10, get 2 free!</Line>
             <Line smoke large>Now with 30% real fish in all protein bowls</Line>
@@ -568,14 +703,13 @@ export const CY_CITY_NETWORK = {
             corp="CYNERGY WATER & POWER CO."
             slogan="We Keep CY Alive"
             products={[
-              "💧 WATER - Purified & Delivered",
-              "⚡ POWER - Always On",
-              "🏠 PROPERTY - Premium Locations",
-              "🚇 TRANSIT - Fast & Reliable"
+              "WATER - Purified & Delivered",
+              "POWER - Always On",
+              "PROPERTY - Premium Locations",
+              "TRANSIT - Fast & Reliable"
             ]}
             cta="Your City. Our Infrastructure."
             theme="dystopian"
-            logo="⚡"
           >
             <Line neon>Connecting to infrastructure network...</Line>
             <Line cyan>[PUBLIC PORTAL]</Line>
@@ -615,7 +749,6 @@ export const CY_CITY_NETWORK = {
             ]}
             cta="The Divine Is Just A Download Away"
             theme="purple"
-            logo="✝️"
           >
             <Line neon>Welcome to the Path of Transformation</Line>
             <Line cyan>[SEEKER ACCESS]</Line>
@@ -655,7 +788,6 @@ export const CY_CITY_NETWORK = {
             ]}
             cta="If It's Made, Kaytell Made It Better"
             theme="corporate"
-            logo="🏭"
           >
             <Line neon>Accessing Kaytell corporate systems...</Line>
             <Line cyan>[CONSUMER PORTAL]</Line>
@@ -695,7 +827,6 @@ export const CY_CITY_NETWORK = {
             ]}
             cta="BUILD YOUR EMPIRE. WE'LL PROVIDE THE FOUNDATION."
             theme="gold"
-            logo="💰"
           >
             <Line neon>Welcome to Spectral Financial Services</Line>
             <Line cyan>[ACCOUNT ACCESS]</Line>
@@ -734,7 +865,6 @@ export const CY_CITY_NETWORK = {
             ]}
             cta="WHEN ALLIANSEN ISN'T ENOUGH"
             theme="sleek"
-            logo="⚔️"
           >
             <Line neon>Accessing UCS corporate network...</Line>
             <Line cyan>[PUBLIC ACCESS]</Line>
@@ -774,7 +904,6 @@ export const CY_CITY_NETWORK = {
             ]}
             cta="EVERYONE'S WATCHING. ARE YOU WORTH IT?"
             theme="neon"
-            logo="📱"
           >
             <Line neon>Accessing celebrity lifestyle feed...</Line>
             <Line cyan>[PUBLIC ACCESS - ALL FEEDS]</Line>
@@ -815,7 +944,6 @@ export const CY_CITY_NETWORK = {
             ]}
             cta="From Warehouse To Your Door - NordShip Never Sleeps"
             theme="green"
-            logo="🚢"
           >
             <Line neon>Accessing logistics network...</Line>
             <Line cyan>[PUBLIC PORTAL]</Line>
@@ -877,7 +1005,6 @@ export const CY_CITY_NETWORK = {
             ]}
             cta="When The Law Isn't On Your Side, We Are."
             theme="sleek"
-            logo="⚖️"
           >
             <Line neon>Accessing legal services portal...</Line>
             <Line cyan>[CONSULTATION REQUIRED]</Line>

@@ -78,6 +78,10 @@ import FactoryIcon from '@mui/icons-material/Factory';
 import WaterDropIcon from '@mui/icons-material/WaterDrop';
 import ConstructionIcon from '@mui/icons-material/Construction';
 import ShieldIcon from '@mui/icons-material/Shield';
+import DeviceHubIcon from '@mui/icons-material/DeviceHub';
+import RamenDiningIcon from '@mui/icons-material/RamenDining';
+import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
+import PlumbingIcon from '@mui/icons-material/Plumbing';
 
 const TEAL = { fontSize: 20, color: 'rgb(79, 209, 197)' };
 const YELLOW = { fontSize: 20, color: 'rgb(251, 191, 36)' };
@@ -85,6 +89,10 @@ const RED = { fontSize: 20, color: 'rgb(252, 129, 129)' };
 const SLATE = { fontSize: 20, color: 'rgb(148, 163, 184)' };
 
 const Icons = {
+  Wrench: () => <PlumbingIcon style={TEAL} />,
+  Fuel: () => <LocalGasStationIcon style={TEAL} />,
+  Noodles: () => <RamenDiningIcon style={TEAL} />,
+  Hub: () => <DeviceHubIcon style={TEAL} />,
   Drugs: () => <Vaccines style={TEAL} />,
   Shield: () => <ShieldIcon style={TEAL} />,
   Weapons: () => <ConstructionIcon style={TEAL} />,

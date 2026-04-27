@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function CorpAd({
+export default function CorpAd ({
   corp,           // Corporation name
   slogan,         // Main slogan/tagline
   tagline,        // Secondary tagline (optional)
@@ -109,17 +109,6 @@ export default function CorpAd({
         alignItems: 'center',
         gap: '1.5rem',
       }}>
-        {/* Logo (if provided) */}
-        {logo && (
-          <div style={{
-            flexShrink: 0,
-            fontSize: '2.5rem',
-            opacity: 0.9,
-          }}>
-            {logo}
-          </div>
-        )}
-
         {/* Main content area */}
         <div style={{ flex: 1 }}>
           {/* Corporation name */}
@@ -224,10 +213,7 @@ export default function CorpAd({
 
       {Boolean(children) && (
         <div style={{
-          backgroundColor: 'rgba(0, 0, 0, 0.2)',
-          padding: '1rem',
-          borderRadius: '6px',
-          margin: '1rem 2rem 0 2rem',
+          margin: '1rem 0',
           fontSize: '0.875rem',
         }}>
           {children }

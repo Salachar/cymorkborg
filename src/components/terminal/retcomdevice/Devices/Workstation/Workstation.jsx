@@ -17,6 +17,7 @@ export default function Workstation({
   productivity = 50,
   cpuUsage = 30,
   uptime = '4d 12h 37m',
+  children,
 }) {
   const getStatusColor = () => {
     const colors = {
@@ -239,6 +240,15 @@ export default function Workstation({
           </span>
         </div>
       </div>
+
+      {Boolean(children) && (
+        <div style={{
+          margin: '1rem 0',
+          fontSize: '0.875rem',
+        }}>
+          {children }
+        </div>
+      )}
     </div>
   );
 }

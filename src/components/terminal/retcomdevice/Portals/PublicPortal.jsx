@@ -68,7 +68,7 @@ export default function PublicPortal({
         borderRadius: '6px',
         padding: '1rem',
         backgroundColor: colors.bg,
-        marginBottom: '1rem',
+        // marginBottom: '1rem',
         boxShadow: `0 0 15px ${colors.primary}30`,
         position: 'relative',
         overflow: 'hidden',

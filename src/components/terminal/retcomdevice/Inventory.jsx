@@ -15,6 +15,7 @@ export default function Inventory({
   items = [],
   footer,
   note,
+  internal = false,
 }) {
   return (
     <div style={{
@@ -27,14 +28,6 @@ export default function Inventory({
 
       {/* Header */}
       <div style={{ textAlign: 'center', marginBottom: '0.75rem' }}>
-        <div style={{
-          fontSize: '0.65rem',
-          color: 'rgb(148, 163, 184)',
-          letterSpacing: '0.15em',
-          marginBottom: '0.25rem',
-        }}>
-          ▒▒ STOCK LISTING ▒▒
-        </div>
         <div style={{
           fontSize: '1rem',
           fontWeight: 'bold',
@@ -59,16 +52,24 @@ export default function Inventory({
       <Divider />
 
       {/* Column headers */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr 120px 120px',
-        padding: '0.2rem 0.4rem',
-        marginBottom: '0.25rem',
-      }}>
-        <span style={{ fontSize: '0.6rem', color: 'rgb(100, 116, 139)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>ITEM</span>
-        <span style={{ fontSize: '0.6rem', color: 'rgb(100, 116, 139)', letterSpacing: '0.12em', textTransform: 'uppercase', textAlign: 'center' }}>CONDITION</span>
-        <span style={{ fontSize: '0.6rem', color: 'rgb(100, 116, 139)', letterSpacing: '0.12em', textTransform: 'uppercase', textAlign: 'right' }}>PRICE</span>
-      </div>
+      {!internal && (
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: internal ? '1fr 120px' : '1fr 120px 120px',
+          padding: '0.2rem 0.4rem',
+          marginBottom: '0.25rem',
+        }}>
+          <span style={{ fontSize: '0.6rem', color: 'rgb(100, 116, 139)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+            ITEM
+          </span>
+          <span style={{ fontSize: '0.6rem', color: 'rgb(100, 116, 139)', letterSpacing: '0.12em', textTransform: 'uppercase', textAlign: 'center' }}>
+            CONDITION
+          </span>
+          <span style={{ fontSize: '0.6rem', color: 'rgb(100, 116, 139)', letterSpacing: '0.12em', textTransform: 'uppercase', textAlign: 'right' }}>
+            PRICE
+          </span>
+        </div>
+      )}
 
       {/* Items */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.1rem' }}>
@@ -82,7 +83,8 @@ export default function Inventory({
             }}>
               <div style={{
                 display: 'grid',
-                gridTemplateColumns: '1fr 120px 120px',
+                // gridTemplateColumns: '1fr 120px 120px',
+                gridTemplateColumns: internal ? '1fr 120px' : '1fr 120px 120px',
                 alignItems: 'baseline',
               }}>
                 {/* Name */}
@@ -101,23 +103,25 @@ export default function Inventory({
                   letterSpacing: '0.05em',
                   whiteSpace: 'nowrap',
                 }}>
-                  {item.condition?.toUpperCase() || 'UNKNOWN'}
+                  {item.condition?.toUpperCase() || ''}
                 </span>
                 {/* Price */}
-                <span style={{
-                  fontSize: '0.8rem',
-                  color: item.price === 'NOT FOR SALE' || item.price === 'MAKE OFFER'
-                    ? 'rgb(148, 163, 184)'
-                    : 'rgb(251, 191, 36)',
-                  textAlign: 'right',
-                  fontWeight: 'bold',
-                  whiteSpace: 'nowrap',
-                }}>
-                  {item.price || '—'}
-                </span>
+                {!internal && (
+                  <span style={{
+                    fontSize: '0.8rem',
+                    color: item.value === 'NOT FOR SALE' || item.value === 'MAKE OFFER'
+                      ? 'rgb(148, 163, 184)'
+                      : 'rgb(251, 191, 36)',
+                    textAlign: 'right',
+                    fontWeight: 'bold',
+                    whiteSpace: 'nowrap',
+                  }}>
+                    {item.value || '—'}
+                  </span>
+                )}
               </div>
               {/* Note */}
-              {item.note && (
+              {item.description && (
                 <div style={{
                   fontSize: '0.7rem',
                   color: 'rgb(100, 116, 139)',
@@ -126,7 +130,7 @@ export default function Inventory({
                   borderLeft: '2px solid rgba(79, 209, 197, 0.2)',
                   fontStyle: 'italic',
                 }}>
-                  {item.note}
+                  {item.description}
                 </div>
               )}
             </div>

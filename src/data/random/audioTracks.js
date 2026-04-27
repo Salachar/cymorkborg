@@ -521,11 +521,3 @@ export const getChannelInfo = (musicType) => {
 export const getAllChannelKeys = () => {
   return Object.keys(AUDIO_TRACKS);
 };
-
-/**
- * Get default cost for musicType (for Jukebox)
- */
-export const getDefaultCost = (musicType) => {
-  const category = AUDIO_TRACKS[musicType];
-  return category ? category.defaultCost : "2¤";
-};

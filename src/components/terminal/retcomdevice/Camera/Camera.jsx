@@ -2,7 +2,7 @@ import { Line, Section, InsetBox } from '@terminal/TerminalComponents';
 
 export default function Camera({
   id = "",
-  location = "Not Set",
+  location = "Location Not Set",
   status = 'ACTIVE',
   cctv,
   coverage,

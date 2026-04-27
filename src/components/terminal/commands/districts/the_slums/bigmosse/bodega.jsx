@@ -15,6 +15,7 @@ import {
   Camera,
   Menu,
   Node,
+  Inventory,
   PersonnelFile,
   CommunityBoard,
   CoffeeMachine,
@@ -401,28 +402,24 @@ export const BODEGA_COMMANDS = {
           "Inventory Status": {
             favicon: <Icons.Inventory />,
             content: (
-              <Node
-                title="BODEGA - INVENTORY MANAGEMENT"
-                subtitle="Last updated: 3 days ago (pre-closure)"
-                footer="Free wifi still active"
-              >
-                <InsetBox title="CURRENT STOCK STATUS:">
-                  <Line red>Significant inventory loss detected</Line>
-                  <Line red>Physical count required for accuracy</Line>
-                </InsetBox>
-                <InsetBox title="ESTIMATED REMAINING STOCK:">
-                  <Line neon>Credchips (loose change in register): Present</Line>
-                  <Line neon>Energy drinks/stims: Low stock</Line>
-                  <Line neon>First aid supplies: Partial kit remaining</Line>
-                  <Line neon>Synth-food rations: Minimal</Line>
-                  <Line neon>Batu's personal items: 1 casino chip (sentimental)</Line>
-                </InsetBox>
-                <InsetBox title="EQUIPMENT STATUS:">
-                  <Line cyan>✓ Wifi router: Operational</Line>
-                  <Line cyan>✓ Security system: Online</Line>
-                  <Line cyan>✓ Under-counter storage: Intact</Line>
-                </InsetBox>
-              </Node>
+              <Inventory
+                internal
+                title="Inventory Status"
+                items={[
+                  {
+                    label: "Energy drinks / stims",
+                    description: "Low stock remaining",
+                  },
+                  {
+                    label: "First aid supplies",
+                    description: "Partial kit only",
+                  },
+                  {
+                    label: "Synth-food rations",
+                    description: "Minimal quantity",
+                  },
+                ]}
+              />
             ),
           },
 

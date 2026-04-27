@@ -120,7 +120,6 @@ export const DiveBarCustom = {
   args: {
     model: 'JB-707',
     location: 'The Rusty Anchor - Downtown dive bar',
-    cost: '2¤',
     songs: [
       {
         title: 'Neon Dreams',

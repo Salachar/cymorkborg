@@ -1,16 +1,5 @@
 import './locked.css';
 
-/**
- * Locked - Visual indicator for password-protected content
- *
- * Compact banner shown within PasswordPrompt to hint at what's being unlocked.
- * No actual data displayed - just themed visual feedback.
- *
- * Props:
- * - theme: String ("wallet", "safe", "vending", "terminal", "vault", "locker")
- * - title: String (optional, e.g., "DIGITAL WALLET")
- * - message: String (optional, e.g., "AUTHENTICATION REQUIRED")
- */
 export default function Locked({
   theme = "terminal",
   title = "LOCKED",

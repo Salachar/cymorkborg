@@ -14,12 +14,17 @@ import { useState, useEffect } from 'react';
 
 export default function RCDAlert({
   message,
-  details = [],
+  title,
+  details,
+  notes,
   children,
 }) {
   const color    = 'rgb(168, 85, 247)';
   const colorDim = 'rgba(168, 85, 247, 0.3)';
   const glow     = 'rgba(168, 85, 247, 0.25)';
+
+  const alert_title = title || message;
+  const alert_notes = notes || details || [];
 
   return (
     <div style={{
@@ -57,11 +62,11 @@ export default function RCDAlert({
       }} />
 
       {/* Message */}
-      {message && (
+      {alert_title && (
         <div style={{
           display: 'flex',
           gap: '0.4rem',
-          marginBottom: details.length > 0 || children ? '0.45rem' : 0,
+          marginBottom: alert_notes.length > 0 || children ? '0.45rem' : 0,
         }}>
           <span style={{
             color,
@@ -75,13 +80,13 @@ export default function RCDAlert({
             fontSize: '0.82rem',
             lineHeight: '1.5',
           }}>
-            {message}
+            {alert_title}
           </span>
         </div>
       )}
 
       {/* Details */}
-      {details.length > 0 && (
+      {alert_notes.length > 0 && (
         <div style={{
           display: 'flex',
           flexDirection: 'column',
@@ -89,7 +94,7 @@ export default function RCDAlert({
           marginBottom: children ? '0.5rem' : 0,
           paddingLeft: '0.75rem',
         }}>
-          {details.map((detail, i) => (
+          {alert_notes.map((alert_note, i) => (
             <div key={i} style={{ display: 'flex', gap: '0.4rem', alignItems: 'flex-start' }}>
               <span style={{
                 color: 'rgb(79, 209, 197)',
@@ -101,7 +106,7 @@ export default function RCDAlert({
                 color: 'rgb(203, 213, 225)',
                 fontSize: '0.75rem',
                 lineHeight: '1.5',
-              }}>{detail}</span>
+              }}>{alert_note}</span>
             </div>
           ))}
         </div>

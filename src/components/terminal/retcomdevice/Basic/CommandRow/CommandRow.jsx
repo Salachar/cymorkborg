@@ -5,26 +5,13 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import CollapseIcon from '@mui/icons-material/UnfoldLess';
 import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 
+import Icons from '@utils/icons';
+
 import './commandRow.css';
 
 function Favicon({ favicon }) {
-  if (!favicon) return null;
-
-  if (typeof favicon === 'object' && React.isValidElement(favicon)) {
-    return favicon;
-  }
-
-  return (
-    <span style={{
-      fontSize: '1.1rem',
-      flexShrink: 0,
-      lineHeight: 1,
-      width: '12px',
-      textAlign: 'center',
-    }}>
-      {favicon}
-    </span>
-  );
+  if (!favicon) return <Icons.Hub />;
+  return favicon;
 }
 
 export default function CommandRow({
@@ -86,13 +73,13 @@ export default function CommandRow({
           </div>
         ) : <div />}
 
-        {/* {!isLocked && hasChildren && childCount > 0 && (
+        {!isLocked && hasChildren && childCount > 0 && (
           <span className="cr-child-count">({childCount} nodes)</span>
-        )} */}
+        )}
       </div>
 
       <div className="cr-strip">
-        {favicon && <Favicon favicon={favicon} />}
+        <Favicon favicon={favicon} />
 
         <span className={`cr-name pl-2`}>
           {displayName}

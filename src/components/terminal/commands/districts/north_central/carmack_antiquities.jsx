@@ -76,50 +76,50 @@ export const CARMACK_ANTIQUITIES_COMMANDS = {
               {
                 label: "Pre-nanocomposite SSD tower (~200 units)",
                 condition: "Worn",
-                price: "5–50¤ ea",
-                note: "Various manufacturers, pre-Incident. Most need legacy hardware to read.",
+                value: "5–50¤ ea",
+                description: "Various manufacturers, pre-Incident. Most need legacy hardware to read.",
               },
               {
                 label: "National Geographic collection (partial run)",
                 condition: "Damaged",
-                price: "Make Offer",
-                note: "Paper media, pre-Incident. Crumbling but intact enough to read.",
+                value: "Make Offer",
+                description: "Paper media, pre-Incident. Crumbling but intact enough to read.",
               },
               {
                 label: "ASR33 Teletype Terminal",
                 condition: "Good",
-                price: "Not For Sale",
-                note: "Hardwired to legacy jack. Active — receiving intermittent transmissions.",
+                value: "Not For Sale",
+                description: "Hardwired to legacy jack. Active — receiving intermittent transmissions.",
               },
               {
                 label: "Legacy data jack interface board",
                 condition: "Worn",
-                price: "800¤",
-                note: "Multi-format. West wall. Several show recent activity.",
+                value: "800¤",
+                description: "Multi-format. West wall. Several show recent activity.",
               },
               {
                 label: "Unlabeled hard drives (box of ~30)",
                 condition: "Unknown",
-                price: "Make Offer",
-                note: "Origin unknown. Uncatalogued.",
+                value: "Make Offer",
+                description: "Origin unknown. Uncatalogued.",
               },
               {
                 label: "First-gen RCD prototype (non-functional)",
                 condition: "Non-Functional",
-                price: "4,000¤",
-                note: "Display piece. Asa insists it's worth it to the right buyer.",
+                value: "4,000¤",
+                description: "Display piece. Asa insists it's worth it to the right buyer.",
               },
               {
                 label: "Vintage terminal keyboard (mechanical)",
                 condition: "Good",
-                price: "120¤",
-                note: "Pre-Incident. Still clicks beautifully.",
+                value: "120¤",
+                description: "Pre-Incident. Still clicks beautifully.",
               },
               {
                 label: "Box of mixed cables and adapters",
                 condition: "Worn",
-                price: "10¤",
-                note: "Grab bag. Could be anything.",
+                value: "10¤",
+                description: "Grab bag. Could be anything.",
               },
             ]}
             footer="Cash only. No returns. All sales final."
@@ -156,60 +156,42 @@ export const CARMACK_ANTIQUITIES_COMMANDS = {
             favicon: <Icons.Inventory />,
             content: (
               <Inventory
-                title="Carmack Antiquities"
-                subtitle="Current stock — subject to change without notice"
+                internal
+                title="Stock Notes"
                 items={[
                   {
                     label: "Pre-nanocomposite SSD tower (~200 units)",
-                    condition: "Worn",
-                    price: "5–50¤ ea",
-                    note: "Various manufacturers, pre-Incident. Most need legacy hardware to read.",
+                    description: "Various manufacturers, pre-Incident. Most need legacy hardware to read.",
                   },
                   {
                     label: "National Geographic collection (partial run)",
-                    condition: "Damaged",
-                    price: "Make Offer",
-                    note: "Paper media, pre-Incident. Crumbling but intact enough to read.",
+                    description: "Paper media, pre-Incident. Crumbling but intact enough to read.",
                   },
                   {
                     label: "ASR33 Teletype Terminal",
-                    condition: "Good",
-                    price: "Not For Sale",
-                    note: "Hardwired to legacy jack. Active — receiving intermittent transmissions.",
+                    description: "Hardwired to legacy jack. Active — receiving intermittent transmissions.",
                   },
                   {
                     label: "Legacy data jack interface board",
-                    condition: "Worn",
-                    price: "800¤",
-                    note: "Multi-format. West wall. Several show recent activity.",
+                    description: "Multi-format. West wall. Several show recent activity.",
                   },
                   {
                     label: "Unlabeled hard drives (box of ~30)",
-                    condition: "Unknown",
-                    price: "Make Offer",
-                    note: "Origin unknown. Uncatalogued.",
+                    description: "Origin unknown. Uncatalogued.",
                   },
                   {
                     label: "First-gen RCD prototype (non-functional)",
-                    condition: "Non-Functional",
-                    price: "4,000¤",
-                    note: "Display piece. Asa insists it's worth it to the right buyer.",
+                    description: "Display piece. Asa insists it's worth it to the right buyer.",
                   },
                   {
                     label: "Vintage terminal keyboard (mechanical)",
-                    condition: "Good",
-                    price: "120¤",
-                    note: "Pre-Incident. Still clicks beautifully.",
+                    description: "Pre-Incident. Still clicks beautifully.",
                   },
                   {
                     label: "Box of mixed cables and adapters",
-                    condition: "Worn",
-                    price: "10¤",
-                    note: "Grab bag. Could be anything.",
+                    description: "Grab bag. Could be anything.",
                   },
                 ]}
-                footer="Cash only. No returns. All sales final."
-                note="Stock rotates irregularly. If you don't see it, ask."
               />
             ),
           },

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Locked from "../Locked/Locked";
+import Locked from "./Locked/Locked";
 import { PASSWORD_ATTEMPTS_STORAGE_KEY } from '@utils/localStorage';
 
 const IS_LOCALHOST = window.location.hostname === 'localhost';

@@ -9,7 +9,6 @@ export default function LocalAd({
   theme = 'warm', // Visual theme
   children,       // Optional custom content (placed mid-section)
 }) {
-  // Theme configurations - more colorful, less refined than CorpAd
   const themes = {
     warm: {
       bg: '#1e3a5f',

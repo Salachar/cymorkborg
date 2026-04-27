@@ -3,17 +3,35 @@ import { Line, Divider } from '@terminal/TerminalComponents';
 import { searchAllItems } from '@data/tables';
 import { getExtracted, saveExtracted, getWallet, saveWallet } from '@utils/localStorage';
 
-/**
- * Extractable - Reusable item extraction interface
- *
- * Props:
- * - id: Unique identifier (e.g., "safe-master-bedroom")
- * - credits: Number — shorthand for a digital credits item
- * - physicalItems: Array<{ id, label, description?, die?, cost?, value?, isCredits? }>
- * - digitalItems: Array (same schema)
- * - disabled: Disable all extraction (default: false)
- * - onExtract: Callback(items, totalValue, 'physical' | 'digital') (optional)
- */
+const resolveItem = (item) => {
+  if (typeof item === "string") item = { id: item };
+  if (!item.id) return item;
+  const found = searchAllItems(item.id);
+  if (!found) return item;
+  return {
+    ...found.entry,
+    section: item.section || found.section,
+    quantity: item.quantity || 1,
+    isCredits: item.isCredits,
+    id: item.id,
+  };
+};
+
+const hydrateItems = (items) => items.map(item => {
+  const resolved = resolveItem(item);
+  return {
+    id: resolved.id,
+    label: resolved.label,
+    description: resolved.description || null,
+    die: resolved.die || null,
+    cost: resolved.cost || null,
+    value: resolved.value || null,
+    quantity: resolved.quantity || 1,
+    section: resolved.section || null,
+    isCredits: resolved.isCredits || false,
+  };
+});
+
 export default function Extractable({
   id,
   credits = 0,
@@ -22,6 +40,8 @@ export default function Extractable({
   disabled = false,
   onExtract,
 }) {
+  // Add the basic credts item to the digital list if there is one
+  // Otherwise we could use digitalItems straight like physical
   const useDigitalItems = [
     ...digitalItems,
     ...(credits ? [{
@@ -43,6 +63,8 @@ export default function Extractable({
     new Set(getExtracted()[`${id}-digital-ids`] || [])
   );
 
+  physicalItems = hydrateItems(physicalItems);
+  digitalItems = hydrateItems(digitalItems);
   const allPhysicalTaken = physicalItems.length > 0 && physicalItems.every(i => extractedPhysicalIds.has(i.id));
   const allDigitalTaken  = useDigitalItems.length > 0 && useDigitalItems.every(i => extractedDigitalIds.has(i.id));
 
@@ -56,22 +78,7 @@ export default function Extractable({
 
   const addToWallet = (items) => {
     const wallet = getWallet();
-    items.forEach(item => {
-      if (item.isCredits) {
-        wallet.credits += item.value || 0;
-      } else {
-        wallet.items.push({
-          id: item.id,
-          label: item.label,
-          description: item.description,
-          die: item.die,
-          cost: item.cost,
-          value: item.value,
-          quantity: item.quantity || 1,
-          section: item.section || null,
-        });
-      }
-    });
+    wallet.items.push(...items);
     saveWallet(wallet);
   };
 
@@ -153,20 +160,6 @@ function ItemSection({
   onExtractItem,
   onExtractAll,
 }) {
-  const resolveItem = (item) => {
-    if (!item.id) return item;
-    const found = searchAllItems(item.id);
-    if (!found) return item;
-    // Merge — item props win for quantity/section overrides, lookup fills in the rest
-    return {
-      ...found.entry,
-      section: item.section || found.section,
-      quantity: item.quantity || 1,
-      isCredits: item.isCredits,
-      id: item.id,
-    };
-  };
-
   return (
     <div
       style={{
@@ -204,8 +197,6 @@ function ItemSection({
       <div style={{ marginTop: '0.75rem' }}>
         {items.map((item, i) => {
           const taken = extractedIds.has(item.id);
-          const display = resolveItem(item);
-
           return (
             <div
               key={item.id}
@@ -223,30 +214,30 @@ function ItemSection({
 
               <div style={{ flex: 1 }}>
                 <Line style={{ margin: 0, color: taken ? 'rgb(148, 163, 184)' : accentColor, fontSize: '0.875rem' }}>
-                  <strong>{display.label}</strong>
-                  {display.quantity > 1 && (
-                    <span style={{ fontWeight: 'normal', opacity: 0.7, marginLeft: '0.4rem' }}>×{display.quantity}</span>
+                  <strong>{item.label}</strong>
+                  {item.quantity > 1 && (
+                    <span style={{ fontWeight: 'normal', opacity: 0.7, marginLeft: '0.4rem' }}>×{item.quantity}</span>
                   )}
-                  {display.die && (
-                    <span style={{ fontFamily: 'monospace', marginLeft: '0.4rem', opacity: 0.8 }}>{display.die}</span>
+                  {item.die && (
+                    <span style={{ fontFamily: 'monospace', marginLeft: '0.4rem', opacity: 0.8 }}>{item.die}</span>
                   )}
-                  {display.cost && (
-                    <span style={{ color: 'rgb(34, 197, 94)', marginLeft: '0.4rem', fontWeight: 'normal', fontSize: '0.8rem' }}>{display.cost}</span>
+                  {item.cost && (
+                    <span style={{ color: 'rgb(34, 197, 94)', marginLeft: '0.4rem', fontWeight: 'normal', fontSize: '0.8rem' }}>{item.cost}</span>
                   )}
                 </Line>
-                {display.description && (
+                {item.description && (
                   <Line smoke style={{ margin: 0, fontSize: '0.78rem', marginTop: '0.15rem', opacity: taken ? 0.5 : 0.8 }}>
-                    {display.description}
+                    {item.description}
                   </Line>
                 )}
-                {display.value && !display.isCredits && (
+                {item.value && !item.isCredits && (
                   <Line style={{ margin: 0, fontSize: '0.75rem', marginTop: '0.15rem', color: 'rgb(34, 197, 94)', opacity: taken ? 0.5 : 1 }}>
-                    ~{display.value.toLocaleString()}¤
+                    ~{item.value.toLocaleString()}¤
                   </Line>
                 )}
-                {display.value && display.isCredits && (
+                {item.value && item.isCredits && (
                   <span style={{ color: taken ? 'rgb(148, 163, 184)' : 'rgb(34, 197, 94)', marginLeft: '0.5rem', fontWeight: 'bold' }}>
-                    [{display.value.toLocaleString()}¤]
+                    [{item.value.toLocaleString()}¤]
                   </span>
                 )}
               </div>

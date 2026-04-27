@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
 import CommandRow from '@terminal/retcomdevice/Basic/CommandRow/CommandRow';
-import {
-  PasswordPrompt,
-} from '@terminal/retcomdevice';
+import PasswordPrompt from '@terminal/retcomdevice/PasswordPrompt/PasswordPrompt';
+
+
 
 import {
   COLLAPSED_CONTENT_STORAGE_KEY,

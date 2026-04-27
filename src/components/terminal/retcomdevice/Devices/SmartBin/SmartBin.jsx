@@ -19,7 +19,6 @@ export default function SmartBin({
 }) {
   const statusColor = STATUS_COLORS[status?.toUpperCase()] || STATUS_COLORS['NOMINAL'];
   const hasExtractable = Boolean(id && items.length > 0);
-
   return (
     <div style={{
       border: '2px solid rgb(100, 116, 139)',

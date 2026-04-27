@@ -3,6 +3,7 @@ import { Line, NodePreview } from '@terminal/TerminalComponents';
 import { DistrictPortal, RCDAlert } from "@terminal/retcomdevice";
 
 import { CY_SANITATION_HQ_COMMANDS } from './abandoned_cy_plant';
+import CY_PLANT_NEARBY from './cy_plant_nearby';
 
 export const BARNYARD_FIELDS_COMMANDS = {
   "Barnyard Fields": {
@@ -10,7 +11,7 @@ export const BARNYARD_FIELDS_COMMANDS = {
     preview: (
       <NodePreview>
         <Line span smoke br> · Slums at the southern edge. The Heirs own this ground in blood and ritual.</Line>
-        <Line span yellow> · CY_Sanitation HQ</Line> — quarantined.
+        <Line span yellow> · CY_Sanitation HQ - </Line><Line span red>quarantined.</Line>
       </NodePreview>
     ),
     content: (
@@ -42,6 +43,7 @@ export const BARNYARD_FIELDS_COMMANDS = {
     ),
     related_commands: {
       ...CY_SANITATION_HQ_COMMANDS,
+      ...CY_PLANT_NEARBY,
     },
   },
 };

@@ -14,6 +14,8 @@ import {
   Node,
   RCDAlert,
   Workstation,
+  Devices,
+  EncryptedMessage,
 } from "@terminal/retcomdevice";
 
 export const CY_SANITATION_HQ_COMMANDS = {
@@ -24,29 +26,31 @@ export const CY_SANITATION_HQ_COMMANDS = {
     favicon: <Icons.Warning />,
     preview: (
       <NodePreview>
-        <Line span red> · Quarantined. Abandoned. Nano-infested. Nobody has checked on it in decades.</Line>
+        <Line span red> · Quarantined. Stay clear.</Line>
       </NodePreview>
     ),
     content: (
       <FacilityPortal
+        theme="secure"
         companyName="CY_SANITATION HEADQUARTERS"
         tagline="Municipal waste management — operations transferred to subsidiary."
         location="Ports/Barnyard Fields border"
-        owner="CY_Sanitation (DEFUNCT — operations transferred to corporate subsidiary)"
+        owner="CY_Sanitation (DEFUNCT)"
         warnings={[
           "QUARANTINE ZONE — Nano infestation confirmed",
-          "Twenty-foot cement perimeter wall — building sheathed in industrial plastic",
           "No authorized entry — no inspection on record since quarantine",
-          "Staff were not evacuated at time of quarantine",
         ]}
-        theme="secure"
       >
+        <InsetBox color="yellow" title="Precautions:">
+          <Line yellow bullet bold>Twenty-foot cement perimeter wall (97%)</Line>
+          <Line yellow bullet bold>Building sheathed in industrial plastic (SEALED)</Line>
+          <Line yellow bullet bold>Containement airlock into building (FUNCTIONAL)</Line>
+        </InsetBox>
         <RCDAlert
-          message="CY_Sanitation's AI was offloaded to a corporate subsidiary after quarantine. The building has never been inspected. Staff remain inside."
+          message="CY_Sanitation records found"
           details={[
-            "Three floors: basement (power generator, sewer regulators), lower offices, management offices",
-            "Power offline since quarantine — mechanical locks only until generator is restored",
-            "Paper records inside document the AI transfer — trail goes cold after subsidiary handoff",
+            "Staff were not evacuated at time of quarantine",
+            "City Inspections have detected signs of life as recent as two weeks ago",
           ]}
         />
       </FacilityPortal>
@@ -58,12 +62,9 @@ export const CY_SANITATION_HQ_COMMANDS = {
         content: (
           <Node
             title="CY_SANITATION HQ — FACILITY DIRECTORY"
-            subtitle="Last updated: prior to quarantine"
+            subtitle="Welcome to CY_Sanitation HQ"
             notes={[
-              "Three-floor facility — basement, lower offices, management offices",
-              "Total staff at time of quarantine: 34",
               "Building systems: centralized power, HVAC, sewage regulation",
-              "Emergency protocols: see Safety & Compliance binder, Floor 1 reception",
             ]}
           />
         ),
@@ -97,21 +98,28 @@ export const CY_SANITATION_HQ_COMMANDS = {
                     ]}
                   />
                 ),
-              },
-
-              "Conduit Room": {
-                favicon: <Icons.Maintenance />,
-                content: (
-                  <Node
-                    title="CONDUIT ROOM — B7"
-                    subtitle="Pipe Infrastructure & Water Systems"
-                    notes={[
-                      "Primary water intake and distribution manifold",
-                      "Houses main building water tanks — capacity 4,000L each",
-                      "Ventilation note: insect ingress reported, screening repair pending",
-                    ]}
-                  />
-                ),
+                related_commands: {
+                  "Power Generator": {
+                    password: {
+                      pw: 'megawatts',
+                      hint: 'Some big energy',
+                    },
+                    content: (
+                      <Node
+                        title="POWER GENERATOR — PG234"
+                        subtitle="CY_Sanition HQ Power Generator"
+                        notes={[
+                          "Core functionality offline",
+                          "Basic diagnostic connection established",
+                        ]}
+                      >
+                        <InsetBox color="yellow" title="Features:">
+                          <Line yellow bold>+2 on Knowledge check to start/keep running</Line>
+                        </InsetBox>
+                      </Node>
+                    )
+                  }
+                }
               },
 
               "Security Office": {
@@ -134,10 +142,10 @@ export const CY_SANITATION_HQ_COMMANDS = {
                 favicon: <Icons.Maintenance />,
                 content: (
                   <Node
-                    title="SEWER REGULATORS — B9–B12"
+                    title="SEWER REGULATORS — B9-B12"
                     subtitle="Municipal Sewage Regulation Units"
                     notes={[
-                      "Four regulation units — independent operation",
+                      "Four offline regulator units",
                       "Monitors and controls sewage flow for Ports/Barnyard Fields sector",
                       "Units rated for 40-year service life — last replaced: see installation log",
                       "Maintenance schedule: quarterly inspection required",
@@ -145,6 +153,84 @@ export const CY_SANITATION_HQ_COMMANDS = {
                     ]}
                   />
                 ),
+                related_commands: {
+                  "Regulator Unit 1": {
+                    password: {
+                      pw: 'loo diamond philips',
+                      hint: 'bathroom gem screwdriver',
+                    },
+                    content: (
+                      <Node
+                        title="SEWER REGULATOR — UNIT 1"
+                        subtitle="Municipal Sewage Regulation Unit"
+                        notes={[
+                          "Offline. Basic maintenance connection established",
+                        ]}
+                      >
+                        <InsetBox color="yellow" title="Features:">
+                          <Line yellow bold>+2 on Knowledge check to sabotage</Line>
+                        </InsetBox>
+                      </Node>
+                    )
+                  },
+                  "Regulator Unit 2": {
+                    password: {
+                      pw: 'royalflush',
+                      hint: 'When a king sends one home',
+                    },
+                    content: (
+                      <Node
+                        title="SEWER REGULATOR — UNIT 2"
+                        subtitle="Municipal Sewage Regulation Unit"
+                        notes={[
+                          "Offline. Basic maintenance connection established",
+                        ]}
+                      >
+                        <InsetBox color="yellow" title="Features:">
+                          <Line yellow bold>+2 on Knowledge check to sabotage</Line>
+                        </InsetBox>
+                      </Node>
+                    )
+                  },
+                  "Regulator Unit 3": {
+                    password: {
+                      pw: 'nsink',
+                      hint: 'Where I was my hands, This I Promise You',
+                    },
+                    content: (
+                      <Node
+                        title="SEWER REGULATOR — UNIT 3"
+                        subtitle="Municipal Sewage Regulation Unit"
+                        notes={[
+                          "Offline. Basic maintenance connection established",
+                        ]}
+                      >
+                        <InsetBox color="yellow" title="Features:">
+                          <Line yellow bold>+2 on Knowledge check to sabotage</Line>
+                        </InsetBox>
+                      </Node>
+                    )
+                  },
+                  "Regulator Unit 4": {
+                    password: {
+                      pw: 'upperdecker',
+                      hint: 'Leaving one in the tank...',
+                    },
+                    content: (
+                      <Node
+                        title="SEWER REGULATOR — UNIT 4"
+                        subtitle="Municipal Sewage Regulation Unit"
+                        notes={[
+                          "Offline. Basic maintenance connection established",
+                        ]}
+                      >
+                        <InsetBox color="yellow" title="Features:">
+                          <Line yellow bold>+2 on Knowledge check to sabotage</Line>
+                        </InsetBox>
+                      </Node>
+                    )
+                  }
+                }
               },
             },
           },
@@ -177,6 +263,13 @@ export const CY_SANITATION_HQ_COMMANDS = {
                     ]}
                   />
                 ),
+                related_commands: {
+                  "Vending Machine": {
+                    content: (
+                      <Devices.VendingMachine />
+                    )
+                  }
+                }
               },
 
               "Reception": {
@@ -191,8 +284,19 @@ export const CY_SANITATION_HQ_COMMANDS = {
                       "Mail and package intake processed here",
                       "Building-wide intercom access at reception terminal",
                     ]}
-                  />
+                  >
+                    <RCDAlert
+                      title="Jackpoint detected"
+                    />
+                  </Node>
                 ),
+                related_commands: {
+                  "Coffee Machine": {
+                    content: (
+                      <Devices.CoffeeMachine />
+                    )
+                  }
+                }
               },
 
               "Ancillary Office A": {
@@ -208,6 +312,26 @@ export const CY_SANITATION_HQ_COMMANDS = {
                     ]}
                   />
                 ),
+                related_commands: {
+                  "Workstation 1": {
+                    content: (
+                      <Devices.Workstation />
+                    )
+                  },
+                  "Workstation 2": {
+                    password: {
+                      pw: "mr clean",
+                      hint: "Aggressively white and bald cleaning mascot",
+                    },
+                    content: (
+                      <Devices.Workstation>
+                        <EncryptedMessage
+                          messages={["CLUE: A note to a colleague on a possible escape from the building. Escaping in a Cyenergy van thats collecting some non-organic assets."]}
+                        />
+                      </Devices.Workstation>
+                    )
+                  }
+                }
               },
 
               "Ancillary Office B": {
@@ -239,6 +363,43 @@ export const CY_SANITATION_HQ_COMMANDS = {
                     ]}
                   />
                 ),
+                related_commands: {
+                  "Smart Fridge": {
+                    content: (
+                      <Devices.SmartFridge />
+                    )
+                  },
+                  "Smart Bin": {
+                    content: (
+                      <Devices.SmartBin
+                        id="cy_plant_pitt_bin"
+                        items={[
+                          'duct_tape',
+                        ]}
+                      />
+                    )
+                  },
+                  "Workstation 1": {
+                    content: (
+                      <Devices.Workstation />
+                    )
+                  },
+                  "Workstation 2": {
+                    content: (
+                      <Devices.Workstation />
+                    )
+                  },
+                  "Workstation 3": {
+                    content: (
+                      <Devices.Workstation />
+                    )
+                  },
+                  "Workstation 4": {
+                    content: (
+                      <Devices.Workstation />
+                    )
+                  },
+                }
               },
             },
           },
@@ -268,8 +429,19 @@ export const CY_SANITATION_HQ_COMMANDS = {
                       "Reception terminal — visitor log and scheduling",
                       "Waiting area: 6 seats",
                     ]}
-                  />
+                  >
+                    <RCDAlert
+                      title="Jackpoint detected"
+                    />
+                  </Node>
                 ),
+                related_commands: {
+                  "Coffee Machine": {
+                    content: (
+                      <Devices.CoffeeMachine />
+                    )
+                  }
+                }
               },
 
               "Middle Management Floor": {
@@ -356,7 +528,9 @@ export const CY_SANITATION_HQ_COMMANDS = {
       "Internal Access": {
         favicon: <Icons.LAN />,
         password: {
-          pw: 'abandon hope',
+          pw: 'thomas crapper',
+          hint: "Didn't actually invent the toilet",
+          showFirst: true,
         },
         content: (
           <Node

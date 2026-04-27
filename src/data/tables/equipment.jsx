@@ -64,6 +64,13 @@ export const EQUIPMENT = [
     description: <>Combat tests +4DR when airborne. Slow, quiet flight.</>,
   },
   {
+    id: "duct_tape",
+    label: "Duct Tape",
+    cost: "5¤",
+    value: 5,
+    description: <>Strong adhesive tape.</>,
+  },
+  {
     id: "faceblock",
     label: "Faceblock",
     cost: "35¤",

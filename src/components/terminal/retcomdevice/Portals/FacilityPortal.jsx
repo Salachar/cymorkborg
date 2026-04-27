@@ -9,7 +9,7 @@ export default function FacilityPortal({
   warnings = [],
   theme = 'corporate',
   children,
-  signalStrength = 3,
+  signalStrength,
 }) {
   // Theme configurations
   const themeConfig = {
@@ -83,39 +83,44 @@ export default function FacilityPortal({
       </div>
 
       <div style={{ padding: '1rem' }}>
-        <div
-          style={{
-            padding: '0.75rem',
-            backgroundColor: `${colors.primary}10`,
-            border: `1px solid ${colors.primary}`,
-            borderRadius: '4px',
-            marginBottom: '1rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}
-        >
-          <Line cyan bold style={{ margin: 0, fontSize: '0.875rem' }}>
-            NETWORK DETECTED
-          </Line>
+        {signalStrength && (
+          <div
+            style={{
+              padding: '0.75rem',
+              backgroundColor: `${colors.primary}10`,
+              border: `1px solid ${colors.primary}`,
+              borderRadius: '4px',
+              marginBottom: '1rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}
+          >
+            <Line cyan bold style={{ margin: 0, fontSize: '0.875rem' }}>
+              NETWORK DETECTED
+            </Line>
 
-          <div style={{ display: 'flex', gap: '3px', alignItems: 'flex-end' }}>
-            {[1, 2, 3, 4].map((bar) => (
-              <div
-                key={bar}
-                style={{
-                  width: '6px',
-                  height: `${bar * 5}px`,
-                  backgroundColor: bar <= signalStrength ? colors.primary : 'rgba(100, 100, 100, 0.3)',
-                  transition: 'background-color 0.3s',
-                  boxShadow: bar <= signalStrength ? `0 0 6px ${colors.primary}` : 'none',
-                }}
-              />
-            ))}
+            <div style={{ display: 'flex', gap: '3px', alignItems: 'flex-end' }}>
+              {[1, 2, 3, 4].map((bar) => (
+                <div
+                  key={bar}
+                  style={{
+                    width: '6px',
+                    height: `${bar * 5}px`,
+                    backgroundColor: bar <= signalStrength ? colors.primary : 'rgba(100, 100, 100, 0.3)',
+                    transition: 'background-color 0.3s',
+                    boxShadow: bar <= signalStrength ? `0 0 6px ${colors.primary}` : 'none',
+                  }}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
-        <div style={{ marginTop: '1rem', marginBottom: '1rem' }}>
+        <div style={{
+          // marginTop: '1rem',
+          marginBottom: '1rem',
+        }}>
           <DataTable
             data={[
               { label: 'LOCATION', value: location },

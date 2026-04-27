@@ -1,18 +1,17 @@
 import { useState, useEffect } from 'react';
 import { Line, Divider, Section, InsetBox } from '@terminal/TerminalComponents';
-import { getJukeboxTracks, getDefaultCost } from '@data/random/audioTracks';
+import { getJukeboxTracks } from '@data/random/audioTracks';
+
 import './Jukebox.css';
 
 export default function Jukebox({
   model = "JB-707",
   location = "Unknown location",
-  cost,
   musicType,
   trackLimit = 4,
   songs,
 }) {
   const displaySongs = songs || getJukeboxTracks(musicType || "synthwave", trackLimit);
-  const displayCost = cost || (musicType ? getDefaultCost(musicType) : "2¤");
 
   const [selectedSongIndex, setSelectedSongIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -214,7 +213,7 @@ export default function Jukebox({
         <div className="jukebox-footer">
           <Divider />
           <Line yellow style={{ fontSize: '0.875rem' }}>
-            Cost: {displayCost} per song
+            2¤ per song
           </Line>
         </div>
       </div>
