@@ -260,6 +260,42 @@ export const CARMACK_ANTIQUITIES_COMMANDS = {
             ),
           },
 
+          "S4N1-PR0 2000 — Legacy Terminal": {
+            favicon: <Icons.Computer />,
+            content: (
+              <Node
+                title="[SANI-PRO 2000 — LEGACY WASTE TERMINAL]"
+                subtitle="Obsolete municipal sanitation interface — non-functional"
+                table={{
+                  model: "Sani-Pro 2000",
+                  manufacturer: "CY_Sanitation Municipal Division",
+                  status: "DEAD",
+                  lastSignal: "Weeks ago — single transmission",
+                }}
+                notes={[
+                  "Standard municipal smart toilet, circa early infrastructure era",
+                  "Heavily modified — aftermarket data ports added, legacy jack interface soldered to secondary board",
+                  "Municipal waste monitoring firmware intact — sanitation telemetry, pressure sensors, flow data",
+                  "Additional hardware suggests someone wanted two-way legacy network capability from a device never designed for it",
+                  "Power cell burnt out — consistent with a single high-demand transmission",
+                  "Modification work is competent but not professional — someone who knew what they were doing and didn't care how it looked",
+                ]}
+              >
+                <RCDAlert
+                  message="Transmission origin confirmed — this device"
+                  details={[
+                    "Single outbound signal detected weeks ago — legacy municipal frequency",
+                    "Transmission duration: 4 seconds",
+                    "Signal strength: far beyond rated capacity for this hardware",
+                    "Destination: Carmack Antiquities legacy jack — this room",
+                    "Device non-functional immediately following transmission",
+                    "Whatever sent that signal used everything this machine had left",
+                  ]}
+                />
+              </Node>
+            ),
+          },
+
           "Camera": {
             favicon: <Icons.Camera />,
             content: (
