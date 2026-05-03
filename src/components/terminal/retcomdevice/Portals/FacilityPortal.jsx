@@ -39,7 +39,7 @@ export default function FacilityPortal({
     },
   };
 
-  const colors = themeConfig[theme];
+  let colors = themeConfig[theme] || themeConfig.corporate;
 
   return (
     <div

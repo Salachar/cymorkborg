@@ -18,6 +18,7 @@ import {
 import { ALLIANSEN_WAREHOUSE_COMMANDS } from './alliansen_warehouse';
 import { TG_LABS_COMMANDS } from './tg_labs';
 import { ROYAL_WEST_COMMANDS } from './royal_west';
+import { IRON_VAULT_STORAGE_COMMANDS } from './iron_vaults';
 
 export const PORTS_DISTRICT_COMMANDS = {
   "Ports": {
@@ -64,6 +65,7 @@ export const PORTS_DISTRICT_COMMANDS = {
       ...ALLIANSEN_WAREHOUSE_COMMANDS,
       ...TG_LABS_COMMANDS,
       ...ROYAL_WEST_COMMANDS,
+      ...IRON_VAULT_STORAGE_COMMANDS,
 
       "Idol Coffins Pop-Up Hotel": {
         favicon: <Icons.Hotel />,

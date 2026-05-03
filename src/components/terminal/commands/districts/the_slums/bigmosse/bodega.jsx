@@ -59,8 +59,8 @@ export const BODEGA_COMMANDS = {
     ),
     preview: (
       <NodePreview>
-        <Line span smoke> · FREE WIFI ACCESS!</Line>
-        <Line span smoke> · Market drone drop off location</Line>
+        <Line span smoke bullet>FREE WIFI ACCESS!</Line>
+        <Line span smoke bullet>Market drone drop off location</Line>
       </NodePreview>
     ),
     related_commands: {
