@@ -39,6 +39,8 @@ export const FAVICON_MAP = {
   'Lobby': Icons.Room,
   'Basement': Icons.Maintenance,
   'Bathrooms': Icons.Room,
+  'Smart Bin': Icons.Trash,
+  'SmartBin': Icons.Trash,
 
   // Devices (partial match via function)
   // handled separately — see getDefaultFavicon below

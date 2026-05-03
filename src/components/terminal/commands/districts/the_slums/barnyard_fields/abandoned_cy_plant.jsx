@@ -220,7 +220,15 @@ export const CY_SANITATION_HQ_COMMANDS = {
                 related_commands: {
                   "Sig's Terminal": {
                     content: (
-                      <Devices.Workstation />
+                      <Devices.Workstation>
+                        <EncryptedMessage
+                          messages={[
+                            "CLUE: [RECOVERED — PARTIAL] Calendar entry, date corrupted",
+                            "10:00 — [CORRUPTED] rep on-site re: AI system handoff",
+                            "[REMAINDER CORRUPTED]",
+                          ]}
+                        />
+                      </Devices.Workstation>
                     )
                   },
                 },
@@ -252,7 +260,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
                         ]}
                       >
                         <InsetBox color="yellow" title="Features:">
-                          <Line yellow bold>+2 on Knowledge check to sabotage</Line>
+                          <Line yellow bold>+2 on Knowledge check to sabotage, power must be on</Line>
                         </InsetBox>
                       </Node>
                     )
@@ -272,7 +280,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
                         ]}
                       >
                         <InsetBox color="yellow" title="Features:">
-                          <Line yellow bold>+2 on Knowledge check to sabotage</Line>
+                          <Line yellow bold>+2 on Knowledge check to sabotage, power must be on</Line>
                         </InsetBox>
                       </Node>
                     )
@@ -292,7 +300,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
                         ]}
                       >
                         <InsetBox color="yellow" title="Features:">
-                          <Line yellow bold>+2 on Knowledge check to sabotage</Line>
+                          <Line yellow bold>+2 on Knowledge check to sabotage, power must be on</Line>
                         </InsetBox>
                       </Node>
                     )
@@ -311,7 +319,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
                         ]}
                       >
                         <InsetBox color="yellow" title="Features:">
-                          <Line yellow bold>+2 on Knowledge check to sabotage</Line>
+                          <Line yellow bold>+2 on Knowledge check to sabotage, power must be on</Line>
                         </InsetBox>
                       </Node>
                     )
@@ -516,10 +524,44 @@ export const CY_SANITATION_HQ_COMMANDS = {
                       },
                     }
                   },
-                  "Workstation 4": {
+                  "Len's Workstation": {
+                    password: {
+                      pw: "overtime",
+                      hint: "What Len was always doing",
+                    },
                     content: (
-                      <Devices.Workstation />
-                    )
+                      <Devices.Workstation
+                        owner="Len"
+                        role="General Operations"
+                        status="IDLE"
+                        lastActivity="Accessing external file share"
+                        uptime="12d 4h 22m"
+                        productivity={38}
+                        emails={14}
+                        openTabs={[
+                          { title: "CY_SAN Internal Portal", type: "normal" },
+                          { title: "External file share — [REDACTED DOMAIN]", type: "suspicious" },
+                          { title: "Overtime request form (unsaved)", type: "normal" },
+                        ]}
+                        recentFiles={[
+                          { name: "Q3_ops_summary.doc", timestamp: "Morning of quarantine" },
+                          { name: "transfer_manifest_FINAL.pdf", timestamp: "Morning of quarantine" },
+                          { name: "personal_notes.txt", timestamp: "Two days prior" },
+                        ]}
+                      >
+                        <EncryptedMessage
+                          messages={[
+                            "CLUE: [RECOVERED] transfer_manifest_FINAL.pdf — partial contents",
+                            "Asset transfer manifest — non-organic infrastructure",
+                            "Receiving party: [CORRUPTED]",
+                            "Account ref: CYN-4471-INFRA",
+                            "Transfer window: 06:00–10:00, day of scheduled maintenance",
+                            "Note: AI system components included in manifest — see appendix",
+                            "[REMAINDER CORRUPTED]",
+                          ]}
+                        />
+                      </Devices.Workstation>
+                    ),
                   },
                 }
               },
@@ -566,7 +608,23 @@ export const CY_SANITATION_HQ_COMMANDS = {
                     content: (
                       <Devices.CoffeeMachine />
                     )
-                  }
+                  },
+                  "Reception Terminal": {
+                    content: (
+                      <Devices.Workstation>
+                        <EncryptedMessage
+                          messages={[
+                            "CLUE: [RECOVERED — PARTIAL] Automated backup log — post-quarantine",
+                            "Backup initiated: 08:47",
+                            "Destination: 10.44.2.[CORRUPTED] — municipal subnet",
+                            "Duration: 6 hours, 12 minutes",
+                            "Status: TRANSFER COMPLETE",
+                            "[LOG ENDS]",
+                          ]}
+                        />
+                      </Devices.Workstation>
+                    )
+                  },
                 }
               },
 
@@ -650,6 +708,22 @@ export const CY_SANITATION_HQ_COMMANDS = {
                     ]}
                   />
                 ),
+                related_commands: {
+                  "Smart Bin": {
+                    content: (
+                      <Devices.SmartBin
+                        id="cy_plant_bathroom_bin"
+                        location="Bathrooms — Room 16"
+                        status="NOMINAL"
+                        items={[
+                          'bandages',
+                          'hand_sanitizer',
+                          'painkillers',
+                        ]}
+                      />
+                    ),
+                  },
+                },
               },
 
               "Director's Office": {
@@ -691,6 +765,10 @@ export const CY_SANITATION_HQ_COMMANDS = {
                     )
                   },
                   "Venn's Workstation": {
+                    password: {
+                      pw: "aldous",
+                      hint: "First name basis",
+                    },
                     content: (
                       <Devices.Workstation>
                         <EncryptedMessage
@@ -778,7 +856,11 @@ export const CY_SANITATION_HQ_COMMANDS = {
           },
 
           "Building Access": {
-            favicon: <Icons.Lock />,
+            password: {
+              pw: "skewer",
+              hint: "An off-kilter sewer",
+              showCount: true,
+            },
             content: (
               <BuildingAccess
                 title="CY_SANITATION HQ — ACCESS CONTROL"

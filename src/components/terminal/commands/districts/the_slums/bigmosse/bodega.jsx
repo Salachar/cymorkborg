@@ -256,7 +256,7 @@ export const BODEGA_COMMANDS = {
           </Node>
         ),
         related_commands: {
-          "SmartBin": {
+          "Smart Bin": {
             content: (
               <SmartBin
                 id="sanitation-bin-b7"
