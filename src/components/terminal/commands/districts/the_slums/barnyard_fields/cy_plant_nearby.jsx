@@ -164,7 +164,6 @@ export const BARNYARD_FUEL_STATION_COMMANDS = {
         status="OPEN 24/7"
         statusColor="neon"
         notes={[
-          "Barnyard Fields — main road in from the Ports border",
           "Vehicle fuel, power cell charging, RCD top-up",
         ]}
         theme="casual"
@@ -172,15 +171,14 @@ export const BARNYARD_FUEL_STATION_COMMANDS = {
         <InsetBox title="SERVICES:">
           <Line neon bullet>Vehicle fuel — standard and synth blend</Line>
           <Line neon bullet>Power cell charging — all formats</Line>
-          <Line neon bullet>RCD charging — 5¤ flat</Line>
+          <Line neon bullet>RCD charging — 1¤ flat</Line>
           <Line neon bullet>Basic vehicle supplies — oil, tape, cable ties</Line>
-          <Line yellow bullet>Attendant on site 06:00–22:00, automated overnight</Line>
         </InsetBox>
         <HoursBanner
           hours="24/7"
           days="Every Day"
-          location="Barnyard Fields"
-          note="Attendant hours: 06:00–22:00. Automated overnight."
+          location="Barnyard Fields — main road in from the Ports border"
+          note="Attendant hours: 06:00-22:00. Automated overnight."
         />
       </PublicPortal>
     ),
@@ -198,7 +196,6 @@ export const BARNYARD_FUEL_STATION_COMMANDS = {
             notes={[
               "City-registered independent operation",
               "Fuel transaction logs maintained 90 days",
-              "Automated overnight systems — no staff on site 22:00–06:00",
             ]}
           />
         ),
@@ -296,12 +293,9 @@ export const BARNYARD_NOODLE_STAND_COMMANDS = {
                 content: (
                   <PersonnelFile
                     employeeId="OWNER-001"
-                    name="[Known only as the Cook]"
-                    position="Owner / Cook"
-                    department="Independent"
+                    position="Owner"
                     district="Barnyard Fields"
                     notes={[
-                      "Registered sole trader — decades of continuous operation",
                       "No violations or citations on record",
                       "Business predates current district zoning records",
                     ]}

@@ -127,6 +127,8 @@ export const CY_SANITATION_HQ_COMMANDS = {
         password: {
           pw: 'connoissewer',
           hint: 'What do you call a sewer expert?',
+          showFirst: true,
+          showCount: true,
         },
         favicon: <Icons.Files />,
         content: (
@@ -173,6 +175,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
                     password: {
                       pw: 'megawatts',
                       hint: 'Some big energy',
+                      showFirst: true,
                     },
                     content: (
                       <Node
@@ -258,6 +261,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
                     password: {
                       pw: 'royalflush',
                       hint: 'When a king sends one home',
+                      showCount: true,
                     },
                     content: (
                       <Node
@@ -277,6 +281,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
                     password: {
                       pw: 'nsink',
                       hint: 'Where I was my hands, This I Promise You',
+                      showCount: true,
                     },
                     content: (
                       <Node
@@ -417,6 +422,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
                 password: {
                   pw: 'loo diamond philips',
                   hint: 'bathroom gemstone screwdriver',
+                  showCount: true,
                 },
                 favicon: <Icons.Room />,
                 content: (
@@ -627,6 +633,10 @@ export const CY_SANITATION_HQ_COMMANDS = {
               },
 
               "Bathrooms": {
+                password: {
+                  pw: "6745",
+                  hint: "Bathroom passcode is 6745",
+                },
                 favicon: <Icons.Room />,
                 content: (
                   <Node
@@ -643,6 +653,10 @@ export const CY_SANITATION_HQ_COMMANDS = {
               },
 
               "Director's Office": {
+                password: {
+                  pw: "trash panda",
+                  hint: "Everyones favorite dumpster diving animal?",
+                },
                 favicon: <Icons.Room />,
                 content: (
                   <Node

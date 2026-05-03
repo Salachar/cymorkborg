@@ -19,7 +19,8 @@ export const NORTH_CENTRAL_COMMANDS = {
     favicon: <Icons.Pin />,
     preview: (
       <NodePreview>
-        <Line span smoke> · The Neon Pillar. Financial district. God and money in the same tower.</Line>
+        <Line span smoke bullet br>The Neon Pillar. Financial district. God and money in the same tower.</Line>
+        <Line span yellow bullet>Carmack Antiquities</Line>
       </NodePreview>
     ),
     content: (

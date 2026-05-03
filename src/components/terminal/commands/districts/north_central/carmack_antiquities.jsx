@@ -41,7 +41,7 @@ export const CARMACK_ANTIQUITIES_COMMANDS = {
         <HoursBanner
           name="Carmack Antiquities"
           hours="10:00 — 18:00"
-          days="Tue–Sat (Closed Mon & Sun)"
+          days="Tue-Sat (Closed Mon & Sun)"
           location="Sabbath Square, North Central"
           note="Hours irregular. If the light's on, she's in."
         />
@@ -247,18 +247,13 @@ export const CARMACK_ANTIQUITIES_COMMANDS = {
                   "Formerly the operational AI of CY_Sanitation HQ",
                   "Offloaded to an unknown corporate subsidiary at time of quarantine — does not know where he currently is",
                   "Communicates through dormant municipal legacy networks — can only be reached via legacy jackpoints",
-                  "The ASR33 teletype is the only hardware Asa has that speaks his protocol — it is a terminal, not his location",
-                  "Physically hardwired to unknown hardware somewhere in the city — cannot move or free himself",
                   "Can interface with old building systems when a jackpoint is nearby and connected",
                 ]}
               >
                 <RCDAlert
-                  message="AI behavioral profile — partial intercept"
+                  message="Sani Briefing"
                   details={[
-                    "Sanny is more than a waste management system — depth of capability unknown",
-                    "Has been routing transmissions through dead municipal infrastructure for some time — this took planning",
-                    "The subsidiary he was offloaded to has no public record",
-                    "He needs agents in the physical world. He cannot act there himself.",
+                    'PW: "toilet trouble"'
                   ]}
                 />
               </Node>

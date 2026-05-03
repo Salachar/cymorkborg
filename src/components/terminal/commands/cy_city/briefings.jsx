@@ -131,7 +131,7 @@ export const BRIEFINGS_COMMANDS = {
         ),
       },
 
-      "Clean Break — Part 1": {
+      "Clean Break — Up The Down Toilet": {
         password: {
           pw: 'toilet trouble',
         },
@@ -159,17 +159,18 @@ export const BRIEFINGS_COMMANDS = {
               },
             ]}
             intel={[
-              "Target: CY_Sanitation HQ, Ports/Barnyard Fields border — quarantined, cement wall, sealed in industrial plastic",
+              "Target: CY_Sanitation HQ, Ports/Barnyard Fields border",
               "Building has been abandoned for decades, staff were locked inside",
               "All locked doors require power to hack",
               "Hazard suits provided — protect from Nano infestation while intact",
+              'CY_Sanitation password: "cynitationhq"',
             ]}
             payment={[
               "10% debt cleared on successful completion",
             ]}
             warnings={[
               "Nano infestation is airborne inside — suits must stay intact",
-              "The staff did not all die. Some of them are still in there.",
+              "The staff did not all die.",
             ]}
           />
         ),
