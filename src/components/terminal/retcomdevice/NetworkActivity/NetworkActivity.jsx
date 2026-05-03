@@ -22,6 +22,7 @@ export default function NetworkActivity({
   title = "NETWORK",
   environment,
   devices = [],
+  children,
 }) {
   const envEntries = environment
     ? Object.entries(environment).filter(([, v]) => v != null && v !== '')
@@ -238,6 +239,15 @@ export default function NetworkActivity({
           );
         })}
       </div>
+
+      {Boolean(children) && (
+        <div style={{
+          margin: '1rem',
+          fontSize: '0.875rem',
+        }}>
+          {children }
+        </div>
+      )}
     </div>
   );
 }

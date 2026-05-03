@@ -39,6 +39,8 @@ export default function Extractable({
   digitalItems = [],
   disabled = false,
   onExtract,
+  compact = false,
+  creditsOnly = false,
 }) {
   // Add the basic credts item to the digital list if there is one
   // Otherwise we could use digitalItems straight like physical
@@ -76,10 +78,23 @@ export default function Extractable({
     saveExtracted(extracted);
   };
 
+  // const addToWallet = (items) => {
+  //   const wallet = getWallet();
+  //   wallet.items.push(...items);
+  //   saveWallet(wallet);
+  // };
+
   const addToWallet = (items) => {
     const wallet = getWallet();
-    wallet.items.push(...items);
+    items.forEach(item => {
+      if (item.isCredits) {
+        wallet.credits += item.value || 0;
+      } else {
+        wallet.items.push(item);
+      }
+    });
     saveWallet(wallet);
+    window.dispatchEvent(new Event('walletUpdated'));
   };
 
   // ─── Handlers ─────────────────────────────────────────────────────────────
@@ -112,6 +127,8 @@ export default function Extractable({
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
       {physicalItems.length > 0 && (
         <ItemSection
+          compact={compact}
+          creditsOnly={creditsOnly}
           label="PHYSICAL ITEMS"
           sublabel="Physical presence required"
           accentColor="rgb(251, 191, 36)"
@@ -128,6 +145,8 @@ export default function Extractable({
 
       {useDigitalItems.length > 0 && (
         <ItemSection
+          compact={compact}
+          creditsOnly={creditsOnly}
           label="DIGITAL ITEMS"
           sublabel="Extractable remotely via network connection"
           accentColor="rgb(79, 209, 197)"
@@ -148,6 +167,8 @@ export default function Extractable({
 // ─── ItemSection ─────────────────────────────────────────────────────────────
 
 function ItemSection({
+  compact = false,
+  creditsOnly = false,
   label,
   sublabel,
   accentColor,
@@ -160,6 +181,8 @@ function ItemSection({
   onExtractItem,
   onExtractAll,
 }) {
+  const hasHeader = !creditsOnly;
+
   return (
     <div
       style={{
@@ -170,31 +193,36 @@ function ItemSection({
       }}
     >
       {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
-        <div style={{ flex: 1 }}>
-          <Line style={{ margin: 0, color: accentColor, fontSize: '0.875rem', fontWeight: 'bold' }}>
-            {label}
-          </Line>
-          {!allTaken && (
-            <Line smoke style={{ fontSize: '0.7rem', margin: 0, marginTop: '0.25rem' }}>
-              {sublabel}
-            </Line>
-          )}
-        </div>
+      {hasHeader && (
+        <>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+            <div style={{ flex: 1 }}>
+              <Line style={{ margin: 0, color: accentColor, fontSize: '0.875rem', fontWeight: 'bold' }}>
+                {label}
+              </Line>
+              {!allTaken && (
+                <Line smoke style={{ fontSize: '0.7rem', margin: 0, marginTop: '0.25rem' }}>
+                  {sublabel}
+                </Line>
+              )}
+            </div>
 
-        <ActionButton
-          label={allTaken ? `✓ ${buttonLabelPast}` : buttonLabel}
-          done={allTaken}
-          disabled={disabled}
-          color={accentColor}
-          onClick={onExtractAll}
-        />
-      </div>
-
-      <Divider />
+            <ActionButton
+              label={allTaken ? `✓ ${buttonLabelPast}` : buttonLabel}
+              done={allTaken}
+              disabled={disabled}
+              color={accentColor}
+              onClick={onExtractAll}
+            />
+          </div>
+          <Divider />
+        </>
+      )}
 
       {/* Items list */}
-      <div style={{ marginTop: '0.75rem' }}>
+      <div style={{
+        marginTop: hasHeader ? '0.75rem' : '0',
+      }}>
         {items.map((item, i) => {
           const taken = extractedIds.has(item.id);
           return (
@@ -236,7 +264,7 @@ function ItemSection({
                   </Line>
                 )}
                 {item.value && item.isCredits && (
-                  <span style={{ color: taken ? 'rgb(148, 163, 184)' : 'rgb(34, 197, 94)', marginLeft: '0.5rem', fontWeight: 'bold' }}>
+                  <span style={{ color: taken ? 'rgb(148, 163, 184)' : 'rgb(229, 226, 43)', fontWeight: 'bold' }}>
                     [{item.value.toLocaleString()}¤]
                   </span>
                 )}

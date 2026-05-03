@@ -6,12 +6,20 @@ import CollapseIcon from '@mui/icons-material/UnfoldLess';
 import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 
 import Icons from '@utils/icons';
+import { getDefaultFavicon } from '@utils/favicon';
 
 import './commandRow.css';
 
-function Favicon({ favicon }) {
-  if (!favicon) return <Icons.Hub />;
-  return favicon;
+// function Favicon({ favicon }) {
+//   if (!favicon) return <Icons.Hub />;
+//   return favicon;
+// }
+
+function Favicon({ favicon, displayName }) {
+  if (favicon) return favicon;
+  const resolved = getDefaultFavicon(displayName);
+  if (resolved) return resolved;
+  return <Icons.Hub />;
 }
 
 export default function CommandRow({
@@ -79,7 +87,8 @@ export default function CommandRow({
       </div>
 
       <div className="cr-strip">
-        <Favicon favicon={favicon} />
+        {/* <Favicon favicon={favicon} /> */}
+        <Favicon favicon={favicon} displayName={displayName} />
 
         <span className={`cr-name pl-2`}>
           {displayName}

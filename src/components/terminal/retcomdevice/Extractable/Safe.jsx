@@ -5,16 +5,25 @@ import Extractable from '../Extractable/Extractable';
 
 export default function Safe({
   id,
-  model,
+  title = "",
+  model = "DS-200",
   location,
   owner,
   security,
   lastAccess,
+  items = [],
   physical = [],
   digital = [],
   notes,
   stealing = true,
 }) {
+  let safeItems = [];
+  if (physical && physical.length) {
+    safeItems = physical;
+  } else if (items && items.length) {
+    safeItems = items;
+  }
+
   const getSecurityColor = () => {
     const secLower = security?.toLowerCase() || '';
     if (secLower.includes('retinal') || secLower.includes('biometric')) {
@@ -80,9 +89,14 @@ export default function Safe({
             <Line smoke style={{ margin: 0, fontSize: '0.75rem', opacity: 0.7 }}>
               DIGITAL SAFE
             </Line>
-            <Line smoke large bold style={{ margin: 0 }}>
+            <Line smoke large bold span style={{ margin: 0 }}>
               [MODEL {model}]
             </Line>
+            {title && (
+              <Line smoke large bold span style={{ margin: 0 }}>
+                {" - "}{title}
+              </Line>
+            )}
           </div>
         </div>
 
@@ -92,7 +106,7 @@ export default function Safe({
               display: 'grid',
               gridTemplateColumns: 'auto 1fr',
               gap: '0.5rem 1rem',
-              marginBottom: (physical.length > 0 || digital.length > 0) ? '1rem' : '0',
+              marginBottom: (safeItems.length > 0 || digital.length > 0) ? '1rem' : '0',
             }}
           >
             {location && (
@@ -141,10 +155,10 @@ export default function Safe({
           </div>
 
           {/* Extractable contents */}
-          {(physical.length > 0 || digital.length > 0) && (
+          {(safeItems.length > 0 || safeItems.length > 0) && (
             <Extractable
               id={`${id}-safe-extractable`}
-              physicalItems={physical}
+              physicalItems={safeItems}
               digitalItems={digital}
             />
           )}

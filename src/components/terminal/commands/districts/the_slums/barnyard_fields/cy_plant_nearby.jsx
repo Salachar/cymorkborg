@@ -14,11 +14,8 @@ import {
   Node,
   PersonnelFile,
   PublicPortal,
+  RCDAlert,
 } from "@terminal/retcomdevice";
-
-// ============================================================================
-// SCRAPYARD
-// ============================================================================
 
 export const BARNYARD_SCRAPYARD_COMMANDS = {
   "Husk & Parts": {
@@ -37,8 +34,9 @@ export const BARNYARD_SCRAPYARD_COMMANDS = {
         status="OPEN"
         statusColor="neon"
         notes={[
-          "Cash only — no credchip trail",
-          "Owner on site most hours",
+          "Barnyard Fields — eastern edge, near Ports border",
+          "Salvage, parts, and industrial components",
+          "Cash only",
         ]}
         theme="casual"
       >
@@ -68,8 +66,9 @@ export const BARNYARD_SCRAPYARD_COMMANDS = {
           <Node
             title="HUSK & PARTS — INTERNAL"
             notes={[
-              "Family operation — owner runs it alone with rotating casual labor",
-              "Actively looking for reliable non-Heirs connections",
+              "Owner-operated — sole proprietor",
+              "Stock records maintained manually",
+              "No formal employee register",
             ]}
           />
         ),
@@ -78,37 +77,26 @@ export const BARNYARD_SCRAPYARD_COMMANDS = {
             favicon: <Icons.Camera />,
             content: (
               <Camera />
-            )
+            ),
           },
 
           "Personnel Files": {
             favicon: <Icons.Person />,
             content: (
               <Node
-                title="HUSK & PARTS - PERSONNEL RECORDS"
-                subtitle="EMPLOYEE ACCESS GRANTED"
-                notes={[
-                  "SETUP PROCESS INCOMPLETE - DATA MISSING"
-                ]}
+                title="HUSK & PARTS — PERSONNEL"
+                notes={["Owner-operated — 1 record on file"]}
               />
             ),
             related_commands: {
-              "Owner": {
+              "Husk": {
                 favicon: <Icons.Person />,
                 content: (
                   <PersonnelFile
                     employeeId="OWNER-001"
-                    name="[Unknown — ask around]"
-                    position="Owner / Operator"
-                    department="Independent Salvage"
+                    name="Husk"
+                    position="Owner"
                     district="Barnyard Fields"
-                    notes={[
-                      "Pragmatic survivor — no ideology, just business",
-                      "Pays Heirs tribute to keep operating, resents it quietly",
-                      "Knows everyone moving through the Fields — good source of local intel",
-                      "Will work with anyone who pays and doesn't bring trouble",
-                      "Has a soft spot for people the Heirs are making life hard for",
-                    ]}
                     status="ACTIVE"
                   />
                 ),
@@ -120,35 +108,36 @@ export const BARNYARD_SCRAPYARD_COMMANDS = {
             favicon: <Icons.Inventory />,
             content: (
               <Inventory
-                internal
-                title="Stock Notes"
+                title="Husk & Parts — Back Lot"
+                subtitle="Unlisted stock"
                 items={[
                   {
                     label: "Hazard suit components (partial)",
                     condition: "Damaged",
-                    description: "Salvaged from quarantine perimeter. Patchable.",
+                    note: "Salvaged. Patchable with basic tools.",
                   },
                   {
                     label: "Industrial cutting equipment",
                     condition: "Worn",
-                    description: "Plasma cutter, plasma torch. Would cut through plastic sheathing.",
+                    note: "Plasma cutter and torch. Heavy use wear.",
                   },
                   {
                     label: "Portable generator (small)",
                     condition: "Good",
-                    description: "Runs clean. Good for 8 hours.",
+                    note: "Clean running. Approx 8 hour runtime.",
                   },
                   {
                     label: "Rope and rigging (assorted)",
                     condition: "Worn",
-                    description: "Various lengths. Would get someone over a wall.",
+                    note: "Various lengths and gauges.",
                   },
                   {
-                    label: "Old CY_Sanitation uniform (x3)",
+                    label: "CY_Sanitation uniform (x3)",
                     condition: "Damaged",
-                    description: "Decades old. Someone's been trading these out of the quarantine zone.",
+                    note: "Old stock. Origin unlisted.",
                   },
                 ]}
+                note="Back lot items not listed in public inventory."
               />
             ),
           },
@@ -158,16 +147,12 @@ export const BARNYARD_SCRAPYARD_COMMANDS = {
   },
 };
 
-// ============================================================================
-// FUEL STATION
-// ============================================================================
-
 export const BARNYARD_FUEL_STATION_COMMANDS = {
   "Depot 9": {
     favicon: <Icons.Fuel />,
     preview: (
       <NodePreview>
-        <Line span smoke> · Independent fuel depot. Barnyard Fields. Everyone stops here eventually.</Line>
+        <Line span smoke> · Independent fuel depot. Barnyard Fields.</Line>
       </NodePreview>
     ),
     content: (
@@ -181,22 +166,21 @@ export const BARNYARD_FUEL_STATION_COMMANDS = {
         notes={[
           "Barnyard Fields — main road in from the Ports border",
           "Vehicle fuel, power cell charging, RCD top-up",
-          "Used by city workers, SecCorps, Heirs, and everyone between",
-          "Neutral by necessity — nobody burns down the fuel depot",
         ]}
         theme="casual"
       >
         <InsetBox title="SERVICES:">
-          <Line neon>▸ Vehicle fuel — standard and synth blend</Line>
-          <Line neon>▸ Power cell charging — all formats</Line>
-          <Line neon>▸ RCD charging — 5¤ flat</Line>
-          <Line neon>▸ Basic vehicle supplies — oil, tape, cable ties</Line>
-          <Line yellow>▸ Attendant on site 06:00–22:00, automated overnight</Line>
+          <Line neon bullet>Vehicle fuel — standard and synth blend</Line>
+          <Line neon bullet>Power cell charging — all formats</Line>
+          <Line neon bullet>RCD charging — 5¤ flat</Line>
+          <Line neon bullet>Basic vehicle supplies — oil, tape, cable ties</Line>
+          <Line yellow bullet>Attendant on site 06:00–22:00, automated overnight</Line>
         </InsetBox>
         <HoursBanner
-          hours="24/7 (automated overnight)"
+          hours="24/7"
           days="Every Day"
           location="Barnyard Fields"
+          note="Attendant hours: 06:00–22:00. Automated overnight."
         />
       </PublicPortal>
     ),
@@ -212,11 +196,9 @@ export const BARNYARD_FUEL_STATION_COMMANDS = {
           <Node
             title="DEPOT 9 — INTERNAL"
             notes={[
-              "City-registered independent — technically legitimate",
-              "Attendant takes informal payments for information, blind eyes, early warnings",
-              "Knows every vehicle and regular that moves through Barnyard Fields",
-              "Has been approached by Heirs, SecCorps, and others — plays all sides carefully",
-              "One rule: never give up a customer mid-transaction",
+              "City-registered independent operation",
+              "Fuel transaction logs maintained 90 days",
+              "Automated overnight systems — no staff on site 22:00–06:00",
             ]}
           />
         ),
@@ -225,36 +207,29 @@ export const BARNYARD_FUEL_STATION_COMMANDS = {
             favicon: <Icons.Person />,
             content: (
               <Node
-                title="DEPOT 9 - PERSONNEL RECORDS"
-                subtitle="EMPLOYEE ACCESS GRANTED"
-                notes={[
-                  "SETUP PROCESS INCOMPLETE - DATA MISSING"
-                ]}
+                title="DEPOT 9 — PERSONNEL"
+                notes={["1 registered staff member"]}
               />
             ),
             related_commands: {
-
               "Attendant": {
                 favicon: <Icons.Person />,
                 content: (
                   <PersonnelFile
                     employeeId="STAFF-001"
                     name="[Unknown — ask around]"
-                    position="Depot Attendant / De Facto Owner"
+                    position="Depot Attendant"
                     department="Independent"
                     district="Barnyard Fields"
                     notes={[
-                      "Runs the depot like a city worker — calm, professional, unbothered",
-                      "Accepts bribes as a matter of course, never solicits them",
-                      "Will not sell out a customer while they're still at the pump",
-                      "Has seen everything pass through this area for years — encyclopedic local knowledge",
-                      "Quietly despises the Heirs but shows nothing",
+                      "Sole registered employee",
+                      "Operating continuously — long tenure",
+                      "City fuel depot certification current",
                     ]}
                     status="ACTIVE"
                   />
                 ),
               },
-
             },
           },
         },
@@ -262,10 +237,6 @@ export const BARNYARD_FUEL_STATION_COMMANDS = {
     },
   },
 };
-
-// ============================================================================
-// NOODLE STAND
-// ============================================================================
 
 export const BARNYARD_NOODLE_STAND_COMMANDS = {
   "The Stand": {
@@ -284,14 +255,14 @@ export const BARNYARD_NOODLE_STAND_COMMANDS = {
         statusColor="neon"
         theme="casual"
         notes={[
-          "No menu, noodle bowl is the only, no substitutions"
+          "Barnyard Fields — fixed location, decades of operation",
+          "One item. No substitutions.",
         ]}
       >
-        <InsetBox color="smoke" title="NOODLE BOWL:">
-          <Line smoke bullet>Synth pork broth — rich, clean</Line>
+        <InsetBox color="smoke" title="NOODLE BOWL — 12¤:">
+          <Line smoke bullet>Synth pork broth</Line>
           <Line smoke bullet>Hand-pulled noodles</Line>
           <Line smoke bullet>Soft egg, scallions, chili oil</Line>
-          <Line yellow bullet bold>12¤</Line>
         </InsetBox>
         <HoursBanner
           hours="10:00 — Supplies run out"
@@ -302,7 +273,6 @@ export const BARNYARD_NOODLE_STAND_COMMANDS = {
     ),
     related_commands: {
       "Internal Access": {
-        favicon: <Icons.LAN />,
         password: {
           pw: "oodles of noodles",
           hint: "So many noodles",
@@ -310,30 +280,17 @@ export const BARNYARD_NOODLE_STAND_COMMANDS = {
         },
         content: (
           <Node
-            title="DEPOT 9 — INTERNAL"
+            title="THE STAND — INTERNAL"
             notes={[
-              "City-registered independent — technically legitimate",
-              "Attendant takes informal payments for information, blind eyes, early warnings",
-              "Knows every vehicle and regular that moves through Barnyard Fields",
-              "Has been approached by Heirs, SecCorps, and others — plays all sides carefully",
-              "One rule: never give up a customer mid-transaction",
+              "Sole proprietor — owner operated",
+              "No formal staff register",
+              "Cash only — no transaction records",
             ]}
           />
         ),
         related_commands: {
           "Personnel Files": {
-            favicon: <Icons.Person />,
-            content: (
-              <Node
-                title="THE STAND - PERSONNEL RECORDS"
-                subtitle="EMPLOYEE ACCESS GRANTED"
-                notes={[
-                  "SETUP PROCESS INCOMPLETE - DATA MISSING"
-                ]}
-              />
-            ),
             related_commands: {
-
               "The Owner": {
                 favicon: <Icons.Person />,
                 content: (
@@ -342,22 +299,16 @@ export const BARNYARD_NOODLE_STAND_COMMANDS = {
                     name="[Known only as the Cook]"
                     position="Owner / Cook"
                     department="Independent"
-                    district="Barnyard Fields — permanent fixture"
+                    district="Barnyard Fields"
                     notes={[
-                      "Has operated this stand since before the CY_Sanitation quarantine",
-                      "Heavily chromed — military-grade augments, clearly veteran hardware",
-                      "Will discuss the outbreak if asked — was present during the initial response",
-                      "Fought the infected in the early hours — describes them as corp workers, not city staff",
-                      "Never understood why city workers weren't among the infected — always bothered him",
-                      "The city's official story doesn't add up to him — too clean, too convenient",
-                      "Respected by everyone in the Fields including the Heirs — nobody touches the stand",
-                      "Doesn't ask where you've been or where you're going",
+                      "Registered sole trader — decades of continuous operation",
+                      "No violations or citations on record",
+                      "Business predates current district zoning records",
                     ]}
                     status="ACTIVE"
                   />
                 ),
               },
-
             },
           },
         },
@@ -365,10 +316,6 @@ export const BARNYARD_NOODLE_STAND_COMMANDS = {
     },
   },
 };
-
-// ============================================================================
-// COMBINED EXPORT
-// ============================================================================
 
 export const BARNYARD_FIELDS_AREA_COMMANDS = {
   ...BARNYARD_SCRAPYARD_COMMANDS,

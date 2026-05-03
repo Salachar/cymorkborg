@@ -296,7 +296,7 @@ export default function TerminalWallet() {
           </div>
         ) : (
           <>
-            <Section title="CREDITS EXTRACTED:" color="yellow">
+            {/* <Section title="CREDITS EXTRACTED:" color="yellow">
               <div
                 style={{
                   display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between',
@@ -310,7 +310,7 @@ export default function TerminalWallet() {
               </div>
             </Section>
 
-            <Spacer />
+            <Spacer /> */}
 
             <Section title={`ITEMS EXTRACTED: (${totalItems})`} color="cyan">
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
@@ -384,12 +384,12 @@ export default function TerminalWallet() {
                         <SellConfirm
                           value={item.value}
                           onSell={() => {
-                            const wallet = getWallet();
-                            const item = wallet.items[i];
-                            if (!item.value) return;
+                            const current = getWallet();
+                            const item = current.items[i];
+                            if (!item?.value) return;
                             const updated = {
-                              credits: wallet.credits + item.value,
-                              items: wallet.items.filter((_, i) => i !== i),
+                              credits: current.credits + item.value,
+                              items: current.items.filter((_, idx) => idx !== i),
                             };
                             saveWallet(updated);
                             setWallet(updated);

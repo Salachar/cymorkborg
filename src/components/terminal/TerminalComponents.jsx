@@ -157,11 +157,11 @@ export const InsetBox = ({ children, title, color = "cyan", className = "", styl
     >
       <div className="p-2 md:p-3">
         {Boolean(title) && (
-          <div className="text-xs md:text-sm font-bold mb-2" style={{ color: COLOR_MAP[color] }}>
+          <div className="text-sm font-bold mb-2" style={{ color: COLOR_MAP[color] }}>
             {title}
           </div>
         )}
-        <div className="text-xs md:text-sm">
+        <div className="text-sm">
           {children}
         </div>
       </div>

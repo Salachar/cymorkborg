@@ -174,6 +174,7 @@ export const CY_CITY_PORTAL = {
       ...CY_CITY_NETWORK,
     },
   },
+  ...STREET_GUIDE_COMMANDS,
   "Cy Games": {
     favicon: <Icons.Games />,
     preview: (
@@ -222,7 +223,6 @@ export const CY_CITY_PORTAL = {
       },
     }
   },
-  ...STREET_GUIDE_COMMANDS,
   "Help": {
     favicon: <Icons.Help />,
     preview: (

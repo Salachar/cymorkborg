@@ -15,7 +15,7 @@ export const LuckyStarBodega = {
     name: "Lucky Star Bodega",
     tagline: "Your neighborhood convenience store",
     subtitle: "Open 24/7 for all your essentials",
-    features: [
+    products: [
       "Fresh coffee & snacks",
       "Lottery tickets",
       "ATM inside",
@@ -32,7 +32,7 @@ export const RustyAnchor = {
     name: "The Rusty Anchor",
     tagline: "Where locals drink",
     subtitle: "Cold beer, warm atmosphere",
-    features: [
+    products: [
       "Happy hour 4-7pm daily",
       "Pool table & darts",
       "Live music Fridays",
@@ -49,7 +49,7 @@ export const NeonPizza = {
     name: "Neon Pizza",
     tagline: "Slices bigger than your problems",
     subtitle: "Family owned since 2015",
-    features: [
+    products: [
       "By the slice or whole pie",
       "Free delivery over 15¤",
       "Vegan options available",
@@ -66,7 +66,7 @@ export const GroundedCafe = {
     name: "Grounded Café",
     tagline: "Locally roasted, lovingly brewed",
     subtitle: "Fair trade & organic",
-    features: [
+    products: [
       "Espresso drinks & pour-over",
       "Fresh pastries daily",
       "Free WiFi",
@@ -83,7 +83,7 @@ export const InkAndSteel = {
     name: "Ink & Steel",
     tagline: "Art that lasts forever",
     subtitle: "Custom designs & walk-ins welcome",
-    features: [
+    products: [
       "5 experienced artists",
       "Piercings available",
       "Free consultations",
@@ -100,7 +100,7 @@ export const PixelPalace = {
     name: "Pixel Palace Arcade",
     tagline: "Where the 80s never ended",
     subtitle: "Over 50 classic arcade machines",
-    features: [
+    products: [
       "All games 25¢",
       "Pinball tournaments monthly",
       "Retro snack bar",
@@ -117,7 +117,7 @@ export const SpinCycleLaundry = {
     name: "Spin Cycle Laundry",
     tagline: "Clean clothes, chill vibes",
     subtitle: "Self-service & drop-off available",
-    features: [
+    products: [
       "Free WiFi & TV",
       "Vending machines",
       "Eco-friendly detergents",
@@ -134,7 +134,7 @@ export const ChromeCustoms = {
     name: "Chrome Customs Garage",
     tagline: "We fix rides, not prices",
     subtitle: "Honest mechanics, fair rates",
-    features: [
+    products: [
       "All makes & models",
       "Custom work & performance upgrades",
       "Free diagnostics",
@@ -151,7 +151,7 @@ export const DogEaredBooks = {
     name: "Dog-Eared Books",
     tagline: "New, used, and loved",
     subtitle: "Independent bookstore since 2010",
-    features: [
+    products: [
       "Buy, sell, trade books",
       "Weekly book club",
       "Author signings",
@@ -168,7 +168,7 @@ export const SharpCuts = {
     name: "Sharp Cuts Barbershop",
     tagline: "Classic cuts, modern style",
     subtitle: "Walk-ins welcome",
-    features: [
+    products: [
       "Haircuts, shaves, beard trims",
       "Kids cuts available",
       "Student discounts",
@@ -185,7 +185,7 @@ export const SecondChanceThrift = {
     name: "Second Chance Thrift",
     tagline: "Treasure hunting for everyone",
     subtitle: "Proceeds support local charities",
-    features: [
+    products: [
       "Clothing, furniture, collectibles",
       "New items daily",
       "Donations accepted",
@@ -202,7 +202,7 @@ export const PowerFitness = {
     name: "Power Fitness Center",
     tagline: "No judgment, just gains",
     subtitle: "24/7 access for members",
-    features: [
+    products: [
       "Free weights & cardio equipment",
       "Personal training available",
       "Group classes included",
@@ -227,197 +227,5 @@ export const PawsAndClaws = {
     cta: "Open daily 9am-7pm",
     theme: 'earthy',
     icon: '🐾',
-  },
-};
-
-// Music venue
-export const UndergroundStage = {
-  args: {
-    name: "The Underground Stage",
-    tagline: "Live music, loud & proud",
-    subtitle: "Supporting local bands since 2012",
-    features: [
-      "Shows 3-4 nights a week",
-      "All ages until 9pm",
-      "Cheap drinks, great sound",
-    ],
-    cta: "Check our socials for lineup • Cover 5-10¤",
-    theme: 'vibrant',
-    icon: '🎸',
-  },
-};
-
-// Bike shop
-export const CycleCity = {
-  args: {
-    name: "Cycle City",
-    tagline: "Ride more, drive less",
-    subtitle: "Sales, repairs, and rentals",
-    features: [
-      "New & used bikes",
-      "Same-day repairs",
-      "Commuter accessories",
-    ],
-    cta: "Open Mon-Sat • Free tune-up with purchase",
-    theme: 'earthy',
-    icon: '🚲',
-  },
-};
-
-// Donut shop
-export const HoleyMoley = {
-  args: {
-    name: "Holey Moley Donuts",
-    tagline: "Ridiculously good donuts",
-    subtitle: "Made fresh every morning",
-    features: [
-      "Classic & creative flavors",
-      "Coffee & cold brew",
-      "Vegan options available",
-    ],
-    cta: "Open 6am-2pm or until sold out!",
-    theme: 'retro',
-    icon: '🍩',
-  },
-};
-
-// Comic book store
-export const CosmicComics = {
-  args: {
-    name: "Cosmic Comics",
-    tagline: "Your universe of comics",
-    subtitle: "New releases every Wednesday",
-    features: [
-      "Comics, manga, graphic novels",
-      "Collectible cards & figures",
-      "Pull list service",
-    ],
-    cta: "Open daily • Game nights Fridays",
-    theme: 'vibrant',
-    icon: '📖',
-  },
-};
-
-// Flower shop
-export const BloomAndGrow = {
-  args: {
-    name: "Bloom & Grow",
-    tagline: "Fresh flowers, happy hours",
-    subtitle: "Local florist & plant shop",
-    features: [
-      "Same-day delivery available",
-      "Custom arrangements",
-      "Houseplants & care advice",
-    ],
-    cta: "Open Tue-Sun • Order online or by phone",
-    theme: 'earthy',
-    icon: '🌸',
-  },
-};
-
-// Minimal ad
-export const MinimalAd = {
-  args: {
-    name: "Local Shop",
-    tagline: "Come visit us",
-    features: [
-      "Great prices",
-      "Friendly service",
-    ],
-    theme: 'warm',
-  },
-};
-
-// With custom content
-export const WithCustomContent = {
-  args: {
-    name: "Night Owl Diner",
-    tagline: "Breakfast anytime, judgement never",
-    subtitle: "Open 24 hours on weekends",
-    features: [
-      "All-day breakfast",
-      "Burgers & comfort food",
-      "Killer milkshakes",
-    ],
-    theme: 'cozy',
-    icon: '🦉',
-    children: (
-      <div>
-        <div style={{ marginBottom: '0.25rem' }}>
-          🌟 Try our famous "Hangover Helper" breakfast combo!
-        </div>
-        <div>
-          📍 312 Main Street (next to the old theater)
-        </div>
-      </div>
-    ),
-  },
-};
-
-// Record store
-export const VinylVault = {
-  args: {
-    name: "The Vinyl Vault",
-    tagline: "Dig deeper, sound better",
-    subtitle: "New & vintage records",
-    features: [
-      "Rock, jazz, electronic, hip-hop",
-      "Turntables & audio gear",
-      "We buy collections",
-    ],
-    cta: "Open daily noon-8pm • In-store listening station",
-    theme: 'retro',
-    icon: '🎵',
-  },
-};
-
-// Martial arts studio
-export const DragonDojo = {
-  args: {
-    name: "Dragon Dojo",
-    tagline: "Discipline. Respect. Power.",
-    subtitle: "Mixed martial arts training",
-    features: [
-      "Kids & adult classes",
-      "Self-defense workshops",
-      "Competition team",
-    ],
-    cta: "First class free! • All skill levels welcome",
-    theme: 'neon',
-    icon: '🥋',
-  },
-};
-
-// Bakery
-export const CrustAndCrumb = {
-  args: {
-    name: "Crust & Crumb Bakery",
-    tagline: "Handcrafted daily with love",
-    subtitle: "Artisan breads & pastries",
-    features: [
-      "Sourdough, baguettes, focaccia",
-      "Croissants & sweet treats",
-      "Special orders for events",
-    ],
-    cta: "Open Wed-Sun 7am-3pm",
-    theme: 'cozy',
-    icon: '🥖',
-  },
-};
-
-// Smoke shop
-export const CloudNine = {
-  args: {
-    name: "Cloud Nine",
-    tagline: "Premium smoke & vape shop",
-    subtitle: "21+ only",
-    features: [
-      "Wide selection of products",
-      "Knowledgeable staff",
-      "Loyalty rewards program",
-    ],
-    cta: "Valid ID required • Open daily 10am-10pm",
-    theme: 'industrial',
-    icon: '💨',
   },
 };

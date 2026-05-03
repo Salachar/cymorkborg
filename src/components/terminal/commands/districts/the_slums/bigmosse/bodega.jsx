@@ -101,21 +101,6 @@ export const BODEGA_COMMANDS = {
         content: (
           <CoffeeMachine />
         ),
-        related_commands: {
-          "Digital Wallet": {
-            password: {
-              pw: "clock",
-              hint: "I have hands but can't clap",
-              content: <DigitalWallet isLocked />
-            },
-            content: (
-              <DigitalWallet
-                id="bogeda-coffee-machine-wallet"
-                credits={30}
-              />
-            )
-          }
-        }
       },
 
       "Bodega Radio": {

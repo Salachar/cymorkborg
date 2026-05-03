@@ -1,5 +1,4 @@
 import PasswordPrompt from './PasswordPrompt';
-import DigitalWallet from '../../Extractable/DigitalWallet';
 
 export default {
   title: 'Terminal/PasswordPrompt',
@@ -68,28 +67,6 @@ export const CorporateMode = {
     decoyLetters: 'X, Q, Z, J, K, W',
     onSubmit: (command, commandDef, password) => console.log('Submitted:', password),
     onCancel: () => console.log('Cancelled'),
-  },
-};
-
-// ============================================================================
-// WITH CHILDREN
-// ============================================================================
-
-export const WithDigitalWallet = {
-  name: 'With Children: Digital Wallet Preview',
-  args: {
-    command: 'Access: Employee Locker',
-    password: 'BLUE',
-    hint: 'Color of the sky',
-    difficulty: 'medium',
-    onSubmit: (command, commandDef, password) => console.log('Submitted:', password),
-    onCancel: () => console.log('Cancelled'),
-    children: (
-      <DigitalWallet
-        accountHolder="Marcus 'Slip' Chen"
-        isLocked={true}
-      />
-    )
   },
 };
 

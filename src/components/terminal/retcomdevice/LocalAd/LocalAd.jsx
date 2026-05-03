@@ -199,7 +199,7 @@ export default function LocalAd({
       </div>
 
       {/* Corner stars (friendlier than brackets) */}
-      <div style={{
+      {/* <div style={{
         position: 'absolute',
         top: '10px',
         right: '10px',
@@ -251,7 +251,7 @@ export default function LocalAd({
           height: '5px',
           backgroundColor: t.accent,
         }} />
-      </div>
+      </div> */}
     </div>
   );
 }

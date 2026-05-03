@@ -11,7 +11,7 @@ export default function ATM({
   accountHolder = "PRIVATE",
   balance = "PRIVATE",
   transactions = [],
-  lastService = "2 weeks ago",
+  lastService,
   credits = 0,
   physicalCredits = 0,
 }) {

@@ -357,11 +357,11 @@ export const LUCKY_FLIGHT_CASINO = {
                       <Line neon>• Office space</Line>
                       <Line neon>• Vaska's Office</Line>
                       <Line neon>• Tech room</Line>
-                      <Line red pulse bod>REDACTED</Line>
+                      <Line red pulse bold>REDACTED</Line>
                     </InsetBox>
-                    <Line red pulse bod>REDACTED</Line>
-                    <Line red pulse bod>REDACTED</Line>
-                    <Line red pulse bod>REDACTED</Line>
+                    <Line red pulse bold>REDACTED</Line>
+                    <Line red pulse bold>REDACTED</Line>
+                    <Line red pulse bold>REDACTED</Line>
                   </Node>
                 ),
               },

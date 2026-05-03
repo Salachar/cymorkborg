@@ -19,8 +19,8 @@ export const PUBLIC_COMMANDS = {
     favicon: <Icons.Alert />,
     content: (
       <LocalAd
-        corp="CORPORATE RELATIONS BUREAU"
-        slogan="Working Together Works"
+        name="CORPORATE RELATIONS BUREAU"
+        tagline="Working Together Works"
         theme="corporate"
       >
         <div className="space-y-3 text-blue-200">
@@ -43,9 +43,9 @@ export const PUBLIC_COMMANDS = {
     favicon: <Icons.Ad />,
     content: (
       <LocalAd
-        corp="SAMURAI"
-        slogan="Never Fade Away"
-        tagline="Legendary Rockerboy Legacy Tour"
+        name="SAMURAI"
+        tagline="Never Fade Away"
+        subtitle="Legendary Rockerboy Legacy Tour"
         theme="neon"
       >
         <div className="space-y-3 text-center">
@@ -102,8 +102,8 @@ export const PUBLIC_COMMANDS = {
     favicon: <Icons.Ad />,
     content: (
       <LocalAd
-        corp="THE LOADED DICE"
-        slogan="Gaming Supply Specialists"
+        name="THE LOADED DICE"
+        tagline="Gaming Supply Specialists"
         products={[
           "Premium Gaming Dice",
           "Custom Chip Sets",
@@ -124,8 +124,8 @@ export const PUBLIC_COMMANDS = {
     favicon: <Icons.Ad />,
     content: (
       <LocalAd
-        corp="THE ANCHOR BAR"
-        slogan="Cheap Drinks. No Judgment."
+        name="THE ANCHOR BAR"
+        tagline="Cheap Drinks. No Judgment."
         products={[
           "Beer - 8¤",
           "Whiskey - 12¤",
@@ -146,8 +146,8 @@ export const PUBLIC_COMMANDS = {
     favicon: <Icons.Ad />,
     content: (
       <LocalAd
-        corp="EMERGENCY MEDICAL"
-        slogan="No Questions. No Records."
+        name="EMERGENCY MEDICAL"
+        tagline="No Questions. No Records."
         products={[
           "Trauma Surgery - 150¤",
           "Emergency Treatment - 100¤",
@@ -168,9 +168,9 @@ export const PUBLIC_COMMANDS = {
     favicon: <Icons.Ad />,
     content: (
       <LocalAd
-        corp="CY SECURITY OPERATIONS"
-        slogan="Protect & Serve"
-        tagline="Join the force that keeps Cy safe."
+        name="CY SECURITY OPERATIONS"
+        tagline="Protect & Serve"
+        subtitle="Join the force that keeps Cy safe."
         products={[
           "Competitive Pay & Benefits",
           "Combat Training & Enhancement",
@@ -187,8 +187,8 @@ export const PUBLIC_COMMANDS = {
     favicon: <Icons.Ad />,
     content: (
       <LocalAd
-        corp="PUBLIC SAFETY NOTICE"
-        slogan="Stay Alert. Stay Safe."
+        name="PUBLIC SAFETY NOTICE"
+        tagline="Stay Alert. Stay Safe."
         theme="dystopian"
       >
         <div className="space-y-3 text-orange-200">

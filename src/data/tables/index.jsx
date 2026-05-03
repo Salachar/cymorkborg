@@ -5,6 +5,7 @@ import { EQUIPMENT } from './equipment';
 import { DRUGS } from './drugs';
 import { AMMO_BOOSTERS } from './ammo';
 import { CYBERTECH } from './cybertech';
+import { RANDOM_ITEMS } from './random_items';
 
 export { NANO_POWERS } from './nanoPowers';
 export { NANO_INFESTATIONS } from './nanoInfestations';
@@ -71,9 +72,19 @@ export const GEAR_SECTIONS = [
   },
 ]
 
+const FOUND_SECTIONS = [
+  { name: 'random', entries: RANDOM_ITEMS },
+];
+
 export function searchAllItems(id) {
+  // Check gear sections first
   for (const { name, entries } of GEAR_SECTIONS) {
     const entry = entries.find(e => (e.id || e.label) === id);
+    if (entry) return { entry, section: name };
+  }
+  // Check found/junk pools
+  for (const { name, entries } of FOUND_SECTIONS) {
+    const entry = entries.find(e => e.id === id);
     if (entry) return { entry, section: name };
   }
   return null;

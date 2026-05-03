@@ -14,10 +14,12 @@ import './digitalWallet.css';
  */
 export default function DigitalWallet({
   id,
-  accountNumber = "PRIVATE",
+  accountNumber,
   credits = 0,
-  accountHolder = "PRIVATE",
+  accountHolder,
   lastTransaction,
+  label,
+  description,
   isLocked = false,
 }) {
   return (
@@ -73,11 +75,13 @@ export default function DigitalWallet({
         <div className="wallet-extract-area">
           <Extractable
             id={`${id}-digital-wallet-extractable`}
+            creditsOnly
+            compact
             digitalItems={[
               {
                 id: `${id}-digital-wallet-credits-item`,
-                label: 'Digital Credits',
-                description: `${credits.toLocaleString()}¤ available balance`,
+                label: label || 'Digital Credits',
+                description, // : description || `${credits.toLocaleString()}¤ available balance`,
                 value: credits,
                 isCredits: true,
               }

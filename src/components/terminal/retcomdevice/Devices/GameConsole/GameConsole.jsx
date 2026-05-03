@@ -7,6 +7,7 @@ export default function GameConsole({
   gameLoaded,
   rgbColor = 0,
   friends = [],
+  children,
 }) {
   const [systemStatus, setSystemStatus] = useState('IDLE');
   const [fanSpeed, setFanSpeed] = useState('LOW');
@@ -35,8 +36,6 @@ export default function GameConsole({
   };
 
   return (
-    <div style={{ position: 'relative' }}>
-      {/* Console container with RGB glow */}
       <div
         style={{
           border: `2px solid ${getRgbColor()}`,
@@ -90,10 +89,12 @@ export default function GameConsole({
           </div>
         </div>
 
-        <Line cyan style={{ fontSize: '0.875rem' }}>
+        <Line cyan style={{
+          fontSize: '0.875rem',
+          marginBottom: '0.5rem',
+        }}>
           Gamertag: {owner}
         </Line>
-        <Divider />
 
         {/* System stats */}
         <div
@@ -234,6 +235,17 @@ export default function GameConsole({
           </Line>
         </div>
 
+        {Boolean(children) && (
+          <div style={{
+            margin: '1rem 0',
+            // padding: '1rem',
+            background: 'rgba(0, 0, 0, 0.5)',
+            borderRadius: '6px',
+          }}>
+            {children}
+          </div>
+        )}
+
         {/* Control buttons */}
         <div style={{ display: 'flex', gap: '0.5rem' }}>
           <button
@@ -277,14 +289,5 @@ export default function GameConsole({
           </button>
         </div>
       </div>
-
-      {/* CSS animations */}
-      <style>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.6; }
-        }
-      `}</style>
-    </div>
   );
 }
