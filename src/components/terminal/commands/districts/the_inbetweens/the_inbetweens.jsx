@@ -14,6 +14,7 @@ import {
 } from '@terminal/retcomdevice';
 
 import THE_55_COMMANDS from './the_55';
+import JUST_SCRAPN_BY_COMMANDS from './just_scrapn_by';
 
 export const THE_INBETWEENS_COMMANDS = {
   "The Inbetweens": {
@@ -113,6 +114,9 @@ export const THE_INBETWEENS_COMMANDS = {
             theme="casual"
           />
         ),
+        related_commands: {
+          ...JUST_SCRAPN_BY_COMMANDS,
+        }
       },
 
       "Borghold": {

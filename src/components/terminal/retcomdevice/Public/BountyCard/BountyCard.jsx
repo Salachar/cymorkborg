@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Line, Divider } from '@terminal/TerminalComponents';
-import Extractable from '../Extractable/Extractable';
+import Extractable from '../../Extractable/Extractable';
 import { formatCredits } from '@utils/general';
 import { RETCOM_EXTRACTED_KEY } from '@utils/localStorage';
 import './BountyCard.css';

@@ -7,12 +7,8 @@ import {
 } from '@terminal/TerminalComponents';
 
 import {
-  BuildingAccess,
-  FacilityPortal,
-  NetworkActivity,
   Node,
-  RCDAlert,
-  Devices,
+  Nodes,
 } from "@terminal/retcomdevice";
 
 export const IRON_VAULT_STORAGE_COMMANDS = {
@@ -24,7 +20,7 @@ export const IRON_VAULT_STORAGE_COMMANDS = {
       </NodePreview>
     ),
     content: (
-      <FacilityPortal
+      <Nodes.FacilityPortal
         companyName="IRON VAULT STORAGE"
         tagline="Secure. Discreet. Yours."
         location="Ports District"
@@ -55,10 +51,10 @@ export const IRON_VAULT_STORAGE_COMMANDS = {
         ),
         related_commands: {
           "Vending Machine": {
-            content: <Devices.VendingMachine />,
+            content: <Nodes.VendingMachine />,
           },
           "Coffee Machine": {
-            content: <Devices.CoffeeMachine />,
+            content: <Nodes.CoffeeMachine />,
           },
         },
       },
@@ -132,10 +128,10 @@ export const IRON_VAULT_STORAGE_COMMANDS = {
                 ),
                 related_commands: {
                   "Workstation": {
-                    content: <Devices.Workstation />,
+                    content: <Nodes.Workstation />,
                   },
                   "Smart Fridge": {
-                    content: <Devices.SmartFridge />,
+                    content: <Nodes.SmartFridge />,
                   },
                 },
               },
@@ -178,7 +174,7 @@ export const IRON_VAULT_STORAGE_COMMANDS = {
               "Management on site 08:00–20:00 daily",
             ]}
           >
-            <RCDAlert
+            <Nodes.RCDAlert
               message="Tenant registry access restricted — unit contents not logged"
               details={[
                 "Iron Vault operates a no-inspection policy — contents are tenant business",
@@ -193,7 +189,7 @@ export const IRON_VAULT_STORAGE_COMMANDS = {
           "Building Access": {
             favicon: <Icons.Lock />,
             content: (
-              <BuildingAccess
+              <Nodes.BuildingAccess
                 title="IRON VAULT STORAGE — ACCESS CONTROL"
                 points={[
                   {
@@ -224,7 +220,7 @@ export const IRON_VAULT_STORAGE_COMMANDS = {
           "Facility Network": {
             favicon: <Icons.LAN />,
             content: (
-              <NetworkActivity
+              <Nodes.NetworkActivity
                 title="IRONVAULT_LOCAL"
                 environment={{
                   power: "ONLINE",

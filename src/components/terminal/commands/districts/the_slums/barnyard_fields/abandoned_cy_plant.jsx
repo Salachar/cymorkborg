@@ -8,22 +8,8 @@ import {
 } from '@terminal/TerminalComponents';
 
 import {
-  ATM,
-  BuildingAccess,
-  Camera,
-  DigitalWallet,
-  Extractable,
-  FacilityPortal,
-  LocalAd,
-  NetworkActivity,
   Node,
-  RetComImage,
-  RCDAlert,
-  Workstation,
-  Devices,
-  Safe,
-  EncryptedMessage,
-  ShiftSchedule,
+  Nodes,
 } from "@terminal/retcomdevice";
 
 import basement_bp from '@images/blueprints/corporate-office-2/corporate-office-2-basement-blueprint.jpg';
@@ -43,7 +29,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
       </NodePreview>
     ),
     content: (
-      <FacilityPortal
+      <Nodes.FacilityPortal
         theme="secure"
         companyName="CY_SANITATION HEADQUARTERS"
         tagline="Municipal waste management — operations transferred to subsidiary."
@@ -59,14 +45,14 @@ export const CY_SANITATION_HQ_COMMANDS = {
           <Line yellow bullet bold>Building sheathed in industrial plastic — sealed</Line>
           <Line yellow bullet bold>Containment airlock — operational</Line>
         </InsetBox>
-        <RCDAlert
+        <Nodes.RCDAlert
           message="CY_Sanitation records found"
           details={[
             "Staff were not evacuated at time of quarantine",
             "City Inspections have detected signs of life as recent as two weeks ago",
           ]}
         />
-      </FacilityPortal>
+      </Nodes.FacilityPortal>
     ),
     related_commands: {
       "Concierge": {
@@ -80,7 +66,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
               "Emergency evacuation map: see south wall",
             ]}
           >
-            <LocalAd
+            <Nodes.LocalAd
               name="Employee Spotlight!"
               subtitle="10 Year Anniversary!"
               products={[
@@ -95,7 +81,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
           "ATM": {
             favicon: <Icons.ATM />,
             content: (
-              <ATM
+              <Nodes.ATM
                 id="cy_sanitation_hq_atm"
                 location="CY_Sanitation HQ - Lobby"
                 credits={50}
@@ -105,19 +91,19 @@ export const CY_SANITATION_HQ_COMMANDS = {
 
           "Vending Machine": {
             content: (
-              <Devices.VendingMachine />
+              <Nodes.VendingMachine />
             )
           },
 
           "Coffee Machine": {
             content: (
-              <Devices.CoffeeMachine>
-                <DigitalWallet
+              <Nodes.CoffeeMachine>
+                <Nodes.DigitalWallet
                   id="cysan_con_coffee_machine_wallet"
                   label="Please buy more coffee, light roast is available"
                   credits={50}
                 />
-              </Devices.CoffeeMachine>
+              </Nodes.CoffeeMachine>
             )
           },
         },
@@ -212,7 +198,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
                       "Staff: 1 security officer per shift",
                     ]}
                   >
-                    <RCDAlert
+                    <Nodes.RCDAlert
                       title="Jackpoint detected"
                     />
                   </Node>
@@ -220,15 +206,15 @@ export const CY_SANITATION_HQ_COMMANDS = {
                 related_commands: {
                   "Sig's Terminal": {
                     content: (
-                      <Devices.Workstation>
-                        <EncryptedMessage
+                      <Nodes.Workstation>
+                        <Nodes.EncryptedMessage
                           messages={[
                             "CLUE: [RECOVERED — PARTIAL] Calendar entry, date corrupted",
                             "10:00 — [CORRUPTED] rep on-site re: AI system handoff",
                             "[REMAINDER CORRUPTED]",
                           ]}
                         />
-                      </Devices.Workstation>
+                      </Nodes.Workstation>
                     )
                   },
                 },
@@ -357,14 +343,14 @@ export const CY_SANITATION_HQ_COMMANDS = {
                       "Building-wide intercom access at reception terminal",
                     ]}
                   >
-                    <RCDAlert
+                    <Nodes.RCDAlert
                       title="Jackpoint detected"
                     />
                   </Node>
                 ),
                 related_commands: {
                   "Petra's Terminal": {
-                    content: <Devices.Workstation />,
+                    content: <Nodes.Workstation />,
                   },
                 },
               },
@@ -385,7 +371,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
                 related_commands: {
                   "Marta's Workstation": {
                     content: (
-                      <Devices.Workstation />
+                      <Nodes.Workstation />
                     ),
                   },
                   "Unoccupied Workstation": {
@@ -394,13 +380,13 @@ export const CY_SANITATION_HQ_COMMANDS = {
                       hint: "Aggressively white and bald cleaning mascot",
                     },
                     content: (
-                      <Devices.Workstation>
-                        <EncryptedMessage
+                      <Nodes.Workstation>
+                        <Nodes.EncryptedMessage
                           messages={[
                             "CLUE: Marta — if you get this, east loading dock, 06:00. Service van coming — white, logo looks like a spider or a wheel or something. Don't ask questions just get in. — D",
                           ]}
                         />
-                      </Devices.Workstation>
+                      </Nodes.Workstation>
                     ),
                   },
                 },
@@ -421,7 +407,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
                 ),
                 related_commands: {
                   "Ray's Workstation": {
-                    content: <Devices.Workstation />,
+                    content: <Nodes.Workstation />,
                   },
                 },
               },
@@ -456,17 +442,17 @@ export const CY_SANITATION_HQ_COMMANDS = {
                 related_commands: {
                   "Pit Radio": {
                     content: (
-                      <Devices.Radio />
+                      <Nodes.Radio />
                     )
                   },
                   "Smart Fridge": {
                     content: (
-                      <Devices.SmartFridge />
+                      <Nodes.SmartFridge />
                     )
                   },
                   "Smart Bin": {
                     content: (
-                      <Devices.SmartBin
+                      <Nodes.SmartBin
                         id="cy_plant_pitt_bin"
                         items={[
                           'duct_tape',
@@ -477,7 +463,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
                   },
                   "Dave's Workstation": {
                     content: (
-                      <Devices.Workstation
+                      <Nodes.Workstation
                         lastActivity="Items entered into desk safe"
                       />
                     ),
@@ -488,7 +474,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
                           hint: "Password recently reset to employee's last name",
                         },
                         content: (
-                          <Safe
+                          <Nodes.Safe
                             id="cysan_dave_desk_safe"
                             title="Desk Safe"
                             items={[
@@ -503,23 +489,23 @@ export const CY_SANITATION_HQ_COMMANDS = {
                   },
                   "Workstation 2": {
                     content: (
-                      <Devices.Workstation />
+                      <Nodes.Workstation />
                     )
                   },
                   "Workstation 3": {
                     content: (
-                      <Devices.Workstation />
+                      <Nodes.Workstation />
                     ),
                     related_commands: {
                       "PulsePlay": {
                         content: (
-                          <Devices.GameConsole>
-                            <DigitalWallet
+                          <Nodes.GameConsole>
+                            <Nodes.DigitalWallet
                               id="cysan_work_console_wallet"
                               label="Gotta save up for a new game to get through work"
                               credits={50}
                             />
-                          </Devices.GameConsole>
+                          </Nodes.GameConsole>
                         )
                       },
                     }
@@ -530,7 +516,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
                       hint: "What Len was always doing",
                     },
                     content: (
-                      <Devices.Workstation
+                      <Nodes.Workstation
                         owner="Len"
                         role="General Operations"
                         status="IDLE"
@@ -549,7 +535,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
                           { name: "personal_notes.txt", timestamp: "Two days prior" },
                         ]}
                       >
-                        <EncryptedMessage
+                        <Nodes.EncryptedMessage
                           messages={[
                             "CLUE: [RECOVERED] transfer_manifest_FINAL.pdf — partial contents",
                             "Asset transfer manifest — non-organic infrastructure",
@@ -560,7 +546,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
                             "[REMAINDER CORRUPTED]",
                           ]}
                         />
-                      </Devices.Workstation>
+                      </Nodes.Workstation>
                     ),
                   },
                 }
@@ -598,7 +584,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
                       "Waiting area: 6 seats",
                     ]}
                   >
-                    <RCDAlert
+                    <Nodes.RCDAlert
                       title="Jackpoint detected"
                     />
                   </Node>
@@ -606,13 +592,13 @@ export const CY_SANITATION_HQ_COMMANDS = {
                 related_commands: {
                   "Coffee Machine": {
                     content: (
-                      <Devices.CoffeeMachine />
+                      <Nodes.CoffeeMachine />
                     )
                   },
                   "Reception Terminal": {
                     content: (
-                      <Devices.Workstation>
-                        <EncryptedMessage
+                      <Nodes.Workstation>
+                        <Nodes.EncryptedMessage
                           messages={[
                             "CLUE: [RECOVERED — PARTIAL] Automated backup log — post-quarantine",
                             "Backup initiated: 08:47",
@@ -622,7 +608,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
                             "[LOG ENDS]",
                           ]}
                         />
-                      </Devices.Workstation>
+                      </Nodes.Workstation>
                     )
                   },
                 }
@@ -644,7 +630,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
                 related_commands: {
                   "Smart Bin": {
                     content: (
-                      <Devices.SmartBin
+                      <Nodes.SmartBin
                         id="cy_plant_mm_floor_bin"
                         items={[
                           'duct_tape',
@@ -654,22 +640,22 @@ export const CY_SANITATION_HQ_COMMANDS = {
                   },
                   "Workstation 1": {
                     content: (
-                      <Devices.Workstation />
+                      <Nodes.Workstation />
                     )
                   },
                   "Workstation 2": {
                     content: (
-                      <Devices.Workstation />
+                      <Nodes.Workstation />
                     )
                   },
                   "Workstation 3": {
                     content: (
-                      <Devices.Workstation />
+                      <Nodes.Workstation />
                     )
                   },
                   "Workstation 4": {
                     content: (
-                      <Devices.Workstation />
+                      <Nodes.Workstation />
                     )
                   },
                 }
@@ -711,7 +697,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
                 related_commands: {
                   "Smart Bin": {
                     content: (
-                      <Devices.SmartBin
+                      <Nodes.SmartBin
                         id="cy_plant_bathroom_bin"
                         location="Bathrooms — Room 16"
                         status="NOMINAL"
@@ -743,7 +729,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
                       "Filing system: confidential contracts and compliance records",
                     ]}
                   >
-                    <RCDAlert
+                    <Nodes.RCDAlert
                       message="Jackpoint detected"
                     />
                   </Node>
@@ -751,12 +737,12 @@ export const CY_SANITATION_HQ_COMMANDS = {
                 related_commands: {
                   "Smart Fridge": {
                     content: (
-                      <Devices.SmartFridge />
+                      <Nodes.SmartFridge />
                     )
                   },
                   "Smart Bin": {
                     content: (
-                      <Devices.SmartBin
+                      <Nodes.SmartBin
                         id="cy_plant_senior_office_bin"
                         items={[
                           'duct_tape',
@@ -770,8 +756,8 @@ export const CY_SANITATION_HQ_COMMANDS = {
                       hint: "First name basis",
                     },
                     content: (
-                      <Devices.Workstation>
-                        <EncryptedMessage
+                      <Nodes.Workstation>
+                        <Nodes.EncryptedMessage
                           messages={[
                             "Draft — unsent",
                             "To: Municipal Oversight, Re: Quarantine Authorization 7-NANO-44",
@@ -782,7 +768,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
                             "[DRAFT UNSENT — 08:54]",
                           ]}
                         />
-                      </Devices.Workstation>
+                      </Nodes.Workstation>
                     ),
                   },
                 }
@@ -800,7 +786,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
                       "View: city street, east-facing",
                     ]}
                   >
-                    <RCDAlert
+                    <Nodes.RCDAlert
                       message="Jackpoint detected"
                     />
                   </Node>
@@ -823,7 +809,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
             title="CY_SANITATION HQ — INTERNAL SYSTEMS"
             subtitle="Staff access only — all actions logged"
           >
-            <RCDAlert
+            <Nodes.RCDAlert
               message="Network offline since quarantine. Historical records accessible. No live systems."
               details={[
                 "All active systems went offline at time of quarantine — logs terminate abruptly",
@@ -838,7 +824,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
           "Shift Schedule": {
             favicon: <Icons.Files />,
             content: (
-              <ShiftSchedule
+              <Nodes.ShiftSchedule
                 location="CY_Sanitation HQ"
                 shift="Morning Shift"
                 shiftTime="08:00 — 16:00"
@@ -862,7 +848,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
               showCount: true,
             },
             content: (
-              <BuildingAccess
+              <Nodes.BuildingAccess
                 title="CY_SANITATION HQ — ACCESS CONTROL"
                 points={[
                   {
@@ -906,7 +892,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
           "Facility Network": {
             favicon: <Icons.LAN />,
             content: (
-              <NetworkActivity
+              <Nodes.NetworkActivity
                 title="CY_SANITATION_LOCAL"
                 environment={{
                   power: "MINIMAL — Emergency connection",
@@ -925,10 +911,10 @@ export const CY_SANITATION_HQ_COMMANDS = {
                   { name: "Workstations", location: "Various", status: "OFFLINE" },
                 ]}
               >
-                <RCDAlert
+                <Nodes.RCDAlert
                   title="Jackpoints detected through facility"
                 />
-              </NetworkActivity>
+              </Nodes.NetworkActivity>
             ),
           },
 
@@ -953,7 +939,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
                   <Node
                     title="CY_SANITATION - BASEMENT BLUEPRINT"
                   >
-                    <RetComImage
+                    <Nodes.RetComImage
                       src={basement_bp}
                       alt="CY_SANITATION Basement"
                       style={{ margin: "1rem", width: "100%" }}
@@ -973,7 +959,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
                   <Node
                     title="CY_SANITATION - FLOOR 1 BLUEPRINT"
                   >
-                    <RetComImage
+                    <Nodes.RetComImage
                       src={floor1_bp}
                       alt="CY_SANITATION Floor 1"
                       style={{ margin: "1rem", width: "100%" }}
@@ -993,9 +979,9 @@ export const CY_SANITATION_HQ_COMMANDS = {
                   <Node
                     title="CY_SANITATION - FLOOR 2 BLUEPRINT"
                   >
-                    <RetComImage
+                    <Nodes.RetComImage
                       src={floor2_bp}
-                      alt="Lucky Flight Casino Floor 2"
+                      alt="CY_SANITATION Floor 2"
                       style={{ margin: "1rem", width: "100%" }}
                     />
                     <InsetBox color="yellow" title="Specifications">
@@ -1013,7 +999,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
                   <Node
                     title="CY_SANITATION - ROOF BLUEPRINT"
                   >
-                    <RetComImage
+                    <Nodes.RetComImage
                       src={roof_bp}
                       alt="CY_SANITATION Roof"
                       style={{ margin: "1rem", width: "100%" }}
