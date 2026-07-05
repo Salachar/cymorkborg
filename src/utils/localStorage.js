@@ -14,7 +14,7 @@ export const CYBORG_SAVED_CHARACTERS        = 'cyborg_saved_characters';
 export const RETCOM_EXTRACTED_KEY           = 'cyborg_retcom_extracted';
 export const RETCOM_WALLET_KEY              = 'cyborg_retcom_wallet';
 export const LIST_INDENT_KEY                = 'cyborg_list_indent';
-
+export const BOOKMARKS_STORAGE_KEY          = 'cyborg_bookmarks';
 // Alias — both names exist in the codebase
 export const WALLET_STORAGE_KEY = RETCOM_WALLET_KEY;
 
@@ -60,6 +60,30 @@ export const getWallet = () => get(RETCOM_WALLET_KEY, { credits: 0, items: [] })
 export function saveWallet(wallet) {
   set(RETCOM_WALLET_KEY, wallet);
   window.dispatchEvent(new Event('walletUpdated'));
+}
+
+// ============================================================================
+// ADD TO @utils/localStorage
+// ============================================================================
+
+export const NOTES_STORAGE_KEY = 'retcom_notes';
+
+export function getNotes() {
+  try {
+    const saved = localStorage.getItem(NOTES_STORAGE_KEY);
+    return saved ? JSON.parse(saved) : [];
+  } catch (e) {
+    console.error('Failed to load notes:', e);
+    return [];
+  }
+}
+
+export function saveNotes(notes) {
+  try {
+    localStorage.setItem(NOTES_STORAGE_KEY, JSON.stringify(notes));
+  } catch (e) {
+    console.error('Failed to save notes:', e);
+  }
 }
 
 // export function transferWalletToCharacter(character) {

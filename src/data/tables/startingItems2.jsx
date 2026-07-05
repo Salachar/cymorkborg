@@ -35,7 +35,7 @@ export const STARTING_ITEMS_2 = [
     id: "crowbar",
     label: "Crowbar",
     die: "d4",
-    description: <>Damage.</>,
+    description: <>d4 damage.</>,
   },
   {
     id: "superlube",
@@ -46,7 +46,7 @@ export const STARTING_ITEMS_2 = [
     id: "grappling_hook",
     label: "Grappling-Hook Crossbow",
     die: "d4",
-    description: <>Damage.</>,
+    description: <>d4 damage.</>,
   },
   {
     id: "acid",
@@ -61,6 +61,6 @@ export const STARTING_ITEMS_2 = [
   {
     id: "random_cybertech_1",
     label: "Random Cybertech",
-    description: <>Roll d10 on page 69.</>,
+    description: <>Roll on Cybertech table.</>,
   },
 ];

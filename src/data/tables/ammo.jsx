@@ -65,7 +65,7 @@ export const AMMO_BOOSTERS = [
     id: "heatseekers",
     label: "Heatseekers",
     cost: "120¤",
-    description: <>−2DR when firing against targets giving off body heat.</>,
+    description: <>-2DR when firing against targets giving off body heat.</>,
   },
 ];
 

@@ -1,0 +1,155 @@
+.notes-page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: monospace;
+  background-color: rgb(19, 23, 34);
+}
+
+.notes-header {
+  background-color: rgb(27, 36, 58);
+  border-bottom: 1px solid rgb(77, 167, 188);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1rem;
+}
+
+.notes-header-title {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: rgb(79, 209, 197);
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 8px rgba(79, 209, 197, 0.4);
+  line-height: 1;
+}
+
+.notes-header-subtitle {
+  font-size: 0.55rem;
+  color: rgb(148, 163, 184);
+  margin-top: 0.15rem;
+  letter-spacing: 0.08em;
+}
+
+.notes-clear-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.35rem 0.5rem;
+  background-color: rgba(239, 68, 68, 0.12);
+  color: rgb(239, 68, 68);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.notes-confirm-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.notes-confirm-label {
+  font-size: 0.65rem;
+  color: rgb(148, 163, 184);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.notes-confirm-btn {
+  padding: 0.35rem 0.6rem;
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: monospace;
+  font-size: 0.65rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+.notes-confirm-yes {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: rgb(239, 68, 68);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.notes-confirm-no {
+  background-color: rgba(79, 209, 197, 0.12);
+  color: rgb(79, 209, 197);
+  border: 1px solid rgba(79, 209, 197, 0.35);
+}
+
+.notes-list {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+  background-color: rgba(29, 35, 50, 0.7);
+  padding: 0.75rem 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.notes-empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(148, 163, 184, 0.5);
+  font-size: 0.8rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+.notes-input-bar {
+  flex-shrink: 0;
+  background-color: rgb(27, 36, 58);
+  border-top: 1px solid rgb(77, 167, 188);
+  padding: 0.6rem 1rem;
+  padding-bottom: calc(max(0.6rem, env(safe-area-inset-bottom)) + 0.1rem);
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.notes-input {
+  flex: 1;
+  background-color: rgba(29, 35, 50, 0.6);
+  border: 1px solid rgba(79, 209, 197, 0.35);
+  border-radius: 2px;
+  color: rgb(203, 213, 225);
+  font-family: monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  padding: 0.5rem 0.6rem;
+  resize: none;
+  outline: none;
+  max-height: 200px;
+}
+
+.notes-input::placeholder {
+  color: rgba(148, 163, 184, 0.5);
+}
+
+.notes-send-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.75rem;
+  background-color: rgba(79, 209, 197, 0.2);
+  color: rgb(79, 209, 197);
+  border: 1px solid rgba(79, 209, 197, 0.4);
+  border-radius: 2px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.notes-send-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}

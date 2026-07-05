@@ -9,7 +9,7 @@ export const STARTING_ITEMS_3 = [
   {
     id: "adrenachrome",
     label: "Adrenachrome_HST",
-    description: <>d3 doses. Heals d6 HP, +1 on all abilities for d6 rounds, then −1 until rest.</>,
+    description: <>d3 doses. Heals d6 HP, +1 on all abilities for d6 rounds, then -1 until rest.</>,
   },
   {
     id: "drone_suit",
@@ -59,6 +59,6 @@ export const STARTING_ITEMS_3 = [
   {
     id: "nano_power",
     label: "A Random Nano Power",
-    description: <>Roll on Nano powers table.</>,
+    description: <>Roll on Nano Powers table.</>,
   },
 ];
