@@ -10,6 +10,8 @@ import {
   RCDAlert,
 } from "@terminal/retcomdevice";
 
+import LAKE_GRAVEL_NEARBY_COMMANDS from './lake_gravel_nearby';
+
 export const LAKE_GRAVEL_COMMANDS = {
   "Lake Gravel": {
     favicon: <Icons.Water />,
@@ -39,7 +41,9 @@ export const LAKE_GRAVEL_COMMANDS = {
         />
       </PublicPortal>
     ),
-    related_commands: {},
+    related_commands: {
+      ...LAKE_GRAVEL_NEARBY_COMMANDS,
+    },
   },
 };
 

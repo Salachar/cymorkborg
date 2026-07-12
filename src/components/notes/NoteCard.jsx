@@ -3,6 +3,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
+import ShareIcon from '@mui/icons-material/IosShare';
+
+import ConfirmationModal from '@components/ConfirmationModal/ConfirmationModal';
 
 import './noteCard.css';
 
@@ -17,9 +20,11 @@ function formatTimestamp(ms) {
   });
 }
 
-export default function NoteCard({ note, onSave, onDelete }) {
+export default function NoteCard({ note, onSave, onDelete, onShare, isConnected = false }) {
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(note.text);
+  const [justShared, setJustShared] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   const startEdit = () => {
     setDraft(note.text);
@@ -34,12 +39,19 @@ export default function NoteCard({ note, onSave, onDelete }) {
   const saveEdit = () => {
     const trimmed = draft.trim();
     if (!trimmed) {
-      // Don't allow saving to empty — just cancel instead.
       cancelEdit();
       return;
     }
     onSave?.(note.id, trimmed);
     setEditing(false);
+  };
+
+  const handleShare = () => {
+    const ok = onShare?.(note);
+    if (ok) {
+      setJustShared(true);
+      setTimeout(() => setJustShared(false), 2000);
+    }
   };
 
   const handleKeyDown = (e) => {
@@ -73,10 +85,19 @@ export default function NoteCard({ note, onSave, onDelete }) {
             </>
           ) : (
             <>
+              {isConnected && (
+                <button
+                  className={`nc-btn ${justShared ? 'nc-btn-shared' : ''}`}
+                  onClick={handleShare}
+                  title="Share to network"
+                >
+                  <ShareIcon style={{ fontSize: 14 }} />
+                </button>
+              )}
               <button className="nc-btn" onClick={startEdit} title="Edit">
                 <EditIcon style={{ fontSize: 14 }} />
               </button>
-              <button className="nc-btn nc-btn-danger" onClick={() => onDelete?.(note.id)} title="Delete">
+              <button className="nc-btn nc-btn-danger" onClick={() => setConfirmDelete(true)} title="Delete">
                 <DeleteIcon style={{ fontSize: 14 }} />
               </button>
             </>
@@ -85,18 +106,25 @@ export default function NoteCard({ note, onSave, onDelete }) {
       </div>
 
       {editing ? (
-        <>
-          <textarea
-            className="nc-edit-textarea"
-            value={draft}
-            onChange={(e) => setDraft(e.target.value)}
-            onKeyDown={handleKeyDown}
-            autoFocus
-          />
-        </>
+        <textarea
+          className="nc-edit-textarea"
+          value={draft}
+          onChange={(e) => setDraft(e.target.value)}
+          onKeyDown={handleKeyDown}
+          autoFocus
+        />
       ) : (
         <div className="nc-body">{note.text}</div>
       )}
+
+      <ConfirmationModal
+        open={confirmDelete}
+        title="Delete Note"
+        message="Delete this note? This cannot be undone."
+        confirmLabel="Delete"
+        onConfirm={() => { setConfirmDelete(false); onDelete?.(note.id); }}
+        onCancel={() => setConfirmDelete(false)}
+      />
     </div>
   );
 }

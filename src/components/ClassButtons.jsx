@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CLASSES } from "../data/builder";
 
-import AppDataExportImport from "../components/CharacterExportImport";
+// import AppDataExportImport from "../components/CharacterExportImport";
 
 import { CLASS_BUTTONS_STORAGE_KEY } from '@utils/localStorage';
 
@@ -113,7 +113,7 @@ export default function ClassButtons({
             </div>
           </div>
 
-          <AppDataExportImport />
+          {/* <AppDataExportImport /> */}
         </>
       )}
     </div>

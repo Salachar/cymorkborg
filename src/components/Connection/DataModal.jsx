@@ -1,12 +1,10 @@
 import { useRef, useState } from 'react';
+import Modal from '@components/Modal/Modal';
 import ConfirmationModal from '@components/ConfirmationModal/ConfirmationModal';
 import ConnectionModal from '@components/Connection/ConnectionModal';
 import { useCyborgSocket } from '@hooks/useCyborgSocket';
 
-export default function AppDataExportImport({
-  character = null,
-  onUpdate = () => {},
-}) {
+export default function DataModal({ open, onClose }) {
   const fileInputRef = useRef(null);
   const [importStatus, setImportStatus] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
@@ -17,6 +15,7 @@ export default function AppDataExportImport({
 
   const { status, connectedClients, send } = useCyborgSocket();
   const isConnected = status === 'connected';
+  const otherClients = connectedClients;
 
   // ── Export ──────────────────────────────────────────────────────────────────
 
@@ -151,52 +150,45 @@ export default function AppDataExportImport({
     } catch { return iso; }
   };
 
-  const buttonClass = "px-4 py-2 bg-gray-800 border-2 border-cy-cyan-subtle text-white font-bold uppercase text-xs transition-all shadow-lg shadow-cy-cyan/30";
+  const buttonClass = "w-full px-4 py-2 bg-gray-800 border-2 border-cy-cyan-subtle text-white font-bold uppercase text-xs transition-all shadow-lg shadow-cy-cyan/30 text-center";
   const buttonStyles = { color: "white", cursor: "pointer", opacity: "0.6" };
 
-  const otherClients = connectedClients;
-
   return (
-    <div>
-      <div className="flex justify-end gap-3 mb-4">
-        <button onClick={handleExport} className={buttonClass} style={buttonStyles}
-          title="Export all app data including characters, settings, and preferences">
-          Export
-        </button>
-
-        <label className={buttonClass} style={buttonStyles}
-          title="Import app data backup (will replace all current data)">
-          Import
-          <input ref={fileInputRef} type="file" accept=".json"
-            onChange={handleFileSelect} className="hidden" />
-        </label>
-
-        <button onClick={handleSendToDevice} className={buttonClass} style={buttonStyles}
-          title="Send all data to another connected device">
-          Send to Device
-        </button>
-
-        {Boolean(character) && (
-          <button onClick={() => { character.toggleLock(); onUpdate(); }}
-            className={buttonClass} style={buttonStyles}>
-            {character.locked ? "Locked" : "Unlocked"}
+    <>
+      <Modal open={open} onClose={onClose} title="APP DATA" subtitle="Export, import, or transfer your data">
+        <div className="flex flex-col gap-3">
+          <button onClick={handleExport} className={buttonClass} style={buttonStyles}
+            title="Export all app data including characters, settings, and preferences">
+            Export
           </button>
+
+          <label className={buttonClass} style={buttonStyles}
+            title="Import app data backup (will replace all current data)">
+            Import
+            <input ref={fileInputRef} type="file" accept=".json"
+              onChange={handleFileSelect} className="hidden" />
+          </label>
+
+          <button onClick={handleSendToDevice} className={buttonClass} style={buttonStyles}
+            title="Send all data to another connected device">
+            Send to Device
+          </button>
+        </div>
+
+        {importStatus === 'success' && (
+          <div className="bg-cy-cyan/20 border border-cy-cyan p-4 animate-pulse">
+            <p className="text-cy-cyan font-bold text-sm">Data imported successfully!</p>
+            <p className="text-gray-300 text-sm mt-2">Please refresh the page to load the imported data.</p>
+          </div>
         )}
-      </div>
 
-      {importStatus === 'success' && (
-        <div className="bg-cy-cyan/20 border border-cy-cyan p-4 mb-4 animate-pulse">
-          <p className="text-cy-cyan font-bold text-sm">Data imported successfully!</p>
-          <p className="text-gray-300 text-sm mt-2">Please refresh the page to load the imported data.</p>
-        </div>
-      )}
-
-      {importStatus === 'error' && (
-        <div className="bg-red-900/20 border border-red-500 p-4 mb-4">
-          <p className="text-red-400 font-bold text-sm">Import Failed</p>
-          <p className="text-gray-300 text-sm mt-2">{errorMessage}</p>
-        </div>
-      )}
+        {importStatus === 'error' && (
+          <div className="bg-red-900/20 border border-red-500 p-4">
+            <p className="text-red-400 font-bold text-sm">Import Failed</p>
+            <p className="text-gray-300 text-sm mt-2">{errorMessage}</p>
+          </div>
+        )}
+      </Modal>
 
       {/* Import confirm */}
       <ConfirmationModal
@@ -212,66 +204,63 @@ export default function AppDataExportImport({
       />
 
       {/* Transfer recipient picker */}
-      {transferOpen && (
-        <div className="cm-overlay" onClick={() => setTransferOpen(false)}>
-          <div className="cm-modal" onClick={e => e.stopPropagation()}>
-            <div className="cm-title">Send to Device</div>
-            <div className="cm-message">
-              Select the device to send all data to. Their current data will be replaced.
-            </div>
-            {otherClients.length === 0 ? (
-              <div className="cm-message" style={{ opacity: 0.6 }}>No other clients connected.</div>
-            ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', marginBottom: '1rem' }}>
-                {otherClients.map(name => (
-                  <button
-                    key={name}
-                    onClick={() => setSelectedRecipient(name)}
-                    style={{
-                      padding: '0.5rem 0.75rem',
-                      fontFamily: 'monospace',
-                      fontSize: '0.8rem',
-                      textAlign: 'left',
-                      borderRadius: '2px',
-                      cursor: 'pointer',
-                      backgroundColor: selectedRecipient === name
-                        ? 'rgba(79, 209, 197, 0.2)' : 'rgba(29, 35, 50, 0.5)',
-                      color: selectedRecipient === name
-                        ? 'rgb(79, 209, 197)' : 'rgb(203, 213, 225)',
-                      border: `1px solid ${selectedRecipient === name
-                        ? 'rgba(79, 209, 197, 0.5)' : 'rgba(79, 209, 197, 0.2)'}`,
-                    }}
-                  >
-                    {name}
-                  </button>
-                ))}
-              </div>
-            )}
-            <div className="cm-actions">
+      <Modal
+        open={transferOpen}
+        onClose={() => { setTransferOpen(false); setSelectedRecipient(null); }}
+        title="Send to Device"
+        message="Select the device to send all data to. Their current data will be replaced."
+      >
+        {otherClients.length === 0 ? (
+          <div className="mdl-message" style={{ opacity: 0.6 }}>No other clients connected.</div>
+        ) : (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+            {otherClients.map(name => (
               <button
-                className="cm-btn cm-btn-confirm"
-                onClick={handleConfirmTransfer}
-                disabled={!selectedRecipient}
-                style={{ opacity: selectedRecipient ? 1 : 0.35, cursor: selectedRecipient ? 'pointer' : 'not-allowed' }}
+                key={name}
+                onClick={() => setSelectedRecipient(name)}
+                style={{
+                  padding: '0.5rem 0.75rem',
+                  fontFamily: 'monospace',
+                  fontSize: '0.8rem',
+                  textAlign: 'left',
+                  borderRadius: '2px',
+                  cursor: 'pointer',
+                  backgroundColor: selectedRecipient === name
+                    ? 'rgba(79, 209, 197, 0.2)' : 'rgba(29, 35, 50, 0.5)',
+                  color: selectedRecipient === name
+                    ? 'rgb(79, 209, 197)' : 'rgb(203, 213, 225)',
+                  border: `1px solid ${selectedRecipient === name
+                    ? 'rgba(79, 209, 197, 0.5)' : 'rgba(79, 209, 197, 0.2)'}`,
+                }}
               >
-                Send
+                {name}
               </button>
-              <button className="cm-btn cm-btn-cancel"
-                onClick={() => { setTransferOpen(false); setSelectedRecipient(null); }}>
-                Cancel
-              </button>
-            </div>
+            ))}
           </div>
+        )}
+        <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'flex-end' }}>
+          <button
+            className="mdl-close-btn"
+            onClick={handleConfirmTransfer}
+            disabled={!selectedRecipient}
+            style={{ padding: '0.35rem 0.75rem', opacity: selectedRecipient ? 1 : 0.35, cursor: selectedRecipient ? 'pointer' : 'not-allowed' }}
+          >
+            Send
+          </button>
+          <button
+            className="mdl-close-btn"
+            style={{ padding: '0.35rem 0.75rem', backgroundColor: 'transparent', color: 'rgba(148, 163, 184, 0.6)', borderColor: 'rgba(148, 163, 184, 0.2)' }}
+            onClick={() => { setTransferOpen(false); setSelectedRecipient(null); }}
+          >
+            Cancel
+          </button>
         </div>
-      )}
+      </Modal>
 
       {/* Connection modal — shown when Send to Device is clicked while offline */}
-      <ConnectionModal
-        open={connectionOpen}
-        onClose={() => setConnectionOpen(false)}
-      >
+      <ConnectionModal open={connectionOpen} onClose={() => setConnectionOpen(false)}>
         <span>Connect to the network first, then try Send to Device again.</span>
       </ConnectionModal>
-    </div>
+    </>
   );
 }

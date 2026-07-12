@@ -13,6 +13,8 @@ import {
 import { AQUACULTURE_MAZE_COMMANDS } from './aquaculture_maze';
 import { LAKE_GRAVEL_COMMANDS } from './lake_gravel';
 import { CYNERGY_PLANTS_COMMANDS } from './cynergy_plants';
+import { OLD_CY_COMMANDS } from './old_cy';
+import WATERWAYS_NEARBY_COMMANDS from './waterways_nearby';
 
 export const WATERWAYS_COMMANDS = {
   "Waterways": {
@@ -44,9 +46,11 @@ export const WATERWAYS_COMMANDS = {
       </PublicPortal>
     ),
     related_commands: {
+      ...WATERWAYS_NEARBY_COMMANDS,
       ...AQUACULTURE_MAZE_COMMANDS,
       ...LAKE_GRAVEL_COMMANDS,
       ...CYNERGY_PLANTS_COMMANDS,
+      ...OLD_CY_COMMANDS,
     },
   },
 };

@@ -14,188 +14,23 @@ import { getWallet, saveWallet } from '@utils/localStorage';
 import { searchAllItems } from '@data/tables';
 import BuilderManager from '@data/builder';
 
-// ─── TransferConfirm ──────────────────────────────────────────────────────────
-
-function SellConfirm({ value, onSell }) {
-  const [pending, setPending] = useState(false);
-
-  if (pending) {
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem', flexShrink: 0 }}>
-        <button
-          onClick={onSell}
-          style={{
-            padding: '0.2rem 0.5rem', fontSize: '0.62rem', fontWeight: 'bold',
-            backgroundColor: 'rgba(34, 197, 94, 0.2)', color: 'rgb(34, 197, 94)',
-            border: '1px solid rgb(34, 197, 94)', borderRadius: '3px',
-            cursor: 'pointer', fontFamily: 'monospace', whiteSpace: 'nowrap',
-          }}
-        >
-          CONFIRM
-        </button>
-        <button
-          onClick={() => setPending(false)}
-          style={{
-            padding: '0.2rem 0.5rem', fontSize: '0.62rem', fontWeight: 'bold',
-            backgroundColor: 'transparent', color: 'rgb(148, 163, 184)',
-            border: '1px solid rgb(71, 85, 105)', borderRadius: '3px',
-            cursor: 'pointer', fontFamily: 'monospace',
-          }}
-        >
-          CANCEL
-        </button>
-      </div>
-    );
-  }
-
-  return (
-    <button
-      onClick={() => setPending(true)}
-      style={{
-        padding: '0.2rem 0.5rem', fontSize: '0.62rem', fontWeight: 'bold',
-        backgroundColor: 'rgba(34, 197, 94, 0.08)', color: 'rgb(34, 197, 94)',
-        border: '1px solid rgba(34, 197, 94, 0.3)', borderRadius: '3px',
-        cursor: 'pointer', fontFamily: 'monospace', flexShrink: 0,
-        whiteSpace: 'nowrap',
-      }}
-    >
-      SELL ({formatCredits(value)})
-    </button>
-  );
-}
-
-function TransferConfirm({ character, onTransfer }) {
-  const [pending, setPending] = useState(false);
-
-  if (pending) {
-    return (
-      <div style={{ display: 'flex', gap: '0.4rem' }}>
-        <button
-          onClick={() => setPending(false)}
-          style={{
-            flex: 1, padding: '0.35rem 0.5rem', fontSize: '0.65rem', fontWeight: 'bold',
-            backgroundColor: 'rgba(71, 85, 105, 0.3)', color: 'rgb(148, 163, 184)',
-            border: '1px solid rgb(71, 85, 105)', borderRadius: '3px',
-            cursor: 'pointer', fontFamily: 'monospace',
-          }}
-        >
-          CANCEL
-        </button>
-        <button
-          onClick={() => { onTransfer(character); setPending(false); }}
-          style={{
-            flex: 1, padding: '0.35rem 0.5rem', fontSize: '0.65rem', fontWeight: 'bold',
-            backgroundColor: 'rgba(34, 197, 94, 0.2)', color: 'rgb(34, 197, 94)',
-            border: '1px solid rgb(34, 197, 94)', borderRadius: '3px',
-            cursor: 'pointer', fontFamily: 'monospace',
-          }}
-        >
-          CONFIRM
-        </button>
-      </div>
-    );
-  }
-
-  return (
-    <div style={{ display: 'flex', gap: '0.4rem' }}>
-      <button
-        onClick={() => setPending(true)}
-        style={{
-          flex: 1, padding: '0.35rem 0.5rem', fontSize: '0.65rem', fontWeight: 'bold',
-          backgroundColor: 'rgba(34, 197, 94, 0.1)', color: 'rgb(34, 197, 94)',
-          border: '1px solid rgba(34, 197, 94, 0.35)', borderRadius: '3px',
-          cursor: 'pointer', fontFamily: 'monospace',
-        }}
-      >
-        TRANSFER
-      </button>
-      <button
-        disabled
-        style={{
-          flex: 1, padding: '0.35rem 0.5rem', fontSize: '0.65rem', fontWeight: 'bold',
-          backgroundColor: 'transparent', color: 'rgb(55, 65, 81)',
-          border: '1px solid rgb(55, 65, 81)', borderRadius: '3px',
-          cursor: 'not-allowed', fontFamily: 'monospace',
-        }}
-      >
-        CONFIRM
-      </button>
-    </div>
-  );
-}
-
-function ClearConfirm({ onClear }) {
-  const [pending, setPending] = useState(false);
-
-  return (
-    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-      <div style={{ display: 'flex', gap: '0.4rem', width: '25%' }}>
-        {pending ? (
-          <>
-            <button
-              onClick={() => setPending(false)}
-              style={{
-                flex: 1, padding: '0.35rem 0.25rem', fontSize: '0.65rem', fontWeight: 'bold',
-                backgroundColor: 'rgba(71, 85, 105, 0.3)', color: 'rgb(148, 163, 184)',
-                border: '1px solid rgb(71, 85, 105)', borderRadius: '3px',
-                cursor: 'pointer', fontFamily: 'monospace',
-              }}
-            >
-              CANCEL
-            </button>
-            <button
-              onClick={() => { onClear(); setPending(false); }}
-              style={{
-                flex: 1, padding: '0.35rem 0.25rem', fontSize: '0.65rem', fontWeight: 'bold',
-                backgroundColor: 'rgba(239, 68, 68, 0.2)', color: 'rgb(239, 68, 68)',
-                border: '1px solid rgb(239, 68, 68)', borderRadius: '3px',
-                cursor: 'pointer', fontFamily: 'monospace',
-              }}
-            >
-              CONFIRM
-            </button>
-          </>
-        ) : (
-          <button
-            onClick={() => setPending(true)}
-            style={{
-              flex: 1, padding: '0.35rem 0.5rem', fontSize: '0.65rem', fontWeight: 'bold',
-              backgroundColor: 'rgba(239, 68, 68, 0.1)', color: 'rgb(239, 68, 68)',
-              border: '1px solid rgba(239, 68, 68, 0.35)', borderRadius: '3px',
-              cursor: 'pointer', fontFamily: 'monospace',
-            }}
-          >
-            CLEAR
-          </button>
-        )}
-      </div>
-    </div>
-  );
-}
+import ConfirmationModal from '@components/ConfirmationModal/ConfirmationModal';
 
 // ─── TerminalWallet ───────────────────────────────────────────────────────────
 
 const hydrateWalletItems = (items) => {
   return items.map(item => {
     const found = searchAllItems(item.id);
-    if (!found) return item; // custom item, no table entry — keep as-is
+    if (!found) return item;
     return {
-      ...found.entry,           // fresh from table
-      ...item,                  // wallet props win (quantity, section, description overrides)
-      value: item.value ?? found.entry.value ?? null, // wallet value wins if set, falls back to table
+      ...found.entry,
+      ...item,
+      value: item.value ?? found.entry.value ?? null,
     };
   });
 };
 
 export default function TerminalWallet() {
-  // const [wallet, setWallet] = useState(getWallet);
-
-  // useEffect(() => {
-  //   const loadWallet = () => setWallet(getWallet());
-  //   window.addEventListener('walletUpdated', loadWallet);
-  //   return () => window.removeEventListener('walletUpdated', loadWallet);
-  // }, []);
-
   const [wallet, setWallet] = useState(() => {
     const saved = getWallet();
     return {
@@ -203,6 +38,9 @@ export default function TerminalWallet() {
       items: hydrateWalletItems(saved.items),
     };
   });
+
+  // Modal state: { type: 'sell'|'transfer'|'clear', index?, character? } | null
+  const [pendingAction, setPendingAction] = useState(null);
 
   useEffect(() => {
     const loadWallet = () => {
@@ -216,18 +54,57 @@ export default function TerminalWallet() {
     return () => window.removeEventListener('walletUpdated', loadWallet);
   }, []);
 
-  const handleTransfer = (character) => {
-    wallet.items.forEach(item => character.addItemToGear(item));
-    character.credits += wallet.credits;
-    BuilderManager.save();
-    saveWallet({ credits: 0, items: [] });
-    setWallet({ credits: 0, items: [] });
+  const handleConfirm = () => {
+    if (!pendingAction) return;
+
+    if (pendingAction.type === 'sell') {
+      const current = getWallet();
+      const item = current.items[pendingAction.index];
+      if (!item?.value) return;
+      const updated = {
+        credits: current.credits + item.value,
+        items: current.items.filter((_, idx) => idx !== pendingAction.index),
+      };
+      saveWallet(updated);
+      setWallet(updated);
+    }
+
+    if (pendingAction.type === 'transfer') {
+      const { character } = pendingAction;
+      wallet.items.forEach(item => character.addItemToGear(item));
+      character.credits += wallet.credits;
+      BuilderManager.save();
+      saveWallet({ credits: 0, items: [] });
+      setWallet({ credits: 0, items: [] });
+    }
+
+    if (pendingAction.type === 'clear') {
+      saveWallet({ credits: 0, items: [] });
+      setWallet({ credits: 0, items: [] });
+    }
+
+    setPendingAction(null);
   };
 
-  const handleClearWallet = () => {
-    saveWallet({ credits: 0, items: [] });
-    setWallet({ credits: 0, items: [] });
-  };
+  const modalProps = (() => {
+    if (!pendingAction) return null;
+    if (pendingAction.type === 'sell') return {
+      title: 'Sell Item',
+      message: `Sell this item for ${formatCredits(pendingAction.value)}? It will be removed from the wallet.`,
+      confirmLabel: 'Sell',
+    };
+    if (pendingAction.type === 'transfer') return {
+      title: 'Transfer to Character',
+      message: `Transfer all wallet contents to ${pendingAction.character?.name || 'this character'}?`,
+      confirmLabel: 'Transfer',
+    };
+    if (pendingAction.type === 'clear') return {
+      title: 'Clear Wallet',
+      message: 'Wipe the wallet without transferring? Extracted items remain extracted.',
+      confirmLabel: 'Clear',
+    };
+    return null;
+  })();
 
   const totalItems = wallet.items.length;
   const isEmpty = wallet.credits === 0 && totalItems === 0;
@@ -296,55 +173,8 @@ export default function TerminalWallet() {
           </div>
         ) : (
           <>
-            {/* <Section title="CREDITS EXTRACTED:" color="yellow">
-              <div
-                style={{
-                  display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between',
-                  alignItems: 'center', gap: '0.25rem', padding: '0.75rem',
-                  backgroundColor: 'rgba(251, 191, 36, 0.1)',
-                  border: '1px solid rgba(251, 191, 36, 0.3)', borderRadius: '3px',
-                }}
-              >
-                <Line yellow style={{ margin: 0 }}>Digital currency (transferable)</Line>
-                <Line yellow bold style={{ margin: 0, fontSize: '1.25rem' }}>{formatCredits(wallet.credits)}</Line>
-              </div>
-            </Section>
-
-            <Spacer /> */}
-
             <Section title={`ITEMS EXTRACTED: (${totalItems})`} color="cyan">
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                {/* {wallet.items.map((item, i) => {
-                  const found = searchAllItems(item.id);
-                  const display = found ? { ...found.entry, quantity: item.quantity || 1 } : item;
-                  return (
-                    <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', padding: '0.5rem 0.75rem', backgroundColor: 'rgba(15, 23, 42, 0.6)', border: '1px solid rgb(71, 85, 105)', borderRadius: '3px' }}>
-                      <span style={{ color: 'rgb(79, 209, 197)', fontSize: '0.875rem', flexShrink: 0 }}>→</span>
-                      <div style={{ flex: 1 }}>
-                        <Line cyan bold style={{ margin: 0, fontSize: '0.875rem' }}>
-                          {display.label}
-                          {display.quantity > 1 && (
-                            <span style={{ color: 'rgb(148, 163, 184)', fontWeight: 'normal', marginLeft: '0.4rem' }}>×{display.quantity}</span>
-                          )}
-                          {display.die && (
-                            <span style={{ fontFamily: 'monospace', marginLeft: '0.4rem', opacity: 0.8, fontWeight: 'normal' }}>{display.die}</span>
-                          )}
-                          {display.cost && (
-                            <span style={{ color: 'rgb(34, 197, 94)', marginLeft: '0.4rem', fontWeight: 'normal', fontSize: '0.8rem' }}>{display.cost}</span>
-                          )}
-                        </Line>
-                        {display.description && (
-                          <Line smoke style={{ margin: 0, fontSize: '0.8rem', marginTop: '0.15rem' }}>{display.description}</Line>
-                        )}
-                        {item.value && !found && (
-                          <Line yellow style={{ margin: 0, fontSize: '0.8rem', marginTop: '0.15rem' }}>
-                            ~{formatCredits(item.value)}
-                          </Line>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })} */}
                 {wallet.items.map((item, i) => {
                   const found = searchAllItems(item.id);
                   const display = found ? { ...found.entry, quantity: item.quantity || 1 } : item;
@@ -379,22 +209,19 @@ export default function TerminalWallet() {
                         )}
                       </div>
 
-                      {/* Sell button — only if item has a value */}
                       {item.value && (
-                        <SellConfirm
-                          value={item.value}
-                          onSell={() => {
-                            const current = getWallet();
-                            const item = current.items[i];
-                            if (!item?.value) return;
-                            const updated = {
-                              credits: current.credits + item.value,
-                              items: current.items.filter((_, idx) => idx !== i),
-                            };
-                            saveWallet(updated);
-                            setWallet(updated);
+                        <button
+                          onClick={() => setPendingAction({ type: 'sell', index: i, value: item.value })}
+                          style={{
+                            padding: '0.2rem 0.5rem', fontSize: '0.62rem', fontWeight: 'bold',
+                            backgroundColor: 'rgba(34, 197, 94, 0.08)', color: 'rgb(34, 197, 94)',
+                            border: '1px solid rgba(34, 197, 94, 0.3)', borderRadius: '3px',
+                            cursor: 'pointer', fontFamily: 'monospace', flexShrink: 0,
+                            whiteSpace: 'nowrap',
                           }}
-                        />
+                        >
+                          SELL ({formatCredits(item.value)})
+                        </button>
                       )}
                     </div>
                   );
@@ -404,7 +231,6 @@ export default function TerminalWallet() {
 
             <Spacer />
 
-            {/* Transfer targets */}
             <Section title="TRANSFER TO CHARACTER:" color="green">
               {sortedChars.length === 0 ? (
                 <Line smoke style={{ margin: 0, fontSize: '0.8rem', opacity: 0.5 }}>No characters found</Line>
@@ -433,7 +259,17 @@ export default function TerminalWallet() {
                           </div>
                         </div>
                         <div style={{ flexShrink: 0, minWidth: '150px' }}>
-                          <TransferConfirm character={character} onTransfer={handleTransfer} />
+                          <button
+                            onClick={() => setPendingAction({ type: 'transfer', character })}
+                            style={{
+                              width: '100%', padding: '0.35rem 0.5rem', fontSize: '0.65rem', fontWeight: 'bold',
+                              backgroundColor: 'rgba(34, 197, 94, 0.1)', color: 'rgb(34, 197, 94)',
+                              border: '1px solid rgba(34, 197, 94, 0.35)', borderRadius: '3px',
+                              cursor: 'pointer', fontFamily: 'monospace',
+                            }}
+                          >
+                            TRANSFER
+                          </button>
                         </div>
                       </div>
                     );
@@ -444,14 +280,36 @@ export default function TerminalWallet() {
 
             <Spacer />
             <Divider />
-            {/* <Spacer /> */}
             <InsetBox color="yellow" title="Clearing the Wallet">
               <Line style={{ fontSize: '0.65rem' }}>Clearing will wipe the wallet without transferring to a character. Extracted items remain extracted.</Line>
             </InsetBox>
-            <ClearConfirm onClear={handleClearWallet} />
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <button
+                onClick={() => setPendingAction({ type: 'clear' })}
+                style={{
+                  padding: '0.35rem 0.5rem', fontSize: '0.65rem', fontWeight: 'bold',
+                  backgroundColor: 'rgba(239, 68, 68, 0.1)', color: 'rgb(239, 68, 68)',
+                  border: '1px solid rgba(239, 68, 68, 0.35)', borderRadius: '3px',
+                  cursor: 'pointer', fontFamily: 'monospace',
+                }}
+              >
+                CLEAR
+              </button>
+            </div>
           </>
         )}
       </div>
+
+      {modalProps && (
+        <ConfirmationModal
+          open={Boolean(pendingAction)}
+          title={modalProps.title}
+          message={modalProps.message}
+          confirmLabel={modalProps.confirmLabel}
+          onConfirm={handleConfirm}
+          onCancel={() => setPendingAction(null)}
+        />
+      )}
     </div>
   );
 }

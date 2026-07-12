@@ -84,6 +84,7 @@ import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
 import PlumbingIcon from '@mui/icons-material/Plumbing';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CarRepairIcon from '@mui/icons-material/CarRepair';
+import BackupIcon from '@mui/icons-material/Backup';
 
 const TEAL = { fontSize: 20, color: 'rgb(79, 209, 197)' };
 const YELLOW = { fontSize: 20, color: 'rgb(251, 191, 36)' };
@@ -91,6 +92,7 @@ const RED = { fontSize: 20, color: 'rgb(252, 129, 129)' };
 const SLATE = { fontSize: 20, color: 'rgb(148, 163, 184)' };
 
 const Icons = {
+  Backup: () => <BackupIcon style={TEAL} />,
   CarRepair: () => <CarRepairIcon style={TEAL} />,
   Trash: () => <DeleteIcon style={TEAL} />,
   Wrench: () => <PlumbingIcon style={TEAL} />,

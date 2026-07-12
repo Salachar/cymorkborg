@@ -51,6 +51,12 @@
   color: rgb(239, 68, 68);
 }
 
+.nc-btn-shared {
+  border-color: rgba(0, 170, 40, 0.5);
+  background-color: rgba(0, 170, 40, 0.15);
+  color: rgb(0, 170, 40);
+}
+
 .nc-body {
   font-size: 0.85rem;
   color: rgb(203, 213, 225);

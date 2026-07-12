@@ -20,9 +20,12 @@ export default defineConfig({
     alias: {
       '@pages': path.resolve(__dirname, './src/pages'),
       '@components': path.resolve(__dirname, './src/components'),
+      '@styles': path.resolve(__dirname, './src/styles'),
       '@data': path.resolve(__dirname, './src/data'),
       '@utils': path.resolve(__dirname, './src/utils'),
       '@images': path.resolve(__dirname, './src/images'),
+      '@hooks': path.resolve(__dirname, './src/hooks'),
+      '@context': path.resolve(__dirname, './src/context'),
       '@terminal': path.resolve(__dirname, './src/components/terminal')
     }
   },

@@ -1,61 +1,12 @@
-.sbm-overlay {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: 1rem;
-}
-
 .sbm-modal {
-  background-color: rgb(19, 23, 34);
-  border: 1px solid rgba(79, 209, 197, 0.4);
-  border-radius: 4px;
-  width: 100%;
-  max-width: 480px;
   height: 80vh;
   display: flex;
   flex-direction: column;
-  font-family: monospace;
-  overflow: hidden;
 }
 
-.sbm-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid rgba(79, 209, 197, 0.3);
-  background-color: rgb(27, 36, 58);
-  flex-shrink: 0;
-}
-
-.sbm-title {
-  font-size: 0.8rem;
-  font-weight: bold;
-  letter-spacing: 0.1em;
-  color: rgb(79, 209, 197);
-  text-shadow: 0 0 8px rgba(79, 209, 197, 0.4);
-}
-
-.sbm-close-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.25rem;
-  background-color: rgba(79, 209, 197, 0.12);
-  color: rgb(79, 209, 197);
-  border: 1px solid rgba(79, 209, 197, 0.35);
-  border-radius: 2px;
-  cursor: pointer;
-}
-
-.sbm-body {
-  padding: 0.75rem 1rem 1rem 1rem;
-  overflow-y: auto;
+.sbm-body-scroll {
   flex: 1;
+  overflow-y: auto;
 }
 
 .sbm-section-label {

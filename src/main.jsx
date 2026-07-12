@@ -2,10 +2,10 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { HashRouter } from 'react-router-dom';
 
-import './index.css'
-
 import BuilderStore, { CLASSES } from "./data/builder";
 import App from './App.jsx'
+
+import '@styles/index.css'
 
 document.documentElement.style.setProperty('--color-class', CLASSES[0].instance.color);
 

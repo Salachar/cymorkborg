@@ -7,7 +7,6 @@ import BuilderManager from "../data/builder";
 import ClassButtons from "../components/ClassButtons";
 import CharacterTabs from "../components/CharacterTabs";
 import CharacterTemplate from "../components/CharacterTemplate";
-import AppDataExportImport from "../components/CharacterExportImport";
 
 import { NavExtraContext } from "../App";
 
@@ -185,12 +184,6 @@ export default function Classes() {
                 onUpdate();
               }}
             />
-            {/* {isBuilder && (
-              <AppDataExportImport
-                character={currentCharacter}
-                onUpdate={onUpdate}
-              />
-            )} */}
           </div>
         )}
 
