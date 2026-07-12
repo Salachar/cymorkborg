@@ -22,8 +22,8 @@ const STATUS_LABEL = {
 };
 
 const QUICK_FILLS = [
-  'ws://192.168.1.00:3002',
-  'ws://localhost:3002',
+  'wss://ws.cymorkborg.com',
+  'wss://localhost:3002',
 ];
 
 export default function ConnectionModal({ open, onClose, children }) {

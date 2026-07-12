@@ -3,10 +3,15 @@ import { createContext, useCallback, useContext, useEffect, useRef, useState } f
 const WS_HOST_KEY = 'retcom_ws_host';
 const WS_NAME_KEY = 'retcom_player_name';
 const RECONNECT_DELAY = 3000;
+const DEFAULT_HOST = 'wss://ws.cymorkborg.com';
 
 function getStoredHost() {
-  try { return localStorage.getItem(WS_HOST_KEY) ?? ''; } catch { return ''; }
+  try {
+    const saved = localStorage.getItem(WS_HOST_KEY);
+    return saved !== null ? saved : DEFAULT_HOST;
+  } catch { return DEFAULT_HOST; }
 }
+
 function saveStoredHost(h) {
   try { localStorage.setItem(WS_HOST_KEY, h); } catch {}
 }
@@ -15,6 +20,13 @@ function getStoredName() {
 }
 function saveStoredName(n) {
   try { localStorage.setItem(WS_NAME_KEY, n); } catch {}
+}
+
+function clearStoredConnection() {
+  try {
+    localStorage.removeItem(WS_HOST_KEY);
+    localStorage.removeItem(WS_NAME_KEY);
+  } catch {}
 }
 
 // Strip all handlers from a socket so it can no longer affect app state,
@@ -143,9 +155,9 @@ export function CyborgSocketProvider({ children }) {
       setStatus('disconnected');
       setConnectedClients([]);
       wsRef.current = null;
-      if (!initial) {
-        reconnectTimer.current = setTimeout(() => connect(), RECONNECT_DELAY);
-      }
+      // if (!initial) {
+      //   reconnectTimer.current = setTimeout(() => connect(), RECONNECT_DELAY);
+      // }
     };
 
     ws.onerror = () => {
@@ -156,14 +168,29 @@ export function CyborgSocketProvider({ children }) {
 
   // ── Disconnect ──────────────────────────────────────────────────────────────
 
+  // const disconnect = useCallback(() => {
+  //   clearTimeout(reconnectTimer.current);
+  //   if (wsRef.current) {
+  //     const ws = wsRef.current;
+  //     detachSocket(ws); // manual disconnect should never trigger an auto-reconnect
+  //     ws.close();
+  //     wsRef.current = null;
+  //   }
+  //   setStatus('disconnected');
+  //   setConnectedClients([]);
+  // }, []);
+
   const disconnect = useCallback(() => {
     clearTimeout(reconnectTimer.current);
     if (wsRef.current) {
       const ws = wsRef.current;
-      detachSocket(ws); // manual disconnect should never trigger an auto-reconnect
+      detachSocket(ws);
       ws.close();
       wsRef.current = null;
     }
+    clearStoredConnection();
+    setHostState(DEFAULT_HOST);
+    setPlayerNameState('');
     setStatus('disconnected');
     setConnectedClients([]);
   }, []);
