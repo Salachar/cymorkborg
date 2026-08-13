@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { CLASSES } from "../data/builder";
 
-// import AppDataExportImport from "../components/CharacterExportImport";
-
 import { CLASS_BUTTONS_STORAGE_KEY } from '@utils/localStorage';
 
 function getOpen() {
@@ -53,7 +51,7 @@ export default function ClassButtons({
       {isOpen && (
         <>
           <div className="px-4 pb-4">
-            <div className="grid grid-cols-4 md:grid-cols-7 gap-2">
+            <div className="grid grid-cols-4 md:grid-cols-8 gap-2">
               {CLASSES.map((character_class, index) => {
                 const ci = character_class.instance;
                 const isActive = currentIndex === index;
@@ -112,8 +110,6 @@ export default function ClassButtons({
               })}
             </div>
           </div>
-
-          {/* <AppDataExportImport /> */}
         </>
       )}
     </div>

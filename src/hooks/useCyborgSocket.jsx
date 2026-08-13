@@ -151,13 +151,9 @@ export function CyborgSocketProvider({ children }) {
       // manual" flag can't reliably tell two different sockets apart,
       // but identity comparison always can.
       if (wsRef.current !== ws) return;
-
       setStatus('disconnected');
       setConnectedClients([]);
       wsRef.current = null;
-      // if (!initial) {
-      //   reconnectTimer.current = setTimeout(() => connect(), RECONNECT_DELAY);
-      // }
     };
 
     ws.onerror = () => {
@@ -167,18 +163,6 @@ export function CyborgSocketProvider({ children }) {
   }, [dispatch]);
 
   // ── Disconnect ──────────────────────────────────────────────────────────────
-
-  // const disconnect = useCallback(() => {
-  //   clearTimeout(reconnectTimer.current);
-  //   if (wsRef.current) {
-  //     const ws = wsRef.current;
-  //     detachSocket(ws); // manual disconnect should never trigger an auto-reconnect
-  //     ws.close();
-  //     wsRef.current = null;
-  //   }
-  //   setStatus('disconnected');
-  //   setConnectedClients([]);
-  // }, []);
 
   const disconnect = useCallback(() => {
     clearTimeout(reconnectTimer.current);

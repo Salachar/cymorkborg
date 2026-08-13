@@ -7,7 +7,7 @@ import {
 export default function Home() {
   return (
     <Page>
-      <PageHeader title="CY_BORG" />
+      <PageHeader title="CY_" />
 
       <section className="mb-12">
         <div className="bg-gradient-to-br from-gray-900/90 to-black border-2 border-cy-cyan/30 p-6 relative overflow-hidden">
@@ -23,7 +23,10 @@ export default function Home() {
               Poisonous space rocks, nuclear weapons, cyclical revolutions, warring nations, warring corporations, warring neighbors; pandemics, tsunamis, volcanoes. In between it all: direct person-machine interfaces, tactical neural implants, and bacteria from outer space intercellular nanorobotics. And the sky is full of ads.
             </p>
             <p className="text-sm text-cy-yellow font-bold">
-              Everyone is interfaced/injected/infected/infested with something. Everyone wants something from everyone else. Everyone is a liar and a cheat. Everyone wants more creds. ¤¤¤¤
+              Everyone is interfaced/injected/infected/infested with something.<br />
+              Everyone wants something from everyone else.<br />
+              Everyone is a liar and a cheat.<br />
+              Everyone wants more creds. ¤¤¤¤
             </p>
           </div>
         </div>

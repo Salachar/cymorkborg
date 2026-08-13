@@ -1,13 +1,13 @@
 import { Routes, Route, NavLink, useLocation } from 'react-router-dom';
 import { useEffect, useRef, useState, createContext } from 'react';
 
-import Home from './pages/Home';
+import CyCity from './pages/CyCity';
 import Rules from './pages/Rules';
 import Combat from './pages/Combat';
-import Classes from './pages/Classes';
+import Characters from './pages/Characters';
 import RetComDevice from './pages/RetComDevice';
 import Artwork from './pages/Artwork';
-import Notes from './pages/Notes';
+import NetLog from './pages/NetLog';
 
 import { CyborgSocketProvider } from '@hooks/useCyborgSocket';
 import { GameMessagesProvider } from '@context/GameMessagesContext';
@@ -15,9 +15,36 @@ import TransferReceiver from '@components/TransferReceiver';
 import MessageSubheader from '@components/Connection/MessageSubheader';
 
 const scrollPositions = {};
-const FULL_SCREEN_ROUTES = ['/retcom', '/notes'];
+const FULL_SCREEN_ROUTES = ['/retcom', '/netlog'];
 
 export const NavExtraContext = createContext({ setNavExtra: () => {} });
+
+const COLOR_MAP = {
+  cyan: {
+    active: 'text-cy-cyan',
+    bg: 'from-cy-cyan/20 to-cy-cyan/10',
+    border: 'border-cy-cyan/50',
+    shadow: '0 0 20px rgba(0, 255, 255, 0.3), inset 0 0 20px rgba(0, 255, 255, 0.1)',
+  },
+  pink: {
+    active: 'text-cy-pink',
+    bg: 'from-cy-pink/20 to-cy-pink/10',
+    border: 'border-cy-pink/50',
+    shadow: '0 0 20px rgba(255, 0, 128, 0.3), inset 0 0 20px rgba(255, 0, 128, 0.1)',
+  },
+  yellow: {
+    active: 'text-cy-yellow',
+    bg: 'from-cy-yellow/20 to-cy-yellow/10',
+    border: 'border-cy-yellow/50',
+    shadow: '0 0 20px rgba(255, 255, 0, 0.3), inset 0 0 20px rgba(255, 255, 0, 0.1)',
+  },
+  green: {
+    active: 'text-cy-green',
+    bg: 'from-cy-green/20 to-cy-green/10',
+    border: 'border-cy-green/50',
+    shadow: '0 0 20px rgba(0, 255, 65, 0.3), inset 0 0 20px rgba(0, 255, 65, 0.1)',
+  },
+};
 
 export default function App() {
   const location = useLocation();
@@ -28,8 +55,8 @@ export default function App() {
 
   useEffect(() => {
     const currentPath = location.pathname;
-    const isClasses = currentPath.startsWith('/classes');
-    if (isFullScreen || isClasses) return;
+    const isCharacters = currentPath.startsWith('/characters');
+    if (isFullScreen || isCharacters) return;
 
     if (contentRef.current && scrollPositions[currentPath] !== undefined) {
       requestAnimationFrame(() => {
@@ -40,7 +67,7 @@ export default function App() {
     }
 
     return () => {
-      if (contentRef.current && !isFullScreen && !isClasses) {
+      if (contentRef.current && !isFullScreen && !isCharacters) {
         scrollPositions[currentPath] = contentRef.current.scrollTop;
       }
     };
@@ -63,13 +90,13 @@ export default function App() {
                 }}
               />
               <div className="relative flex items-center h-16 px-4 overflow-scroll">
-                <CyNavLink to="/" label="Home" color="cyan" end />
+                <CyNavLink to="/" label="CY_" color="cyan" end />
                 <CyNavLink to="/artwork" label="Artwork" color="yellow" />
                 <CyNavLink to="/rules" label="Rules" color="yellow" />
                 <CyNavLink to="/combat" label="Combat" color="pink" />
-                <CyNavLink to="/classes" label="Classes" color="pink" />
+                <CyNavLink to="/characters" label="Characters" color="pink" />
                 <CyNavLink to="/retcom" label="RetCom" color="green" />
-                <CyNavLink to="/notes" label="Notes" color="green" />
+                <CyNavLink to="/netlog" label="Net Log" color="green" />
 
                 {navExtra && (
                   <div className="ml-auto flex-shrink-0">{navExtra}</div>
@@ -84,15 +111,15 @@ export default function App() {
             {isFullScreen ? (
               <Routes>
                 <Route path="/retcom" element={<RetComDevice />} />
-                <Route path="/notes" element={<Notes />} />
+                <Route path="/netlog" element={<NetLog />} />
               </Routes>
             ) : (
               <div ref={contentRef} className="flex-1 overflow-y-auto overflow-x-hidden">
                 <Routes>
-                  <Route path="/" element={<Home />} />
+                  <Route path="/" element={<CyCity />} />
                   <Route path="/rules" element={<Rules />} />
                   <Route path="/combat" element={<Combat />} />
-                  <Route path="/classes/:slug?" element={<Classes />} />
+                  <Route path="/characters/:slug?" element={<Characters />} />
                   <Route path="/artwork" element={<Artwork />} />
                 </Routes>
               </div>
@@ -108,13 +135,8 @@ export default function App() {
 }
 
 function CyNavLink({ to, label, color, end = false }) {
-  const colorMap = {
-    cyan:   { active: 'text-cy-cyan',   bg: 'from-cy-cyan/20 to-cy-cyan/10',     border: 'border-cy-cyan/50',   shadow: '0 0 20px rgba(0, 255, 255, 0.3), inset 0 0 20px rgba(0, 255, 255, 0.1)' },
-    pink:   { active: 'text-cy-pink',   bg: 'from-cy-pink/20 to-cy-pink/10',     border: 'border-cy-pink/50',   shadow: '0 0 20px rgba(255, 0, 128, 0.3), inset 0 0 20px rgba(255, 0, 128, 0.1)' },
-    yellow: { active: 'text-cy-yellow', bg: 'from-cy-yellow/20 to-cy-yellow/10', border: 'border-cy-yellow/50', shadow: '0 0 20px rgba(255, 255, 0, 0.3), inset 0 0 20px rgba(255, 255, 0, 0.1)' },
-    green:  { active: 'text-cy-green',  bg: 'from-cy-green/20 to-cy-green/10',   border: 'border-cy-green/50',  shadow: '0 0 20px rgba(0, 255, 65, 0.3), inset 0 0 20px rgba(0, 255, 65, 0.1)' },
-  };
-  const colors = colorMap[color];
+  const colors = COLOR_MAP[color];
+
   return (
     <NavLink
       to={to}

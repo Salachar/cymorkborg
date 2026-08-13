@@ -46,11 +46,6 @@ export function collapseSubtree(expandedRows, path) {
   return next;
 }
 
-
-// ============================================================================
-// ADD TO @utils/commands
-// ============================================================================
-
 /**
  * Recursively walk the command tree, building a flat list of searchable
  * entries. Stops descending into any node that is locked (has a password

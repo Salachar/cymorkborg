@@ -12,7 +12,7 @@ import { getNotes, saveNotes } from '@utils/localStorage';
 
 import '@styles/notes.css';
 
-export default function Notes() {
+export default function NetLog() {
   const [notes, setNotes] = useState([]);
   const [draft, setDraft] = useState('');
   const [confirmClear, setConfirmClear] = useState(false);

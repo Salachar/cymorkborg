@@ -10,8 +10,8 @@ import DischargedCorpKiller from "./DischargedCorpKiller";
 import OrphanedGearhead from "./OrphanedGearhead";
 import RenegadeCyberslasher from "./RenegadeCyberslasher";
 import ForsakenGangGoon from "./ForsakenGangGoon";
-// import StrungOutApothecary from "./StrungOutApothecary";
 import RevolutionistChemist from "./RevolutionistChemist";
+import StrungOutApothecary from "./StrungOutApothecary";
 
 export const CLASS_MAP = {
   [ShunnedNanomancer.class]: ShunnedNanomancer,
@@ -20,8 +20,8 @@ export const CLASS_MAP = {
   [OrphanedGearhead.class]: OrphanedGearhead,
   [RenegadeCyberslasher.class]: RenegadeCyberslasher,
   [ForsakenGangGoon.class]: ForsakenGangGoon,
-  // [StrungOutApothecary.class]: StrungOutApothecary,
   [RevolutionistChemist.class]: RevolutionistChemist,
+  [StrungOutApothecary.class]: StrungOutApothecary,
 };
 
 const NanoMancerInstance = new ShunnedNanomancer();
@@ -30,8 +30,8 @@ const DischargedCorpKillerInstance  = new DischargedCorpKiller();
 const OrphanedGearheadInstance  = new OrphanedGearhead();
 const RenegadeCyberslasherInstance  = new RenegadeCyberslasher();
 const ForsakenGangGoonInstance  = new ForsakenGangGoon();
-// const StrungOutApothecaryInstance  = new StrungOutApothecary();
 const RevolutionistChemistInstance  = new RevolutionistChemist();
+const StrungOutApothecaryInstance  = new StrungOutApothecary();
 
 export const CLASSES = [
   {
@@ -64,15 +64,15 @@ export const CLASSES = [
     constructor: ForsakenGangGoon,
     instance: ForsakenGangGoonInstance,
   },
-  // {
-  //   id: StrungOutApothecaryInstance.class_id,
-  //   constructor: StrungOutApothecary,
-  //   instance: StrungOutApothecaryInstance,
-  // },
   {
     id: RevolutionistChemistInstance.class_id,
     constructor: RevolutionistChemist,
     instance: RevolutionistChemistInstance,
+  },
+  {
+    id: StrungOutApothecaryInstance.class_id,
+    constructor: StrungOutApothecary,
+    instance: StrungOutApothecaryInstance,
   },
 ];
 

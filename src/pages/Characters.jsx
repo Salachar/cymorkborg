@@ -41,7 +41,7 @@ function NavLockButton({ character, onUpdate }) {
   );
 }
 
-export default function Classes() {
+export default function Characters() {
   const navigate = useNavigate();
   const { slug } = useParams();
   const { setNavExtra } = useContext(NavExtraContext);
@@ -150,7 +150,7 @@ export default function Classes() {
           setTabIndex(index);
           setCharAndColor(instance);
           setIsBuilder(false);
-          navigate(`/classes/${instance.class_id}`);
+          navigate(`/characters/${instance.class_id}`);
         }}
         onAdd={({ constructor }) => {
           const new_character = new constructor();
@@ -158,7 +158,7 @@ export default function Classes() {
           setTabIndex(null);
           setCharAndColor(new_character);
           setIsBuilder(true);
-          navigate(`/classes/${new_character.id}`);
+          navigate(`/characters/${new_character.id}`);
         }}
       />
 
@@ -172,12 +172,12 @@ export default function Classes() {
                 setCharAndColor(character);
                 setIsBuilder(true);
                 BuilderManager.setLastSelected(character.id);
-                navigate(`/classes/${character.id}`);
+                navigate(`/characters/${character.id}`);
               }}
               onClose={(character, id) => {
                 if (currentCharacter && id === currentCharacter?.id) {
                   setCurrentCharacter(null);
-                  navigate(`/classes`);
+                  navigate(`/characters`);
                 }
                 BuilderManager.deleteCharacter(id);
                 checkCharacters(null);

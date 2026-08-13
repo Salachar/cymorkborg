@@ -806,7 +806,7 @@ export const BUSINESS_COMMANDS = {
       },
 
       "Pawn Records": {
-        favicon: <Icons.File />,
+        favicon: <Icons.Files />,
         password: {
           pw: "deathdogs",
           hint: "They have an absurd amount of nitrates",

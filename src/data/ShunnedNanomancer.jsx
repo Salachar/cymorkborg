@@ -16,8 +16,6 @@ export default class ShunnedNanomancer extends BaseClass {
   static class = "Shunned Nanomancer";
   static artwork = class_image;
 
-  static health_die = "d4";
-
   static die = {
     health: "d4",
     glitches: "d2",
