@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { CLASSES } from "../data/builder";
 
-import { CLASS_BUTTONS_STORAGE_KEY } from '@utils/localStorage';
+import { CYBORG_CLASS_BUTTONS_KEY } from '@utils/localStorage';
 
 function getOpen() {
   try {
-    const saved = localStorage.getItem(CLASS_BUTTONS_STORAGE_KEY);
+    const saved = localStorage.getItem(CYBORG_CLASS_BUTTONS_KEY);
     return saved !== null ? JSON.parse(saved) : true;
   } catch (e) {
     return true;
@@ -14,7 +14,7 @@ function getOpen() {
 
 function saveOpen(value) {
   try {
-    localStorage.setItem(CLASS_BUTTONS_STORAGE_KEY, JSON.stringify(value));
+    localStorage.setItem(CYBORG_CLASS_BUTTONS_KEY, JSON.stringify(value));
   } catch (e) {}
 }
 

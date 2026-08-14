@@ -26,7 +26,7 @@ export default defineConfig({
       '@images': path.resolve(__dirname, './src/images'),
       '@hooks': path.resolve(__dirname, './src/hooks'),
       '@context': path.resolve(__dirname, './src/context'),
-      '@terminal': path.resolve(__dirname, './src/components/terminal')
+      '@retcom': path.resolve(__dirname, './src/components/retcom')
     }
   },
   test: {

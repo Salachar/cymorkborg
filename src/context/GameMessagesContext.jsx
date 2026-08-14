@@ -3,32 +3,31 @@ import { useCyborgSocket } from '@hooks/useCyborgSocket';
 import ToastDisplay from '@components/Toast';
 
 import {
-  NOTES_STORAGE_KEY,
-  PASSWORD_STORAGE_KEY,
+  CYBORG_NOTES_KEY,
+  CYBORG_SHARED_FEED_KEY,
+  RETCOM_PASSWORD_KEY,
 } from '@utils/localStorage';
-
-const SHARED_FEED_KEY = 'retcom_shared_feed';
 
 function getStoredSharedFeed() {
   try {
-    const saved = localStorage.getItem(SHARED_FEED_KEY);
+    const saved = localStorage.getItem(CYBORG_SHARED_FEED_KEY);
     return saved ? JSON.parse(saved) : {};
   } catch { return {}; }
 }
 
 function saveSharedFeed(feed) {
-  try { localStorage.setItem(SHARED_FEED_KEY, JSON.stringify(feed)); } catch {}
+  try { localStorage.setItem(CYBORG_SHARED_FEED_KEY, JSON.stringify(feed)); } catch {}
 }
 
 function getStoredPasswords() {
   try {
-    const saved = localStorage.getItem(PASSWORD_STORAGE_KEY);
+    const saved = localStorage.getItem(RETCOM_PASSWORD_KEY);
     return saved ? JSON.parse(saved) : {};
   } catch { return {}; }
 }
 
 function savePasswords(passwords) {
-  try { localStorage.setItem(PASSWORD_STORAGE_KEY, JSON.stringify(passwords)); } catch {}
+  try { localStorage.setItem(RETCOM_PASSWORD_KEY, JSON.stringify(passwords)); } catch {}
 }
 
 // ─── Context ──────────────────────────────────────────────────────────────────

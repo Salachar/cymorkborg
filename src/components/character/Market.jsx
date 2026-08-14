@@ -1,14 +1,12 @@
 import React from "react";
 
-import CollapsibleSection from '../CollapsibleSection';
 import MarketCart from "./MarketCart";
 
-// Helper functions for collapse state management
-const COLLAPSE_STORAGE_KEY = "cy_borg_collapse_states";
+import { CYBORG_MARKET_COLLAPSED_SECTIONS_KEY } from '@utils/localStorage';
 
 function getCollapseStates() {
   try {
-    const stored = localStorage.getItem(COLLAPSE_STORAGE_KEY);
+    const stored = localStorage.getItem(CYBORG_MARKET_COLLAPSED_SECTIONS_KEY);
     return stored ? JSON.parse(stored) : {};
   } catch (e) {
     console.error("Error reading collapse states:", e);
@@ -23,7 +21,7 @@ function setCollapseState(characterId, sectionKey, isOpen) {
       states[characterId] = {};
     }
     states[characterId][sectionKey] = isOpen;
-    localStorage.setItem(COLLAPSE_STORAGE_KEY, JSON.stringify(states));
+    localStorage.setItem(CYBORG_MARKET_COLLAPSED_SECTIONS_KEY, JSON.stringify(states));
   } catch (e) {
     console.error("Error saving collapse state:", e);
   }
@@ -45,7 +43,9 @@ export default function Market({
 
   const [searchQuery, setSearchQuery] = React.useState("");
 
-  // Track collapse state for each section
+  // Track collapse state per item-category section (weapons, armor, etc) —
+  // this is unrelated to the page-level "Market" wrapper, which is no
+  // longer collapsible now that it's a standalone tab.
   const [sectionStates, setSectionStates] = React.useState(() => {
     const initial = {};
     sections.forEach(section => {
@@ -150,19 +150,16 @@ export default function Market({
   };
 
   return (
-    <CollapsibleSection
-      title="Market"
-      sectionKey="market"
-      character={character}
-      headerClass="bg-gradient-to-r from-yellow-900/20 via-gray-900 to-yellow-900/20 border-2 border-yellow-600/50 p-4 mb-4 cursor-pointer hover:border-yellow-600/70 transition-colors"
-      headerTextClass="text-yellow-400"
-      headerChildrenEnabled={cartItems.length > 0}
-      headerChildren={(
-        <span className="text-sm text-gray-400">
-          ({cartItems.length} item{cartItems.length !== 1 ? 's' : ''} in cart)
-        </span>
-      )}
-    >
+    <div>
+      <div className="flex items-center justify-between bg-gradient-to-r from-yellow-900/20 via-gray-900 to-yellow-900/20 border-2 border-yellow-600/50 p-4 mb-4">
+        <h3 className="text-yellow-400 font-black uppercase tracking-wide text-lg">Market</h3>
+        {cartItems.length > 0 && (
+          <span className="text-sm text-gray-400">
+            ({cartItems.length} item{cartItems.length !== 1 ? 's' : ''} in cart)
+          </span>
+        )}
+      </div>
+
       <div className="flex gap-4">
         {/* Main Shop Area */}
         <div className="flex-1">
@@ -368,6 +365,6 @@ export default function Market({
           </div>
         </div>
       </div>
-    </CollapsibleSection>
+    </div>
   );
 }

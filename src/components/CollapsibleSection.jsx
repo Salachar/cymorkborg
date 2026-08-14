@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { COLLAPSE_STORAGE_KEY } from '@utils/localStorage';
+import { CYBORG_COLLAPSED_SECTIONS_KEY } from '@utils/localStorage';
 
 // Helper functions for collapse state management
 function getCollapseStates() {
   try {
-    const stored = localStorage.getItem(COLLAPSE_STORAGE_KEY);
+    const stored = localStorage.getItem(CYBORG_COLLAPSED_SECTIONS_KEY);
     return stored ? JSON.parse(stored) : {};
   } catch (e) {
     console.error("Error reading collapse states:", e);
@@ -19,7 +19,7 @@ function setCollapseState(characterId, sectionKey, isOpen) {
       states[characterId] = {};
     }
     states[characterId][sectionKey] = isOpen;
-    localStorage.setItem(COLLAPSE_STORAGE_KEY, JSON.stringify(states));
+    localStorage.setItem(CYBORG_COLLAPSED_SECTIONS_KEY, JSON.stringify(states));
   } catch (e) {
     console.error("Error saving collapse state:", e);
   }

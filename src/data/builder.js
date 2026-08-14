@@ -1,7 +1,7 @@
 import {
-  CYBORG_LAST_SELECTED,
-  CYBORG_SAVED_CHARACTERS,
-  COLLAPSE_STORAGE_KEY,
+  CYBORG_LAST_SELECTED_CHARACTER_KEY,
+  CYBORG_SAVED_CHARACTERS_KEY,
+  CYBORG_COLLAPSED_SECTIONS_KEY,
 } from '@utils/localStorage';
 
 import ShunnedNanomancer from "./ShunnedNanomancer";
@@ -95,7 +95,7 @@ class BuilderManager {
   setLastSelected(id) {
     this._last_selected_id = id;
     try {
-      localStorage.setItem(CYBORG_LAST_SELECTED, id);
+      localStorage.setItem(CYBORG_LAST_SELECTED_CHARACTER_KEY, id);
     } catch (e) {
       console.error("Failed to save last selected:", e);
     }
@@ -119,15 +119,15 @@ class BuilderManager {
 
     if (this._last_selected_id === id) {
       this._last_selected_id = null;
-      localStorage.removeItem(CYBORG_LAST_SELECTED);
+      localStorage.removeItem(CYBORG_LAST_SELECTED_CHARACTER_KEY);
     }
 
     try {
-      const stored = localStorage.getItem(COLLAPSE_STORAGE_KEY);
+      const stored = localStorage.getItem(CYBORG_COLLAPSED_SECTIONS_KEY);
       if (stored) {
         const states = JSON.parse(stored);
         delete states[id];
-        localStorage.setItem(COLLAPSE_STORAGE_KEY, JSON.stringify(states));
+        localStorage.setItem(CYBORG_COLLAPSED_SECTIONS_KEY, JSON.stringify(states));
       }
     } catch (e) {
       console.error("Error cleaning up collapse states:", e);
@@ -145,7 +145,7 @@ class BuilderManager {
         charJSON[c.id] = c.toJSON();
       })
 
-      localStorage.setItem(CYBORG_SAVED_CHARACTERS, JSON.stringify(charJSON));
+      localStorage.setItem(CYBORG_SAVED_CHARACTERS_KEY, JSON.stringify(charJSON));
     } catch (e) {
       console.log("Failed to save characters", e);
     }
@@ -154,7 +154,7 @@ class BuilderManager {
   load () {
     // Load last selected
     try {
-      const lastSelected = localStorage.getItem(CYBORG_LAST_SELECTED);
+      const lastSelected = localStorage.getItem(CYBORG_LAST_SELECTED_CHARACTER_KEY);
       if (lastSelected) {
         this._last_selected_id = lastSelected;
       }
@@ -163,7 +163,7 @@ class BuilderManager {
     }
 
     try {
-      const chars = localStorage.getItem(CYBORG_SAVED_CHARACTERS);
+      const chars = localStorage.getItem(CYBORG_SAVED_CHARACTERS_KEY);
       if (!chars) return;
       const parsed = JSON.parse(chars);
       Object.keys(parsed).forEach((c_id) => {

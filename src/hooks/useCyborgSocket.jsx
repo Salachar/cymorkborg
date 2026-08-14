@@ -1,31 +1,34 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
 
-const WS_HOST_KEY = 'retcom_ws_host';
-const WS_NAME_KEY = 'retcom_player_name';
+import {
+  CYBORG_WS_HOST_KEY,
+  CYBORG_WS_NAME_KEY,
+} from '@utils/localStorage';
+
 const RECONNECT_DELAY = 3000;
 const DEFAULT_HOST = 'wss://ws.cymorkborg.com';
 
 function getStoredHost() {
   try {
-    const saved = localStorage.getItem(WS_HOST_KEY);
+    const saved = localStorage.getItem(CYBORG_WS_HOST_KEY);
     return saved !== null ? saved : DEFAULT_HOST;
   } catch { return DEFAULT_HOST; }
 }
 
 function saveStoredHost(h) {
-  try { localStorage.setItem(WS_HOST_KEY, h); } catch {}
+  try { localStorage.setItem(CYBORG_WS_HOST_KEY, h); } catch {}
 }
 function getStoredName() {
-  try { return localStorage.getItem(WS_NAME_KEY) ?? ''; } catch { return ''; }
+  try { return localStorage.getItem(CYBORG_WS_NAME_KEY) ?? ''; } catch { return ''; }
 }
 function saveStoredName(n) {
-  try { localStorage.setItem(WS_NAME_KEY, n); } catch {}
+  try { localStorage.setItem(CYBORG_WS_NAME_KEY, n); } catch {}
 }
 
 function clearStoredConnection() {
   try {
-    localStorage.removeItem(WS_HOST_KEY);
-    localStorage.removeItem(WS_NAME_KEY);
+    localStorage.removeItem(CYBORG_WS_HOST_KEY);
+    localStorage.removeItem(CYBORG_WS_NAME_KEY);
   } catch {}
 }
 

@@ -10,7 +10,6 @@ import Name from "./character/Name";
 import CreditsTracker from "./character/Credits";
 import GlitchesTracker from "./character/Glitches";
 import Inventory from "./character/Inventory";
-import Market from "./character/Market";
 import Flavor from "./character/Flavor";
 import StartingItems from "./character/StartingItems";
 import NanoPowers from "./character/NanoPowers";
@@ -18,7 +17,6 @@ import Infestations from "./character/Infestations";
 import Apps from "./character/Apps";
 import Cyberware from "./character/Cyberware";
 import Cyberdeck from "./character/Cyberdeck";
-import Services from "./character/Services";
 import Debt from "./character/Debt";
 
 import {
@@ -210,14 +208,6 @@ export default function CharacterTemplate({
             character={character}
             sections={GEAR_SECTIONS}
             onUpdate={onUpdate}
-          />
-          <Market
-            character={character}
-            sections={GEAR_SECTIONS}
-            onUpdate={onUpdate}
-          />
-          <Services
-            character={character}
           />
           <div className="divider" />
 

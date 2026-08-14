@@ -1,16 +1,18 @@
 import { Routes, Route, NavLink, useLocation } from 'react-router-dom';
 import { useEffect, useRef, useState, createContext } from 'react';
 
-import CyCity from './pages/CyCity';
-import Rules from './pages/Rules';
-import Combat from './pages/Combat';
-import Characters from './pages/Characters';
-import RetComDevice from './pages/RetComDevice';
-import Artwork from './pages/Artwork';
-import NetLog from './pages/NetLog';
+import CyCity from './pages/CyCity/CyCity';
+import Rules from './pages/Rules/Rules';
+import Combat from './pages/Combat/Combat';
+import Characters from './pages/Characters/Characters';
+import Market from './pages/Market/Market';
+import RetComDevice from './pages/RetComDevice/RetComDevice';
+import Artwork from './pages/Artwork/Artwork';
+import NetLog from './pages/NetLog/NetLog';
 
 import { CyborgSocketProvider } from '@hooks/useCyborgSocket';
 import { GameMessagesProvider } from '@context/GameMessagesContext';
+import { CharacterProvider } from '@context/CharacterContext';
 import TransferReceiver from '@components/TransferReceiver';
 import MessageSubheader from '@components/Connection/MessageSubheader';
 
@@ -76,6 +78,7 @@ export default function App() {
   return (
     <CyborgSocketProvider>
       <GameMessagesProvider>
+        <CharacterProvider>
         <NavExtraContext.Provider value={{ setNavExtra }}>
           <div className="flex flex-col h-screen overflow-hidden">
             <nav className="relative bg-black border-b border-cy-cyan/30 overflow-hidden flex-shrink-0">
@@ -95,6 +98,7 @@ export default function App() {
                 <CyNavLink to="/rules" label="Rules" color="yellow" />
                 <CyNavLink to="/combat" label="Combat" color="pink" />
                 <CyNavLink to="/characters" label="Characters" color="pink" />
+                <CyNavLink to="/market" label="Market" color="green" />
                 <CyNavLink to="/retcom" label="RetCom" color="green" />
                 <CyNavLink to="/netlog" label="Net Log" color="green" />
 
@@ -120,6 +124,7 @@ export default function App() {
                   <Route path="/rules" element={<Rules />} />
                   <Route path="/combat" element={<Combat />} />
                   <Route path="/characters/:slug?" element={<Characters />} />
+                  <Route path="/market" element={<Market />} />
                   <Route path="/artwork" element={<Artwork />} />
                 </Routes>
               </div>
@@ -129,6 +134,7 @@ export default function App() {
           {/* Global — listens for incoming device transfers on any page */}
           <TransferReceiver />
         </NavExtraContext.Provider>
+        </CharacterProvider>
       </GameMessagesProvider>
     </CyborgSocketProvider>
   );
