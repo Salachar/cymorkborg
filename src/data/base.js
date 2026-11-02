@@ -35,15 +35,14 @@ class BaseClass {
     unlocked: false,
     jacked_in: false,
     slots: 4,
-    loaded_apps: [] // Array of app_ids currently loaded
+    loaded_apps: [],
+    fumble_risk: 0,
   };
   _debt = {
     amount: 0,
     creditor: null,
     urgency: null,
   };
-
-  _locked = false;
 
   constructor(data = {}) {
     this.id = data.id || crypto.randomUUID();
@@ -131,7 +130,8 @@ class BaseClass {
         unlocked: data.cyberdeck.unlocked || false,
         jacked_in: data.cyberdeck.jacked_in || false,
         slots: data.cyberdeck.slots || 4,
-        loaded_apps: data.cyberdeck.loaded_apps || []
+        loaded_apps: data.cyberdeck.loaded_apps || [],
+        fumble_risk: data.cyberdeck.fumble_risk || 0,
       };
     }
 
@@ -148,28 +148,11 @@ class BaseClass {
         urgency: data.debt.urgency || null
       };
     }
-
-    if (data.locked) {
-      this._locked = true;
-    }
   }
 
   #checkStatPoints(stat, new_value) {
     if (new_value < -3 || new_value > 3) return false;
     return true;
-  }
-
-  // Lock/unlock character sheet
-  get locked() {
-    return this._locked;
-  }
-
-  toggleLock() {
-    this._locked = !this._locked;
-    if (this._locked) {
-      this._max_health = this._current_health;
-      this._max_glitches = this._glitches;
-    }
   }
 
   // Class information
@@ -202,24 +185,24 @@ class BaseClass {
     this._name = new_name;
   }
 
-  // Health
   get max_health() {
-    if (!this._locked) return this._current_health;
     return this._max_health;
   }
 
   set max_health(new_max) {
-    this._max_health = new_max;
+    this._max_health = Math.max(1, new_max);
+    if (this._current_health > this._max_health) {
+      this._current_health = this._max_health;
+    }
   }
 
   get current_health() {
     return this._current_health;
   }
 
+  // Capped at max; may go below 0 (Battered / Dead*).
   set current_health(new_health) {
-    if (!this._locked && new_health < 0) new_health = 0;
-    if (this._locked && new_health > this._max_health) new_health = this._max_health;
-    this._current_health = new_health;
+    this._current_health = Math.min(new_health, this._max_health);
   }
 
   // Credits
@@ -232,8 +215,14 @@ class BaseClass {
   }
 
   get max_glitches() {
-    if (!this._locked) return this._glitches;
     return this._max_glitches;
+  }
+
+  set max_glitches(new_max) {
+    this._max_glitches = Math.max(0, new_max);
+    if (this._glitches > this._max_glitches) {
+      this._glitches = this._max_glitches;
+    }
   }
 
   // Glitches
@@ -242,9 +231,7 @@ class BaseClass {
   }
 
   set glitches(new_glitches) {
-    if (!this._locked && new_glitches < 0) new_glitches = 0;
-    if (this._locked && new_glitches > this._max_glitches) new_glitches = this._max_glitches;
-    this._glitches = new_glitches;
+    this._glitches = Math.max(0, Math.min(new_glitches, this._max_glitches));
   }
 
   // Stats
@@ -546,6 +533,18 @@ class BaseClass {
     }
   }
 
+  // Set a flavor category. Never toggles off, so a roll that lands on the
+  // current pick keeps it.
+  setStyle(section_name, entry) {
+    const entry_id = entry.id || entry.label || entry.name;
+    if (!entry_id) return;
+    this._style[section_name] = { [entry_id]: true };
+  }
+
+  clearStyle(section_name) {
+    delete this._style[section_name];
+  }
+
   // Starting items system
   get starting_items() {
     return this._starting_items;
@@ -572,11 +571,52 @@ class BaseClass {
     }
   }
 
+  // Debt
+  get debt() {
+    return this._debt;
+  }
+
+  setDebtAmount(amount) {
+    this._debt.amount = Math.max(0, Math.round(Number(amount) || 0));
+  }
+
+  // Moves credits onto the debt, capped at both. Returns what was paid.
+  payDebtFromCredits(amount) {
+    const pay = Math.max(0, Math.min(Number(amount) || 0, this._credits, this._debt.amount));
+    this._credits -= pay;
+    this._debt.amount -= pay;
+    return pay;
+  }
+
+  // Set, never toggle. null clears.
+  setDebtCreditor(entry) {
+    this._debt.creditor = entry ? (entry.id || entry.label) : null;
+  }
+
+  setDebtUrgency(entry) {
+    this._debt.urgency = entry ? (entry.id || entry.label) : null;
+  }
+
+  clearDebt() {
+    this._debt.amount = 0;
+  }
+
+  // Set a class table choice. Never toggles off, so a roll that lands on
+  // the current pick keeps it.
+  setTableChoice(table_name, entry) {
+    const entry_id = entry.id || entry.label || entry.name;
+    if (!entry_id) return;
+    this._selected_tables[table_name] = { [entry_id]: true };
+  }
+
+  clearTableChoice(table_name) {
+    delete this._selected_tables[table_name];
+  }
+
   // Serialize character to JSON
   toJSON() {
     return {
       id: this.id,
-      locked: this.locked,
       class: this.class,
       name: this.name,
       current_health: this.current_health,
@@ -601,7 +641,8 @@ class BaseClass {
         unlocked: false,
         jacked_in: false,
         slots: 4,
-        loaded_apps: []
+        loaded_apps: [],
+        fumble_risk: 0,
       },
       debt: this._debt || {
         amount: 0,

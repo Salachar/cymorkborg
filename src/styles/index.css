@@ -42,8 +42,77 @@
   --color-ink-squid: #22303C;
   --color-ink-iron: #2E2D36;
 
-  --color-class: #00ffff; /* Default to cyan */
   --click-height: 3rem;
+}
+
+/* ==========================================================================
+   CY_BORG DESIGN TOKENS (new system)
+   Used by Emotion styled components. The --color-* variables above and
+   Tailwind's @theme block below are legacy and go away with Tailwind.
+
+   One color, one job. Variety comes from form (shape, weight, border,
+   layout), never from switching hue.
+   ========================================================================== */
+:root {
+  /* ---- Surfaces: dark blue-gray, darkest to lightest ---- */
+  --cy-bg-black: rgb(10, 11, 18);          /* app shell / outermost */
+  --cy-bg-base: rgb(17, 19, 30);           /* page background */
+  --cy-bg-elevated: rgb(24, 27, 42);       /* nav, headers, bars */
+  --cy-bg-panel: rgba(32, 36, 55, 0.7);    /* translucent content panels */
+  --cy-bg-panel-solid: rgb(32, 36, 55);    /* solid panels (cards on cards) */
+  --cy-scrim: rgba(10, 11, 18, 0.94);      /* fullscreen overlays */
+  --cy-backdrop: rgba(10, 11, 18, 0.72);   /* behind dialogs */
+
+  /* ---- Yellow: the voice. Titles, active states, primary emphasis. ---- */
+  --cy-yellow: rgb(245, 210, 70);
+  --cy-yellow-bright: rgb(255, 228, 120);  /* rare: needs to shout */
+  --cy-yellow-border: rgba(245, 210, 70, 0.45);
+  --cy-yellow-dim: rgba(245, 210, 70, 0.35);
+  --cy-yellow-bg: rgba(245, 210, 70, 0.08);
+
+  /* ---- Pink: the glow. Highlights, shadows, hover. Rarely text. ---- */
+  --cy-pink: rgb(255, 64, 140);
+  --cy-pink-border: rgba(255, 64, 140, 0.45);
+  --cy-pink-glow: rgba(255, 64, 140, 0.35);  /* text-shadow / box-shadow */
+  --cy-pink-faint: rgba(255, 64, 140, 0.18);
+  --cy-pink-bg: rgba(255, 64, 140, 0.08);
+
+  /* ---- Cyan: intel. Rumors, whispers, system readouts. Tertiary, text
+     level only: never a section fill or border color. ---- */
+  --cy-cyan: rgb(110, 205, 215);
+  --cy-cyan-dim: rgba(110, 205, 215, 0.4);
+  --cy-cyan-bg: rgba(110, 205, 215, 0.08);
+
+  /* ---- Green: health state only (HP above two-thirds). Not a general
+     "success" color. ---- */
+  --cy-green: rgb(110, 200, 130);
+
+  /* ---- Purple: atmosphere only. Mist and background gradients.
+     Never text, never borders. ---- */
+  --cy-purple: rgb(140, 95, 215);
+  --cy-purple-mist: rgba(140, 95, 215, 0.12);
+  --cy-purple-faint: rgba(140, 95, 215, 0.06);
+
+  /* ---- Red: danger, damage, delete. Nothing else. Kept redder and less
+     saturated than pink so the two never read as the same thing. ---- */
+  --cy-red: rgb(215, 70, 60);
+  --cy-red-border: rgba(215, 70, 60, 0.45);
+  --cy-red-bg: rgba(215, 70, 60, 0.12);
+
+  /* ---- Text ---- */
+  --cy-text: rgb(222, 226, 238);
+  --cy-text-muted: rgb(148, 156, 180);
+  --cy-text-dim: rgba(148, 156, 180, 0.55);
+
+  /* ---- Structure: neutral lines (replaces cyan as the structural color) ---- */
+  --cy-hairline: rgba(148, 156, 180, 0.15);
+  --cy-border: rgba(148, 156, 180, 0.28);
+
+  /* ---- Layout ---- */
+  --cy-radius: 2px;
+  --cy-max-width: 1200px;
+  --cy-font: "Courier New", monospace;
+  --cy-safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 /* Tailwind custom theme */
@@ -97,7 +166,10 @@ body {
 
 #root {
   max-width: 1200px;
-  height: 100vh;
+  /* 100% of the fixed body, which tracks the *visible* viewport. 100vh is
+     the viewport with browser toolbars hidden, so on tablets and phones
+     it overshoots and the bottom of the app gets clipped. */
+  height: 100%;
   margin: 0 auto;
   background-color: var(--color-bg-dark);
   box-shadow:

@@ -1,4 +1,3 @@
-import React from 'react';
 import LockIcon from '@mui/icons-material/Lock';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
@@ -6,13 +5,36 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import Icons from '@utils/icons';
 import { getDefaultFavicon } from '@utils/favicon';
 
-import './searchResultRow.css';
+import {
+  Row,
+  Strip,
+  Name,
+  Lock,
+  StarButton,
+  Breadcrumb,
+  CrumbNear,
+  CrumbSep,
+  Preview,
+} from './SearchBookmarks.styles';
 
 function Favicon({ favicon, displayName }) {
   if (favicon) return favicon;
   const resolved = getDefaultFavicon(displayName);
   if (resolved) return resolved;
   return <Icons.Hub />;
+}
+
+// Parent path, with all but the last two parts shortened to initials.
+function buildBreadcrumb(path) {
+  const parents = path.split('/').slice(0, -1);
+  if (parents.length === 0) return null;
+  return parents.map((part, i) => {
+    const isNear = i >= parents.length - 2;
+    return {
+      text: isNear ? part : part.split(/\s+/).map((w) => w[0]?.toUpperCase() ?? '').join(''),
+      isNear,
+    };
+  });
 }
 
 export default function SearchResultRow({
@@ -22,60 +44,59 @@ export default function SearchResultRow({
   onToggleBookmark,
 }) {
   const { id, path, hasBlocker, isBypassed, preview, favicon } = entry;
+  const breadcrumb = buildBreadcrumb(path);
 
-  const breadcrumb = (() => {
-    const parts = path.split('/');
-    const parents = parts.slice(0, -1);
-    if (parents.length === 0) return null;
-    return parents.map((part, i, arr) => {
-      const isRecent = i >= arr.length - 2;
-      if (isRecent) return part;
-      return part.split(/\s+/).map(word => word[0]?.toUpperCase() ?? '').join('');
-    });
-  })();
+  const navigate = () => onNavigate?.(path);
 
-  const stopProp = (fn) => (e) => { e.stopPropagation(); fn?.(); };
+  // The row holds a button (the star), so it can't itself be a <button>.
+  // role="button" plus Enter/Space keeps it keyboard-usable.
+  const handleKeyDown = (e) => {
+    if (e.target !== e.currentTarget) return;
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      navigate();
+    }
+  };
 
   return (
-    <div className="srr-root" onClick={() => onNavigate?.(path)}>
-      <div className="srr-strip">
+    <Row role="button" tabIndex={0} onClick={navigate} onKeyDown={handleKeyDown}>
+      <Strip>
         <Favicon favicon={favicon} displayName={id} />
 
-        {(hasBlocker && !isBypassed) && (
-          <LockIcon style={{ fontSize: 14, color: 'rgb(251, 191, 36)' }} />
+        {hasBlocker && !isBypassed && (
+          <Lock title="Locked">
+            <LockIcon style={{ fontSize: 14 }} />
+          </Lock>
         )}
 
-        <span className="srr-name">{id}</span>
+        <Name>{id}</Name>
 
-        <button
-          onClick={stopProp(onToggleBookmark)}
-          className="srr-star-btn"
-          title={isBookmarked ? "Remove bookmark" : "Add bookmark"}
+        <StarButton
+          type="button"
+          aria-pressed={isBookmarked}
+          aria-label={isBookmarked ? 'Remove bookmark' : 'Add bookmark'}
+          title={isBookmarked ? 'Remove bookmark' : 'Add bookmark'}
+          onClick={(e) => {
+            e.stopPropagation();
+            onToggleBookmark?.();
+          }}
         >
-          {isBookmarked
-            ? <StarIcon style={{ fontSize: 14, color: 'rgb(250, 204, 21)' }} />
-            : <StarBorderIcon style={{ fontSize: 14 }} />}
-        </button>
-      </div>
+          {isBookmarked ? <StarIcon style={{ fontSize: 16 }} /> : <StarBorderIcon style={{ fontSize: 16 }} />}
+        </StarButton>
+      </Strip>
 
       {breadcrumb && (
-        <div className="srr-breadcrumb">
-          {breadcrumb.map((part, i, arr) => (
+        <Breadcrumb>
+          {breadcrumb.map((part, i) => (
             <span key={i}>
-              {i > 0 && <span className="srr-breadcrumb-sep"> → </span>}
-              <span className={i >= arr.length - 2 ? 'srr-breadcrumb-near' : 'srr-breadcrumb-far'}>
-                {part}
-              </span>
+              {i > 0 && <CrumbSep> → </CrumbSep>}
+              {part.isNear ? <CrumbNear>{part.text}</CrumbNear> : part.text}
             </span>
           ))}
-        </div>
+        </Breadcrumb>
       )}
 
-      {preview && (
-        <div className="srr-preview">
-          {preview}
-        </div>
-      )}
-    </div>
+      {preview && <Preview>{preview}</Preview>}
+    </Row>
   );
 }

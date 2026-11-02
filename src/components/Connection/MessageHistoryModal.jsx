@@ -1,48 +1,47 @@
-import React from 'react';
 import { useGameMessages } from '@context/GameMessagesContext';
 import Modal from '@components/Modal/Modal';
-import './messageHistoryModal.css';
+import { Button } from '@components/Layout/Layout';
 
-const TYPE_COLOR = {
-  unlock: 'rgb(0, 170, 40)',
-  note:   'rgb(251, 191, 36)',
-  info:   'rgb(79, 209, 197)',
-};
+import {
+  Actions,
+  Muted,
+  HistoryRow,
+  HistoryLabel,
+  HistoryMessage,
+  HistoryTime,
+} from './Connection.styles';
 
 function formatTime(ts) {
   try {
-    return new Date(ts).toLocaleTimeString(undefined, {
-      hour: 'numeric',
-      minute: '2-digit',
-    });
-  } catch { return ''; }
+    return new Date(ts).toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+  } catch {
+    return '';
+  }
 }
 
 export default function MessageHistoryModal({ open, onClose }) {
   const { messageHistory, clearHistory } = useGameMessages();
 
   return (
-    <Modal open={open} onClose={onClose} title="NOTIFICATION HISTORY">
+    <Modal open={open} onClose={onClose} title="Notification History" maxWidth="30rem">
       {messageHistory.length > 0 && (
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <button className="mhm-clear-btn" onClick={clearHistory}>
-            Clear
-          </button>
-        </div>
+        <Actions>
+          <Button type="button" onClick={clearHistory}>Clear</Button>
+        </Actions>
       )}
 
       {messageHistory.length === 0 ? (
-        <div className="mhm-empty">No notifications yet this session.</div>
+        <Muted>No notifications yet this session.</Muted>
       ) : (
-        messageHistory.map(msg => (
-          <div key={msg.id} className="mhm-row">
-            <span className="mhm-label" style={{ color: TYPE_COLOR[msg.type] ?? TYPE_COLOR.info }}>
-              {msg.label ?? msg.type.toUpperCase()}
-            </span>
-            <span className="mhm-message">{msg.message}</span>
-            <span className="mhm-time">{formatTime(msg.timestamp)}</span>
-          </div>
-        ))
+        <div>
+          {messageHistory.map((msg) => (
+            <HistoryRow key={msg.id}>
+              <HistoryLabel>{msg.label ?? msg.type.toUpperCase()}</HistoryLabel>
+              <HistoryMessage>{msg.message}</HistoryMessage>
+              <HistoryTime>{formatTime(msg.timestamp)}</HistoryTime>
+            </HistoryRow>
+          ))}
+        </div>
       )}
     </Modal>
   );

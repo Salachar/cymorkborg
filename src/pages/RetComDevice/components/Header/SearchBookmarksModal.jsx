@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
-import SearchIcon from '@mui/icons-material/Search';
-
+import { useState } from 'react';
 import Modal from '@components/Modal/Modal';
-import SearchResultRow from './SearchResultRow';
+import { SearchInput } from '@components/Layout/Layout';
 import { searchIndex_filter } from '@utils/commands';
 
-import './searchBookmarksModal.css';
+import SearchResultRow from './SearchResultRow';
+import { Layout, ListArea, ListLabel, Rows, Empty } from './SearchBookmarks.styles';
 
+// Search field on top (no autofocus, so the keyboard stays down when
+// you're after a bookmark). Empty field: your bookmarks. Typing: results,
+// in the same spot, right under the field.
 export default function SearchBookmarksModal({
   open,
   onClose,
@@ -17,78 +19,68 @@ export default function SearchBookmarksModal({
 }) {
   const [query, setQuery] = useState('');
 
-  const bookmarkedEntries = searchIndex.filter(entry => bookmarks[entry.path]);
-  const results = query.trim() ? searchIndex_filter(searchIndex, query, 20) : [];
-
-  const handleNavigate = (path) => {
-    onNavigate?.(path);
-    onClose?.();
-  };
+  const trimmed = query.trim();
+  const bookmarkedEntries = searchIndex.filter((entry) => bookmarks[entry.path]);
+  const results = trimmed ? searchIndex_filter(searchIndex, query, 20) : [];
 
   const handleClose = () => {
     setQuery('');
     onClose?.();
   };
 
+  const handleNavigate = (path) => {
+    onNavigate?.(path);
+    handleClose();
+  };
+
+  const renderRows = (entries) => (
+    <Rows>
+      {entries.map((entry) => (
+        <SearchResultRow
+          key={entry.path}
+          entry={entry}
+          isBookmarked={Boolean(bookmarks[entry.path])}
+          onNavigate={handleNavigate}
+          onToggleBookmark={() => onToggleBookmark?.(entry.path)}
+        />
+      ))}
+    </Rows>
+  );
+
   return (
     <Modal
       open={open}
       onClose={handleClose}
-      title="SEARCH & BOOKMARKS"
-      className="sbm-modal"
-      bodyClassName="sbm-body-scroll"
+      title="Search & Bookmarks"
+      maxWidth="40rem"
+      height="min(80dvh, 44rem)"
     >
-      {/* Bookmarks */}
-      <div className="sbm-section-label">BOOKMARKS</div>
-      {bookmarkedEntries.length === 0 ? (
-        <div className="sbm-empty">No bookmarks yet — tap the star on a command to save it here.</div>
-      ) : (
-        <div className="sbm-results">
-          {bookmarkedEntries.map(entry => (
-            <SearchResultRow
-              key={entry.path}
-              entry={entry}
-              isBookmarked={true}
-              onNavigate={handleNavigate}
-              onToggleBookmark={() => onToggleBookmark?.(entry.path)}
-            />
-          ))}
-        </div>
-      )}
-
-      <div className="sbm-divider" />
-
-      {/* Search */}
-      <div className="sbm-section-label">SEARCH</div>
-      <div className="sbm-search-input-wrap">
-        <SearchIcon style={{ fontSize: 16, color: 'rgba(79, 209, 197, 0.6)' }} />
-        <input
-          autoFocus
-          className="sbm-search-input"
-          type="text"
-          placeholder="Search commands..."
+      <Layout>
+        <SearchInput
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={setQuery}
+          placeholder="Search commands…"
+          label="Search commands"
         />
-      </div>
 
-      {query.trim() && (
-        <div className="sbm-results" style={{ marginTop: '0.5rem' }}>
-          {results.length === 0 ? (
-            <div className="sbm-empty">No results.</div>
+        <ListArea>
+          {trimmed ? (
+            <>
+              <ListLabel>Results</ListLabel>
+              {results.length === 0 ? <Empty>No results.</Empty> : renderRows(results)}
+            </>
           ) : (
-            results.map(entry => (
-              <SearchResultRow
-                key={entry.path}
-                entry={entry}
-                isBookmarked={Boolean(bookmarks[entry.path])}
-                onNavigate={handleNavigate}
-                onToggleBookmark={() => onToggleBookmark?.(entry.path)}
-              />
-            ))
+            <>
+              <ListLabel>Bookmarks</ListLabel>
+              {bookmarkedEntries.length === 0 ? (
+                <Empty>No bookmarks yet. Tap the star on a command to save it here.</Empty>
+              ) : (
+                renderRows(bookmarkedEntries)
+              )}
+            </>
           )}
-        </div>
-      )}
+        </ListArea>
+      </Layout>
     </Modal>
   );
 }

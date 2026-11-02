@@ -221,33 +221,6 @@ export const CY_CITY_PORTAL = {
       },
     }
   },
-  "Help": {
-    favicon: <Icons.Help />,
-    preview: (
-      <NodePreview>
-        <Line smoke> · Tips and guidance for using the RetCom Device</Line>
-      </NodePreview>
-    ),
-    content: (
-      <Node
-        title="RCD-7 - QUICK REFERENCE"
-        subtitle="RetCom Device User Guide"
-      >
-        <InsetBox title="NAVIGATION">
-          <Line cyan>• Tap any node to expand or collapse it</Line>
-          <Line cyan>• Nodes with ▶ contain sub-nodes inside</Line>
-          <Line cyan>• Eye icon toggles content visibility without closing</Line>
-          <Line cyan>• Double-tap any content panel to expand from partial to full</Line>
-        </InsetBox>
-        <InsetBox title="WALLET">
-          <Line yellow>• Tracks all extracted credits and items</Line>
-          <Line yellow>• TAKE / CLAIM items individually or use the section button for all</Line>
-          <Line yellow>• Open Wallet and TRANSFER to move assets into a character's inventory</Line>
-          <Line yellow>• CLEAR wipes the wallet without transferring</Line>
-        </InsetBox>
-      </Node>
-    ),
-  },
 };
 
 export default CY_CITY_PORTAL;

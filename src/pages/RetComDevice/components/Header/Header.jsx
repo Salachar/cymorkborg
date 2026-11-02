@@ -1,188 +1,32 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import CollapseIcon from '@mui/icons-material/UnfoldLess';
 import SearchIcon from '@mui/icons-material/Search';
 
-import { NewsTicker } from './NewsTicker';
-import SearchBookmarksModal from './SearchBookmarksModal';
+import { Button, IconButton, SegmentedControl } from '@components/Layout/Layout';
 import { useCyborgSocket } from '@hooks/useCyborgSocket';
-
 import { EVENT_FEED } from '@data/random/eventFeed';
 
-const BG = 'rgb(27, 36, 58)';
-const BORDER = 'rgb(77, 167, 188)';
-const TEAL = 'rgb(79, 209, 197)';
-const AMBER = 'rgb(251, 191, 36)';
-const DIM = 'rgb(148, 163, 184)';
+import { NewsTicker } from './NewsTicker';
+import SearchBookmarksModal from './SearchBookmarksModal';
 
-const INDENT_OPTIONS = [0, 1, 1.5];
+import {
+  Bar,
+  BarRow,
+  Logo,
+  LogoName,
+  LogoSub,
+  Status,
+  StatusTime,
+  StatusLines,
+  StatusLine,
+  StatusLabel,
+  Controls,
+  ControlDivider,
+  WideOnly,
+} from './Header.styles';
 
-function GmStatusReadout({ time, activity, note }) {
-  if (!time && !activity && !note) {
-    return (
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '0.75rem',
-        flex: 1,
-        minWidth: 0,
-        overflow: 'hidden',
-        marginLeft: '0.75rem',
-      }} />
-    )
-  }
-
-  return (
-    <div style={{
-      display: 'flex',
-      alignItems: 'center',
-      gap: '1rem',
-      flex: 1,
-      minWidth: 0,
-      overflow: 'hidden',
-      marginLeft: '0.75rem',
-    }}>
-      {time && (
-        <div
-          title={time}
-          style={{
-            fontSize: '1.5rem',
-            lineHeight: '1.5rem',
-            fontWeight: 'bold',
-            color: TEAL,
-            textShadow: '0 0 8px rgba(79, 209, 197, 0.4)',
-            letterSpacing: '0.04em',
-            fontFamily: 'monospace',
-            whiteSpace: 'nowrap',
-            flexShrink: 0,
-          }}
-        >
-          {time}
-        </div>
-      )}
-
-      {(activity || note) && (
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '0.15rem',
-          minWidth: 0,
-          overflow: 'hidden',
-        }}>
-          {activity && (
-            <div
-              title={`Activity: ${activity}`}
-              style={{
-                fontSize: '0.62rem',
-                fontFamily: 'monospace',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              <span style={{ color: AMBER, fontWeight: 'bold' }}>Activity: </span>
-              <span style={{ color: 'rgb(203, 213, 225)' }}>{activity}</span>
-            </div>
-          )}
-          {note && (
-            <div
-              title={note}
-              style={{
-                fontSize: '0.62rem',
-                fontFamily: 'monospace',
-                color: 'rgb(203, 213, 225)',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              {note}
-            </div>
-          )}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function HeaderButton({ onClick, title, children, square = false, style = {} }) {
-  const [hover, setHover] = useState(false);
-
-  return (
-    <button
-      onClick={onClick}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-      title={title}
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '0.3rem',
-        padding: square ? '0.35rem' : '0.35rem 0.6rem',
-        backgroundColor: hover ? 'rgba(79, 209, 197, 0.16)' : 'rgba(79, 209, 197, 0.08)',
-        color: hover ? TEAL : 'rgba(79, 209, 197, 0.75)',
-        border: '1px solid rgba(79, 209, 197, 0.3)',
-        borderRadius: '2px',
-        cursor: 'pointer',
-        fontFamily: 'monospace',
-        fontSize: '0.65rem',
-        letterSpacing: '0.05em',
-        whiteSpace: 'nowrap',
-        transition: 'background-color 0.15s ease, color 0.15s ease',
-        ...style,
-      }}
-    >
-      {children}
-    </button>
-  );
-}
-
-function IndentControl({ indent, onChange }) {
-  return (
-    <div style={{
-      display: 'flex',
-      alignItems: 'stretch',
-      border: '1px solid rgba(79, 209, 197, 0.3)',
-      borderRadius: '2px',
-      overflow: 'hidden',
-      flexShrink: 0,
-    }}>
-      <span style={{
-        display: 'flex',
-        alignItems: 'center',
-        fontSize: '0.6rem',
-        color: 'rgba(79, 209, 197, 0.5)',
-        fontFamily: 'monospace',
-        letterSpacing: '0.08em',
-        padding: '0 0.5rem',
-        backgroundColor: 'rgba(79, 209, 197, 0.04)',
-        borderRight: '1px solid rgba(79, 209, 197, 0.2)',
-      }}>
-        INDENT
-      </span>
-
-      {INDENT_OPTIONS.map((val, i) => (
-        <button
-          key={val}
-          onClick={() => onChange(val)}
-          style={{
-            padding: '0.35rem 0.55rem',
-            fontSize: '0.65rem',
-            fontFamily: 'monospace',
-            backgroundColor: indent === val ? 'rgba(79, 209, 197, 0.22)' : 'transparent',
-            color: indent === val ? TEAL : 'rgba(79, 209, 197, 0.55)',
-            border: 'none',
-            borderLeft: i > 0 ? '1px solid rgba(79, 209, 197, 0.2)' : 'none',
-            cursor: 'pointer',
-          }}
-        >
-          {val}
-        </button>
-      ))}
-    </div>
-  );
-}
+const INDENT_OPTIONS = [{ value: 0 }, { value: 1 }, { value: 1.5 }];
 
 export default function Header({
   indent = 1,
@@ -194,53 +38,45 @@ export default function Header({
   const { gmStatus } = useCyborgSocket();
 
   return (
-    <div style={{
-      backgroundColor: BG,
-      borderBottom: `1px solid ${BORDER}`,
-      flexShrink: 0,
-      fontFamily: 'monospace',
-    }}>
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '0.5rem',
-        padding: '0.6rem 1rem',
-      }}>
-        {/* Logo */}
-        <div style={{ flexShrink: 0 }}>
-          <div style={{ fontSize: '0.8rem', fontWeight: 'bold', color: TEAL, letterSpacing: '0.1em', textShadow: `0 0 8px rgba(79, 209, 197, 0.4)`, lineHeight: 1 }}>
-            RCD-7
-          </div>
-          <div style={{ fontSize: '0.55rem', color: DIM, marginTop: '0.15rem', letterSpacing: '0.08em' }}>
-            RET COM DEVICE
-          </div>
-        </div>
+    <Bar>
+      <BarRow>
+        <Logo>
+          <LogoName>RCD-7</LogoName>
+          <LogoSub>Ret Com Device</LogoSub>
+        </Logo>
 
-        <GmStatusReadout
-          time={gmStatus?.time}
-          activity={gmStatus?.activity}
-          note={gmStatus?.note}
-        />
+        <GmStatus time={gmStatus?.time} activity={gmStatus?.activity} note={gmStatus?.note} />
 
-        {/* Everything else, right-aligned */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexShrink: 0 }}>
-          <IndentControl
-            indent={indent}
-            onChange={(val) => onEvent({ type: 'indent_change', value: val })}
+        <Controls>
+          <SegmentedControl
+            label="Indent"
+            options={INDENT_OPTIONS}
+            value={indent}
+            onChange={(value) => onEvent({ type: 'indent_change', value })}
           />
 
-          <div style={{ width: '1px', height: '28px', backgroundColor: BORDER, opacity: 0.3 }} />
+          <ControlDivider />
 
-          <HeaderButton onClick={() => setSearchOpen(true)} title="Search & Bookmarks">
-            <SearchIcon style={{ fontSize: 14 }} />
-            Search &amp; Bookmarks
-          </HeaderButton>
+          <Button
+            type="button"
+            onClick={() => setSearchOpen(true)}
+            aria-label="Search and bookmarks"
+            title="Search & Bookmarks"
+          >
+            <SearchIcon style={{ fontSize: 16 }} />
+            <WideOnly>Search &amp; Bookmarks</WideOnly>
+          </Button>
 
-          <HeaderButton onClick={() => onEvent({ type: 'reset_tree' })} title="Collapse all" square>
-            <CollapseIcon style={{ fontSize: 16 }} />
-          </HeaderButton>
-        </div>
-      </div>
+          <IconButton
+            type="button"
+            onClick={() => onEvent({ type: 'reset_tree' })}
+            aria-label="Collapse all"
+            title="Collapse all"
+          >
+            <CollapseIcon style={{ fontSize: 18 }} />
+          </IconButton>
+        </Controls>
+      </BarRow>
 
       {EVENT_FEED.length > 0 && <NewsTicker feed={EVENT_FEED} />}
 
@@ -252,6 +88,28 @@ export default function Header({
         onNavigate={(path) => onEvent({ type: 'navigate_to', path })}
         onToggleBookmark={(path) => onEvent({ type: 'toggle_bookmark', path })}
       />
-    </div>
+    </Bar>
+  );
+}
+
+// GM-pushed time, activity and note. Renders an empty spacer when the GM
+// hasn't sent anything, so the controls stay right-aligned.
+function GmStatus({ time, activity, note }) {
+  return (
+    <Status>
+      {time && <StatusTime title={time}>{time}</StatusTime>}
+
+      {(activity || note) && (
+        <StatusLines>
+          {activity && (
+            <StatusLine title={`Activity: ${activity}`}>
+              <StatusLabel>Activity: </StatusLabel>
+              {activity}
+            </StatusLine>
+          )}
+          {note && <StatusLine title={note}>{note}</StatusLine>}
+        </StatusLines>
+      )}
+    </Status>
   );
 }

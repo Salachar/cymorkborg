@@ -15,6 +15,7 @@ export default class DischargedCorpKiller extends BaseClass {
   static color = "#FF0080"; // Hot pink/magenta for discharged killer
   static class = "Discharged Corp Killer";
   static artwork = class_image;
+  static tagline = "A good soldier discharged without severance. The Corp wants you dead.";
 
   static die = {
     health: "d8",

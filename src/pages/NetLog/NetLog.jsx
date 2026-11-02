@@ -1,35 +1,30 @@
-import { useEffect, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 import SendIcon from '@mui/icons-material/Send';
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 
 import ConfirmationModal from '@components/ConfirmationModal';
+import { Page, PageHeader, Button, TextArea } from '@components/Layout/Layout';
+
 import NoteCard from './components/NoteCard';
 import SharedNoteCard from './components/SharedNoteCard';
+import ChromeBar from '@components/Chrome/ChromeBar';
 
 import { useCyborgSocket } from '@hooks/useCyborgSocket';
 import { useGameMessages } from '@context/GameMessagesContext';
 import { getNotes, saveNotes } from '@utils/localStorage';
 
-import '@styles/notes.css';
+import { Composer, SendButton, Feed, Empty } from './NetLog.styles';
 
+// A normal page in the app's scroll container: composer on top, notes
+// below, newest first. A new note lands right under the input.
 export default function NetLog() {
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState(() => getNotes());
   const [draft, setDraft] = useState('');
   const [confirmClear, setConfirmClear] = useState(false);
-  const listRef = useRef(null);
 
   const { status } = useCyborgSocket();
   const { shareNote, sharedFeedList, deleteSharedNote } = useGameMessages();
-
-  useEffect(() => {
-    setNotes(getNotes());
-  }, []);
-
-  useEffect(() => {
-    const el = listRef.current;
-    if (!el) return;
-    el.scrollTop = el.scrollHeight;
-  }, [notes.length, sharedFeedList.length]);
+  const isConnected = status === 'connected';
 
   const persist = (next) => {
     setNotes(next);
@@ -40,104 +35,122 @@ export default function NetLog() {
     const trimmed = draft.trim();
     if (!trimmed) return;
     const now = Date.now();
-    persist([...notes, {
-      id: `${now}-${Math.random().toString(36).slice(2, 8)}`,
-      text: trimmed,
-      createdAt: now,
-      updatedAt: now,
-    }]);
+    persist([
+      ...notes,
+      {
+        id: `${now}-${Math.random().toString(36).slice(2, 8)}`,
+        text: trimmed,
+        createdAt: now,
+        updatedAt: now,
+      },
+    ]);
     setDraft('');
   };
 
+  // Enter makes a newline (tablet keyboards); Cmd/Ctrl+Enter adds the note
+  // for anyone on a laptop.
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+      e.preventDefault();
+      handleAdd();
+    }
+  };
+
   const handleSaveEdit = (id, newText) => {
-    persist(notes.map(n => n.id === id
-      ? { ...n, text: newText, updatedAt: Date.now() }
-      : n
-    ));
+    persist(notes.map((n) => (n.id === id ? { ...n, text: newText, updatedAt: Date.now() } : n)));
   };
 
   const handleDelete = (id) => {
-    persist(notes.filter(n => n.id !== id));
+    persist(notes.filter((n) => n.id !== id));
   };
 
-  const isConnected = status === 'connected';
-
-  const allItems = [
-    ...notes.map(n => ({ ...n, _type: 'personal' })),
-    ...sharedFeedList.map(n => ({ ...n, _type: 'shared' })),
-  ].sort((a, b) => a.createdAt - b.createdAt);
+  const feed = useMemo(
+    () =>
+      [
+        ...notes.map((n) => ({ ...n, _type: 'personal' })),
+        ...sharedFeedList.map((n) => ({ ...n, _type: 'shared' })),
+      ].sort((a, b) => b.createdAt - a.createdAt),
+    [notes, sharedFeedList]
+  );
 
   return (
-    <div className="notes-page">
-      <div className="notes-header">
-        <div>
-          <div className="notes-header-title">PERSONAL LOG</div>
-          <div className="notes-header-subtitle">NOTES</div>
-        </div>
-
-        <div className="notes-header-right">
-          <button
-            className="notes-clear-btn"
-            onClick={() => notes.length > 0 && setConfirmClear(true)}
-          >
-            <DeleteSweepIcon style={{ fontSize: 14 }} />
-            Clear All
-          </button>
-        </div>
-      </div>
-
-      <div className="notes-list" ref={listRef}>
-        {allItems.length === 0 ? (
-          <div className="notes-empty">No notes yet. Jot something down below.</div>
-        ) : (
-          allItems.map(item =>
-            item._type === 'personal' ? (
-              <NoteCard
-                key={item.id}
-                note={item}
-                onSave={handleSaveEdit}
-                onDelete={handleDelete}
-                onShare={shareNote}
-                isConnected={isConnected}
-              />
-            ) : (
-              <SharedNoteCard
-                key={`shared-${item.id}`}
-                note={item}
-                onDelete={deleteSharedNote}
-              />
-            )
-          )
-        )}
-      </div>
-
-      <div className="notes-input-bar">
-        <textarea
-          className="notes-input"
-          placeholder="Write a note..."
-          value={draft}
-          onChange={(e) => setDraft(e.target.value)}
-          rows={3}
+    <>
+      <ChromeBar />
+      <Page compact>
+        <PageHeader
+          compact
+          title="Net Log"
+          actions={
+            <Button
+              type="button"
+              data-variant="danger"
+              disabled={notes.length === 0}
+              onClick={() => setConfirmClear(true)}
+            >
+              <DeleteSweepIcon style={{ fontSize: 16 }} />
+              Clear all
+            </Button>
+          }
         />
-        <button
-          className="notes-send-btn"
-          onClick={handleAdd}
-          disabled={!draft.trim()}
-          title="Add note"
-        >
-          <SendIcon style={{ fontSize: 18 }} />
-        </button>
-      </div>
 
-      <ConfirmationModal
-        open={confirmClear}
-        title="Clear All Notes"
-        message="Delete all personal notes? This cannot be undone."
-        confirmLabel="Clear All"
-        onConfirm={() => { persist([]); setConfirmClear(false); }}
-        onCancel={() => setConfirmClear(false)}
-      />
+        <Composer>
+          <TextArea
+            placeholder="Write a note…"
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            onKeyDown={handleKeyDown}
+            rows={3}
+            aria-label="New note"
+          />
+          <SendButton
+            type="button"
+            data-variant="primary"
+            onClick={handleAdd}
+            disabled={!draft.trim()}
+            aria-label="Add note"
+            title="Add note"
+          >
+            <SendIcon style={{ fontSize: 18 }} />
+          </SendButton>
+        </Composer>
 
-    </div>
+        {feed.length === 0 ? (
+          <Empty>No notes yet. Write one above.</Empty>
+        ) : (
+          <Feed>
+            {feed.map((item) =>
+              item._type === 'personal' ? (
+                <NoteCard
+                  key={item.id}
+                  note={item}
+                  onSave={handleSaveEdit}
+                  onDelete={handleDelete}
+                  onShare={shareNote}
+                  isConnected={isConnected}
+                />
+              ) : (
+                <SharedNoteCard
+                  key={`shared-${item.id}`}
+                  note={item}
+                  onDelete={deleteSharedNote}
+                />
+              )
+            )}
+          </Feed>
+        )}
+
+        <ConfirmationModal
+          open={confirmClear}
+          title="Clear All Notes"
+          message="Delete all personal notes? Shared notes stay. This cannot be undone."
+          confirmLabel="Clear All"
+          onConfirm={() => {
+            persist([]);
+            setConfirmClear(false);
+          }}
+          onCancel={() => setConfirmClear(false)}
+        />
+      </Page>
+    </>
   );
 }

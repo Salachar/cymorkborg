@@ -2,7 +2,18 @@ import { useRef, useState } from 'react';
 import Modal from '@components/Modal/Modal';
 import ConfirmationModal from '@components/ConfirmationModal/ConfirmationModal';
 import ConnectionModal from '@components/Connection/ConnectionModal';
+import { Button } from '@components/Layout/Layout';
 import { useCyborgSocket } from '@hooks/useCyborgSocket';
+
+import {
+  ActionStack,
+  FullButton,
+  StatusPanel,
+  RecipientList,
+  RecipientButton,
+  Actions,
+  Muted,
+} from './Connection.styles';
 
 export default function DataModal({ open, onClose }) {
   const fileInputRef = useRef(null);
@@ -150,43 +161,51 @@ export default function DataModal({ open, onClose }) {
     } catch { return iso; }
   };
 
-  const buttonClass = "w-full px-4 py-2 bg-gray-800 border-2 border-cy-cyan-subtle text-white font-bold uppercase text-xs transition-all shadow-lg shadow-cy-cyan/30 text-center";
-  const buttonStyles = { color: "white", cursor: "pointer", opacity: "0.6" };
-
   return (
     <>
-      <Modal open={open} onClose={onClose} title="APP DATA" subtitle="Export, import, or transfer your data">
-        <div className="flex flex-col gap-3">
-          <button onClick={handleExport} className={buttonClass} style={buttonStyles}
-            title="Export all app data including characters, settings, and preferences">
+      <Modal open={open} onClose={onClose} title="App Data" subtitle="Export, import, or transfer your data">
+        <ActionStack>
+          <FullButton
+            type="button"
+            onClick={handleExport}
+            title="Export all app data including characters, settings, and preferences"
+          >
             Export
-          </button>
+          </FullButton>
 
-          <label className={buttonClass} style={buttonStyles}
-            title="Import app data backup (will replace all current data)">
+          {/* A label so the whole button opens the file picker. */}
+          <FullButton as="label" title="Import app data backup (will replace all current data)">
             Import
-            <input ref={fileInputRef} type="file" accept=".json"
-              onChange={handleFileSelect} className="hidden" />
-          </label>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".json"
+              onChange={handleFileSelect}
+              style={{ display: 'none' }}
+            />
+          </FullButton>
 
-          <button onClick={handleSendToDevice} className={buttonClass} style={buttonStyles}
-            title="Send all data to another connected device">
+          <FullButton
+            type="button"
+            onClick={handleSendToDevice}
+            title="Send all data to another connected device"
+          >
             Send to Device
-          </button>
-        </div>
+          </FullButton>
+        </ActionStack>
 
         {importStatus === 'success' && (
-          <div className="bg-cy-cyan/20 border border-cy-cyan p-4 animate-pulse">
-            <p className="text-cy-cyan font-bold text-sm">Data imported successfully!</p>
-            <p className="text-gray-300 text-sm mt-2">Please refresh the page to load the imported data.</p>
-          </div>
+          <StatusPanel data-tone="success">
+            <strong>Data imported.</strong>
+            Reloading to apply it…
+          </StatusPanel>
         )}
 
         {importStatus === 'error' && (
-          <div className="bg-red-900/20 border border-red-500 p-4">
-            <p className="text-red-400 font-bold text-sm">Import Failed</p>
-            <p className="text-gray-300 text-sm mt-2">{errorMessage}</p>
-          </div>
+          <StatusPanel data-tone="error">
+            <strong>Import failed</strong>
+            {errorMessage}
+          </StatusPanel>
         )}
       </Modal>
 
@@ -211,50 +230,38 @@ export default function DataModal({ open, onClose }) {
         message="Select the device to send all data to. Their current data will be replaced."
       >
         {otherClients.length === 0 ? (
-          <div className="mdl-message" style={{ opacity: 0.6 }}>No other clients connected.</div>
+          <Muted>No other clients connected.</Muted>
         ) : (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-            {otherClients.map(name => (
-              <button
+          <RecipientList>
+            {otherClients.map((name) => (
+              <RecipientButton
                 key={name}
+                type="button"
+                aria-pressed={selectedRecipient === name}
                 onClick={() => setSelectedRecipient(name)}
-                style={{
-                  padding: '0.5rem 0.75rem',
-                  fontFamily: 'monospace',
-                  fontSize: '0.8rem',
-                  textAlign: 'left',
-                  borderRadius: '2px',
-                  cursor: 'pointer',
-                  backgroundColor: selectedRecipient === name
-                    ? 'rgba(79, 209, 197, 0.2)' : 'rgba(29, 35, 50, 0.5)',
-                  color: selectedRecipient === name
-                    ? 'rgb(79, 209, 197)' : 'rgb(203, 213, 225)',
-                  border: `1px solid ${selectedRecipient === name
-                    ? 'rgba(79, 209, 197, 0.5)' : 'rgba(79, 209, 197, 0.2)'}`,
-                }}
               >
                 {name}
-              </button>
+              </RecipientButton>
             ))}
-          </div>
+          </RecipientList>
         )}
-        <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'flex-end' }}>
-          <button
-            className="mdl-close-btn"
+
+        <Actions>
+          <Button
+            type="button"
+            data-variant="primary"
             onClick={handleConfirmTransfer}
             disabled={!selectedRecipient}
-            style={{ padding: '0.35rem 0.75rem', opacity: selectedRecipient ? 1 : 0.35, cursor: selectedRecipient ? 'pointer' : 'not-allowed' }}
           >
             Send
-          </button>
-          <button
-            className="mdl-close-btn"
-            style={{ padding: '0.35rem 0.75rem', backgroundColor: 'transparent', color: 'rgba(148, 163, 184, 0.6)', borderColor: 'rgba(148, 163, 184, 0.2)' }}
+          </Button>
+          <Button
+            type="button"
             onClick={() => { setTransferOpen(false); setSelectedRecipient(null); }}
           >
             Cancel
-          </button>
-        </div>
+          </Button>
+        </Actions>
       </Modal>
 
       {/* Connection modal — shown when Send to Device is clicked while offline */}

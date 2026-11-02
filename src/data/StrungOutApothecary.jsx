@@ -15,6 +15,7 @@ export default class StrungOutApothecary extends BaseClass {
   static color = "#00CC88";
   static class = "Strung Out Apothecary";
   // static artwork = class_image;
+  static tagline = "Knows every drug by heart. Keeps the crew alive, mostly.";
 
   static die = {
     health: "d6",

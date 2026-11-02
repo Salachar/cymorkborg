@@ -15,6 +15,7 @@ export default class ForsakenGangGoon extends BaseClass {
   static color = "#FF0000"; // Red for gang violence
   static class = "Forsaken Gang-Goon";
   static artwork = class_image;
+  static tagline = "Your gang was your family. They’re gone, so keep your edge.";
 
   static die = {
     health: "d6",

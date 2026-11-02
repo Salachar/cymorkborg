@@ -1,11 +1,49 @@
 import React, { useEffect, useState } from "react";
 import { rollDie } from "../utils/dice";
 
+import {
+  Wrapper,
+  Label,
+  Row,
+  Track,
+  RollButton,
+  DieButton,
+  DiePlaceholder,
+  ValueBox,
+  Total,
+  Seam,
+  SeamGlyph,
+  Outcome,
+  Info,
+} from "./SegmentedDice.styles";
+
+const DEFAULT_OUTCOME_LABELS = {
+  crit: "CRIT",
+  hit: "HIT",
+  miss: "MISS",
+  fumble: "FUMBLE",
+};
+
+const SUCCESS_OUTCOMES = new Set(["crit", "hit"]);
+
+const prefersReducedMotion = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 /**
- * SegmentedDice - Connected terminal display with operators on seams
+ * SegmentedDice - connected terminal display with operators on seams
  *
- * Visual: | ROLL | 4 | 3 | 6 | = 13 |
- *              +   +   +
+ * Visual: | ROLL → 4 + 3 + 6 = 13 |
+ *
+ * showCombatOutcome: for a single d20 roll, shows CRIT (nat 20), FUMBLE
+ * (nat 1), or HIT/MISS against `dr`. Labels can be overridden via
+ * `outcomeLabels` (e.g. DODGED/HIT for a defense roll).
+ *
+ * fumbleOn: highest natural roll that fumbles (default 1). Captured when a
+ * roll starts, so a caller that raises it after the roll (App fumble risk)
+ * doesn't change the result already on screen.
+ *
+ * Props and rolling behavior are unchanged from the Tailwind version.
  */
 export default function SegmentedDice({
   label = "",
@@ -19,6 +57,10 @@ export default function SegmentedDice({
   displayFormat = null,
   onRollComplete = null,
   character_id = "",
+  showCombatOutcome = false,
+  dr = 12,
+  outcomeLabels = null,
+  fumbleOn = 1,
 }) {
   const [currentId, setCurrentId] = useState(character_id);
   const [diceStates, setDiceStates] = useState([]);
@@ -26,8 +68,7 @@ export default function SegmentedDice({
   const [diceCount, setDiceCount] = useState(1);
   const [rolled, setRolled] = useState(false);
   const [rolling, setRolling] = useState(false);
-  const [rollingIndices, setRollingIndices] = useState(new Set());
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [fumbleAtRoll, setFumbleAtRoll] = useState(fumbleOn);
 
   useEffect(() => {
     let amount = 1;
@@ -60,41 +101,37 @@ export default function SegmentedDice({
     }
   }, [rolling, rolled]);
 
+  const setDie = (index, value) => {
+    setDiceStates((prev) => {
+      const copy = [...prev];
+      copy[index] = value;
+      return copy;
+    });
+  };
+
+  // Numbers tumble for 400ms before settling. With reduced motion the
+  // final value lands immediately.
   const animateDie = async (index) => {
     if (!rolled) setRolled(true);
-
     setRolling(true);
-    setRollingIndices(prev => new Set(prev).add(index));
+
+    if (prefersReducedMotion()) {
+      setDie(index, rollDie(dieMax));
+      return;
+    }
 
     const duration = 400;
     const interval = 60;
     let elapsed = 0;
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       const intervalId = setInterval(() => {
         elapsed += interval;
-
-        setDiceStates(prev => {
-          const copy = [...prev];
-          copy[index] = rollDie(dieMax);
-          return copy;
-        });
+        setDie(index, rollDie(dieMax));
 
         if (elapsed >= duration) {
           clearInterval(intervalId);
-          const finalValue = rollDie(dieMax);
-          setDiceStates(prev => {
-            const copy = [...prev];
-            copy[index] = finalValue;
-            return copy;
-          });
-
-          setRollingIndices(prev => {
-            const next = new Set(prev);
-            next.delete(index);
-            return next;
-          });
-
+          setDie(index, rollDie(dieMax));
           resolve();
         }
       }, interval);
@@ -102,37 +139,35 @@ export default function SegmentedDice({
   };
 
   const rerollAll = async () => {
+    setFumbleAtRoll(fumbleOn);
     setRolling(true);
-    const promises = [];
-    for (let i = 0; i < diceStates.length; i++) {
-      promises.push(animateDie(i));
-    }
-    await Promise.all(promises);
+    await Promise.all(diceStates.map((_, i) => animateDie(i)));
     setRolling(false);
   };
 
   const rerollDie = async (index) => {
     if (!allowIndividualReroll) return;
+    setFumbleAtRoll(fumbleOn);
     setRolling(true);
     await animateDie(index);
     setRolling(false);
   };
 
   const getActiveDice = () => {
-    if (!rolled || diceStates.some(d => d === null)) return [];
+    if (!rolled || diceStates.some((d) => d === null)) return [];
 
     let activeDice = diceStates.map((value, index) => ({ value, index }));
 
     if (dropLowest > 0) {
       const sorted = [...activeDice].sort((a, b) => a.value - b.value);
-      const toDrop = sorted.slice(0, dropLowest).map(d => d.index);
-      activeDice = activeDice.filter(d => !toDrop.includes(d.index));
+      const toDrop = sorted.slice(0, dropLowest).map((d) => d.index);
+      activeDice = activeDice.filter((d) => !toDrop.includes(d.index));
     }
 
     if (dropHighest > 0) {
       const sorted = [...activeDice].sort((a, b) => b.value - a.value);
-      const toDrop = sorted.slice(0, dropHighest).map(d => d.index);
-      activeDice = activeDice.filter(d => !toDrop.includes(d.index));
+      const toDrop = sorted.slice(0, dropHighest).map((d) => d.index);
+      activeDice = activeDice.filter((d) => !toDrop.includes(d.index));
     }
 
     return activeDice;
@@ -140,206 +175,102 @@ export default function SegmentedDice({
 
   const isDropped = (index) => {
     if (!rolled) return false;
-    const activeDice = getActiveDice();
-    return !activeDice.some(d => d.index === index);
+    return !getActiveDice().some((d) => d.index === index);
   };
 
   const getTotal = () => {
     const activeDice = getActiveDice();
     if (activeDice.length === 0) return null;
-
-    const sum = activeDice.reduce((total, die) => total + die.value, 0);
-    return sum + mod;
+    return activeDice.reduce((sum, die) => sum + die.value, 0) + mod;
   };
 
-  const formatTotal = (value) => {
-    if (displayFormat) {
-      return displayFormat(value);
-    }
-    return value;
+  const formatTotal = (value) => (displayFormat ? displayFormat(value) : value);
+
+  // Only meaningful for a single d20; hidden while dice are still tumbling.
+  const getOutcome = () => {
+    if (!showCombatOutcome || !rolled || rolling) return null;
+    if (diceCount !== 1 || dieMax !== 20) return null;
+
+    const natural = diceStates[0];
+    const rollTotal = getTotal();
+    if (natural === null || rollTotal === null) return null;
+
+    if (natural === 20) return "crit";
+    if (natural <= fumbleAtRoll) return "fumble";
+    return rollTotal * multiplier >= dr ? "hit" : "miss";
   };
 
   if (!rollable) return null;
 
   const total = getTotal();
-
-  // Calculate total segment width for positioning
-  const dieSegmentWidth = 3; // rem
-  const rollButtonWidth = 5; // rem
+  const outcome = getOutcome();
+  const labels = { ...DEFAULT_OUTCOME_LABELS, ...(outcomeLabels || {}) };
 
   return (
-    <div className="flex flex-col gap-2">
-      {label && (
-        <div className="text-xs font-bold text-cy-cyan uppercase tracking-wide">
-          {label}
-        </div>
-      )}
+    <Wrapper>
+      {label && <Label>{label}</Label>}
 
-      <div className="relative inline-flex border-2 border-gray-700 bg-black max-w-fit">
-        {/* Roll Button Segment */}
-        <button
-          onClick={rerollAll}
-          disabled={rolling}
-          className="relative px-4 h-12 bg-gray-900 hover:bg-gray-800 disabled:opacity-50 transition-colors border-r-2 border-gray-700 w-20 flex-shrink-0"
-        >
-          <span className="text-xs font-bold text-cy-cyan uppercase tracking-wider">
-            {rolling ? "..." : "Roll"}
-          </span>
-        </button>
+      <Row>
+        <Track>
+          <RollButton type="button" onClick={rerollAll} disabled={rolling}>
+            {rolling ? "…" : "Roll"}
+          </RollButton>
 
-        {/* Operator on seam */}
-        <div className="absolute left-[calc(5rem+1px)] top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none">
-          <div className="bg-black px-1">
-            <span className="text-cy-cyan font-bold text-base" style={{
-              textShadow: '0 0 8px rgba(0, 255, 255, 0.8), 0 0 4px rgba(0, 255, 255, 0.6)'
-            }}>
-              →
-            </span>
-          </div>
-        </div>
-
-        {/* Die Segments */}
-        {diceStates.map((value, idx) => {
-          const isRolling = rollingIndices.has(idx);
-          const dropped = isDropped(idx);
-          const isHovered = hoveredIndex === idx;
-
-          return (
+          {diceStates.map((value, idx) => (
             <React.Fragment key={idx}>
-              {/* Operator on seam between dice */}
-              {idx !== 0 && (
-                <div
-                  className="absolute top-1/2 -translate-y-1/2 z-10 pointer-events-none"
-                  style={{ left: `calc(5rem + ${idx * 3}rem + 1px)` }}
-                >
-                  <div className="bg-black px-1 -translate-x-1/2">
-                    <span className="text-cy-cyan font-bold text-base" style={{
-                      textShadow: '0 0 8px rgba(0, 255, 255, 0.8), 0 0 4px rgba(0, 255, 255, 0.6)'
-                    }}>
-                      +
-                    </span>
-                  </div>
-                </div>
-              )}
-
-              <button
+              <SeamOp>{idx === 0 ? "→" : "+"}</SeamOp>
+              <DieButton
+                type="button"
                 onClick={() => rerollDie(idx)}
                 disabled={!allowIndividualReroll || rolling}
-                className={`
-                  relative w-12 h-12 font-mono font-bold text-xl flex-shrink-0
-                  border-r-2 border-gray-700 transition-all
-                  ${dropped
-                    ? 'bg-gray-950 text-gray-700'
-                    : isHovered
-                      ? 'bg-gray-800 text-cy-yellow'
-                      : 'bg-black text-cy-yellow hover:bg-gray-900'
-                  }
-                  ${!allowIndividualReroll ? 'cursor-default' : 'cursor-pointer'}
-                  ${isRolling ? 'animate-pulse' : ''}
-                  disabled:opacity-50
-                `}
+                data-dropped={isDropped(idx) || undefined}
+                aria-label={rolled && value !== null ? `Die ${idx + 1}: ${value}. Reroll` : `Die ${idx + 1}`}
               >
-                <span className={dropped ? 'line-through' : ''}>
-                  {rolled && value !== null ? (
-                    value
-                  ) : (
-                    <span className="text-gray-700 text-sm">d{dieMax}</span>
-                  )}
-                </span>
-
-                {isRolling && (
-                  <div className="absolute inset-0 bg-cy-cyan/20" />
-                )}
-              </button>
+                {rolled && value !== null ? value : <DiePlaceholder>d{dieMax}</DiePlaceholder>}
+              </DieButton>
             </React.Fragment>
-          );
-        })}
+          ))}
 
-        {/* Modifier Segment */}
-        {mod !== 0 && (
-          <>
-            {/* + operator on seam */}
-            <div
-              className="absolute top-1/2 -translate-y-1/2 z-10 pointer-events-none"
-              style={{ left: `calc(5rem + ${diceCount * 3}rem + 1px)` }}
-            >
-              <div className="bg-black px-1 -translate-x-1/2">
-                <span className="text-cy-cyan font-bold text-base" style={{
-                  textShadow: '0 0 8px rgba(0, 255, 255, 0.8), 0 0 4px rgba(0, 255, 255, 0.6)'
-                }}>
-                  +
-                </span>
-              </div>
-            </div>
+          {/* Negative modifiers read "− 2" rather than "+ -2". */}
+          {mod !== 0 && (
+            <>
+              <SeamOp>{mod < 0 ? "−" : "+"}</SeamOp>
+              <ValueBox data-rolled={rolled}>{Math.abs(mod)}</ValueBox>
+            </>
+          )}
 
-            <div className="px-3 h-12 flex items-center justify-center bg-black border-r-2 border-gray-700 min-w-[3rem] flex-shrink-0">
-              <span className={`text-base font-mono ${rolled ? 'text-gray-400' : 'text-gray-600'}`}>
-                {mod}
-              </span>
-            </div>
-          </>
+          {multiplier !== 1 && (
+            <>
+              <SeamOp>×</SeamOp>
+              <ValueBox data-rolled={rolled}>{multiplier}</ValueBox>
+            </>
+          )}
+
+          <SeamOp big>=</SeamOp>
+          <Total>{rolled && total !== null ? formatTotal(total * multiplier) : "—"}</Total>
+        </Track>
+
+        {outcome && (
+          <Outcome data-result={SUCCESS_OUTCOMES.has(outcome) ? "success" : "fail"}>
+            {labels[outcome]}
+          </Outcome>
         )}
+      </Row>
 
-        {/* Multiplier Segment */}
-        {multiplier !== 1 && (
-          <>
-            {/* × operator on seam */}
-            <div
-              className="absolute top-1/2 -translate-y-1/2 z-10 pointer-events-none"
-              style={{
-                left: mod !== 0
-                  ? `calc(5rem + ${diceCount * 3}rem + 3rem + 1px)`
-                  : `calc(5rem + ${diceCount * 3}rem + 1px)`
-              }}
-            >
-              <div className="bg-black px-1 -translate-x-1/2">
-                <span className="text-cy-cyan font-bold text-base" style={{
-                  textShadow: '0 0 8px rgba(0, 255, 255, 0.8), 0 0 4px rgba(0, 255, 255, 0.6)'
-                }}>
-                  ×
-                </span>
-              </div>
-            </div>
-
-            <div className="px-3 h-12 flex items-center justify-center bg-black border-r-2 border-gray-700 min-w-[3rem] flex-shrink-0">
-              <span className={`text-base font-mono ${rolled ? 'text-gray-400' : 'text-gray-600'}`}>
-                {multiplier}
-              </span>
-            </div>
-          </>
-        )}
-
-        {/* Equals operator and Total (always shown) */}
-        <>
-          {/* = operator on seam */}
-          <div
-            className="absolute top-1/2 -translate-y-1/2 z-10 pointer-events-none"
-            style={{ right: `calc(5rem + 1px)` }}
-          >
-            <div className="bg-black px-1 translate-x-1/2">
-              <span className="text-cy-cyan font-bold text-xl" style={{
-                textShadow: '0 0 8px rgba(0, 255, 255, 0.8), 0 0 4px rgba(0, 255, 255, 0.6)'
-              }}>
-                =
-              </span>
-            </div>
-          </div>
-
-          <div className="px-4 h-12 flex items-center justify-center bg-gray-900 w-20 flex-shrink-0">
-            <span className="text-2xl font-bold text-cy-cyan font-mono tabular-nums">
-              {rolled && total !== null ? formatTotal(total * multiplier) : "—"}
-            </span>
-          </div>
-        </>
-      </div>
-
-      {/* Info text */}
       {rolled && (dropLowest > 0 || dropHighest > 0) && (
-        <div className="text-xs text-gray-500 font-mono">
+        <Info>
           {dropLowest > 0 && `Dropped lowest ${dropLowest}`}
           {dropHighest > 0 && `Dropped highest ${dropHighest}`}
-        </div>
+        </Info>
       )}
-    </div>
+    </Wrapper>
+  );
+}
+
+function SeamOp({ big = false, children }) {
+  return (
+    <Seam aria-hidden="true">
+      <SeamGlyph data-big={big || undefined}>{children}</SeamGlyph>
+    </Seam>
   );
 }

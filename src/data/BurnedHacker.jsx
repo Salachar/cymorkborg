@@ -15,6 +15,7 @@ export default class BurnedHacker extends BaseClass {
   static color = "#00FFFF"; // Cyan/electric blue for hacker
   static class = "Burned Hacker";
   static artwork = class_image;
+  static tagline = "Once the sharpest decker in Cy. Now burnt, with no one at your back.";
 
   static die = {
     health: "d6",

@@ -1,51 +1,24 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { CLASSES } from "@data/builder";
 import BuilderManager from "@data/builder";
 
-import ClassButtons from "@components/ClassButtons";
-import CharacterTabs from "@components/CharacterTabs";
-import CharacterTemplate from "@components/CharacterTemplate";
+import ClassButtons from "./components/ClassButtons";
+import CharacterTabs from "./components/CharacterTabs";
+import CharacterTemplate, { getSheetJumps } from "./components/CharacterTemplate";
 
-import { NavExtraContext } from "../../App";
+import ChromeBar from "@components/Chrome/ChromeBar";
+import ConfirmationModal from "@components/ConfirmationModal/ConfirmationModal";
+import { Page, Collapsible } from "@components/Layout/Layout";
+
 import { useCharacterContext } from "@context/CharacterContext";
 
-const setClassColor = (classData) => {
-  let data = classData;
-  if (classData.instance) classData = classData.instance;
-  if (!classData.color) return;
-  document.documentElement.style.setProperty('--color-class', classData.color);
-};
-
-// Lock button rendered in the nav
-function NavLockButton({ character, onUpdate }) {
-  if (!character?.toggleLock) return null;
-
-  return (
-    <button
-      type="button"
-      onClick={() => {
-        character.toggleLock();
-        onUpdate();
-      }}
-      className="
-        h-8 px-3
-        bg-gray-800
-        border border-cy-cyan
-        text-cy-cyan font-bold uppercase text-xs
-        transition-all
-      "
-    >
-      {character.locked ? 'Locked' : 'Unlocked'}
-    </button>
-  );
-}
+import { Pickers, NoPunks } from "./Characters.styles";
 
 export default function Characters() {
   const navigate = useNavigate();
   const { slug } = useParams();
-  const { setNavExtra } = useContext(NavExtraContext);
   const { selectedCharacter, selectCharacter, touch } = useCharacterContext();
 
   const [tabIndex, setTabIndex] = useState(null);
@@ -54,7 +27,8 @@ export default function Characters() {
   // characters, so they stay page-local rather than going into context.
   const [previewCharacter, setPreviewCharacter] = useState(null);
   const [isBuilder, setIsBuilder] = useState(false);
-  const [timestamp, setTimestamp] = useState(Date.now());
+  // Character waiting on delete confirmation: { character, id } or null.
+  const [pendingDelete, setPendingDelete] = useState(null);
 
   useEffect(() => {
     checkCharacters(slug);
@@ -64,32 +38,13 @@ export default function Characters() {
   // real character (builder mode) or a local rules-preview instance.
   const currentCharacter = isBuilder ? selectedCharacter : previewCharacter;
 
-  // Keep nav lock button in sync with current character and lock state
-  useEffect(() => {
-    if (isBuilder && currentCharacter?.toggleLock) {
-      setNavExtra(
-        <NavLockButton
-          key={timestamp} // re-renders on update so locked label stays current
-          character={currentCharacter}
-          onUpdate={onUpdate}
-        />
-      );
-    } else {
-      setNavExtra(null);
-    }
-
-    return () => setNavExtra(null);
-  }, [isBuilder, currentCharacter, timestamp]);
-
   const setBuilderCharacter = (character) => {
     selectCharacter(character?.id || null);
     setPreviewCharacter(null);
-    setClassColor(character);
   };
 
   const setPreview = (classData) => {
     setPreviewCharacter(classData.instance || classData);
-    setClassColor(classData);
   };
 
   const checkCharacters = (slug) => {
@@ -143,65 +98,97 @@ export default function Characters() {
     }
   };
 
+  // touch() bumps the character context, which re-renders this page and
+  // the strip's character row (the lock lives there now).
   const onUpdate = () => {
     touch();
-    setTimestamp(Date.now());
   };
 
-  const hasCharacters = Object.keys(BuilderManager.characters).length > 0;
+  const deleteCharacter = (id) => {
+    if (selectedCharacter && id === selectedCharacter?.id) {
+      selectCharacter(null);
+      navigate(`/punks`);
+    }
+    BuilderManager.deleteCharacter(id);
+    checkCharacters(null);
+    onUpdate();
+  };
+
+  const characterCount = Object.keys(BuilderManager.characters).length;
+
+  // Jumps only for a real character's sheet, not a class preview.
+  const jumps = isBuilder ? getSheetJumps(currentCharacter) : null;
 
   return (
     <>
-      <ClassButtons
-        currentIndex={tabIndex}
-        onClick={({ instance, index }) => {
-          setTabIndex(index);
-          setIsBuilder(false);
-          setPreview(instance);
-          navigate(`/characters/${instance.class_id}`);
+      <ChromeBar character jumps={jumps} />
+      {/* Scroll memory off here, as before: switching characters reuses
+          this page, and each sheet should start at the top. */}
+      <Page compact rememberScroll={false}>
+      {/* Collapse both while playing and the punk's name card sits at the top. */}
+      <Pickers>
+        <Collapsible
+          title="Your Punks"
+          sectionKey="your_punks"
+          defaultOpen
+          meta={characterCount > 0 ? String(characterCount) : null}
+        >
+          {characterCount > 0 ? (
+              <CharacterTabs
+                currentCharacter={isBuilder ? selectedCharacter : null}
+                onSelect={(character) => {
+                  setTabIndex(null);
+                  setIsBuilder(true);
+                  setBuilderCharacter(character);
+                  navigate(`/punks/${character.id}`);
+                }}
+                onClose={(character, id) => setPendingDelete({ character, id })}
+              />
+          ) : (
+            <NoPunks>No punks yet. Start one from a class below.</NoPunks>
+          )}
+        </Collapsible>
+
+        <ClassButtons
+          currentIndex={tabIndex}
+          onClick={({ instance, index }) => {
+            setTabIndex(index);
+            setIsBuilder(false);
+            setPreview(instance);
+            navigate(`/punks/${instance.class_id}`);
+          }}
+          onAdd={({ constructor }) => {
+            const new_character = new constructor();
+            BuilderManager.addCharacter(new_character);
+            setTabIndex(null);
+            setIsBuilder(true);
+            setBuilderCharacter(new_character);
+            navigate(`/punks/${new_character.id}`);
+          }}
+        />
+      </Pickers>
+
+      {currentCharacter && (
+        <CharacterTemplate
+          builder={isBuilder}
+          character={currentCharacter}
+          onUpdate={onUpdate}
+        />
+      )}
+
+      <ConfirmationModal
+        open={Boolean(pendingDelete)}
+        title="Delete Character"
+        message={`Delete ${pendingDelete?.character?.name || "this character"}? This cannot be undone.`}
+        confirmLabel="Delete"
+        onConfirm={() => {
+          const id = pendingDelete?.id;
+          setPendingDelete(null);
+          if (id) deleteCharacter(id);
         }}
-        onAdd={({ constructor }) => {
-          const new_character = new constructor();
-          BuilderManager.addCharacter(new_character);
-          setTabIndex(null);
-          setIsBuilder(true);
-          setBuilderCharacter(new_character);
-          navigate(`/characters/${new_character.id}`);
-        }}
+        onCancel={() => setPendingDelete(null)}
       />
-
-      <div className="px-6 pt-6 pb-16 md:px-12 md:pt-8 md:pb-20">
-        {hasCharacters && (
-          <div className="mb-6">
-            <CharacterTabs
-              currentCharacter={isBuilder ? selectedCharacter : null}
-              onSelect={(character) => {
-                setTabIndex(null);
-                setIsBuilder(true);
-                setBuilderCharacter(character);
-                navigate(`/characters/${character.id}`);
-              }}
-              onClose={(character, id) => {
-                if (selectedCharacter && id === selectedCharacter?.id) {
-                  selectCharacter(null);
-                  navigate(`/characters`);
-                }
-                BuilderManager.deleteCharacter(id);
-                checkCharacters(null);
-                onUpdate();
-              }}
-            />
-          </div>
-        )}
-
-        {currentCharacter && (
-          <CharacterTemplate
-            builder={isBuilder}
-            character={currentCharacter}
-            onUpdate={onUpdate}
-          />
-        )}
-      </div>
+      </Page>
     </>
   );
 }

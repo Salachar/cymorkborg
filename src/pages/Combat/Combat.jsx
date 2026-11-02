@@ -1,556 +1,522 @@
 import {
   Page,
-  PageHeader,
-  DefinitionBox,
-} from "@components/PageComponents";
+  // PageHeader,
+  Section,
+  InsetPanel,
+  Callout,
+  Directory,
+  Scale,
+  RollTable,
+  OptionalRule,
+  OptionalTag,
+  Tip,
+  // JumpBar,
+  Stack,
+  SubHeading,
+  Roll,
+  Modifier,
+} from '@components/Layout/Layout';
 
-import { useSelectedCharacter } from "@context/CharacterContext";
-import CharacterStrip, { formatModifier, STAT_LABELS } from "@components/CharacterStrip";
+import { useSelectedCharacter } from '@context/CharacterContext';
+import { formatModifier, STAT_LABELS } from '@utils/character';
+import SegmentedDice from '@components/SegmentedDice';
+import ChromeBar from '@components/Chrome/ChromeBar';
 
-export function GlitchTip({ children }) {
-  return (
-    <div className="bg-cy-cyan/10 border border-cy-cyan p-3 rounded">
-      <p className="text-cy-cyan text-sm">
-        <strong>Glitch Tip:</strong> {children}
-      </p>
-    </div>
-  );
-}
+import {
+  QuickGrid,
+  QuickRow,
+  QuickAction,
+  QuickTest,
+  StepBlock,
+  StepNumber,
+  StepTitle,
+  ActionCard,
+  ActionHeader,
+  ActionName,
+  ActionTest,
+  ActionText,
+  ActionRisk,
+  ActionDetails,
+  RollerRow,
+} from './Combat.styles';
+
+/* ==========================================================================
+   DATA
+   ========================================================================== */
+
+const JUMPS = [
+  { id: 'quick-ref', label: 'Quick ref' },
+  { id: 'step-1', number: '1', label: 'Initiative' },
+  { id: 'step-2', number: '2', label: 'Actions' },
+  { id: 'step-3', number: '3', label: 'Hit' },
+  { id: 'step-4', number: '4', label: 'Damage' },
+  { id: 'step-5', number: '5', label: 'Defend' },
+  { id: 'step-6', number: '6', label: '0 HP' },
+  { id: 'step-7', number: '7', label: 'After' },
+  { id: 'rules', label: 'Rules' },
+];
+
+const QUICK_REF = [
+  { label: 'Melee attack', statKey: 'STR' },
+  { label: 'Ranged attack', statKey: 'PRE' },
+  { label: 'Autofire', statKey: 'AGI' },
+  { label: 'Defense', statKey: 'AGI' },
+  { label: 'Use App', statKey: 'KNO' },
+  { label: 'Use Nano', statKey: 'PRE' },
+];
+
+const INITIATIVE = [
+  { roll: '1–3', result: 'Enemies act first' },
+  { roll: '4–6', result: 'PCs act first' },
+];
+
+const HIT_RESULTS = [
+  { roll: 'Nat 20', result: 'Critical hit', detail: "×2 damage, and the target's armor or cover drops 1 tier." },
+  { roll: '≥ DR', result: 'Hit', detail: 'Roll weapon damage.' },
+  { roll: '< DR', result: 'Miss', detail: 'The attack misses.' },
+  { roll: 'Nat 1', result: 'Fumble', detail: 'Roll on the weapon fumble table.' },
+];
+
+const WEAPON_FUMBLE = [
+  { roll: '1–3', result: 'Out of ammo or drop weapon' },
+  { roll: '4–5', result: 'Misfire or weapon breaks' },
+  { roll: '6', result: 'Weapon explodes', detail: 'You take d6 damage.' },
+];
+
+const ARMOR_TIERS = [
+  { value: 'None', label: 'No reduction' },
+  { value: '−d2', label: 'Reduce damage by d2' },
+  { value: '−d4', label: 'Reduce damage by d4' },
+  { value: '−d6', label: 'Reduce damage by d6' },
+];
+
+const DEFENSE_RESULTS = [
+  { roll: 'Nat 20', result: 'Critical defense', detail: 'You dodge and get a free attack on the enemy.' },
+  { roll: '≥ DR12', result: 'Dodge', detail: 'No damage taken.' },
+  { roll: '< DR12', result: 'Hit', detail: "You're hit. Roll your armor to reduce the damage." },
+  { roll: 'Nat 1', result: 'Fumble', detail: 'You take ×2 damage, and your armor drops 1 tier.' },
+];
+
+const GM_ATTACK_RESULTS = [
+  { roll: 'Nat 20', result: 'Critical hit', detail: "×2 damage, and the player's armor drops 1 tier." },
+  { roll: '≥ DR12', result: 'Hit', detail: 'Player rolls armor to reduce the damage.' },
+  { roll: '< DR12', result: 'Miss', detail: 'No damage.' },
+  { roll: 'Nat 1', result: 'Fumble', detail: 'The player gets a free attack on the enemy.' },
+];
+
+const BATTERED = [
+  { roll: '1–2', result: 'Fall unconscious', detail: 'Out for d4 rounds, then wake up with d4 HP.' },
+  {
+    roll: '3–4',
+    result: 'Cy-Rage test',
+    detail: 'Test Presence DR10, +1DR for each cybertech installed. Success: unconscious, as above. Failure: Cy-Rage.',
+  },
+  {
+    roll: '5–6',
+    result: 'Critical injury',
+    detail: 'Roll on the body table. That body part is destroyed and must be replaced or regrown. Unable to act for d4 rounds, then active with d4 HP.',
+  },
+  {
+    roll: '7',
+    result: 'Hemorrhage',
+    detail: 'Death in d2 hours unless treated. All tests are +4DR in the first hour, +6DR in the last.',
+  },
+  {
+    roll: '8',
+    result: 'Dead*',
+    detail: "*Unless you can pay. With at least 1k¤ in a personal bank account, there's a 50% chance an Emergency Response Team reaches you in time at 0 or −1 HP. Add a zero to the bill for each HP below that.",
+  },
+];
+
+const DR_SCALE = [
+  { value: 'DR6', label: 'Simple' },
+  { value: 'DR8', label: 'Routine' },
+  { value: 'DR10', label: 'Easy' },
+  { value: 'DR12', label: 'Normal' },
+  { value: 'DR14', label: 'Difficult' },
+  { value: 'DR16', label: 'Really hard' },
+  { value: 'DR18', label: 'Almost impossible' },
+];
+
+const ABILITIES = [
+  { label: 'Strength', description: 'Melee attacks, physical force, grappling.' },
+  { label: 'Agility', description: 'Defense, autofire, dodging, sneaking.' },
+  { label: 'Presence', description: 'Ranged attacks, social interaction, Nano, resisting Cy-Rage.' },
+  { label: 'Toughness', description: 'Physical resilience. Sets starting HP.' },
+  { label: 'Knowledge', description: 'Information, hacking, technical skills, using Apps.' },
+];
+
+const GLITCH_USES = [
+  { label: 'Lower a DR', description: <>−4DR on one test. Spend it before rolling.</> },
+  { label: 'Cancel a crit or fumble', description: 'Neutralize the special effect of a Nat 20 or Nat 1.' },
+  { label: 'Soak damage', description: <>Reduce incoming damage by <Roll>d6</Roll>.</> },
+  { label: 'Max damage', description: 'Deal maximum damage with one attack. No roll needed.' },
+  { label: 'Reroll', description: "Reroll any die, yours or someone else's." },
+];
+
+const DOWNTIME = [
+  { label: "Full night's rest", description: <>Eat, drink, and sleep for a full night. Restore <Roll>d6 HP</Roll>.</> },
+  {
+    label: 'No food or water',
+    description: <>You can't recover HP, and you lose <Roll>d4 HP</Roll> each day without food or drink. All tests are +2DR per day without rest.</>,
+  },
+  {
+    label: 'Time',
+    description: 'A round is enough to cross a normal-sized room and attack once, activate an App, or use Nano. Ten rounds make about a minute.',
+  },
+  {
+    label: 'Carrying',
+    description: <>Carry <Roll>Strength + 8</Roll> normal-sized items without trouble. Beyond that, Strength and Agility tests are +2DR. You can't carry more than twice Strength + 8.</>,
+  },
+];
+
+/* ==========================================================================
+   PAGE
+   ========================================================================== */
 
 export default function Combat() {
   const character = useSelectedCharacter();
+  const agiMod = formatModifier(character?.stats?.AGI);
 
   return (
-    <Page>
-      <PageHeader
-        title="Combat Flow"
-      />
+    <>
+      <ChromeBar character jumps={JUMPS} />
+      <Page compact>
+        <Section id="quick-ref" title="Quick reference">
+          <QuickGrid>
+            {QUICK_REF.map((item) => (
+              <QuickRefRow key={item.label} character={character} {...item} />
+            ))}
+          </QuickGrid>
+        </Section>
 
-      <CharacterStrip
-        character={character}
-        emptyMessage="No character selected — stats won't show inline below."
-      />
+        {/* ---- 1 ---- */}
+        <Step id="step-1" number="1" title="Initiative">
+          <p>Roll <Roll>d6</Roll> for the group:</p>
+          <RollTable rows={INITIATIVE} />
+          <p>
+            If order matters within a group, each character rolls <Roll>Agility + d6</Roll>.
+          </p>
+          <GlitchTip>Reroll the initiative die and take the better result.</GlitchTip>
+        </Step>
 
-      {/* Quick Reference Box */}
-      <div className="bg-gradient-to-r from-red-900/20 to-gray-900/20 border-2 border-red-500 p-6 mb-8">
-        <h2 className="text-2xl font-black text-red-400 mb-3 uppercase">Quick Reference</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
-          <QuickRefLine character={character} label="Melee Attack:" statKey="STR" />
-          <QuickRefLine character={character} label="Ranged Attack:" statKey="PRE" />
-          <QuickRefLine character={character} label="Autofire:" statKey="AGI" />
-          <QuickRefLine character={character} label="Defense:" statKey="AGI" />
-          <QuickRefLine character={character} label="Use App:" statKey="KNO" />
-          <QuickRefLine character={character} label="Use Nano:" statKey="PRE" />
-        </div>
-      </div>
+        {/* ---- 2 ---- */}
+        <Step id="step-2" number="2" title="Your turn: choose an action">
+          <p>
+            Move anywhere within a reasonably sized room, roughly <Roll>6 spaces</Roll> on a 1" grid (~30ft). Movement needs no roll and can be split between your actions.
+          </p>
 
-      <DefinitionBox
-        title="Using Glitches in Combat"
-        definitions={[
-          {
-            label: "Reduce DR by 4",
-            description: "Use before rolling a test",
-          }, {
-            label: "Neutralize Crit/Fumble",
-            description: "Cancel the special effect",
-          }, {
-            label: "Reduce Damage by d6",
-            description: "Lower incoming damage",
-          }, {
-            label: "Deal Max Damage",
-            description: "No roll needed for damage",
-          }, {
-            label: "Reroll Any Die",
-            description: "Yours or someone else's",
-          }
-        ]}
-      >
-        <p className="text-gray-300 mb-4 text-sm">
-          Reality glitches in your favor. You start with at least d2 Glitches (or class die).
-          Regain them by rolling again after spending all and resting.
-        </p>
-      </DefinitionBox>
+          <Tip label="Cybertech">
+            Check your cybertech for extra attack options. A SmartJack, for example, enhances some guns.
+          </Tip>
 
-      {/* Combat Steps */}
-      <div className="space-y-6 mt-8">
-
-        {/* Step 1 */}
-        <CombatStep
-          number="01"
-          title="Initiative"
-          color="cyan"
-        >
-          <div className="space-y-3">
-            <div className="bg-black/30 p-4 rounded">
-              <p className="text-gray-300 mb-2">
-                <strong className="text-cy-yellow">Roll d6:</strong>
-              </p>
-              <ul className="space-y-1 text-gray-400 text-sm">
-                <li>• <strong className="text-cy-cyan">1-3:</strong> Enemies act first</li>
-                <li>• <strong className="text-cy-cyan">4-6:</strong> PCs act first</li>
-              </ul>
-            </div>
-            <GlitchTip>Spend a Glitch to reroll the initiative die and take the better result.</GlitchTip>
-            <p className="text-gray-400 text-sm">
-              <strong className="text-cy-cyan">If needed:</strong> Roll Agility + d6 to determine individual order within each group.
-            </p>
-          </div>
-        </CombatStep>
-
-        {/* Step 2 */}
-        <CombatStep
-          number="02"
-          title="Your Turn: Choose Your Action"
-          color="cyan"
-        >
-          <div className="space-y-3">
-            <div className="bg-cy-cyan/10 border border-cy-cyan p-3 rounded">
-              <div className="text-cy-cyan text-sm">
-                <strong>Cybertech Tip:</strong> Check for attack options on any cybertech you might have.
-              </div>
-              <div className="text-cy-cyan text-sm mt-2">
-                <strong>SmartJack:</strong> Acquirable cybertech that enhances some guns.
-              </div>
-            </div>
-
-            <div className="bg-gray-900/50 border border-gray-700 p-3 rounded">
-              <p className="text-cy-yellow font-bold text-sm mb-2">Movement</p>
-              <p className="text-gray-400 text-sm">
-                On your turn you can move anywhere within a reasonably sized room — roughly <strong className="text-gray-300">6 spaces on a 1" grid</strong> (~30ft). Movement doesn't require a roll and can be split up between actions/attacks if you have multiple.
-              </p>
-            </div>
-
-            <ActionOption
-              action="Take Cover"
+          <Stack $gap="0.75rem">
+            <Action
+              name="Take cover"
               test="No roll"
-              description="Position yourself behind cover. Increase DR to hit you, or lower DR to defend while covered."
-              optional={true}
-            />
-            <div className="ml-8 space-y-1 text-xs text-gray-400 mb-2">
-              <p>• <strong className="text-blue-400">Light cover ±2DR</strong> - office cubicle, car door, hostage, explosive gas tank</p>
-              <p>• <strong className="text-blue-600">Heavy cover ±4DR</strong> - concrete wall, cyberbike, bulletproof glass, reactor</p>
-              <p className="text-gray-500 italic mt-2">When an attack misses: Heavy → Light, Light → Destroyed</p>
-            </div>
+              optional
+              description="Get behind something. Raises the DR to hit you, or lowers your DR to defend."
+            >
+              <ActionDetails>
+                <p><Roll>±2DR</Roll> Light cover: office cubicle, car door, hostage, explosive gas tank.</p>
+                <p><Roll>±4DR</Roll> Heavy cover: concrete wall, cyberbike, bulletproof glass, reactor.</p>
+                <p>When an attack misses you, cover degrades: heavy becomes light, light is destroyed.</p>
+              </ActionDetails>
+            </Action>
 
-            <ActionOption
-              action="Melee Attack"
+            <Action
+              name="Melee attack"
               test="Strength DR12"
               statKey="STR"
+              dr={12}
               character={character}
               description="Get close and personal. Roll to hit, then roll weapon damage."
             />
-            <ActionOption
-              action="Ranged Attack (Single Shot)"
+
+            <Action
+              name="Ranged attack (single shot)"
               test="Presence DR12"
               statKey="PRE"
+              dr={12}
               character={character}
               description="Aim and fire. Roll to hit, then roll weapon damage."
             />
-            <ActionOption
-              action="Aim at Target"
-              test="No roll (1 round)"
-              description="Spend one round aiming. Next attack gets either -2DR to hit OR +2 damage."
-              optional={true}
+
+            <Action
+              name="Aim"
+              test="No roll, 1 round"
+              optional
+              description="Spend a round aiming. Your next attack gets either −2DR to hit or +2 damage."
             />
-            <ActionOption
-              action="Autofire"
+
+            <Action
+              name="Autofire"
               test="Agility DR12"
               statKey="AGI"
+              dr={12}
               character={character}
-              description="Spray and pray. On hit: roll damage, then you can attack again (same or different target). Max 3 attacks total. Check armor for each hit."
+              description="On a hit, roll damage, then attack again (same or a nearby target), up to 3 attacks total. Check armor for each hit."
             />
-            <ActionOption
-              action="Suppressive Fire"
-              test="Agility (spend mag)"
+
+            <Action
+              name="Suppressive fire"
+              test="Agility, spend a mag"
               statKey="AGI"
+              optional
               character={character}
-              description="Suppress up to d3 targets with automatic weapon. Suppressed targets must either get out of the way (+4DR to next action) or stand their ground (defend DR14 autofire)."
-              optional={true}
+              description="Suppress up to d3 targets with an automatic weapon. Each must either get out of the way (+4DR to their next action) or stand their ground (defend DR14 against autofire)."
             />
-            <ActionOption
-              action="Use App"
+
+            <Action
+              name="Use App"
               test="Knowledge DR12"
               statKey="KNO"
+              dr={12}
               character={character}
-              description="Must be jacked into your Deck. All non-App actions are +2DR while jacked in."
-              warning="Fumble = App burns for the day + Backlash. Each use increases fumble risk by 1 until next day."
+              description="You must be jacked into your Deck. All non-App actions are +2DR while jacked in."
+              risk="Fumble burns the App for the day and triggers a Backlash. Each use raises the fumble risk by 1 until the next day."
             />
-            <ActionOption
-              action="Use Nano"
+
+            <Action
+              name="Use Nano"
               test="Presence DR12"
               statKey="PRE"
+              dr={12}
               character={character}
               description="Activate your Nano power."
-              warning="Failure = power fails + take d2 damage. Each use increases fumble risk by 1 for the day."
+              risk="Failure means the power fails and you take d2 damage. Each use raises the fumble risk by 1 for the day."
             />
-            <ActionOption
-              action="Other Actions"
+
+            <Action
+              name="Other actions"
               test="Varies"
-              description="Move, reload, use item, help ally, etc. Any action you might want to try. GM determines if a test is needed."
+              description="Reload, use an item, help an ally, anything else you want to try. The GM decides whether it needs a test."
             />
+          </Stack>
 
-            {/* Range Note */}
-            <div className="bg-gray-900/50 border border-gray-700 p-3 rounded mt-4">
-              <p className="text-cy-yellow font-bold text-sm mb-2">Range Modifiers (Optional)</p>
-              <p className="text-gray-400 text-xs mb-2">
-                <strong>Close range</strong> = arm's length or less • <strong>Long range</strong> = farther than a room away
-              </p>
-              <ul className="space-y-1 text-gray-400 text-xs">
-                <li>• <strong className="text-red-400">+2DR</strong> when firing at close range</li>
-                <li>• Autofire: <strong className="text-green-400">+2 damage</strong> at close, <strong className="text-red-400">-2 damage</strong> at long</li>
-              </ul>
-            </div>
-          </div>
-        </CombatStep>
+          <OptionalRule title="Range modifiers">
+            <p>Close range is arm's length or less. Long range is farther than a room away.</p>
+            <p><Roll>+2DR</Roll> to fire at close range.</p>
+            <p>Autofire: <Roll>+2 damage</Roll> at close range, <Roll>−2 damage</Roll> at long range.</p>
+          </OptionalRule>
+        </Step>
 
-        {/* Step 3 */}
-        <CombatStep
-          number="03"
-          title="Roll to Hit (If attacking)"
-          color="yellow"
-        >
-          <div className="space-y-3">
-            <div className="bg-black/30 p-4 rounded">
-              <p className="text-gray-300 mb-3">
-                Roll <strong className="text-cy-yellow">d20 ± your Ability Score</strong>
-              </p>
-              <div className="space-y-2 text-sm">
-                <ResultBox
-                  result="Natural 20 (Critical Hit)"
-                  effect="×2 damage + reduce target's armor by 1 tier"
-                  color="cyan"
-                />
-                <ResultBox
-                  result="≥ DR12 (Success)"
-                  effect="Roll weapon damage"
-                  color="green"
-                />
-                <ResultBox
-                  result="< DR12 (Miss)"
-                  effect="Attack misses"
-                  color="gray"
-                />
-                <ResultBox
-                  result="Natural 1 (Fumble)"
-                  effect="Roll on the weapon fumble table"
-                  color="red"
-                />
-              </div>
-            </div>
+        {/* ---- 3 ---- */}
+        <Step id="step-3" number="3" title="Roll to hit">
+          <p>
+            Roll <Roll>d20 ± ability</Roll> against the attack's DR (usually DR12).
+          </p>
+          <RollTable rows={HIT_RESULTS} />
+          <GlitchTip>Spend one before rolling to lower the DR by 4.</GlitchTip>
+          <GlitchTip>Neutralize a fumble. No roll on the weapon fumble table.</GlitchTip>
 
-            <GlitchTip>Spend a Glitch before rolling to reduce the DR by 4.</GlitchTip>
-            <GlitchTip>Spend a Glitch to neutralize a fumble — no roll on the weapon fumble table.</GlitchTip>
+          <SubHeading>Weapon fumble (d6)</SubHeading>
+          <RollTable rows={WEAPON_FUMBLE} />
+        </Step>
 
-            <div className="bg-red-900/20 border border-red-600 p-3 rounded">
-              <p className="text-red-400 font-bold text-sm mb-2">Weapon Fumble Table (d6):</p>
-              <ul className="space-y-1 text-gray-400 text-xs">
-                <li>• <strong>1-3:</strong> Out of ammo or drop weapon</li>
-                <li>• <strong>4-5:</strong> Misfire / Weapon breaks</li>
-                <li>• <strong>6:</strong> Weapon explodes, you take d6 damage</li>
-              </ul>
-            </div>
-          </div>
-        </CombatStep>
+        {/* ---- 4 ---- */}
+        <Step id="step-4" number="4" title="Roll damage">
+          <p>Roll your weapon's damage die. The target reduces it by rolling their armor.</p>
 
-        {/* Step 4 */}
-        <CombatStep
-          number="04"
-          title="Roll Damage (If You Hit)"
-          color="yellow"
-        >
-          <div className="space-y-3">
-            <p className="text-gray-300">
-              Roll your weapon's damage die. Target reduces damage by their armor rating.
+          <SubHeading>Armor</SubHeading>
+          <Scale steps={ARMOR_TIERS} />
+
+          <InsetPanel title="Example">
+            <p>
+              You hit with a pistol (<Roll>d8</Roll>) and roll 6. The enemy has −d2 armor and rolls 1. Final damage: 5 HP.
             </p>
-            <div className="bg-black/30 p-4 rounded">
-              <p className="text-gray-400 text-sm mb-2">
-                <strong className="text-cy-yellow">Example:</strong>
-              </p>
-              <p className="text-gray-400 text-sm">
-                You hit with a pistol (d8 damage). You roll 6. Enemy has -d2 armor and rolls 1.
-                Final damage: <strong className="text-cy-cyan">5 HP</strong>
-              </p>
-            </div>
+          </InsetPanel>
 
-            <GlitchTip>Spend a Glitch to deal maximum weapon damage — no roll needed.</GlitchTip>
+          <GlitchTip>Deal maximum weapon damage. No roll needed.</GlitchTip>
 
-            {/* Hits Always Hurt */}
-            <div className="bg-gray-900/50 border border-gray-700 p-3 rounded mt-4">
-              <p className="text-cy-yellow font-bold text-sm mb-2">Hits Always Hurt (Optional)</p>
-              <p className="text-gray-300 text-xs">
-                Hits always deal a minimum of <strong className="text-cy-yellow">1 damage</strong> regardless of armor reduction or other negative damage modifiers <span className="text-gray-500 italic">unless that would bring a character down to 0 HP</span>.
-              </p>
-            </div>
-          </div>
-        </CombatStep>
-
-        {/* Step 5 */}
-        <CombatStep
-          number="05"
-          title="Enemy's Turn: Defend Yourself"
-          color="red"
-        >
-          <div className="space-y-3">
-            <div className="bg-black/30 p-4 rounded">
-              <p className="text-gray-300 mb-3">
-                When attacked, roll <strong className="text-cy-yellow">Agility DR12</strong>
-                {formatModifier(character?.stats?.AGI) && (
-                  <span className="text-gray-400"> ({formatModifier(character?.stats?.AGI)})</span>
-                )} to defend.
-              </p>
-
-              <div className="space-y-2 text-sm">
-                <ResultBox
-                  result="Natural 20 (Critical Defense)"
-                  effect="You dodge AND get a free attack on the enemy"
-                  color="cyan"
-                />
-                <ResultBox
-                  result="≥ DR12 (Success)"
-                  effect="You dodge. No damage taken."
-                  color="green"
-                />
-                <ResultBox
-                  result="< DR12 (Failure)"
-                  effect="You're hit. Roll your armor to reduce damage."
-                  color="gray"
-                />
-                <ResultBox
-                  result="Natural 1 (Fumble)"
-                  effect="You take ×2 damage + armor reduced by 1 tier"
-                  color="red"
-                />
-              </div>
-            </div>
-
-            {/* Alternate Rule Block */}
-            <div className="bg-gray-900/50 border border-gray-600 border-dashed p-3 rounded">
-              <p className="text-gray-400 font-bold text-sm mb-2 uppercase tracking-wider">⚙ Alternate Rule: GM Rolls Attacks</p>
-              <p className="text-gray-500 text-xs mb-3">
-                Instead of the player defending, the GM rolls <strong className="text-gray-400">Agility DR12</strong> for the enemy's attack.
-              </p>
-              <div className="space-y-2 text-sm">
-                <ResultBox
-                  result="Natural 20 (Critical Hit)"
-                  effect="Enemy hits for ×2 damage + reduces player armor by 1 tier"
-                  color="red"
-                />
-                <ResultBox
-                  result="≥ DR12 (Hit)"
-                  effect="Enemy hits. Player rolls armor to reduce damage."
-                  color="gray"
-                />
-                <ResultBox
-                  result="< DR12 (Miss)"
-                  effect="Enemy misses. No damage."
-                  color="green"
-                />
-                <ResultBox
-                  result="Natural 1 (Fumble)"
-                  effect="Enemy fumbles — player gets a free attack on them"
-                  color="cyan"
-                />
-              </div>
-            </div>
-
-            <GlitchTip>Spend a Glitch to reduce incoming damage by d6.</GlitchTip>
-            <GlitchTip>Spend a Glitch to neutralize a fumble — take normal damage instead of ×2.</GlitchTip>
-          </div>
-        </CombatStep>
-
-        {/* Step 6 */}
-        <CombatStep
-          number="06"
-          title="At 0 HP: Roll on Battered Table"
-          color="red"
-        >
-          <div className="space-y-3">
-            <p className="text-gray-300 mb-3">
-              When you hit 0 HP, roll <strong className="text-cy-yellow">d8</strong>:
+          <OptionalRule title="Hits always hurt">
+            <p>
+              A hit always deals at least 1 damage, whatever armor or other modifiers say, unless that would bring a character to 0 HP.
             </p>
-            <div className="space-y-2">
-              <BatteredResult
-                roll="1-2"
-                outcome="Fall Unconscious"
-                description="Out for d4 rounds, wake up with d4 HP"
-              />
-              <BatteredResult
-                roll="3-4"
-                outcome="Cy-Rage Test"
-                description="Test Presence DR10 (+1DR per cybertech). Success = unconscious. Failure = CY-RAGE."
-              />
-              <BatteredResult
-                roll="5-6"
-                outcome="Critical Injury"
-                description="Random body part destroyed. Unable to act d4 rounds, then active with d4 HP."
-              />
-              <BatteredResult
-                roll="7"
-                outcome="Hemorrhage"
-                description="Death in d2 hours unless treated. +4DR first hour, +6DR last hour."
-              />
-              <BatteredResult
-                roll="8"
-                outcome="Dead*"
-                description="*Unless you can pay. 1k¤ in bank = 50% chance Emergency Response Team saves you (at 0 to -1 HP). Add a zero per HP below -1."
-              />
-            </div>
+          </OptionalRule>
+        </Step>
 
-            <div className="bg-red-900/20 border-2 border-red-600 p-4 rounded mt-4">
-              <p className="text-red-400 font-bold mb-2 uppercase">Cy-Rage</p>
-              <p className="text-gray-400 text-sm">
-                Gain +d8 HP. Attack random targets twice per round with most effective weapon.
-                Attacks DR10, Defense DR14. Continues until Battered, Dead, or sedated.
-              </p>
-            </div>
+        {/* ---- 5 ---- */}
+        <Step id="step-5" number="5" title="Enemy's turn: defend">
+          <p>
+            Enemies don't roll to attack. When attacked, roll <Roll>Agility DR12</Roll>
+            {agiMod && <Modifier>({agiMod})</Modifier>} to defend.
+          </p>
+          <RollTable rows={DEFENSE_RESULTS} />
+          <GlitchTip>Reduce incoming damage by d6.</GlitchTip>
+          <GlitchTip>Neutralize a fumble. Take normal damage instead of ×2.</GlitchTip>
 
-            <GlitchTip>Spend a Glitch to reroll on the Battered table and take the better result.</GlitchTip>
-          </div>
-        </CombatStep>
+          <OptionalRule tag="Alternate" title="GM rolls attacks">
+            <p>Instead of the player defending, the GM rolls <Roll>Agility DR12</Roll> for the enemy's attack.</p>
+            <RollTable rows={GM_ATTACK_RESULTS} />
+          </OptionalRule>
+        </Step>
 
-        {/* Step 7 */}
-        <CombatStep
-          number="07"
-          title="After Combat: Recovery & Checks"
-          color="green"
-        >
-          <div className="space-y-4">
-            <div className="bg-black/30 p-4 rounded">
-              <p className="text-cy-yellow font-bold mb-2">Count Your Bullets</p>
-              <p className="text-gray-300 text-sm mb-2">
-                For each weapon you fired, roll:
-              </p>
-              <ul className="space-y-1 text-gray-400 text-sm">
-                <li>• <strong className="text-cy-cyan">d8</strong> (if you used single shot or melee)</li>
-                <li>• <strong className="text-cy-cyan">d6</strong> (if you used autofire)</li>
-              </ul>
-              <p className="text-gray-400 text-sm mt-2">
-                <strong className="text-red-400">1-3:</strong> Magazine is empty. Must reload.
-              </p>
-            </div>
+        {/* ---- 6 ---- */}
+        <Step id="step-6" number="6" title="At 0 HP: the Battered table">
+          <p>When you hit 0 HP, roll <Roll>d8</Roll>:</p>
+          <RollTable rows={BATTERED} />
+          <p>Below 0 HP, you're Dead* by the same rule: unless you can pay.</p>
 
-            <div className="bg-black/30 p-4 rounded">
-              <p className="text-cy-yellow font-bold mb-2">Catch Your Breath</p>
-              <p className="text-gray-300 text-sm">
-                If there's still time and it's safe: sit down, hydrate, breathe.
-                Restore <strong className="text-green-400">d4 HP</strong>.
-              </p>
-            </div>
+          <InsetPanel title="Cy-Rage">
+            <p>
+              Gain <Roll>+d8 HP</Roll> and attack random targets twice per round with your most effective weapon. Attacks are DR10, defense DR14. It lasts until you're Battered, Dead, or sedated.
+            </p>
+          </InsetPanel>
 
-            <div className="bg-black/30 p-4 rounded">
-              <p className="text-cy-yellow font-bold mb-2">Check for Infestations</p>
-              <p className="text-gray-300 text-sm mb-2">
-                <strong className="text-cy-cyan">If you have Nano powers:</strong>
-              </p>
-              <ul className="space-y-1 text-gray-400 text-sm">
-                <li>• Infestations linked to Nano power: Trigger on fumble</li>
-                <li>• Other infestations: Trigger when taking 5+ damage from single attack + failing Presence DR10</li>
-              </ul>
-            </div>
+          <GlitchTip>Reroll on the Battered table and take the better result.</GlitchTip>
+        </Step>
 
-            <div className="bg-black/30 p-4 rounded">
-              <p className="text-cy-yellow font-bold mb-2">Check for App Backlash</p>
-              <p className="text-gray-300 text-sm">
-                If you fumbled while using an App, the GM determines the Backlash effect.
+        {/* ---- 7 ---- */}
+        <Step id="step-7" number="7" title="After combat">
+          <Directory
+            labelWidth="13rem"
+            items={[
+              {
+                label: 'Count your bullets',
+                description: (
+                  <>
+                    <p>
+                      For each weapon you fired, roll <Roll>d8</Roll> (single shot or melee) or <Roll>d6</Roll> (autofire). On 1–3 the mag is empty and must be replaced.
+                    </p>
+                    {character && (
+                      <RollerRow data-align="start">
+                        <SegmentedDice character_id={character.id} label="Single shot / melee" dice="1d8" />
+                        <SegmentedDice character_id={character.id} label="Autofire" dice="1d6" />
+                      </RollerRow>
+                    )}
+                  </>
+                ),
+              },
+              {
+                label: 'Catch your breath',
+                description: <>If there's still time and it's safe: sit down, hydrate, breathe. Restore <Roll>d4 HP</Roll>.</>,
+              },
+              {
+                label: 'Infestations',
+                description: 'If you have Nano powers: infestations linked to a Nano power trigger on a fumble. Others trigger when you take 5+ damage from a single attack and fail a Presence DR10 test.',
+              },
+              {
+                label: 'App Backlash',
+                description: 'If you fumbled while using an App, the GM determines the Backlash.',
+              },
+            ]}
+          />
+        </Step>
+
+        {/* ---- Reference ---- */}
+        <Section id="rules" title="Rules reference">
+          <Stack $gap="2.5rem">
+            <Callout title="Tests">
+              <p>
+                Roll <Roll>d20 ± ability</Roll> and meet or beat the Difficulty Rating (DR) to succeed.
               </p>
-            </div>
-          </div>
-        </CombatStep>
-      </div>
-    </Page>
+            </Callout>
+
+            <Stack>
+              <SubHeading>Difficulty ratings</SubHeading>
+              <Scale steps={DR_SCALE} />
+            </Stack>
+
+            <Stack>
+              <SubHeading>Abilities</SubHeading>
+              <Directory items={ABILITIES} labelWidth="10rem" />
+            </Stack>
+
+            <Stack>
+              <SubHeading>Glitches</SubHeading>
+              <p>
+                Sometimes the constant bad luck just… glitches. You start with <Roll>d2</Roll> Glitches (or your class die). Once you've spent them all and had a chance to rest, roll that die again to regain them.
+              </p>
+              <Directory items={GLITCH_USES} labelWidth="13rem" />
+            </Stack>
+
+            <Stack>
+              <SubHeading>Downtime</SubHeading>
+              <Directory items={DOWNTIME} labelWidth="13rem" />
+            </Stack>
+          </Stack>
+        </Section>
+      </Page>
+    </>
   );
 }
 
-// Component: Combat Step
-function CombatStep({ number, title, color, children }) {
-  const colorMap = {
-    cyan: "border-cy-cyan bg-cy-cyan/5",
-    yellow: "border-cy-yellow bg-cy-yellow/5",
-    red: "border-red-500 bg-red-900/10",
-    green: "border-green-500 bg-green-900/10",
-  };
+/* ==========================================================================
+   COMPONENTS
+   ========================================================================== */
 
-  const textColorMap = {
-    cyan: "text-cy-cyan",
-    yellow: "text-cy-yellow",
-    red: "text-red-400",
-    green: "text-green-400",
-  };
-
+// Still exported: other pages may import it.
+export function GlitchTip({ children }) {
   return (
-    <div className={`border-l-4 ${colorMap[color]} p-6`}>
-      <div className="flex items-start gap-4 mb-4">
-        <h2 className={`text-2xl font-black ${textColorMap[color]} uppercase pt-1`}>
-          {title}
-        </h2>
-      </div>
+    <Tip label="Glitch" tone="glitch">
       {children}
-    </div>
+    </Tip>
   );
 }
 
-// Component: Action Option — now optionally character-aware via statKey
-function ActionOption({ action, test, description, warning, optional, statKey, character }) {
+function Step({ id, number, title, children }) {
+  return (
+    <StepBlock id={id}>
+      <StepNumber aria-hidden="true">{number}</StepNumber>
+      <StepTitle>{title}</StepTitle>
+      <Stack>{children}</Stack>
+    </StepBlock>
+  );
+}
+
+function QuickRefRow({ character, label, statKey }) {
+  const modifier = formatModifier(character?.stats?.[statKey]);
+  return (
+    <QuickRow>
+      <QuickAction>{label}</QuickAction>
+      <QuickTest>
+        <Roll>{STAT_LABELS[statKey]} DR12</Roll>
+        {modifier && <Modifier>({modifier})</Modifier>}
+      </QuickTest>
+    </QuickRow>
+  );
+}
+
+// Tests that involve a roll show as a Roll token; "No roll" / "Varies"
+// stay plain. A dice roller appears when a character is selected.
+function Action({ name, test, description, risk, optional, statKey, character, dr, children }) {
   const modifier = statKey ? formatModifier(character?.stats?.[statKey]) : null;
 
   return (
-    <div className={`bg-black/30 p-4 rounded ${optional ? 'border-l-2 border-cy-yellow' : ''}`}>
-      <div className="flex items-start justify-between mb-2">
-        <h3 className="text-lg font-bold text-cy-cyan">{action}</h3>
-        <span className="text-sm text-cy-yellow font-mono">
-          {test}
-          {modifier && (
-            <span className="text-gray-400 ml-1">({modifier})</span>
-          )}
-        </span>
-      </div>
-      <p className="text-gray-400 text-sm mb-2">{description}</p>
-      {warning && (
-        <p className="text-red-400 text-xs"><b>!</b> {warning}</p>
+    <ActionCard data-optional={optional ? 'true' : undefined}>
+      <ActionHeader>
+        <ActionName>
+          {name}
+          {optional && <OptionalTag>Optional</OptionalTag>}
+        </ActionName>
+        <ActionTest>
+          {statKey ? <Roll>{test}</Roll> : test}
+          {modifier && <Modifier>({modifier})</Modifier>}
+        </ActionTest>
+      </ActionHeader>
+
+      <ActionText>{description}</ActionText>
+
+      {children}
+
+      {risk && (
+        <ActionRisk>
+          <strong>Risk:</strong> {risk}
+        </ActionRisk>
       )}
-    </div>
-  );
-}
 
-// Component: quick reference line, character-aware
-function QuickRefLine({ character, label, statKey }) {
-  const modifier = formatModifier(character?.stats?.[statKey]);
-  return (
-    <div className="text-gray-300">
-      <span className="text-cy-cyan font-bold">{label}</span> {STAT_LABELS[statKey]} DR12
-      {modifier && <span className="text-gray-400"> ({modifier})</span>}
-    </div>
-  );
-}
-
-// Component: Result Box
-function ResultBox({ result, effect, color }) {
-  const colorMap = {
-    cyan: "border-cy-cyan text-cy-cyan",
-    green: "border-green-500 text-green-400",
-    gray: "border-gray-600 text-gray-400",
-    red: "border-red-500 text-red-400",
-  };
-
-  return (
-    <div className={`border-l-2 ${colorMap[color]} pl-3 py-1`}>
-      <p className="font-bold text-sm">{result}</p>
-      <p className="text-gray-400 text-xs">{effect}</p>
-    </div>
-  );
-}
-
-// Component: Battered Result
-function BatteredResult({ roll, outcome, description }) {
-  return (
-    <div className="bg-black/40 border border-gray-700 p-3 rounded">
-      <div className="flex items-start gap-3">
-        <span className="text-cy-cyan font-bold font-mono text-sm">{roll}</span>
-        <div>
-          <p className="text-cy-yellow font-bold text-sm mb-1">{outcome}</p>
-          <p className="text-gray-400 text-xs">{description}</p>
-        </div>
-      </div>
-    </div>
+      {statKey && character && (
+        <RollerRow>
+          <SegmentedDice
+            character_id={character.id}
+            dice="1d20"
+            mod={character.stats?.[statKey] ?? 0}
+            dr={dr}
+            showCombatOutcome={dr !== undefined}
+          />
+        </RollerRow>
+      )}
+    </ActionCard>
   );
 }

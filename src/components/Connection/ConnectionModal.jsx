@@ -1,37 +1,47 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import WifiIcon from '@mui/icons-material/Wifi';
 import WifiOffIcon from '@mui/icons-material/WifiOff';
 import SignalWifi1BarIcon from '@mui/icons-material/SignalWifi1Bar';
 
 import Modal from '@components/Modal/Modal';
+import { Button, TextInput } from '@components/Layout/Layout';
 import { useCyborgSocket } from '@hooks/useCyborgSocket';
-import './connectionModal.css';
 
-const STATUS_COLOR = {
-  connected: 'rgb(0, 170, 40)',
-  connecting: 'rgb(250, 204, 21)',
-  disconnected: 'rgba(148, 163, 184, 0.5)',
-  error: 'rgb(239, 68, 68)',
-};
+import {
+  StatusPill,
+  FieldRow,
+  FieldLabel,
+  QuickFillRow,
+  QuickFillList,
+  QuickFillButton,
+  Hint,
+  Actions,
+  ClientsBlock,
+  BlockLabel,
+  ClientRow,
+  ClientDot,
+  Muted,
+} from './Connection.styles';
 
 const STATUS_LABEL = {
   connected: 'Connected',
-  connecting: 'Connecting...',
+  connecting: 'Connecting…',
   disconnected: 'Offline',
   error: 'Error',
 };
 
-const QUICK_FILLS = [
-  'wss://ws.cymorkborg.com',
-  'wss://localhost:3002',
-];
+const QUICK_FILLS = ['wss://ws.cymorkborg.com', 'wss://localhost:3002'];
 
 export default function ConnectionModal({ open, onClose, children }) {
   const {
-    host, setHost,
-    playerName, setPlayerName,
-    status, connectedClients,
-    connect, disconnect,
+    host,
+    setHost,
+    playerName,
+    setPlayerName,
+    status,
+    connectedClients,
+    connect,
+    disconnect,
   } = useCyborgSocket();
 
   const [hostInput, setHostInput] = useState(host);
@@ -40,7 +50,7 @@ export default function ConnectionModal({ open, onClose, children }) {
   if (!open) return null;
 
   const isConnected = status === 'connected';
-  const canConnect = hostInput.trim() && nameInput.trim();
+  const canConnect = Boolean(hostInput.trim() && nameInput.trim());
 
   const handleConnect = () => {
     const h = hostInput.trim();
@@ -51,102 +61,94 @@ export default function ConnectionModal({ open, onClose, children }) {
     connect(h, n);
   };
 
-  const handleDisconnect = () => {
-    disconnect();
-  };
-
-  const statusSubtitle = (
-    <span className="comod-status-pill" style={{ color: STATUS_COLOR[status] }}>
-      {status === 'connected'
-        ? <WifiIcon style={{ fontSize: 13 }} />
-        : status === 'connecting'
-        ? <SignalWifi1BarIcon style={{ fontSize: 13 }} />
-        : <WifiOffIcon style={{ fontSize: 13 }} />
-      }
-      {STATUS_LABEL[status]}
-    </span>
-  );
+  const statusIcon =
+    status === 'connected' ? (
+      <WifiIcon style={{ fontSize: 13 }} />
+    ) : status === 'connecting' ? (
+      <SignalWifi1BarIcon style={{ fontSize: 13 }} />
+    ) : (
+      <WifiOffIcon style={{ fontSize: 13 }} />
+    );
 
   return (
-    <Modal open={open} onClose={onClose} title="NETWORK CONNECTION" subtitle={statusSubtitle}>
-      {/* Fields */}
-      <div className="comod-field-row">
-        <span className="comod-field-label">NAME *</span>
-        <input
-          className="comod-input"
+    <Modal
+      open={open}
+      onClose={onClose}
+      title="Network Connection"
+      subtitle={
+        <StatusPill data-status={status}>
+          {statusIcon}
+          {STATUS_LABEL[status]}
+        </StatusPill>
+      }
+    >
+      <FieldRow>
+        <FieldLabel>Name *</FieldLabel>
+        <TextInput
           placeholder="Required"
           value={nameInput}
-          onChange={e => setNameInput(e.target.value)}
+          onChange={(e) => setNameInput(e.target.value)}
           disabled={isConnected}
         />
-      </div>
+      </FieldRow>
 
-      <div className="comod-field-row">
-        <span className="comod-field-label">HOST</span>
-        <input
-          className="comod-input"
+      <FieldRow>
+        <FieldLabel>Host</FieldLabel>
+        <TextInput
           placeholder="ws://192.168.x.x:3002"
           value={hostInput}
-          onChange={e => setHostInput(e.target.value)}
-          onKeyDown={e => e.key === 'Enter' && !isConnected && canConnect && handleConnect()}
+          onChange={(e) => setHostInput(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && !isConnected && canConnect && handleConnect()}
           disabled={isConnected}
         />
-      </div>
+      </FieldRow>
 
-      {/* Quick fill buttons */}
       {!isConnected && (
-        <div className="comod-quickfill-row">
-          <span className="comod-field-label">QUICK FILL</span>
-          <div className="comod-quickfill-btns">
-            {QUICK_FILLS.map(addr => (
-              <button key={addr} className="comod-quickfill-btn" onClick={() => setHostInput(addr)}>
+        <QuickFillRow>
+          <FieldLabel>Quick fill</FieldLabel>
+          <QuickFillList>
+            {QUICK_FILLS.map((addr) => (
+              <QuickFillButton key={addr} type="button" onClick={() => setHostInput(addr)}>
                 {addr}
-              </button>
+              </QuickFillButton>
             ))}
-          </div>
-        </div>
+          </QuickFillList>
+        </QuickFillRow>
       )}
 
-      {/* Children — contextual message slot */}
-      {children && (
-        <div className="comod-children">
-          {children}
-        </div>
-      )}
+      {children && <Hint>{children}</Hint>}
 
-      {/* Action */}
-      <div className="comod-actions">
+      <Actions>
         {isConnected ? (
-          <button className="comod-btn comod-btn-danger" onClick={handleDisconnect}>
+          <Button type="button" onClick={disconnect}>
             Disconnect
-          </button>
+          </Button>
         ) : (
-          <button className="comod-btn" onClick={handleConnect} disabled={!canConnect}>
+          <Button type="button" data-variant="primary" onClick={handleConnect} disabled={!canConnect}>
             Connect
-          </button>
+          </Button>
         )}
-        <button className="comod-btn comod-btn-dim" onClick={onClose}>
+        <Button type="button" onClick={onClose}>
           Close
-        </button>
-      </div>
+        </Button>
+      </Actions>
 
-      {/* Connected clients */}
       {isConnected && (
-        <div className="comod-clients">
-          <div className="comod-clients-label">
-            CONNECTED — {connectedClients.length} {connectedClients.length === 1 ? 'client' : 'clients'}
-          </div>
+        <ClientsBlock>
+          <BlockLabel>
+            Connected — {connectedClients.length} {connectedClients.length === 1 ? 'client' : 'clients'}
+          </BlockLabel>
           {connectedClients.length === 0 ? (
-            <div className="comod-clients-empty">No other clients connected</div>
+            <Muted>No other clients connected</Muted>
           ) : (
-            connectedClients.map(name => (
-              <div key={name} className="comod-client-row">
-                <span className="comod-client-dot" />
+            connectedClients.map((name) => (
+              <ClientRow key={name}>
+                <ClientDot />
                 {name}
-              </div>
+              </ClientRow>
             ))
           )}
-        </div>
+        </ClientsBlock>
       )}
     </Modal>
   );

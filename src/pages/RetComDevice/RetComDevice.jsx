@@ -3,6 +3,8 @@ import { useEffect, useMemo, useState } from 'react';
 import Header from './components/Header/Header';
 import List from './components/List';
 import ConfirmationModal from '@components/ConfirmationModal/ConfirmationModal';
+import { Page, PageShell } from '@components/Layout/Layout';
+import ChromeBar from '@components/Chrome/ChromeBar';
 
 import {
   RETCOM_PASSWORD_KEY,
@@ -24,10 +26,25 @@ import { useCyborgSocket } from '@hooks/useCyborgSocket';
 
 import CY_CITY_COMMANDS from './commands/cy_city';
 
+import { Tree } from './RetComDevice.styles';
+
+// Saved state loads before the first render (not in an effect), so the
+// tree is already at full height when the app restores this page's
+// scroll position.
+const loadJSON = (key, fallback) => {
+  try {
+    const saved = localStorage.getItem(key);
+    return saved ? JSON.parse(saved) : fallback;
+  } catch (e) {
+    console.error(`Failed to load ${key}:`, e);
+    return fallback;
+  }
+};
+
 export default function RetComDevice() {
-  const [discoveredPasswords, setDiscoveredPasswords] = useState({});
-  const [expandedRows, setExpandedRows] = useState({});
-  const [bookmarks, setBookmarks] = useState({});
+  const [discoveredPasswords, setDiscoveredPasswords] = useState(() => getDiscoveredPasswords());
+  const [expandedRows, setExpandedRows] = useState(() => loadJSON(RETCOM_NODES_EXPANDED_KEY, {}));
+  const [bookmarks, setBookmarks] = useState(() => loadJSON(RETCOM_BOOKMARKS_KEY, {}));
 
   const { shareUnlock } = useGameMessages();
   const { status } = useCyborgSocket();
@@ -40,18 +57,6 @@ export default function RetComDevice() {
       return saved !== null ? parseFloat(saved) : 1;
     } catch { return 1; }
   });
-
-  useEffect(() => {
-    setDiscoveredPasswords(getDiscoveredPasswords());
-    try {
-      const saved = localStorage.getItem(RETCOM_NODES_EXPANDED_KEY);
-      if (saved) setExpandedRows(JSON.parse(saved));
-    } catch (e) { console.error('Failed to load tree state:', e); }
-    try {
-      const saved = localStorage.getItem(RETCOM_BOOKMARKS_KEY);
-      if (saved) setBookmarks(JSON.parse(saved));
-    } catch (e) { console.error('Failed to load bookmarks:', e); }
-  }, []);
 
   // Listen for unlocks pushed by GameMessagesProvider
   useEffect(() => {
@@ -162,29 +167,22 @@ export default function RetComDevice() {
     }
   };
 
+  // A normal page in the app's scroll container: the header sticks to
+  // the top, the tree scrolls beneath it.
   return (
-    <div
-      className="flex-1 flex flex-col overflow-hidden font-mono"
-      style={{ backgroundColor: 'rgb(19, 23, 34)' }}
-    >
-      <Header
-        indent={indent}
-        searchIndex={searchIndex}
-        bookmarks={bookmarks}
-        onEvent={handleEvent}
-      />
-      <div style={{
-        flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column',
-        paddingBottom: 'calc(max(1.5rem, env(safe-area-inset-bottom)) + 0.75rem)',
-      }}>
-        <div
-          className="flex-1 overflow-y-auto"
-          style={{
-            backgroundColor: 'rgba(29, 35, 50, 0.7)',
-            padding: '0.75rem 48px',
-            minHeight: 0,
-          }}
-        >
+    <>
+      <ChromeBar>
+        <Header
+          indent={indent}
+          searchIndex={searchIndex}
+          bookmarks={bookmarks}
+          onEvent={handleEvent}
+        />
+      </ChromeBar>
+
+      <Page wide>
+
+        <Tree>
           <List
             campaignCommandList={CY_CITY_COMMANDS}
             discoveredPasswords={discoveredPasswords}
@@ -196,22 +194,22 @@ export default function RetComDevice() {
             onEvent={handleEvent}
             isConnected={isConnected}
           />
-        </div>
-      </div>
+        </Tree>
 
-      <ConfirmationModal
-        open={Boolean(pendingShareUnlock)}
-        title="Share Unlock"
-        message={pendingShareUnlock
-          ? `Share unlock for "${pendingShareUnlock.path.split('/').pop()}" with all connected players?${pendingShareUnlock.value && pendingShareUnlock.value !== 'UNLOCKED' ? `\n\nPassword: ${pendingShareUnlock.value}` : ''}`
-          : ''}
-        confirmLabel="Share"
-        onConfirm={() => {
-          shareUnlock(pendingShareUnlock.path, pendingShareUnlock.value);
-          setPendingShareUnlock(null);
-        }}
-        onCancel={() => setPendingShareUnlock(null)}
-      />
-    </div>
+        <ConfirmationModal
+          open={Boolean(pendingShareUnlock)}
+          title="Share Unlock"
+          message={pendingShareUnlock
+            ? `Share unlock for "${pendingShareUnlock.path.split('/').pop()}" with all connected players?${pendingShareUnlock.value && pendingShareUnlock.value !== 'UNLOCKED' ? `\n\nPassword: ${pendingShareUnlock.value}` : ''}`
+            : ''}
+          confirmLabel="Share"
+          onConfirm={() => {
+            shareUnlock(pendingShareUnlock.path, pendingShareUnlock.value);
+            setPendingShareUnlock(null);
+          }}
+          onCancel={() => setPendingShareUnlock(null)}
+        />
+      </Page>
+    </>
   );
 }

@@ -15,6 +15,7 @@ export default class RevolutionistChemist extends BaseClass {
   static color = "#AADD00"; // Acid yellow-green
   static class = "Revolutionist Chemist";
   static artwork = class_image;
+  static tagline = "Cooks for the corps by day. Burns their palaces by night.";
 
   static die = {
     health: "d6",

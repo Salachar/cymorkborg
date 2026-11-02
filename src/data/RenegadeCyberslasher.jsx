@@ -15,6 +15,7 @@ export default class RenegadeCyberslasher extends BaseClass {
   static color = "#FF00FF"; // Magenta/hot pink for cyberslasher
   static class = "Renegade Cyberslasher";
   static artwork = class_image;
+  static tagline = "Chrome, steel and a disciplined mind. You used to kill for a cause.";
 
   static die = {
     health: "d10",
