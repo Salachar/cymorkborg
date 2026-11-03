@@ -1,26 +1,42 @@
-export const COLOR_MAP = {
-  cyan: 'rgb(0, 255, 255)',
-  smoke: 'rgb(133, 175, 231)',
-  neon: 'rgb(0, 170, 40)',
-  yellow: 'rgb(250, 204, 21)',
-  pink: 'rgb(255, 0, 128)',
-  red: 'rgb(239, 68, 68)',
-  teal: 'rgb(79, 209, 197)',
-}
+// RetCom's building blocks. Same exports and props as before; styling moved
+// from inline styles and Tailwind classes to Emotion (RetComComponents.styles.js).
+// className and style are still accepted wherever they were.
 
-export const Spacer = () => {
-  return (
-    <div
-      style={{
-        height: '1rem',
-      }}
-    />
-  );
-}
+import {
+  COLOR_MAP,
+  TEXT,
+  LineEl,
+  SpacerEl,
+  NodePreviewEl,
+  SectionEl,
+  SectionTitle,
+  BoxEl,
+  InsetOuter,
+  InsetInner,
+  InsetTitle,
+  InsetBody,
+  DividerEl,
+  ListItemEl,
+  WarningEl,
+  HeaderEl,
+  DataTableEl,
+  DataRow,
+  DataLabel,
+  DataValue,
+  ProgressEl,
+  ProgressLabel,
+  KeyValueEl,
+  KVLabel,
+  KVValue,
+} from './RetComComponents.styles';
 
-// Text styling components
+export { COLOR_MAP };
+
+export const Spacer = () => <SpacerEl />;
+
+// Text styling. `pulse` is accepted but no longer animates.
 export const Line = ({
-  className = "",
+  className = '',
   styles = {},
   inline,
   cyan = false,
@@ -37,8 +53,8 @@ export const Line = ({
   xsmall = false,
   small = false,
   large = false,
-  color = "",
-  pulse,
+  color = '',
+  pulse, // eslint-disable-line no-unused-vars
   loading = false,
   style = {},
   span = false,
@@ -46,207 +62,112 @@ export const Line = ({
   bullet = false,
   children,
 }) => {
-  let appliedClassname = className;
-  let appliedStyles = {
-    ...styles,
-    ...style,
-  };
+  // Computed from props, in the same order as before.
+  const css = {};
 
-  if (inline) appliedStyles.display = "inline-block";
+  if (inline) css.display = 'inline-block';
 
   if (color && COLOR_MAP[color]) {
-    appliedStyles.color = COLOR_MAP[color];
+    css.color = COLOR_MAP[color];
   } else {
-    if (cyan) appliedStyles.color = COLOR_MAP.cyan;
-    if (smoke) appliedStyles.color = COLOR_MAP.smoke;
-    if (neon)  appliedStyles.color = COLOR_MAP.neon;
-    if (yellow)  appliedStyles.color = COLOR_MAP.yellow;
-    if (pink)  appliedStyles.color = COLOR_MAP.pink;
-    if (red) appliedStyles.color = COLOR_MAP.red;
-    if (teal) appliedStyles.color = COLOR_MAP.teal;
+    if (cyan) css.color = COLOR_MAP.cyan;
+    if (smoke) css.color = COLOR_MAP.smoke;
+    if (neon) css.color = COLOR_MAP.neon;
+    if (yellow) css.color = COLOR_MAP.yellow;
+    if (pink) css.color = COLOR_MAP.pink;
+    if (red) css.color = COLOR_MAP.red;
+    if (teal) css.color = COLOR_MAP.teal;
   }
 
-  if (top) appliedStyles.marginTop = "0.5rem";
-  if (bottom) appliedStyles.marginBottom = "0.5rem";
-  if (left) appliedStyles.marginLeft = "0.5rem";
+  if (top) css.marginTop = '0.5rem';
+  if (bottom) css.marginBottom = '0.5rem';
+  if (left) css.marginLeft = '0.5rem';
 
-  if (bold) appliedClassname += " font-bold";
-  if (pulse) appliedStyles.animation = 'pulse-text 2s ease-in-out infinite';
-  if (xsmall) appliedClassname += " text-xs";
-  if (small) appliedClassname += " text-sm";
-  if (large) appliedClassname += " text-lg";
+  if (bold) css.fontWeight = 700;
+  if (xsmall) Object.assign(css, TEXT.xs);
+  if (small) Object.assign(css, TEXT.sm);
+  if (large) Object.assign(css, TEXT.lg);
 
-  if (span) {
-    return (
-      <>
-        <span className={appliedClassname} style={appliedStyles}>{bullet && " · "}{children}{loading ? "..." : ""}</span>
-        {br && <br />}
-      </>
-    );
-  } else {
-    return (
-      <>
-        <div className={appliedClassname} style={appliedStyles}>{bullet && " · "}{children}{loading ? "..." : ""}</div>
-        {br && <br />}
-      </>
-    );
-  }
-};
+  // Caller-provided style stays inline, as before.
+  const inlineStyle = { ...styles, ...style };
 
-export const NodePreview = ({ children }) => {
   return (
-    <div
-      style={{
-        fontFamily: 'monospace',
-        fontSize: '0.72rem',
-        color: 'rgb(148, 163, 184)',
-      }}
-    >
-      {children}
-    </div>
+    <>
+      <LineEl
+        as={span ? 'span' : 'div'}
+        className={className || undefined}
+        style={inlineStyle}
+        $css={css}
+      >
+        {bullet && ' · '}
+        {children}
+        {loading ? '...' : ''}
+      </LineEl>
+      {br && <br />}
+    </>
   );
 };
 
-// Section components
-export const Section = ({ title, center = false, children, color = "yellow" }) => {
-  let appliedStyles = {
-    marginTop: "0.5rem"
-  };
-  if (center) appliedStyles.textAlign = "center";
-  return (
-    <div style={appliedStyles}>
-      <div style={{
-        color: COLOR_MAP[color],
-        fontWeight: "bold"
-      }}>
-        {title}
-      </div>
-      {children}
-    </div>
-  );
-};
+export const NodePreview = ({ children }) => <NodePreviewEl>{children}</NodePreviewEl>;
 
-// Box/Border components
-export const Box = ({ children, color = "cyan", className = "" }) => {
-  return (
-    <div
-      className={className}
-      style={{
-        border: `2px solid ${COLOR_MAP[color]}`,
-        padding: "1rem"
-      }}
-    >
-      {children}
-    </div>
-  );
-};
+export const Section = ({ title, center = false, children, color = 'yellow' }) => (
+  <SectionEl data-center={center || undefined}>
+    <SectionTitle $color={color}>{title}</SectionTitle>
+    {children}
+  </SectionEl>
+);
 
-export const InsetBox = ({ children, title, color = "cyan", className = "", style = {} }) => {
-  return (
-    <div
-      className={className}
-      style={{
-        backgroundColor: 'rgba(15, 23, 42, 0.6)',
-        border: '1px solid rgb(71, 85, 105)',
-        borderRadius: '3px',
-        margin: "0.75rem 0",
-        ...style,
-      }}
-    >
-      <div className="p-2 md:p-3">
-        {Boolean(title) && (
-          <div className="text-sm font-bold mb-2" style={{ color: COLOR_MAP[color] }}>
-            {title}
-          </div>
-        )}
-        <div className="text-sm">
-          {children}
-        </div>
-      </div>
-    </div>
-  );
-};
+export const Box = ({ children, color = 'cyan', className = '' }) => (
+  <BoxEl className={className || undefined} $color={color}>
+    {children}
+  </BoxEl>
+);
 
-// Divider
-export const Divider = ({ color = "cyan", style }) => {
-  return (
-    <div style={{
-      borderTop: `1px solid ${COLOR_MAP[color]}`,
-      marginTop: "0.5rem",
-      marginBottom: "0.5rem",
-      ...style,
-    }} />
-  );
-};
+export const InsetBox = ({ children, title, color = 'cyan', className = '', style = {} }) => (
+  <InsetOuter className={className || undefined} style={style}>
+    <InsetInner>
+      {Boolean(title) && <InsetTitle $color={color}>{title}</InsetTitle>}
+      <InsetBody>{children}</InsetBody>
+    </InsetInner>
+  </InsetOuter>
+);
 
-// List item component
-export const ListItem = ({ children, indent = false }) => {
-  return (
-    <div style={{
-      color: COLOR_MAP.neon,
-      marginLeft: indent ? "1rem" : "0"
-    }}>
-      → {children}
-    </div>
-  );
-};
+export const Divider = ({ color = 'cyan', style }) => <DividerEl $color={color} style={style} />;
 
-// Warning/Alert component
-export const Warning = ({ children }) => {
-  return (
-    <div style={{
-      color: COLOR_MAP.red,
-      fontWeight: "bold",
-      marginTop: "0.5rem"
-    }}>
-      ⚠ {children}
-    </div>
-  );
-};
+export const ListItem = ({ children, indent = false }) => (
+  <ListItemEl data-indent={indent || undefined}>→ {children}</ListItemEl>
+);
 
-// Header component
-export const Header = ({ children, color = "cyan" }) => {
-  return (
-    <div style={{
-      color: COLOR_MAP[color],
-      fontWeight: "bold"
-    }}>
-      {children}
-    </div>
-  );
-};
+export const Warning = ({ children }) => <WarningEl>⚠ {children}</WarningEl>;
 
-export const DataTable = ({ data }) => {
-  return (
-    <div className="flex flex-col gap-1">
-      {data.map((row, index) => (
-        <div key={index} className="flex flex-wrap gap-x-4 gap-y-0.5">
-          <span className="text-xs md:text-sm shrink-0" style={{ color: COLOR_MAP.yellow, minWidth: '80px' }}>{row.label}:</span>
-          <span className="text-xs md:text-sm" style={{ color: COLOR_MAP.neon }}>{row.value}</span>
-        </div>
-      ))}
-    </div>
-  );
-};
+export const Header = ({ children, color = 'cyan' }) => <HeaderEl $color={color}>{children}</HeaderEl>;
 
-export const ProgressBar = ({ percent = 100, label = "" }) => {
+export const DataTable = ({ data }) => (
+  <DataTableEl>
+    {data.map((row, index) => (
+      <DataRow key={index}>
+        <DataLabel>{row.label}:</DataLabel>
+        <DataValue>{row.value}</DataValue>
+      </DataRow>
+    ))}
+  </DataTableEl>
+);
+
+export const ProgressBar = ({ percent = 100, label = '' }) => {
   const filled = Math.round(percent / 4);
   const empty = 25 - filled;
 
   return (
-    <div className="text-xs md:text-sm overflow-hidden break-all" style={{ color: COLOR_MAP.neon }}>
-      {label && <span style={{ color: COLOR_MAP.yellow }}>{label}: </span>}
+    <ProgressEl>
+      {label && <ProgressLabel>{label}: </ProgressLabel>}
       [{'█'.repeat(filled)}{'░'.repeat(empty)}] {percent}%
-    </div>
+    </ProgressEl>
   );
 };
 
-export const KeyValue = ({ label, value, valueColor = "neon" }) => {
-  return (
-    <div className="flex flex-wrap gap-x-2 gap-y-0.5">
-      <span className="text-xs md:text-sm shrink-0" style={{ color: COLOR_MAP.yellow }}>{label}:</span>
-      <span className="text-xs md:text-sm" style={{ color: COLOR_MAP[valueColor] }}>{value}</span>
-    </div>
-  );
-};
-
+export const KeyValue = ({ label, value, valueColor = 'neon' }) => (
+  <KeyValueEl>
+    <KVLabel>{label}:</KVLabel>
+    <KVValue $color={valueColor}>{value}</KVValue>
+  </KeyValueEl>
+);

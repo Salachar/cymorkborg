@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Header from './components/Header/Header';
 import List from './components/List';
 import ConfirmationModal from '@components/ConfirmationModal/ConfirmationModal';
-import { Page, PageShell } from '@components/Layout/Layout';
+import { Page } from '@components/Layout/Layout';
 import ChromeBar from '@components/Chrome/ChromeBar';
 
 import {

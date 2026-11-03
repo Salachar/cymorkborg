@@ -1,6 +1,3 @@
-// RetCom page shell. Uses the shared page background but not Page's
-// width cap: the tree gets the full content width.
-
 import styled from '@emotion/styled';
 import { mq } from '@styles/media';
 
