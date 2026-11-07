@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import Extractable from '../Extractable/Extractable';
 
 /**
  * RCDAlert - Jailbroken RCD injecting tactical intel
@@ -6,10 +6,22 @@ import { useState, useEffect } from 'react';
  * Sits visually apart from native terminal UI — foreign insert feel.
  * Purple = standard intel.
  *
+ * It can also flag a drop: loot the punk's jailbroken RCD detected that
+ * nobody else would notice (cash behind a dryer filter, an item under an
+ * offering plate, credits on a forgotten account). Give the node a mundane
+ * name ("Dryer #3") so search can't find it; the alert is the discovery.
+ *
  * Props:
  * - message: String — main alert text
  * - details: Array of strings — secondary info lines
  * - children: ReactNode (optional)
+ *
+ * Loot (all optional; any of them makes this a drop):
+ * - id: String — required with loot; unique, remembers what's been taken
+ * - cash: Number — physical cash / credchip, goes to the wallet's credits
+ * - physical: Array — physical items, same shape as Safe's `physical`
+ * - credits: Number — digital credits, claimable remotely
+ * - digital: Array — digital items, claimable remotely
  */
 
 export default function RCDAlert({
@@ -18,6 +30,11 @@ export default function RCDAlert({
   details,
   notes,
   children,
+  id,
+  cash = 0,
+  physical = [],
+  credits = 0,
+  digital = [],
 }) {
   const color    = 'rgb(168, 85, 247)';
   const colorDim = 'rgba(168, 85, 247, 0.3)';
@@ -25,6 +42,15 @@ export default function RCDAlert({
 
   const alert_title = title || message;
   const alert_notes = notes || details || [];
+
+  // Physical cash rides with the physical items as a credits entry
+  // (Extractable adds isCredits entries to the wallet's credits).
+  const physicalItems = [
+    ...physical,
+    ...(cash ? [{ id: `${id}_cash`, label: 'Cash', value: cash, isCredits: true }] : []),
+  ];
+
+  const hasLoot = Boolean(id) && (physicalItems.length > 0 || digital.length > 0 || credits > 0);
 
   return (
     <div style={{
@@ -41,6 +67,7 @@ export default function RCDAlert({
       <div style={{
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'space-between',
         gap: '0.5rem',
         marginBottom: '0.45rem',
       }}>
@@ -53,6 +80,20 @@ export default function RCDAlert({
         }}>
           ◈ RCD-7_INTEL.SYS
         </span>
+
+        {hasLoot && (
+          <span style={{
+            color: 'rgb(79, 209, 197)',
+            fontSize: '0.6rem',
+            fontWeight: 'bold',
+            letterSpacing: '0.12em',
+            border: '1px solid rgba(79, 209, 197, 0.4)',
+            borderRadius: '2px',
+            padding: '0.05rem 0.35rem',
+          }}>
+            DROP DETECTED
+          </span>
+        )}
       </div>
 
       {/* Divider */}
@@ -66,7 +107,7 @@ export default function RCDAlert({
         <div style={{
           display: 'flex',
           gap: '0.4rem',
-          marginBottom: alert_notes.length > 0 || children ? '0.45rem' : 0,
+          marginBottom: alert_notes.length > 0 || children || hasLoot ? '0.45rem' : 0,
         }}>
           <span style={{
             color,
@@ -91,7 +132,7 @@ export default function RCDAlert({
           display: 'flex',
           flexDirection: 'column',
           gap: '0.2rem',
-          marginBottom: children ? '0.5rem' : 0,
+          marginBottom: children || hasLoot ? '0.5rem' : 0,
           paddingLeft: '0.75rem',
         }}>
           {alert_notes.map((alert_note, i) => (
@@ -109,6 +150,22 @@ export default function RCDAlert({
               }}>{alert_note}</span>
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Drop contents */}
+      {hasLoot && (
+        <div style={{
+          marginTop: '0.5rem',
+          paddingTop: '0.5rem',
+          borderTop: `1px dashed ${colorDim}`,
+        }}>
+          <Extractable
+            id={`${id}-rcd-drop`}
+            physicalItems={physicalItems}
+            digitalItems={digital}
+            credits={credits}
+          />
         </div>
       )}
 

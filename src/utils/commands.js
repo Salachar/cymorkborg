@@ -48,11 +48,12 @@ export function collapseSubtree(expandedRows, path) {
 
 /**
  * Recursively walk the command tree, building a flat list of searchable
- * entries. Stops descending into any node that is locked (has a password
- * and has not been bypassed) — nothing behind a lock is indexed, including
- * the locked node's own descendants. The locked node itself IS included
- * (so the player can see "this exists and is locked"), but its children
- * are not.
+ * entries. Search only finds what a player could reach without cracking
+ * anything:
+ *   - a locked node (password, not bypassed) is left out, with everything
+ *     under it; once unlocked (cracked or shared), it and its subtree are in
+ *   - a node with `searchable: false` is left out, with everything under
+ *     it, whether locked or not (for secrets that have no password)
  */
 export function buildSearchIndex(tree, discoveredPasswords = {}, basePath = '', depth = 0) {
   let results = [];
@@ -61,6 +62,9 @@ export function buildSearchIndex(tree, discoveredPasswords = {}, basePath = '', 
     const path = basePath ? `${basePath}/${id}` : id;
     const hasBlocker = Boolean(def.password);
     const isBypassed = Boolean(discoveredPasswords[path]);
+
+    if (def.searchable === false) continue;
+    if (hasBlocker && !isBypassed) continue;
 
     results.push({
       id,
@@ -72,12 +76,42 @@ export function buildSearchIndex(tree, discoveredPasswords = {}, basePath = '', 
       isBypassed,
     });
 
-    // Don't descend past a locked, unbypassed node.
-    if (hasBlocker && !isBypassed) continue;
-
     if (def.related_commands && Object.keys(def.related_commands).length > 0) {
       results = results.concat(
         buildSearchIndex(def.related_commands, discoveredPasswords, path, depth + 1)
+      );
+    }
+  }
+
+  return results;
+}
+
+/**
+ * Entries for bookmarked paths, in tree order. Unlike search, this ignores
+ * locks and `searchable`: a bookmarked lock should stay in Bookmarks so the
+ * player can come back to crack it. Same entry shape as buildSearchIndex.
+ */
+export function buildBookmarkEntries(tree, bookmarks = {}, discoveredPasswords = {}, basePath = '', depth = 0) {
+  let results = [];
+
+  for (const [id, def] of Object.entries(tree)) {
+    const path = basePath ? `${basePath}/${id}` : id;
+
+    if (bookmarks[path]) {
+      results.push({
+        id,
+        path,
+        depth,
+        preview: def.preview ?? null,
+        favicon: def.favicon ?? null,
+        hasBlocker: Boolean(def.password),
+        isBypassed: Boolean(discoveredPasswords[path]),
+      });
+    }
+
+    if (def.related_commands && Object.keys(def.related_commands).length > 0) {
+      results = results.concat(
+        buildBookmarkEntries(def.related_commands, bookmarks, discoveredPasswords, path, depth + 1)
       );
     }
   }
@@ -143,5 +177,48 @@ export function getAncestorPaths(path) {
   for (let i = 0; i < parts.length; i++) {
     result.push(parts.slice(0, i + 1).join('/'));
   }
+  return result;
+}
+
+/**
+ * Look up a node's definition by its path ("a/b/c"), walking
+ * related_commands one segment at a time. Returns null if any segment is
+ * missing (e.g. the node was renamed since it was shared).
+ */
+export function findCommand(tree, path) {
+  if (!tree || !path) return null;
+  let level = tree;
+  let def = null;
+  for (const segment of path.split('/')) {
+    def = level?.[segment];
+    if (!def) return null;
+    level = def.related_commands || {};
+  }
+  return def;
+}
+
+/**
+ * What a shared node unlocks for the receiver, as { path: password }.
+ *
+ * A sender can only see a node if every node above it is unlocked, so the
+ * ancestors with passwords always unlock. The node itself unlocks only if
+ * the sender had unlocked it (`unlocked`). Passwords come from the
+ * receiver's own tree, so they never travel over the wire.
+ *
+ * If part of the path no longer exists, whatever resolved is returned.
+ */
+export function resolveShare(tree, path, unlocked = false) {
+  const result = {};
+  if (!tree || !path) return result;
+
+  const paths = getAncestorPaths(path);
+  paths.forEach((p, i) => {
+    const isTarget = i === paths.length - 1;
+    const def = findCommand(tree, p);
+    if (!def?.password) return;
+    if (isTarget && !unlocked) return;
+    result[p] = def.password.pw || 'UNLOCKED';
+  });
+
   return result;
 }

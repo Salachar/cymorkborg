@@ -68,3 +68,47 @@ export const Body = styled.div`
   -webkit-user-select: text;
   user-select: text;
 `;
+
+/* ---- Shared node card ---------------------------------------------------- */
+
+export const NodeLine = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3rem 0.6rem;
+`;
+
+export const NodeName = styled.span`
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--cy-text);
+`;
+
+export const NodePath = styled.div`
+  margin-top: 0.2rem;
+  font-size: 0.72rem;
+  color: var(--cy-text-dim);
+`;
+
+export const NodeActions = styled.div`
+  margin-top: 0.65rem;
+`;
+
+export const Missing = styled.p`
+  margin: 0;
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--cy-text-muted);
+`;
+
+// "Shared" / "Queued" beside a personal note's timestamp.
+export const SharedTag = styled.span`
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cy-cyan);
+
+  &[data-queued='true'] {
+    color: var(--cy-text-muted);
+  }
+`;

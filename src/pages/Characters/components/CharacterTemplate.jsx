@@ -1,5 +1,6 @@
 import ClassUniques from "./characterV2/ClassUniques";
 import ClassSection from "./characterV2/ClassSection";
+import { Weapons, Armor } from "./characterV2/Gear";
 import ClassArtwork from "./ClassArtwork";
 
 import { Prose } from "@components/Layout/Layout";
@@ -22,7 +23,12 @@ import Cyberdeck from "./characterV2/Cyberdeck";
 // ChromeBar). Ids match the Anchors below.
 export function getSheetJumps(character) {
   if (!character) return null;
-  const hasClassComponents = Boolean(character.constructor.components?.length);
+  // The class section only shows components that aren't weapons or armor
+  // (those have their own sections), so it can be empty (e.g. the Chemist).
+  const hasClassComponents = (character.constructor.components || []).some(
+    (c) => c.category !== "weapon" && c.category !== "armor"
+  );
+
   return [
     { id: "sheet-name", label: "Name" },
     { id: "sheet-uniques", label: "Uniques" },
@@ -31,12 +37,14 @@ export function getSheetJumps(character) {
     { id: "sheet-glitches", label: "Glitches" },
     { id: "sheet-creds", label: "Creds & Debt" },
     hasClassComponents && { id: "sheet-class", label: "Class" },
+    { id: "sheet-weapons", label: "Weapons" },
+    { id: "sheet-armor", label: "Armor" },
     { id: "sheet-inventory", label: "Inventory" },
+    { id: "sheet-cybertech", label: "Cybertech" },
+    { id: "sheet-cyberdeck", label: "Deck" },
+    { id: "sheet-apps", label: "Apps" },
     { id: "sheet-nano", label: "Nano" },
     { id: "sheet-infestations", label: "Infestations" },
-    { id: "sheet-apps", label: "Apps" },
-    { id: "sheet-cyberdeck", label: "Deck" },
-    { id: "sheet-cybertech", label: "Cybertech" },
   ].filter(Boolean);
 }
 
@@ -83,15 +91,17 @@ export default function CharacterTemplate({
       )}
 
       <ClassSection character={character} builder={builder} onUpdate={onUpdate} />
+      <Weapons character={character} builder={builder} onUpdate={onUpdate} />
+      <Armor character={character} builder={builder} onUpdate={onUpdate} />
 
       {builder && (
         <>
           <Inventory character={character} onUpdate={onUpdate} />
+          <Cyberware character={character} onUpdate={onUpdate} />
+          <Cyberdeck character={character} onUpdate={onUpdate} />
+          <Apps character={character} onUpdate={onUpdate} />
           <NanoPowers character={character} onUpdate={onUpdate} />
           <Infestations character={character} onUpdate={onUpdate} />
-          <Apps character={character} onUpdate={onUpdate} />
-          <Cyberdeck character={character} onUpdate={onUpdate} />
-          <Cyberware character={character} onUpdate={onUpdate} />
         </>
       )}
     </Sheet>

@@ -154,3 +154,31 @@ export const TickerText = styled.span`
   color: var(--cy-text-muted);
   ${fade}
 `;
+
+/* ---- Settings dialog ----------------------------------------------------- */
+
+export const Setting = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+`;
+
+export const SettingText = styled.div`
+  min-width: 0;
+`;
+
+export const SettingName = styled.div`
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cy-text);
+`;
+
+export const SettingHint = styled.div`
+  margin-top: 0.15rem;
+  font-size: 0.75rem;
+  color: var(--cy-text-dim);
+`;

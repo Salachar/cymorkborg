@@ -4,6 +4,7 @@ import TablePicker, { entryId } from '@components/TablePicker/TablePicker';
 import { STYLES, FEATURES, WANTS, QUIRKS, CURRENT_OBSESSIONS } from '@data/tables';
 
 import PickerButton from './PickerButton';
+import Advancement from './Advancement';
 import {
   Card,
   Corner,
@@ -100,6 +101,8 @@ export default function Name({
             );
           })}
         </FlavorRow>
+
+      <Advancement character={character} onUpdate={onUpdate} />
 
       {active && (
         <TablePicker

@@ -4,6 +4,7 @@ export const WEAPONS_FOR_SALE = [
   {
     id: "broken_bottle",
     label: "Broken Bottle/Cobblestone",
+    category: "weapon",
     die: "d3",
     cost: "0¤",
     description: <>Street trash weaponized.</>,
@@ -11,6 +12,7 @@ export const WEAPONS_FOR_SALE = [
   {
     id: "taser",
     label: "Taser",
+    category: "weapon",
     die: "d2",
     cost: "20¤",
     description: <>Test Toughness or fall down.</>,
@@ -18,6 +20,7 @@ export const WEAPONS_FOR_SALE = [
   {
     id: "shockstick",
     label: "Shockstick",
+    category: "weapon",
     die: "d4",
     cost: "350¤",
     description: <>Test Toughness or fall down.</>,
@@ -25,6 +28,7 @@ export const WEAPONS_FOR_SALE = [
   {
     id: "machete",
     label: "Machete",
+    category: "weapon",
     die: "d6",
     cost: "20¤",
     description: <>Close combat blade.</>,
@@ -32,6 +36,7 @@ export const WEAPONS_FOR_SALE = [
   {
     id: "filament_knife",
     label: "Filament Knife",
+    category: "weapon",
     die: "d6",
     cost: "300¤",
     description: <>Monomolecular edge cuts through most materials.</>,
@@ -39,6 +44,7 @@ export const WEAPONS_FOR_SALE = [
   {
     id: "monosword",
     label: "Monosword",
+    category: "weapon",
     die: "d8",
     cost: "200¤",
     description: <>High-tech blade with monomolecular edge.</>,
@@ -46,6 +52,7 @@ export const WEAPONS_FOR_SALE = [
   {
     id: "throwing_knives",
     label: "Too Many Throwing Knives",
+    category: "weapon",
     die: "d4",
     cost: "30¤",
     description: <>Two attacks per round.</>,
@@ -53,6 +60,7 @@ export const WEAPONS_FOR_SALE = [
   {
     id: "power_tool",
     label: "Power Tool",
+    category: "weapon",
     die: "d6",
     cost: "35¤",
     description: <>Breaks down on a 1.</>,
@@ -60,6 +68,7 @@ export const WEAPONS_FOR_SALE = [
   {
     id: "chainsaw",
     label: "Chainsaw",
+    category: "weapon",
     die: "d6+1",
     cost: "40¤",
     description: <>1-in-4 to hit yourself on a miss.</>,
@@ -67,6 +76,7 @@ export const WEAPONS_FOR_SALE = [
   {
     id: "pneumatic_glove",
     label: "Pneumatic Glove",
+    category: "weapon",
     die: "d6",
     cost: "300¤",
     description: <>Ignores armor on a crit.</>,
@@ -74,6 +84,7 @@ export const WEAPONS_FOR_SALE = [
   {
     id: "9mm_pistol",
     label: "9mm Pistol",
+    category: "weapon",
     die: "d6a",
     cost: "60¤",
     description: <>Standard sidearm.</>,
@@ -81,6 +92,7 @@ export const WEAPONS_FOR_SALE = [
   {
     id: "ancient_revolver",
     label: "Ancient Revolver",
+    category: "weapon",
     die: "d8",
     cost: "50¤",
     description: <>Old but reliable.</>,
@@ -88,6 +100,8 @@ export const WEAPONS_FOR_SALE = [
   {
     id: "smartgun",
     label: "SmartGun™",
+    category: "weapon",
+    smartjack: true,
     die: "d6a",
     cost: "100¤",
     description: <>d10a with a SmartJack (Cybertech).</>,
@@ -95,6 +109,7 @@ export const WEAPONS_FOR_SALE = [
   {
     id: "small_smgs",
     label: "Pair of Small SMGs",
+    category: "weapon",
     die: "d6a",
     cost: "300¤",
     description: <>Only autofire.</>,
@@ -102,6 +117,7 @@ export const WEAPONS_FOR_SALE = [
   {
     id: "assault_rifle",
     label: "Assault Rifle",
+    category: "weapon",
     die: "d8a",
     cost: "400¤",
     description: <>Military grade automatic weapon.</>,
@@ -109,6 +125,7 @@ export const WEAPONS_FOR_SALE = [
   {
     id: "grenade_launcher",
     label: "Grenade Launcher",
+    category: "weapon",
     die: "d6",
     cost: "600¤",
     description: <>Hits up to d3 targets. For mounting on an assault rifle.</>,
@@ -117,6 +134,7 @@ export const WEAPONS_FOR_SALE = [
   {
     id: "shotgun",
     label: "Shotgun",
+    category: "weapon",
     die: "d8",
     cost: "350¤",
     description: <>Close range devastation.</>,
@@ -124,6 +142,7 @@ export const WEAPONS_FOR_SALE = [
   {
     id: "sniper_rifle",
     label: "Sniper Rifle",
+    category: "weapon",
     die: "d12",
     cost: "1k¤",
     description: <>×3 damage on crit. −4DR, +3 damage when aiming 2 rounds.</>,
@@ -131,6 +150,7 @@ export const WEAPONS_FOR_SALE = [
   {
     id: "pulse_rifle",
     label: "Pulse Rifle",
+    category: "weapon",
     die: "d10a",
     cost: "—¤",
     description: <>High-tech energy weapon.</>,
@@ -139,6 +159,7 @@ export const WEAPONS_FOR_SALE = [
   {
     id: "nailgun",
     label: "Nailgun",
+    category: "weapon",
     die: "d6a",
     cost: "400¤",
     description: <>Only autofire.</>,
@@ -146,6 +167,7 @@ export const WEAPONS_FOR_SALE = [
   {
     id: "laser_turret",
     label: "Laser Turret",
+    category: "weapon",
     die: "d12a",
     cost: ">10k¤",
     description: <>Mounted defense system.</>,
@@ -154,6 +176,7 @@ export const WEAPONS_FOR_SALE = [
   {
     id: "rocket_launcher",
     label: "Rocket Launcher",
+    category: "weapon",
     die: "d12",
     cost: "5k¤",
     description: <>d4 targets. Ignores 2 points of armor. Fires once per combat. ×2 damage vs. vehicles, turrets and mechs.</>,
@@ -162,12 +185,14 @@ export const WEAPONS_FOR_SALE = [
   {
     id: "flashbang",
     label: "Flashbang",
+    category: "weapon",
     cost: "25¤",
     description: <>Test Toughness or +4DR for d4 rounds.</>,
   },
   {
     id: "hand_grenade",
     label: "Hand Grenade",
+    category: "weapon",
     die: "d6",
     cost: "45¤",
     description: <>To up to d3 targets.</>,
@@ -176,6 +201,7 @@ export const WEAPONS_FOR_SALE = [
   {
     id: "epulse_grenade",
     label: "ePulse Grenade",
+    category: "weapon",
     die: "d8",
     cost: "60¤",
     description: <>To up to d3 tech targets or people with 2+ cybertech.</>,

@@ -64,6 +64,7 @@ export default class RenegadeCyberslasher extends BaseClass {
       type: "rollable",
       name: "weapon",
       label: "Weapon",
+      category: "weapon",
       select_mode: "single",
       entries: WEAPONS_TABLE.slice(0, 8),
       before: <div className="divider small" />,
@@ -79,6 +80,7 @@ export default class RenegadeCyberslasher extends BaseClass {
       type: "rollable",
       name: "armor",
       label: "Armor",
+      category: "armor",
       select_mode: "single",
       entries: ARMOR_TABLE.slice(0, 2),
       before: <div className="divider small" />,
@@ -93,6 +95,7 @@ export default class RenegadeCyberslasher extends BaseClass {
     {
       type: "rollable",
       name: "signature_weapon",
+      category: "weapon",
       label: "Your Trenchcoat Hides Most of Your...",
       select_mode: "single",
       entries: [

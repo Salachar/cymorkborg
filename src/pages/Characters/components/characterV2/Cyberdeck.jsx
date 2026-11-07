@@ -9,6 +9,7 @@ import { Button, IconButton, NumberStepper, RollTable, Directory } from '@compon
 import useTableRoll from '@hooks/useTableRoll';
 import { formatModifier } from '@utils/character';
 import { APPS, APP_FUMBLES } from '@data/tables';
+import { cyberEffects } from '@utils/cybertech';
 
 import { Field, FieldLabel, Note, Divider } from './Editor.styles';
 import {
@@ -159,7 +160,15 @@ function DeckView({ character, onUpdate }) {
     .filter((id) => !deck.loaded_apps.includes(id))
     .map(findApp)
     .filter(Boolean);
-  const bays = Array.from({ length: deck.slots }, (_, i) => loaded[i] || null);
+  // An installed Skinslot adds a bay beyond the deck's own slots.
+  const { extraAppSlots } = cyberEffects(character);
+  const totalSlots = deck.slots + extraAppSlots;
+  const bays = Array.from({ length: totalSlots }, (_, i) => loaded[i] || null);
+  // Apps in bays that no longer exist (e.g. the Skinslot was uninstalled):
+  // shown as unseated with Eject, never silently dropped.
+  const unseated = loaded.slice(totalSlots);
+  const eject = (appId) =>
+    update((d) => (d.loaded_apps = d.loaded_apps.filter((id) => id !== appId)));
 
   return (
     <>
@@ -212,16 +221,18 @@ function DeckView({ character, onUpdate }) {
           <Readout>
             <ReadoutLabel>Slots</ReadoutLabel>
             <ReadoutValue>
-              {loaded.length} / {deck.slots}
+              {Math.min(loaded.length, totalSlots)} / {deck.slots}
+              {extraAppSlots ? ` + ${extraAppSlots}` : ''}
             </ReadoutValue>
-            <ReadoutHint>in use</ReadoutHint>
+            <ReadoutHint>in use{extraAppSlots ? ' (Skinslot)' : ''}</ReadoutHint>
           </Readout>
         </DeviceRow>
       </Device>
 
       <Rack>
         {bays.map((app, index) => {
-          const number = String(index + 1).padStart(2, '0');
+          // Bays past the deck's own slots are the Skinslot's.
+          const number = index >= deck.slots ? 'SKIN' : String(index + 1).padStart(2, '0');
 
           if (!app) {
             return (
@@ -251,7 +262,7 @@ function DeckView({ character, onUpdate }) {
                   </div>
                   <IconButton
                     type="button"
-                    onClick={() => update((d) => (d.loaded_apps = d.loaded_apps.filter((id) => id !== appId)))}
+                    onClick={() => eject(appId)}
                     aria-label={`Eject ${app.label}`}
                     title="Eject"
                   >
@@ -286,6 +297,32 @@ function DeckView({ character, onUpdate }) {
         })}
       </Rack>
 
+      {unseated.length > 0 && (
+        <Rack>
+          {unseated.map((app) => (
+            <Bay key={`unseated_${entryId(app)}`} data-empty="false">
+              <BayNumber>!!</BayNumber>
+              <BayBody>
+                <BayHead>
+                  <div>
+                    <CartName>{app.label}</CartName>
+                    <CartDescription>Unseated: its bay is gone. Eject it, or free a slot.</CartDescription>
+                  </div>
+                  <IconButton
+                    type="button"
+                    onClick={() => eject(entryId(app))}
+                    aria-label={`Eject ${app.label}`}
+                    title="Eject"
+                  >
+                    <EjectIcon style={{ fontSize: 18 }} />
+                  </IconButton>
+                </BayHead>
+              </BayBody>
+            </Bay>
+          ))}
+        </Rack>
+      )}
+
       <Backlash />
 
       <RulesBlock>
@@ -300,7 +337,7 @@ function DeckView({ character, onUpdate }) {
           allowRoll={false}
           onSelect={(app) => {
             update((d) => {
-              if (d.loaded_apps.length < (d.slots || 4) && !d.loaded_apps.includes(entryId(app))) {
+              if (d.loaded_apps.length < totalSlots && !d.loaded_apps.includes(entryId(app))) {
                 d.loaded_apps = [...d.loaded_apps, entryId(app)];
               }
             });
@@ -370,10 +407,12 @@ function DeckEditor({ character, onUpdate }) {
     onUpdate();
   };
 
+  const { extraAppSlots } = cyberEffects(character);
+
   return (
     <>
       <Field>
-        <FieldLabel>Slots</FieldLabel>
+        <FieldLabel>Slots{extraAppSlots ? ` (+${extraAppSlots} Skinslot)` : ''}</FieldLabel>
         <NumberStepper
           value={deck.slots}
           min={MIN_SLOTS}
@@ -383,7 +422,8 @@ function DeckEditor({ character, onUpdate }) {
           onChange={(v) =>
             update((d) => {
               d.slots = v;
-              if ((d.loaded_apps || []).length > v) d.loaded_apps = d.loaded_apps.slice(0, v);
+              const total = v + extraAppSlots;
+              if ((d.loaded_apps || []).length > total) d.loaded_apps = d.loaded_apps.slice(0, total);
             })
           }
         />

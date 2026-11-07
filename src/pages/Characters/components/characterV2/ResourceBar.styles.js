@@ -10,7 +10,7 @@ export const Bar = styled.div`
   position: relative;
   display: flex;
   align-items: stretch;
-  height: 3.5rem;
+  height: 4rem;
   overflow: hidden;
   background-color: var(--cy-bg-black);
   border: 1px solid var(--cy-border);

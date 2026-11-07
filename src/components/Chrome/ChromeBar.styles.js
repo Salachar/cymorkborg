@@ -66,6 +66,31 @@ export const LastMessage = styled.div`
   overflow: hidden;
 `;
 
+// The latest message as a link (e.g. to the shared node in RetCom).
+export const MessageLink = styled.button`
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  min-width: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  font-family: var(--cy-font);
+  text-align: left;
+  cursor: pointer;
+
+  & > span:last-of-type {
+    text-decoration: underline;
+    text-decoration-color: var(--cy-border);
+    text-underline-offset: 2px;
+  }
+
+  &:focus-visible {
+    outline: 1px solid var(--cy-yellow-dim);
+    outline-offset: 2px;
+  }
+`;
+
 // One style for every message type; the label text says which it is.
 export const MessageLabel = styled.span`
   flex-shrink: 0;
@@ -142,6 +167,12 @@ export const CharacterName = styled.span`
   font-weight: 700;
   letter-spacing: 0.04em;
   color: var(--cy-text);
+`;
+
+export const CharacterClass = styled.span`
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--cy-text-muted);
 `;
 
 export const Readout = styled.span`

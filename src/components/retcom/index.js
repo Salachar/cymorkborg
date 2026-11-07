@@ -8,6 +8,7 @@ import DistrictPortal from "./Portals/DistrictPortal";
 import PrivatePortal from "./Portals/PrivatePortal";
 import PublicPortal from "./Portals/PublicPortal";
 import FacilityPortal from "./Portals/FacilityPortal";
+import CorpAd from "./Portals/CorpAd";
 // Interactables
 import ATM from "./Extractable/ATM";
 import DigitalWallet from "./Extractable/DigitalWallet";
@@ -58,6 +59,7 @@ export const Nodes = {
   EventLineup,
   Extractable,
   FacilityPortal,
+  CorpAd,
   GameConsole,
   HoursBanner,
   Inventory,
@@ -98,6 +100,7 @@ export {
   EventLineup,
   Extractable,
   FacilityPortal,
+  CorpAd,
   GameConsole,
   HoursBanner,
   Inventory,

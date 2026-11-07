@@ -42,7 +42,8 @@ export default function CommandRow({
   onClick,
   onCollapse,
   onToggleBookmark,
-  onShareUnlock,
+  // onShareUnlock,
+  onShareNode,
   style = {},
 }) {
   const isVisible = contentSize !== 'hidden';
@@ -113,11 +114,20 @@ export default function CommandRow({
               : <StarBorderIcon style={{ fontSize: 14 }} />}
           </button>
 
-          {isBypassed && isConnected && (
+          {/* {isBypassed && isConnected && (
             <button
               onClick={stopProp(onShareUnlock)}
               className="cr-vis-btn"
               title="Share unlock with all players"
+            >
+              <ShareIcon style={{ fontSize: 14 }} />
+            </button>
+          )} */}
+          {isConnected && (
+            <button
+              onClick={stopProp(onShareNode)}
+              className="cr-vis-btn"
+              title="Share with all players"
             >
               <ShareIcon style={{ fontSize: 14 }} />
             </button>

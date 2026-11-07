@@ -59,6 +59,7 @@ export default class ShunnedNanomancer extends BaseClass {
       type: "rollable",
       name: "weapon",
       label: "Weapon",
+      category: "weapon",
       select_mode: "single",
       entries: WEAPONS_TABLE.slice(0, 6),
       before: <div className="divider" />,
@@ -74,6 +75,7 @@ export default class ShunnedNanomancer extends BaseClass {
       type: "rollable",
       name: "armor",
       label: "Armor",
+      category: "armor",
       select_mode: "single",
       entries: ARMOR_TABLE.slice(0, 2),
       note: (

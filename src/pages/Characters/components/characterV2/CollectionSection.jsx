@@ -37,6 +37,9 @@ import {
  *   isAvailable        (entry, character) => bool, extra filter for Add
  *   renderTags         (entry, character) => node, beside the name
  *   onRemoved          (id, character) => void, after removal (cleanup)
+ *   rowActions         (id, entry, update) => node, extra buttons beside an
+ *                      item's remove in the edit dialog; call update(fn)
+ *                      to change the character and refresh
  *   emptyText          shown with nothing owned
  *   footnote           play note under the cards
  *   itemNoun           "app", "infestation", ... for labels
@@ -51,6 +54,7 @@ export default function CollectionSection({
   isAvailable = () => true,
   renderTags = null,
   onRemoved = null,
+  rowActions = null,
   emptyText = '',
   footnote = null,
   itemNoun = 'item',
@@ -73,6 +77,7 @@ export default function CollectionSection({
           storageKey={storageKey}
           isAvailable={isAvailable}
           onRemoved={onRemoved}
+          rowActions={rowActions}
           itemNoun={itemNoun}
         />
       }
@@ -123,6 +128,7 @@ function CollectionEditor({
   storageKey,
   isAvailable,
   onRemoved,
+  rowActions,
   itemNoun,
 }) {
   const [adding, setAdding] = useState(false);
@@ -153,6 +159,10 @@ function CollectionEditor({
             <EditItem key={itemId}>
               <EditHead>
                 <EditName>{entry.label}</EditName>
+                {rowActions?.(itemId, entry, (fn) => {
+                  fn(character);
+                  onUpdate();
+                })}
                 <IconButton
                   type="button"
                   data-variant="danger"

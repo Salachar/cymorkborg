@@ -3,6 +3,7 @@ import Icons from '@utils/icons';
 import {
   Line,
   InsetBox,
+  KeyValue,
   NodePreview,
 } from '@retcom/RetComComponents';
 
@@ -151,6 +152,84 @@ export const GRAVEL_LAKE_TAXI_COMMANDS = {
 };
 
 // ============================================================================
+// WATER TAXI STOP (served by Maret)
+// ============================================================================
+
+export const WATER_TAXI_STOP_COMMANDS = {
+  "Water Taxi Stop 14": {
+    favicon: <Icons.Taxi />,
+    preview: (
+      <NodePreview>
+        <Line span smoke> · Gravel Lake east shore. Next taxi: eventually.</Line>
+      </NodePreview>
+    ),
+    content: (
+      <Node
+        title="WATER TAXI — STOP 14"
+        subtitle="Gravel Lake east shore — served by Maret's Water Taxi"
+        notes={[
+          "Fares: 15¤ flat · 25¤ after 20:00 · cash only",
+          "Next arrival: 12 min (estimate unreliable)",
+          "Last pickup: 03:00",
+        ]}
+      />
+    ),
+  },
+};
+
+// ============================================================================
+// KEBAB CART (by the taxi stop)
+// ============================================================================
+
+export const DOCK_KEBAB_COMMANDS = {
+  "Dock Kebab Cart": {
+    favicon: <Icons.Food />,
+    preview: (
+      <NodePreview>
+        <Line span smoke> · Kebab and noodles by the taxi stop. Open when the lights are on.</Line>
+      </NodePreview>
+    ),
+    content: (
+      <Nodes.Menu
+        title="DOCK KEBAB"
+        subtitle="Cash, chips or a good story"
+        signType="chalkboard"
+        categories={[
+          {
+            name: "FOOD:",
+            items: [
+              { name: "Mystery kebab", price: "7¤" },
+              { name: "Noodle cup", price: "4¤" },
+              { name: "Fried algae sticks", price: "3¤" },
+            ],
+          },
+          {
+            name: "DRINK:",
+            items: [
+              { name: "Tea, hot", price: "2¤" },
+              { name: "Tea, cold", price: "2¤" },
+            ],
+          },
+        ]}
+      />
+    ),
+    related_commands: {
+      "Tip Jar": {
+        favicon: <Icons.Wallet />,
+        content: (
+          <Nodes.DigitalWallet
+            id="dock-kebab-tip-jar"
+            label="Tips (please)"
+            accountHolder="KEBAB-CART"
+            credits={18}
+          />
+        ),
+      },
+    },
+  },
+};
+
+// ============================================================================
 // FLOATING MARKET BARGE
 // ============================================================================
 
@@ -182,6 +261,7 @@ export const FLOATING_MARKET_COMMANDS = {
           <Line neon bullet>Canal Provisions — dried food, water filters, basic supplies</Line>
           <Line neon bullet>Scrap & Surplus — salvage, cable, tools</Line>
           <Line neon bullet>The Medicine Box — basic meds, bandages, no prescriptions</Line>
+          <Line neon bullet>Second Skin Scents — custom fragrance, lower deck</Line>
           <Line yellow bullet>Rotating traders — check board on arrival</Line>
         </InsetBox>
         <Nodes.HoursBanner
@@ -225,6 +305,85 @@ export const FLOATING_MARKET_COMMANDS = {
           />
         ),
       },
+
+      // ── Secret #4: members use a custom pheromone; it can be bought ──────
+      "Second Skin Scents": {
+        favicon: <Icons.Stars />,
+        preview: (
+          <NodePreview>
+            <Line span smoke> · Custom fragrance stall, lower deck. Smell like someone new.</Line>
+          </NodePreview>
+        ),
+        content: (
+          <Nodes.PublicPortal
+            name="SECOND SKIN SCENTS"
+            tagline="Smell like someone new."
+            network="SECONDSKIN"
+            signalStrength="weak"
+            status="OPEN"
+            statusColor="neon"
+            notes={[
+              "The Barge, lower deck — follow the smell",
+              "Custom blends mixed while you wait",
+              "Private and bulk orders welcome",
+            ]}
+            theme="fancy"
+          >
+            <InsetBox title="HOUSE BLENDS:">
+              <KeyValue label="No. 2 'Rain on Chrome'" value="40¤" />
+              <KeyValue label="No. 5 'Clean Sheets'" value="35¤" />
+              <KeyValue label="No. 7 'Old Money'" value="90¤" />
+              <Line smoke>Custom blends: ask at the stall</Line>
+            </InsetBox>
+          </Nodes.PublicPortal>
+        ),
+        related_commands: {
+          "Order Book": {
+            favicon: <Icons.Files />,
+            password: {
+              pw: "kinship",
+              hint: "Name of the best-selling private blend",
+              showCount: true,
+            },
+            content: (
+              <Node
+                title="SECOND SKIN — PRIVATE ORDERS"
+                notes={[
+                  "Mixer: Odile Fane",
+                  "Private orders are confidential. Mostly.",
+                ]}
+              />
+            ),
+            related_commands: {
+              "Standing Orders": {
+                favicon: <Icons.Files />,
+                content: (
+                  <Nodes.EncryptedMessage
+                    messages={[
+                      "GLCF — No. 9 'KINSHIP' — 40 vials, monthly. Collected, never delivered. Paid in full, cash.",
+                      "Formula supplied by the client. Not my nose. Base notes are wrong for perfume; it's not meant for people to smell. It's meant for people to recognise.",
+                      "Retail on No. 9 if anyone ever asks: 400¤ a vial. Special order, two days. Nobody's asked.",
+                    ]}
+                  />
+                ),
+              },
+              "Tester Rack": {
+                favicon: <Icons.Inventory />,
+                content: (
+                  <Nodes.RCDAlert
+                    id="second-skin-tester-rack"
+                    message="Unlabelled tester at the back of the rack. Same chemical signature as the GLCF order."
+                    details={["Nearly empty. Maybe one application left."]}
+                    physical={[
+                      { id: "second_skin_no9_tester", label: "Tester vial — No. 9 'Kinship'", description: "Nearly empty. One application, if you're lucky." },
+                    ]}
+                  />
+                ),
+              },
+            },
+          },
+        },
+      },
     },
   },
 };
@@ -235,6 +394,8 @@ export const FLOATING_MARKET_COMMANDS = {
 
 export const WATERWAYS_NEARBY_COMMANDS = {
   ...GRAVEL_LAKE_TAXI_COMMANDS,
+  ...WATER_TAXI_STOP_COMMANDS,
+  ...DOCK_KEBAB_COMMANDS,
   ...FLOATING_MARKET_COMMANDS,
 };
 

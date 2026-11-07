@@ -8,6 +8,7 @@ import {
 
 import {
   Node,
+  RetComImage,
 } from "@retcom";
 
 import Wallet from '@pages/RetComDevice/components/Wallet';
@@ -31,18 +32,38 @@ import THE_SLUMS_COMMANDS from '../districts/the_slums/the_slums';
 import UNDERSJON_COMMANDS from '../districts/undersjon/undersjon';
 import WATERWAYS_COMMANDS from '../districts/waterways/waterways';
 
+import CityMap from '@retcom/CityMap/CityMap'; // adjust to where you put it
+
+import CY_CITY_MAP from '@images/cycity_overview.png';
+
 export const CY_CITY_PORTAL = {
   ...BRIEFINGS_COMMANDS,
-  "Wallet": {
-    favicon: <Icons.Wallet />,
-    preview: (
-      <NodePreview>
-        <Line smoke> · Keeps track of all collected credits and items in the RetComDevice</Line>
-        <Line smoke> · Extracted credits/items are transferable to characters here</Line>
-      </NodePreview>
-    ),
-    content: <Wallet />,
+  // "Wallet": {
+  //   favicon: <Icons.Wallet />,
+  //   preview: (
+  //     <NodePreview>
+  //       <Line smoke> · Keeps track of all collected credits and items in the RetComDevice</Line>
+  //       <Line smoke> · Extracted credits/items are transferable to characters here</Line>
+  //     </NodePreview>
+  //   ),
+  //   content: <Wallet />,
+  // },
+
+  // "Cy City Map": {
+  //   favicon: <Icons.Map />,
+  //   content: (
+  //     <RetComImage
+  //       src={CY_CITY_MAP}
+  //       theme="red"
+  //     />
+  //   ),
+  // },
+
+  "Cy City Map": {
+    favicon: <Icons.Map />,
+    content: <CityMap src={CY_CITY_MAP} />,
   },
+
   "Cy City District Network": {
     favicon: <Icons.Map />,
     preview: (

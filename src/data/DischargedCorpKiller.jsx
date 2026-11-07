@@ -75,9 +75,10 @@ export default class DischargedCorpKiller extends BaseClass {
     {
       type: "rollable",
       name: "weapon",
+      category: "weapon",
       label: "Weapon",
       select_mode: "single",
-      entries: WEAPONS_TABLE.slice(0, 8),
+      entries: WEAPONS_TABLE,
       before: <div className="divider small" />,
       note: (
         <div className="bg-gray-900/50 border border-gray-800 p-3 mb-6">
@@ -90,9 +91,10 @@ export default class DischargedCorpKiller extends BaseClass {
     {
       type: "rollable",
       name: "armor",
+      category: "armor",
       label: "Armor",
       select_mode: "single",
-      entries: ARMOR_TABLE.slice(0, 5),
+      entries: ARMOR_TABLE.slice(1, 5),
       before: <div className="divider small" />,
       note: (
         <div className="bg-gray-900/50 border border-gray-800 p-3 mb-6">
@@ -105,6 +107,7 @@ export default class DischargedCorpKiller extends BaseClass {
     {
       type: "rollable",
       name: "stolen_gear",
+      category: "weapon",
       label: "You Took Something From Your Employer When You Left the Force...",
       select_mode: "single",
       entries: [
@@ -118,6 +121,7 @@ export default class DischargedCorpKiller extends BaseClass {
           id: "smart_rifle",
           label: "Prototype Smart™ Assault Rifle",
           die: "d10a",
+          smartjack: true,
           description: <>Around-the-corner shooting, camera sight, grenade launcher, the works.</>,
         },
         {

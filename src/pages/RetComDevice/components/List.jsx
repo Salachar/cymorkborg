@@ -169,7 +169,8 @@ function CommandNode({
           onToggleSize={handleToggleSize}
           onCollapse={() => onEvent({ type: 'collapse_subtree', path })}
           onToggleBookmark={() => onEvent({ type: 'toggle_bookmark', path })}
-          onShareUnlock={() => onEvent({ type: 'share_unlock', path, value: bypassValue })}
+          // onShareUnlock={() => onEvent({ type: 'share_unlock', path, value: bypassValue })}
+          onShareNode={() => onEvent({ type: 'share_node', path, unlocked: !isLocked })}
           onClick={() => isExpandable && onToggle(path)}
           style={{
             marginLeft: `${depth * indent}rem`,

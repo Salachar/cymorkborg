@@ -4,6 +4,7 @@ import {
   CharacterRow as Row,
   CharacterInfo,
   CharacterName,
+  CharacterClass,
   Readout,
   ReadoutLabel,
   ReadoutValue,
@@ -22,6 +23,7 @@ export default function CharacterRow({ character, onUpdate }) {
     <Row>
       <CharacterInfo>
         <CharacterName>{character.name || 'Unnamed'}</CharacterName>
+        <CharacterClass>[{character.class || ''}]</CharacterClass>
 
         <Readout>
           <ReadoutLabel>HP</ReadoutLabel>

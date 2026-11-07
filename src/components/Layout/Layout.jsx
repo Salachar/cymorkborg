@@ -188,15 +188,15 @@ export function Callout({ title = '', children }) {
 
 /* ---- Reference forms ----------------------------------------------------- */
 
-// Term / detail pairs. items: [{ label, description }]. Descriptions can
-// be JSX. labelWidth sets the term column on tablet and up.
+// Term / detail pairs. items: [{ id?, label, description }]. Labels and
+// descriptions can be JSX. labelWidth sets the term column on tablet and up.
 export function Directory({ items = [], labelWidth }) {
   if (!items.length) return null;
 
   return (
     <DirectoryList style={labelWidth ? { '--dir-label-width': labelWidth } : undefined}>
-      {items.map((item) => (
-        <DirectoryRow key={item.label}>
+      {items.map((item, index) => (
+        <DirectoryRow key={item.id ?? (typeof item.label === 'string' ? item.label : index)}>
           <DirectoryTerm>{item.label}</DirectoryTerm>
           <DirectoryDetail>{item.description}</DirectoryDetail>
         </DirectoryRow>

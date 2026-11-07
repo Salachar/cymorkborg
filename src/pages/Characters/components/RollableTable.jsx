@@ -171,7 +171,8 @@ export default function RollableTable({
                 if (compact) {
                   return (
                     <div
-                      key={`entry_${index}`}
+                      // key={`entry_${index}`}
+                      key={`rollable_${label}_entry_${index}`}
                       onClick={() => {
                         if (!selectable || select_mode === "none") return;
                         onClick(entry, index);
@@ -215,7 +216,7 @@ export default function RollableTable({
                 // NORMAL MODE (full cards)
                 return (
                   <div
-                    key={`entry_${index}`}
+                    key={`rollable_${label}_entry_${index}`}
                     onClick={() => {
                       if (!selectable || select_mode === "none") return;
                       onClick(entry, index);

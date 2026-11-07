@@ -2,12 +2,13 @@ import SegmentedDice from '@components/SegmentedDice';
 import SheetSection from '@components/SheetSection/SheetSection';
 import { NumberStepper } from '@components/Layout/Layout';
 
-import ResourceBar from './ResourceBar';
+import GlitchPanel from './GlitchPanel';
 import { Field, FieldLabel, Note, Divider } from './Editor.styles';
 
 /**
  * Glitches, as a SheetSection. Same bar as Health, in cyan.
- *   play   − current / max +   (0 to max)
+ *   play   GlitchPanel: the bar (0 to max), then the five uses, each with
+ *          Spend (−1) and an Undo for the last spend
  *   edit   regain roll (class die): sets both max and current to the
  *          result, per the rules; plus a max stepper for corrections
  */
@@ -20,17 +21,7 @@ export default function Glitches({ character = null, onUpdate = () => {} }) {
       title="Glitches"
       edit={<GlitchesEditor character={character} onUpdate={onUpdate} />}
     >
-      <ResourceBar
-        current={character.glitches}
-        max={character.max_glitches}
-        min={0}
-        tone="glitch"
-        unit="glitch"
-        onChange={(value) => {
-          character.glitches = value;
-          onUpdate();
-        }}
-      />
+      <GlitchPanel character={character} onUpdate={onUpdate} />
     </SheetSection>
   );
 }

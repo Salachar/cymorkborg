@@ -142,14 +142,14 @@ export const RUBBLE_SALVAGE_COMMANDS = {
                 position="Owner"
                 district="Old Cy — eastern edge"
                 notes={[
-                  "Real name unknown — has been Rubble for as long as anyone can remember",
-                  "Has operated on this site for over twenty-five years",
-                  "Was here when the compound was a derelict military installation",
-                  "Was here when the Foundation moved in and started renovating",
-                  "Sold them their first load of epoxy sealant — didn't know what it was for",
-                  "Has been buying anything related to the old installation ever since — blueprints, access records, survey data",
-                  "Will not say why. Will pay well.",
-                  "Privately believes something went wrong inside the compound a long time ago and has been wrong ever since",
+                  "Registered as: Rubble & Sons (no sons on record)",
+                  "Owner: 'Rubble.' Legal name not on file",
+                  "Trading at this site 25+ yrs. Zoning grandfathered, pre-Old Cy designation",
+                  "Staff: none registered",
+                  "Ledger: First order from the Foundation when they moved in. Industrial epoxy sealant, a lot of it. Paid cash, asked no questions. Neither did I.",
+                  "Ledger: Standing buy order on anything from the old installation. Plans, access records, survey data, hardware. Top price.",
+                  "Ledger: Bought the salvage lot with the keycard in it. That's when I started paying attention.",
+                  "Own note: That ground was wrong before the wall went up. Whatever they're doing in there, they're keeping it in.",
                 ]}
                 status="ACTIVE"
               />
@@ -381,6 +381,378 @@ export const EX_NEOPHYTE_SQUAT_COMMANDS = {
 };
 
 // ============================================================================
+// MISSING PERSONS WALL — Secret #2: Armitage is Corto with another face
+// ============================================================================
+
+export const LAST_SEEN_WALL_COMMANDS = {
+  "Last Seen Wall": {
+    favicon: <Icons.Bulletin />,
+    preview: (
+      <NodePreview>
+        <Line span smoke> · Missing persons board. Names, photos, last known places.</Line>
+      </NodePreview>
+    ),
+    content: (
+      <Nodes.CommunityBoard
+        name="LAST SEEN — MISSING PERSONS"
+        location="Old Cy shore path, painted wall by the bus shelter"
+        posts={[
+          { text: "TEODOR MARR, 24. Last seen in the Foundation queue. Tall, scar across the back of his left hand. — Ilse", color: "yellow" },
+          { text: "Anyone who came out of the charity: did you see a woman with a red coat? Please.", color: "smoke" },
+          { text: "Found my uncle. He's fine. He's staying there. He says. Taking his photo down.", color: "smoke" },
+          { text: "Board is run by Ilse. Ask at the bus shelter evenings if you have anything.", color: "neon" },
+        ]}
+        vibe="Faded photos. Fresh tape. Someone keeps it tidy."
+      />
+    ),
+    related_commands: {
+      "Ilse's Drive": {
+        favicon: <Icons.Files />,
+        password: {
+          pw: "teodor",
+          hint: "Who she's looking for",
+          showCount: true,
+        },
+        content: (
+          <Node
+            title="SHARED DRIVE — I. MARR"
+            subtitle="Personal. Not for the board."
+          />
+        ),
+        related_commands: {
+          "Notes": {
+            favicon: <Icons.Files />,
+            content: (
+              <Nodes.EncryptedMessage
+                messages={[
+                  "Went to the evening meeting to ask about Teo. The man who runs it now is called Armitage. Friendly. Too friendly.",
+                  "Teo's in there. I saw him through the gate, carrying crates. It's his hand, his scar. It isn't his face.",
+                  "Old flight crew photo from the salvage lot, the one with the helicopter. Pilot's name on the back: Corto. Look at his hands. Look at the way he stands. Then go to a meeting and watch Armitage.",
+                  "Nobody believes me. Faces don't just change.",
+                ]}
+              />
+            ),
+          },
+          "Photos": {
+            favicon: <Icons.Camera />,
+            content: (
+              <Node
+                title="PHOTOS — 3 FILES"
+                notes={[
+                  "teo_birthday.img — Teodor, before. Grinning, scar visible on the left hand.",
+                  "gate_zoom.img — Blurry. A man carrying crates. Same scar. Different face.",
+                  "crew_photo_back.img — Two pilots by a rotor craft. Ink on the back: \"Corto & Riviera.\"",
+                ]}
+              />
+            ),
+          },
+        },
+      },
+    },
+  },
+};
+
+// ============================================================================
+// VANISHED MILCORP — Secret #5: someone calculated the mass to cover CY
+// ============================================================================
+
+export const HALVARD_FIELD_OFFICE_COMMANDS = {
+  "Halvard Systems — Field Office": {
+    favicon: <Icons.Tower />,
+    preview: (
+      <NodePreview>
+        <Line span smoke> · Vacant. Service temporarily unavailable. For two years.</Line>
+      </NodePreview>
+    ),
+    content: (
+      <Nodes.PublicPortal
+        name="HALVARD SYSTEMS"
+        tagline="Service temporarily unavailable."
+        network="HALVARD_FIELD"
+        signalStrength="weak"
+        status="OFFLINE"
+        statusColor="yellow"
+        notes={[
+          "Defence technology. Advanced APP research.",
+          "This office is closed. Please contact your account manager.",
+          "Account managers: [NONE ASSIGNED]",
+        ]}
+        theme="corporate"
+      />
+    ),
+    related_commands: {
+      "Cached Intranet": {
+        favicon: <Icons.Computer />,
+        password: {
+          pw: "coverage",
+          hint: "What the last project was measuring",
+          showFirst: true,
+          showCount: true,
+          lockType: 'terminal',
+        },
+        content: (
+          <Node
+            title="HALVARD — CACHED INTRANET (READ ONLY)"
+            notes={[
+              "Cache date: two years ago. Nothing newer.",
+              "Most directories empty. A few survived.",
+            ]}
+          />
+        ),
+        related_commands: {
+          "Project Memos": {
+            favicon: <Icons.Files />,
+            content: (
+              <Nodes.EncryptedMessage
+                messages={[
+                  "PROJECT BLOOM — Phase 2 approved. Field test with two volunteers from flight ops.",
+                  "Phase 2 note: subjects report \"hearing it.\" Continue.",
+                  "COVERAGE ESTIMATE (rough): raw material required to cover CY municipal area at 2cm depth — see attached. Who asked for this?",
+                  "Attachment: coverage_estimate.calc — [FILE INTACT]",
+                  "Final entry: all staff to report to the shore site. Bring nothing.",
+                ]}
+              />
+            ),
+          },
+          "coverage_estimate.calc": {
+            favicon: <Icons.Science />,
+            content: (
+              <Node
+                title="COVERAGE_ESTIMATE.CALC"
+                notes={[
+                  "Area: CY municipal boundary",
+                  "Depth: 2cm (minimum viable)",
+                  "Required mass: 1.9 × 10^9 kg",
+                  "Current mass: [FIELD UPDATED REMOTELY — LAST VALUE 3.1 × 10^6 kg]",
+                  "Rate: [FIELD UPDATED REMOTELY]",
+                ]}
+              />
+            ),
+          },
+        },
+      },
+    },
+  },
+};
+
+// ============================================================================
+// CRASH SALVAGE CLAIM — Secret #6: the crash was intentional
+// ============================================================================
+
+export const SALVAGE_CLAIM_COMMANDS = {
+  "Salvage Claim #4471": {
+    favicon: <Icons.Shipping />,
+    preview: (
+      <NodePreview>
+        <Line span smoke> · Rotor craft wreck, Old Cy outskirts. Claim pending.</Line>
+      </NodePreview>
+    ),
+    content: (
+      <Nodes.PublicPortal
+        name="CY SALVAGE REGISTRY — CLAIM #4471"
+        tagline="Finders, filers."
+        network="CY_SALVAGE"
+        signalStrength="medium"
+        status="ACTIVE"
+        statusColor="yellow"
+        notes={[
+          "Item: rotor craft, military pattern, heavily damaged",
+          "Location: Old Cy outskirts, north of the shore path",
+          "Status: CLAIM PENDING — owner of record has not responded",
+          "Claimant: J. Okonjo",
+        ]}
+        theme="industrial"
+      />
+    ),
+    related_commands: {
+      "Claimant Log": {
+        favicon: <Icons.Files />,
+        password: {
+          pw: "no distress call",
+          hint: "What was missing from the crash report",
+        },
+        content: (
+          <Nodes.EncryptedMessage
+            messages={[
+              "Day 1: Found it. Halvard markings. Filed the claim. Military always comes for their wrecks.",
+              "Day 9: Nobody came. Nobody's coming. Flight recorder bay was already open when I got there. Clean cut.",
+              "Day 10: Harnesses cut from the inside. Both seats. No blood.",
+              "Day 12: Pulled the nav unit. Flight plan was filed with this field as the destination. They meant to put it down here. Or meant to crash it here.",
+              "Day 30: Charity people walk past the wreck at night. They don't look at it. They look at me.",
+            ]}
+          />
+        ),
+        related_commands: {
+          "Cockpit Photo": {
+            favicon: <Icons.Camera />,
+            content: (
+              <Node
+                title="COCKPIT_01.IMG"
+                notes={[
+                  "Both seats empty. Harness straps cut neatly at the buckle.",
+                  "Flight recorder bay open. Housing intact. Contents gone.",
+                  "Something dried and dark on the instrument panel. Not blood. Doesn't look like anything.",
+                ]}
+              />
+            ),
+          },
+          "Wreck": {
+            favicon: <Icons.Inventory />,
+            content: (
+              <Nodes.RCDAlert
+                id="salvage-4471-wreck"
+                message="Recoverable component under the pilot seat. Okonjo missed it."
+                physical={[
+                  { id: "salvage_4471_nav_card", label: "Nav memory card", description: "Halvard issue. Holds the filed flight plan.", value: 120 },
+                ]}
+              />
+            ),
+          },
+        },
+      },
+    },
+  },
+};
+
+// ============================================================================
+// LAUNDROMAT
+// ============================================================================
+
+export const SUDS_SPIN_COMMANDS = {
+  "Suds & Spin Laundromat": {
+    favicon: <Icons.Services />,
+    preview: (
+      <NodePreview>
+        <Line span smoke> · Coin laundry. Half the machines work. Rooms for rent on the board.</Line>
+      </NodePreview>
+    ),
+    content: (
+      <Nodes.PublicPortal
+        name="SUDS & SPIN"
+        tagline="Clean enough."
+        network="SUDS_POS"
+        signalStrength="weak"
+        status="OPEN"
+        statusColor="neon"
+        notes={[
+          "Wash 4¤ · Dry 3¤ · Detergent 1¤",
+          "Machines 2, 5 and 6 out of order",
+          "Not responsible for lost items. Especially socks.",
+        ]}
+        theme="casual"
+      >
+        <Nodes.HoursBanner hours="06:00 — 23:00" days="Daily" location="Old Cy, under the overpass" />
+      </Nodes.PublicPortal>
+    ),
+    related_commands: {
+      "Notice Board": {
+        favicon: <Icons.Bulletin />,
+        content: (
+          <Nodes.CommunityBoard
+            name="SUDS & SPIN — BOARD"
+            location="By the change machine"
+            posts={[
+              { text: "ROOM FOR RENT: dry, mostly. 200¤/month. Ask for Hedda.", color: "neon" },
+              { text: "Whoever keeps taking the good basket: I know who you are.", color: "smoke" },
+              { text: "Free kittens. Probably kittens.", color: "smoke" },
+            ]}
+            vibe="Warm, damp, humming."
+          />
+        ),
+      },
+      "Dryer #3": {
+        favicon: <Icons.Maintenance />,
+        content: (
+          <Nodes.RCDAlert
+            id="suds-spin-dryer-3"
+            message="Unregistered credchip signal behind the lint filter."
+            details={["Out-of-order sticker on the door. Nobody's opened it in weeks."]}
+            cash={35}
+          />
+        ),
+      },
+      "Washer #5": {
+        favicon: <Icons.Maintenance />,
+        content: (
+          <Node
+            title="WASHER #5"
+            notes={["OUT OF ORDER. Taped shut. Smells like it should stay that way."]}
+          />
+        ),
+      },
+    },
+  },
+};
+
+// ============================================================================
+// PIRATE RADIO
+// ============================================================================
+
+export const PIRATE_RADIO_COMMANDS = {
+  "Pirate Radio Repeater": {
+    favicon: <Icons.Radio />,
+    preview: (
+      <NodePreview>
+        <Line span smoke> · Unlicensed relay. Plays whatever it wants.</Line>
+      </NodePreview>
+    ),
+    content: <Nodes.Radio />,
+    related_commands: {
+      "Late Night Call-In": {
+        favicon: <Icons.Radio />,
+        content: (
+          <Nodes.EncryptedMessage
+            messages={[
+              "[03:40] CALLER: Is this the show? Is anyone listening?",
+              "[03:40] CALLER: I just want to say the lake is louder tonight. That's all. Louder.",
+              "[03:41] [CALL DROPPED]",
+            ]}
+          />
+        ),
+      },
+    },
+  },
+};
+
+// ============================================================================
+// CHARGING KIOSK
+// ============================================================================
+
+export const CHARGING_KIOSK_COMMANDS = {
+  "Charging Kiosk": {
+    favicon: <Icons.Tech />,
+    preview: (
+      <NodePreview>
+        <Line span smoke> · Free RCD charging. Sponsored. Read the terms. Or don't.</Line>
+      </NodePreview>
+    ),
+    content: (
+      <Node
+        title="FREE CHARGE — SPONSORED BY ALLIANSEN INC."
+        subtitle="Plug in. Power up. Opt in."
+        notes={[
+          "By connecting you agree to the Terms of Service",
+          "Terms of Service: 214 pages. Section 31 grants behavioural data rights in perpetuity.",
+          "Charging speed: slow, then slower",
+        ]}
+      />
+    ),
+    related_commands: {
+      "Billing Panel": {
+        favicon: <Icons.ATM />,
+        content: (
+          <Nodes.RCDAlert
+            id="old-cy-charging-kiosk-billing"
+            message="Rounding bug in the billing panel. Spare change pools in a dead sub-account."
+            credits={22}
+          />
+        ),
+      },
+    },
+  },
+};
+
+// ============================================================================
 // COMBINED EXPORT
 // ============================================================================
 
@@ -388,6 +760,12 @@ export const OLD_CY_NEARBY_COMMANDS = {
   ...RUBBLE_SALVAGE_COMMANDS,
   ...ROADRUNNER_WAYPOINT_COMMANDS,
   ...EX_NEOPHYTE_SQUAT_COMMANDS,
+  ...LAST_SEEN_WALL_COMMANDS,
+  ...HALVARD_FIELD_OFFICE_COMMANDS,
+  ...SALVAGE_CLAIM_COMMANDS,
+  ...SUDS_SPIN_COMMANDS,
+  ...PIRATE_RADIO_COMMANDS,
+  ...CHARGING_KIOSK_COMMANDS,
 };
 
 export default OLD_CY_NEARBY_COMMANDS;

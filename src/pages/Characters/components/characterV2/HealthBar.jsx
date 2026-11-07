@@ -2,10 +2,11 @@ import SegmentedDice from '@components/SegmentedDice';
 import SheetSection from '@components/SheetSection/SheetSection';
 import { Button, NumberStepper } from '@components/Layout/Layout';
 import { formatModifier, healthLevel } from '@utils/character';
+import { cyberEffects } from '@utils/cybertech';
 
 import ResourceBar from './ResourceBar';
 
-import { Down } from './HealthBar.styles';
+import { Down, Armor, ArmorText } from './HealthBar.styles';
 import { Field, FieldLabel, Note, Divider } from './Editor.styles';
 
 /**
@@ -14,13 +15,19 @@ import { Field, FieldLabel, Note, Divider } from './Editor.styles';
  *   edit   max HP stepper, the creation roll (die + Toughness), heal to full
  *
  * Current HP is capped at max and may go below 0 (Battered / Dead*).
+ *
+ * Cybertech: max HP includes Skeleplating (+10; BaseClass adds it), and
+ * Skinhard shows a natural-armor line with its roller.
  */
 export default function HealthBar({ character = null, onUpdate = () => {} }) {
   if (!character) return null;
 
-  const current = character.current_health;
-  const max = character.max_health;
+  const max = character.max_health; // includes cybertech bonus
+  // Shown capped at max (e.g. right after Skeleplating comes out); the
+  // stored value clamps the next time HP changes.
+  const current = Math.min(character.current_health, max);
   const level = healthLevel(current, max);
+  // const { armorDie } = cyberEffects(character);
 
   const setCurrent = (value) => {
     character.current_health = value;
@@ -34,6 +41,15 @@ export default function HealthBar({ character = null, onUpdate = () => {} }) {
       edit={<HealthEditor character={character} onUpdate={onUpdate} />}
     >
       <ResourceBar current={current} max={max} level={level} unit="HP" onChange={setCurrent} />
+{/*
+      {armorDie && (
+        <Armor>
+          <ArmorText>
+            Natural armor · <strong>Skinhard −{armorDie}</strong>
+          </ArmorText>
+          <SegmentedDice character_id={character.id} dice={`1${armorDie}`} />
+        </Armor>
+      )} */}
 
       {current <= 0 && (
         <Down>
@@ -47,7 +63,9 @@ export default function HealthBar({ character = null, onUpdate = () => {} }) {
 function HealthEditor({ character, onUpdate }) {
   const die = character.constructor.die?.health || 'd8';
   const toughness = character.stats?.TOU || 0;
-  const max = character.max_health;
+  const max = character.max_health;        // with cybertech bonus
+  const base = character.base_max_health;  // what the stepper edits
+  const { maxHpBonus } = cyberEffects(character);
 
   const setMax = (value) => {
     character.max_health = value;
@@ -65,10 +83,15 @@ function HealthEditor({ character, onUpdate }) {
   return (
     <>
       <Field>
-        <FieldLabel>Max HP</FieldLabel>
-        <NumberStepper value={max} min={1} label="max HP" size="lg" onChange={setMax} />
+        <FieldLabel>
+          {maxHpBonus ? `Base max HP (+${maxHpBonus} Skeleplating = ${max})` : 'Max HP'}
+        </FieldLabel>
+        <NumberStepper value={base} min={1} label="max HP" size="lg" onChange={setMax} />
       </Field>
-      <Note>Lowering max HP brings current HP down with it. Raising it leaves current HP alone.</Note>
+      <Note>
+        Lowering max HP brings current HP down with it. Raising it leaves current HP alone.
+        {maxHpBonus ? ' Installed cybertech is added on top automatically.' : ''}
+      </Note>
 
       <Divider />
 
@@ -84,7 +107,9 @@ function HealthEditor({ character, onUpdate }) {
             onRollComplete={handleRoll}
           />
         </div>
-        <Note style={{ marginTop: '0.4rem' }}>Rolling sets max HP (minimum 1) and heals to full.</Note>
+        <Note style={{ marginTop: '0.4rem' }}>
+          Rolling sets {maxHpBonus ? 'base ' : ''}max HP (minimum 1) and heals to full.
+        </Note>
       </div>
 
       <Divider />

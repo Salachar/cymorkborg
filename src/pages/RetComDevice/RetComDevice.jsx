@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import Header from './components/Header/Header';
 import List from './components/List';
@@ -18,6 +19,7 @@ import {
 import {
   collapseSubtree,
   buildSearchIndex,
+  buildBookmarkEntries,
   getAncestorPaths,
 } from '@utils/commands';
 
@@ -46,10 +48,14 @@ export default function RetComDevice() {
   const [expandedRows, setExpandedRows] = useState(() => loadJSON(RETCOM_NODES_EXPANDED_KEY, {}));
   const [bookmarks, setBookmarks] = useState(() => loadJSON(RETCOM_BOOKMARKS_KEY, {}));
 
-  const { shareUnlock } = useGameMessages();
+  const { shareNode } = useGameMessages();
   const { status } = useCyborgSocket();
   const isConnected = status === 'connected';
-  const [pendingShareUnlock, setPendingShareUnlock] = useState(null);
+  // Node waiting on share confirmation: { path, unlocked } or null.
+  const [pendingShare, setPendingShare] = useState(null);
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const [indent, setIndent] = useState(() => {
     try {
@@ -58,17 +64,21 @@ export default function RetComDevice() {
     } catch { return 1; }
   });
 
-  // Listen for unlocks pushed by GameMessagesProvider
+  // Unlocks from a shared node, pushed by GameMessagesProvider:
+  // { unlocks: { path: password, ... } } (the node and/or its ancestors).
   useEffect(() => {
     const handler = (e) => {
-      const { path, value } = e.detail;
+      const unlocks = e.detail?.unlocks || {};
+      const paths = Object.keys(unlocks);
+      if (!paths.length) return;
       setDiscoveredPasswords(prev => {
-        const next = { ...prev, [path]: value ?? 'UNLOCKED' };
+        const next = { ...prev, ...unlocks };
         try { localStorage.setItem(RETCOM_PASSWORD_KEY, JSON.stringify(next)); } catch {}
         return next;
       });
       setExpandedRows(prev => {
-        const next = { ...prev, [path]: true };
+        const next = { ...prev };
+        paths.forEach((p) => { next[p] = true; });
         try { localStorage.setItem(RETCOM_NODES_EXPANDED_KEY, JSON.stringify(next)); } catch {}
         return next;
       });
@@ -86,6 +96,13 @@ export default function RetComDevice() {
   const searchIndex = useMemo(
     () => buildSearchIndex(CY_CITY_COMMANDS, discoveredPasswords),
     [discoveredPasswords]
+  );
+
+  // Bookmarks resolve by path (not through search), so bookmarked locks
+  // and unsearchable nodes still show there.
+  const bookmarkEntries = useMemo(
+    () => buildBookmarkEntries(CY_CITY_COMMANDS, bookmarks, discoveredPasswords),
+    [bookmarks, discoveredPasswords]
   );
 
   const handleToggle = (path) => {
@@ -158,8 +175,8 @@ export default function RetComDevice() {
         break;
       }
 
-      case 'share_unlock':
-        setPendingShareUnlock({ path: event.path, value: event.value });
+      case 'share_node':
+        setPendingShare({ path: event.path, unlocked: Boolean(event.unlocked) });
         break;
 
       default:
@@ -167,48 +184,58 @@ export default function RetComDevice() {
     }
   };
 
-  // A normal page in the app's scroll container: the header sticks to
-  // the top, the tree scrolls beneath it.
+  // Arriving from a share link (toast, ChromeBar, Net Log): jump to the
+  // node, then clear the state so refresh or Back doesn't jump again.
+  useEffect(() => {
+    const focusPath = location.state?.focusPath;
+    if (!focusPath) return;
+    handleEvent({ type: 'navigate_to', path: focusPath });
+    navigate(location.pathname, { replace: true, state: null });
+  }, [location.key]);
+
+  // The device header is the ChromeBar's extension, so it stays in view
+  // while the tree scrolls in the Page below. Page is wide: the tree uses
+  // the full content width.
   return (
     <>
-      <ChromeBar>
+      <ChromeBar character>
         <Header
           indent={indent}
           searchIndex={searchIndex}
+          bookmarkEntries={bookmarkEntries}
           bookmarks={bookmarks}
           onEvent={handleEvent}
         />
       </ChromeBar>
 
       <Page wide>
-
-        <Tree>
-          <List
-            campaignCommandList={CY_CITY_COMMANDS}
-            discoveredPasswords={discoveredPasswords}
-            expandedRows={expandedRows}
-            bookmarks={bookmarks}
-            indent={indent}
-            onToggle={handleToggle}
-            onUnlock={handleUnlock}
-            onEvent={handleEvent}
-            isConnected={isConnected}
-          />
-        </Tree>
-
-        <ConfirmationModal
-          open={Boolean(pendingShareUnlock)}
-          title="Share Unlock"
-          message={pendingShareUnlock
-            ? `Share unlock for "${pendingShareUnlock.path.split('/').pop()}" with all connected players?${pendingShareUnlock.value && pendingShareUnlock.value !== 'UNLOCKED' ? `\n\nPassword: ${pendingShareUnlock.value}` : ''}`
-            : ''}
-          confirmLabel="Share"
-          onConfirm={() => {
-            shareUnlock(pendingShareUnlock.path, pendingShareUnlock.value);
-            setPendingShareUnlock(null);
-          }}
-          onCancel={() => setPendingShareUnlock(null)}
+      <Tree>
+        <List
+          campaignCommandList={CY_CITY_COMMANDS}
+          discoveredPasswords={discoveredPasswords}
+          expandedRows={expandedRows}
+          bookmarks={bookmarks}
+          indent={indent}
+          onToggle={handleToggle}
+          onUnlock={handleUnlock}
+          onEvent={handleEvent}
+          isConnected={isConnected}
         />
+      </Tree>
+
+      <ConfirmationModal
+        open={Boolean(pendingShare)}
+        title="Share Node"
+        message={pendingShare
+          ? `Share "${pendingShare.path.split('/').pop()}" with all connected players?${pendingShare.unlocked ? "\n\nThey'll unlock it too." : ''}`
+          : ''}
+        confirmLabel="Share"
+        onConfirm={() => {
+          shareNode(pendingShare.path, pendingShare.unlocked);
+          setPendingShare(null);
+        }}
+        onCancel={() => setPendingShare(null)}
+      />
       </Page>
     </>
   );

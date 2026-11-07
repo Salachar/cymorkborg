@@ -5,18 +5,18 @@ import { useCyborgSocket } from '@hooks/useCyborgSocket';
 import { useCharacterContext } from '@context/CharacterContext';
 
 import ConnectionModal from '@components/Connection/ConnectionModal';
-import MessageHistoryModal from '@components/Connection/MessageHistoryModal';
 import DataModal from '@components/Connection/DataModal';
 
 import NetworkButton from './NetworkButton';
 import DataButton from './DataButton';
 import CharacterRow from './CharacterRow';
+import { useFollowLink } from '@components/Toast/Toast';
 
 import {
   Bar,
   StripRow,
-  StripButton,
   LastMessage,
+  MessageLink,
   MessageLabel,
   MessageText,
   MessageEmpty,
@@ -44,24 +44,20 @@ export { ChromeToolbar } from './ChromeBar.styles';
  *
  * Rows, top to bottom (the bar decides the order, the page decides what's
  * in it):
- *   main strip          always: message log, last message, network, data
+ *   main strip          always: latest message (tappable if it links
+ *                       somewhere), network, data
  *   connected players   when connected and others are online
  *   character           character prop, and a character is selected
  *   extension           children, if any (RetCom header, Market search)
  *   jumps               jumps prop: [{ id, label, number? }]
  */
-export default function ChromeBar({
-  character = false,
-  jumps = null,
-  showLock = false,
-  children,
-}) {
-  const { lastMessage, messageHistory } = useGameMessages();
+export default function ChromeBar({ character = false, jumps = null, children }) {
+  const { lastMessage } = useGameMessages();
+  const follow = useFollowLink();
   const { status, connectedClients } = useCyborgSocket();
   const { selectedCharacter, touch } = useCharacterContext();
 
   const [connectionOpen, setConnectionOpen] = useState(false);
-  const [historyOpen, setHistoryOpen] = useState(false);
   const [dataOpen, setDataOpen] = useState(false);
 
   const isConnected = status === 'connected';
@@ -72,16 +68,19 @@ export default function ChromeBar({
     <>
       <Bar>
         <StripRow>
-          <StripButton type="button" onClick={() => setHistoryOpen(true)}>
-            {messageHistory.length > 0 ? `Log (${messageHistory.length})` : 'Log'}
-          </StripButton>
-
           <LastMessage>
             {lastMessage ? (
-              <>
-                <MessageLabel>{lastMessage.label ?? lastMessage.type.toUpperCase()}</MessageLabel>
-                <MessageText>{lastMessage.message}</MessageText>
-              </>
+              lastMessage.link ? (
+                <MessageLink type="button" onClick={() => follow(lastMessage.link)}>
+                  <MessageLabel>{lastMessage.label ?? lastMessage.type.toUpperCase()}</MessageLabel>
+                  <MessageText>{lastMessage.message}</MessageText>
+                </MessageLink>
+              ) : (
+                <>
+                  <MessageLabel>{lastMessage.label ?? lastMessage.type.toUpperCase()}</MessageLabel>
+                  <MessageText>{lastMessage.message}</MessageText>
+                </>
+              )
             ) : (
               <MessageEmpty>No messages this session</MessageEmpty>
             )}
@@ -102,13 +101,7 @@ export default function ChromeBar({
           </ClientsRow>
         )}
 
-        {showCharacter && (
-          <CharacterRow
-            character={selectedCharacter}
-            showLock={showLock}
-            onUpdate={touch}
-          />
-        )}
+        {showCharacter && <CharacterRow character={selectedCharacter} onUpdate={touch} />}
 
         {showJumps && <Jumps items={jumps} />}
 
@@ -116,7 +109,6 @@ export default function ChromeBar({
       </Bar>
 
       <ConnectionModal open={connectionOpen} onClose={() => setConnectionOpen(false)} />
-      <MessageHistoryModal open={historyOpen} onClose={() => setHistoryOpen(false)} />
       <DataModal open={dataOpen} onClose={() => setDataOpen(false)} />
     </>
   );

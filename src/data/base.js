@@ -1,6 +1,7 @@
 // CY_BORG Base Character Class
 // Abilities: Agility, Knowledge, Presence, Strength, Toughness
 // Ability scores range from -3 to +3
+import { cyberEffects } from '@utils/cybertech';
 
 class BaseClass {
   _name = "";
@@ -19,6 +20,7 @@ class BaseClass {
     TOU: 0,
   };
 
+  _advancements = 0;
   _selected_tables = {};
   _gear = {}; // Actual inventory: { section_name: { item_id: { quantity: 1, selected: true } } }
   _shop_cart = {}; // Shopping cart: { section_name: { item_id: { quantity: 1 } } }
@@ -55,6 +57,10 @@ class BaseClass {
       STR: 0,
       TOU: 0,
     };
+
+    if (typeof data.advancements === 'number') {
+      this._advancements = data.advancements;
+    }
 
     if (typeof data.current_health === "number") {
       this._current_health = data.current_health;
@@ -151,7 +157,8 @@ class BaseClass {
   }
 
   #checkStatPoints(stat, new_value) {
-    if (new_value < -3 || new_value > 3) return false;
+    // −3 to +6: creation reaches +3, advancement can go higher.
+    if (new_value < -3 || new_value > 6) return false;
     return true;
   }
 
@@ -185,15 +192,46 @@ class BaseClass {
     this._name = new_name;
   }
 
-  get max_health() {
+  get advancements() {
+    return this._advancements;
+  }
+
+  set advancements(n) {
+    this._advancements = Math.max(0, Number(n) || 0);
+  }
+
+  // get max_health() {
+  //   return this._max_health;
+  // }
+
+  // set max_health(new_max) {
+  //   this._max_health = Math.max(1, new_max);
+  //   if (this._current_health > this._max_health) {
+  //     this._current_health = this._max_health;
+  //   }
+  // }
+
+  // The character's own max, without cybertech. Editing and saving use this.
+  get base_max_health() {
     return this._max_health;
   }
 
+  // Effective max: base + installed cybertech (Skeleplating +10).
+  get max_health() {
+    return this._max_health + cyberEffects(this).maxHpBonus;
+  }
+
+  // Sets the BASE max.
   set max_health(new_max) {
     this._max_health = Math.max(1, new_max);
-    if (this._current_health > this._max_health) {
-      this._current_health = this._max_health;
+    if (this._current_health > this.max_health) {
+      this._current_health = this.max_health;
     }
+  }
+
+  // Capped at the effective max; may go below 0.
+  set current_health(new_health) {
+    this._current_health = Math.min(new_health, this.max_health);
   }
 
   get current_health() {
@@ -201,9 +239,9 @@ class BaseClass {
   }
 
   // Capped at max; may go below 0 (Battered / Dead*).
-  set current_health(new_health) {
-    this._current_health = Math.min(new_health, this._max_health);
-  }
+  // set current_health(new_health) {
+  //   this._current_health = Math.min(new_health, this._max_health);
+  // }
 
   // Credits
   get credits() {
@@ -571,6 +609,18 @@ class BaseClass {
     }
   }
 
+  // Set a starting-items table's pick. Never toggles off, so a roll that
+  // lands on the current pick keeps it.
+  setStartingItem(section_name, entry) {
+    const entry_id = entry.id || entry.label || entry.name;
+    if (!entry_id) return;
+    this._starting_items[section_name] = { [entry_id]: true };
+  }
+
+  clearStartingItem(section_name) {
+    delete this._starting_items[section_name];
+  }
+
   // Debt
   get debt() {
     return this._debt;
@@ -619,8 +669,9 @@ class BaseClass {
       id: this.id,
       class: this.class,
       name: this.name,
+      advancements: this._advancements || 0,
       current_health: this.current_health,
-      max_health: this.max_health,
+      max_health: this._max_health,
       credits: this.credits,
       glitches: this.glitches,
       max_glitches: this.max_glitches,

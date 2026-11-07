@@ -8,6 +8,7 @@
 
 const { WebSocketServer } = require('ws');
 const readline = require('readline');
+const crypto = require('crypto');
 
 const PORT = 3002;
 const wss = new WebSocketServer({ port: PORT });
@@ -18,6 +19,34 @@ const PUBLIC_URL = 'wss://ws.cymorkborg.com';
 const clients = new Map();
 
 const gmStatus = { time: null, note: null, activity: null };
+
+// ─── Session log ──────────────────────────────────────────────────────────────
+// Shared messages are numbered and kept in memory for this server run, so a
+// client that drops (a tablet asleep, say) can catch up on reconnect. Lost
+// when the server restarts; a new SESSION_ID tells clients to start over.
+
+const SESSION_ID = crypto.randomUUID();
+const LOGGED_TYPES = new Set(['share_note', 'share_node']);
+const LOG_LIMIT = 500;
+
+let seq = 0;
+const log = []; // { seq, data, from }
+
+function logMessage(data, from) {
+  seq += 1;
+  log.push({ seq, data, from });
+  if (log.length > LOG_LIMIT) log.shift();
+  return seq;
+}
+
+// Everything after `lastSeq` (or the whole log if the client is from a
+// different session), minus the player's own shares.
+function replayFor(name, clientSessionId, lastSeq) {
+  const from = clientSessionId === SESSION_ID ? Number(lastSeq) || 0 : 0;
+  return log.filter((entry) => entry.seq > from && entry.from !== name);
+}
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
 
 function getClientList() {
   return Array.from(clients.values()).map(c => c.name).filter(Boolean);
@@ -64,6 +93,8 @@ function evictExistingByName(name, exceptWs) {
   }
 }
 
+// ─── Connections ──────────────────────────────────────────────────────────────
+
 wss.on('connection', (ws) => {
   clients.set(ws, { name: null, isAlive: true });
   console.log(`Client connected. Total: ${clients.size}`);
@@ -91,10 +122,30 @@ wss.on('connection', (ws) => {
           meta.name = data.name;
           clients.set(ws, meta);
         }
+
+        ws.send(JSON.stringify({ type: 'welcome', sessionId: SESSION_ID, seq }));
         broadcastClientList();
         ws.send(JSON.stringify({ type: 'client_list', clients: getClientList() }));
         ws.send(JSON.stringify({ type: 'gm_status', ...gmStatus }));
-        console.log(`Client registered as: ${data.name}`);
+
+        // Catch up on anything shared while this client was away.
+        const missed = replayFor(data.name, data.sessionId, data.lastSeq);
+        for (const entry of missed) {
+          ws.send(JSON.stringify({ ...entry.data, seq: entry.seq, replayed: true }));
+        }
+        ws.send(JSON.stringify({ type: 'replay_done', count: missed.length }));
+
+        console.log(
+          `Client registered as: ${data.name}` +
+          (missed.length ? ` (replayed ${missed.length})` : '')
+        );
+        break;
+      }
+
+      // App-level liveness check after a tablet wakes. Answer only the
+      // sender (unknown types would otherwise be broadcast to everyone).
+      case 'ping': {
+        ws.send(JSON.stringify({ type: 'pong', t: data.t ?? null }));
         break;
       }
 
@@ -108,9 +159,16 @@ wss.on('connection', (ws) => {
         break;
       }
 
-      default:
-        broadcast(data, ws);
+      default: {
+        if (LOGGED_TYPES.has(data.type)) {
+          const from = clients.get(ws)?.name ?? null;
+          const n = logMessage(data, from);
+          broadcast({ ...data, seq: n }, ws);
+        } else {
+          broadcast(data, ws);
+        }
         break;
+      }
     }
   });
 
@@ -150,6 +208,7 @@ setInterval(() => {
 //   note 3 days left until Sani's deadline
 //   activity High Police Activity
 //   time clear   (or "note clear" / "activity clear" to blank a field)
+//   log          how many shared messages this session holds
 
 const GM_COMMAND = /^(time|note|activity)\s+(.+)$/i;
 
@@ -158,9 +217,14 @@ rl.on('line', (line) => {
   const trimmed = line.trim();
   if (!trimmed) return;
 
+  if (trimmed.toLowerCase() === 'log') {
+    console.log(`Session log: ${log.length} message(s), latest seq ${seq}.`);
+    return;
+  }
+
   const match = trimmed.match(GM_COMMAND);
   if (!match) {
-    console.log(`Unrecognized command: "${trimmed}" (expected: time / note / activity <value>)`);
+    console.log(`Unrecognized command: "${trimmed}" (expected: time / note / activity <value>, or log)`);
     return;
   }
 
@@ -180,4 +244,4 @@ rl.on('line', (line) => {
 console.log(`RetCom Note Server running locally on port ${PORT}`);
 console.log(`Make sure "cloudflared tunnel run retcom" is also running.`);
 console.log(`Players connect at: ${PUBLIC_URL}`);
-console.log(`\nGM commands: type "time ...", "note ...", or "activity ..." and press Enter.`);
+console.log(`\nGM commands: type "time ...", "note ...", or "activity ..." and press Enter. "log" shows the session log size.`);

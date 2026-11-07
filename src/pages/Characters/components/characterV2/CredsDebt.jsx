@@ -3,6 +3,7 @@ import { useState } from 'react';
 import SegmentedDice from '@components/SegmentedDice';
 import SheetSection from '@components/SheetSection/SheetSection';
 import TablePicker, { entryId } from '@components/TablePicker/TablePicker';
+import Modal from '@components/Modal/Modal';
 import { Button } from '@components/Layout/Layout';
 import { DEBT_TO_WHOM, DEBT_URGENCY } from '@data/tables';
 
@@ -10,14 +11,20 @@ import AmountInput from './AmountInput';
 import PickerButton from './PickerButton';
 import { Field, FieldLabel, Note, Divider } from './Editor.styles';
 import {
-  Summary,
-  Panel,
+  CreditsBar,
+  CreditsReadout,
   PanelLabel,
-  Amount,
+  CreditsAmount,
+  DebtBlock,
+  DebtAmount,
   DebtDetails,
   DebtTerm,
   DebtValue,
   DebtDescription,
+  Preview,
+  PreviewTerm,
+  PreviewValue,
+  DialogActions,
   GroupTitle,
   Row,
   QuickAdjust,
@@ -37,13 +44,16 @@ function parseDebtDie(die = '3d6x1000') {
 }
 
 /**
- * Credits and debt, as one SheetSection.
- *   play   balance, amount owed, who you owe, how urgent
+ * Credits and debt, as one single-column SheetSection.
+ *   play   a thin credits banner with Pay down debt (when there's debt),
+ *          then the debt at full width: amount, who you owe, how urgent
+ *   pay    its own dialog: amount, Max, before → after preview
  *   edit   credits: balance, quick adjust, starting roll
- *          debt: amount (adjust freely), roll, creditor + urgency pickers,
- *                pay from credits, clear
+ *          debt: amount (adjust freely), roll, creditor + urgency pickers, clear
  */
 export default function CredsDebt({ character = null, onUpdate = () => {} }) {
+  const [paying, setPaying] = useState(false);
+
   if (!character) return null;
 
   const debt = character.debt;
@@ -57,55 +67,73 @@ export default function CredsDebt({ character = null, onUpdate = () => {} }) {
       editWidth="40rem"
       edit={<CredsDebtEditor character={character} onUpdate={onUpdate} />}
     >
-      <Summary>
-        <Panel>
+      <CreditsBar>
+        <CreditsReadout>
           <PanelLabel>Credits</PanelLabel>
-          <Amount data-tone="credits">{formatCreds(character.credits)}</Amount>
-        </Panel>
+          <CreditsAmount>{formatCreds(character.credits)}</CreditsAmount>
+        </CreditsReadout>
 
-        <Panel>
-          <PanelLabel>Debt</PanelLabel>
-          {debt.amount > 0 ? (
-            <Amount>{formatCreds(debt.amount)}</Amount>
-          ) : (
-            <Amount data-empty="true">No debt</Amount>
-          )}
+        {debt.amount > 0 && (
+          <Button
+            type="button"
+            data-variant="primary"
+            disabled={character.credits <= 0}
+            title={character.credits <= 0 ? 'No credits to pay with' : 'Pay down debt from your credits'}
+            onClick={() => setPaying(true)}
+          >
+            Pay down debt
+          </Button>
+        )}
+      </CreditsBar>
 
-          {(creditor || urgency) && (
-            <DebtDetails>
-              {creditor && (
-                <div>
-                  <DebtTerm>Owed to</DebtTerm>
-                  <DebtValue>
-                    {creditor.label}
-                    {creditor.description && <DebtDescription>{creditor.description}</DebtDescription>}
-                  </DebtValue>
-                </div>
-              )}
-              {urgency && (
-                <div>
-                  <DebtTerm>Urgency</DebtTerm>
-                  <DebtValue>
-                    {urgency.label}
-                    {urgency.description && <DebtDescription>{urgency.description}</DebtDescription>}
-                  </DebtValue>
-                </div>
-              )}
-            </DebtDetails>
-          )}
-        </Panel>
-      </Summary>
+      <DebtBlock>
+        <PanelLabel>Debt</PanelLabel>
+        {debt.amount > 0 ? (
+          <DebtAmount>{formatCreds(debt.amount)}</DebtAmount>
+        ) : (
+          <DebtAmount data-empty="true">No debt</DebtAmount>
+        )}
+
+        {(creditor || urgency) && (
+          <DebtDetails>
+            {creditor && (
+              <div>
+                <DebtTerm>Owed to</DebtTerm>
+                <DebtValue>
+                  {creditor.label}
+                  {creditor.description && <DebtDescription>{creditor.description}</DebtDescription>}
+                </DebtValue>
+              </div>
+            )}
+            {urgency && (
+              <div>
+                <DebtTerm>Urgency</DebtTerm>
+                <DebtValue>
+                  {urgency.label}
+                  {urgency.description && <DebtDescription>{urgency.description}</DebtDescription>}
+                </DebtValue>
+              </div>
+            )}
+          </DebtDetails>
+        )}
+      </DebtBlock>
+
+      {paying && (
+        <PayDebtDialog
+          character={character}
+          onUpdate={onUpdate}
+          onClose={() => setPaying(false)}
+        />
+      )}
     </SheetSection>
   );
 }
 
 function CredsDebtEditor({ character, onUpdate }) {
   const [picker, setPicker] = useState(null); // 'creditor' | 'urgency' | null
-  const [payment, setPayment] = useState(0);
 
   const debt = character.debt;
   const { dice, multiplier } = parseDebtDie(character.constructor.die?.debt);
-  const maxPayment = Math.max(0, Math.min(character.credits, debt.amount));
   const creditor = findEntry(DEBT_TO_WHOM, debt.creditor);
   const urgency = findEntry(DEBT_URGENCY, debt.urgency);
 
@@ -204,30 +232,6 @@ function CredsDebtEditor({ character, onUpdate }) {
         <PickerButton wide label="How urgent" value={urgency?.label} onClick={() => setPicker('urgency')} />
       </Pickers>
 
-      <div>
-        <FieldLabel>Pay from credits</FieldLabel>
-        <Row style={{ marginTop: '0.4rem' }}>
-          <AmountInput label="Payment amount" value={payment} onChange={(n) => setPayment(Math.max(0, n))} />
-          <Button
-            type="button"
-            data-variant="primary"
-            disabled={payment <= 0 || maxPayment <= 0}
-            onClick={() => {
-              update(() => character.payDebtFromCredits(payment));
-              setPayment(0);
-            }}
-          >
-            Pay {formatCreds(Math.min(payment, maxPayment))}
-          </Button>
-          <Button type="button" disabled={maxPayment <= 0} onClick={() => setPayment(maxPayment)}>
-            Max
-          </Button>
-        </Row>
-        <Note style={{ marginTop: '0.4rem' }}>
-          Moves credits onto the debt. Capped at what you have and what you owe ({formatCreds(maxPayment)}).
-        </Note>
-      </div>
-
       <Row>
         <Button type="button" disabled={debt.amount <= 0} onClick={() => update(() => character.clearDebt())}>
           Clear debt
@@ -247,5 +251,61 @@ function CredsDebtEditor({ character, onUpdate }) {
         />
       )}
     </>
+  );
+}
+
+/* ---- Pay down debt ------------------------------------------------------- */
+
+// Moves credits onto the debt. Pay applies it and closes.
+function PayDebtDialog({ character, onUpdate, onClose }) {
+  const [payment, setPayment] = useState(0);
+
+  const credits = character.credits;
+  const owed = character.debt.amount;
+  const maxPayment = Math.max(0, Math.min(credits, owed));
+  const pay = Math.max(0, Math.min(payment, maxPayment));
+
+  return (
+    <Modal open onClose={onClose} title="Pay down debt" maxWidth="26rem">
+      <Field>
+        <FieldLabel>Amount</FieldLabel>
+        <Row>
+          <AmountInput label="Payment amount" value={payment} onChange={(n) => setPayment(Math.max(0, n))} />
+          <Button type="button" disabled={maxPayment <= 0} onClick={() => setPayment(maxPayment)}>
+            Max
+          </Button>
+        </Row>
+      </Field>
+      <Note>Capped at what you have and what you owe ({formatCreds(maxPayment)}).</Note>
+
+      <Preview>
+        <PreviewTerm>Credits</PreviewTerm>
+        <PreviewValue>
+          {formatCreds(credits)} → <strong>{formatCreds(credits - pay)}</strong>
+        </PreviewValue>
+        <PreviewTerm>Debt</PreviewTerm>
+        <PreviewValue>
+          {formatCreds(owed)} → <strong>{formatCreds(owed - pay)}</strong>
+        </PreviewValue>
+      </Preview>
+
+      <DialogActions>
+        <Button type="button" onClick={onClose}>
+          Cancel
+        </Button>
+        <Button
+          type="button"
+          data-variant="primary"
+          disabled={pay <= 0}
+          onClick={() => {
+            character.payDebtFromCredits(pay);
+            onUpdate();
+            onClose();
+          }}
+        >
+          Pay {formatCreds(pay)}
+        </Button>
+      </DialogActions>
+    </Modal>
   );
 }

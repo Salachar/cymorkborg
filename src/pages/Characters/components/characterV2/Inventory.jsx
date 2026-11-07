@@ -5,7 +5,9 @@ import SegmentedDice from '@components/SegmentedDice';
 import SheetSection from '@components/SheetSection/SheetSection';
 import TablePicker, { entryId } from '@components/TablePicker/TablePicker';
 import ConfirmationModal from '@components/ConfirmationModal/ConfirmationModal';
-import { Button, IconButton, NumberStepper, TextInput, TextArea } from '@components/Layout/Layout';
+import { Button, IconButton, NumberStepper, TextInput, TextArea, Tag } from '@components/Layout/Layout';
+import { cyberEffects, hasCybertech, installCybertech } from '@utils/cybertech';
+import { GEAR_KINDS, dieInfo } from '@utils/gear';
 import {
   STARTING_ITEMS_1,
   STARTING_ITEMS_2,
@@ -81,7 +83,7 @@ function startingSelections(character) {
 
 // Every gear and custom item, with where it's stored (for edits) kept
 // separate from where it's shown (category).
-function collectItems(character) {
+export function collectItems(character) {
   const items = [];
 
   Object.keys(character.gear).forEach((storageSection) => {
@@ -96,6 +98,8 @@ function collectItems(character) {
       };
       items.push({
         key: `gear:${storageSection}:${itemId}`,
+        itemId,
+        storageSection,
         category: found?.section ?? storageSection,
         entry,
         quantity: gearItem.quantity ?? 0,
@@ -157,7 +161,10 @@ export default function Inventory({ character = null, onUpdate = () => {} }) {
   if (!character) return null;
 
   const starting = startingSelections(character).filter((s) => s.entry);
-  const groups = groupByCategory(collectItems(character));
+  // Weapons and armor have their own sections.
+  const groups = groupByCategory(
+    collectItems(character).filter((item) => !GEAR_KINDS.has(item.entry.category))
+  );
 
   return (
     <SheetSection
@@ -200,6 +207,14 @@ export default function Inventory({ character = null, onUpdate = () => {} }) {
                     onUpdate();
                   }}
                   onDelete={() => setPendingDelete(item)}
+                  onInstall={
+                    item.category === 'cybertech' && item.itemId
+                      ? () => {
+                          if (installCybertech(character, item.itemId, item.storageSection)) onUpdate();
+                        }
+                      : null
+                  }
+                  installed={item.category === 'cybertech' && hasCybertech(character, item.itemId)}
                 />
               ))}
             </Items>
@@ -225,8 +240,61 @@ export default function Inventory({ character = null, onUpdate = () => {} }) {
 
 // One item. Starting equipment passes no quantity (no stepper, value, or
 // delete).
-function ItemRow({ character, entry, quantity, onQuantity, onDelete }) {
+// Whether the character carries any Inventory item of this gear kind.
+export const hasGearKind = (character, kind) =>
+  collectItems(character).some((item) => item.entry.category === kind);
+
+/**
+ * Inventory items of one gear kind ('weapon' or 'armor'), with the same
+ * rows as Inventory (quantity, delete with confirmation, roller). Used by
+ * the Weapons and Armor sections, under the class gear.
+ */
+export function GearKindItems({ character, onUpdate = () => {}, kind, emptyText = null }) {
+  const [pendingDelete, setPendingDelete] = useState(null);
+  const items = collectItems(character).filter((item) => item.entry.category === kind);
+
+  if (!items.length) return emptyText ? <Empty>{emptyText}</Empty> : null;
+
+  return (
+    <>
+      <Items>
+        {items.map((item) => (
+          <ItemRow
+            key={item.key}
+            character={character}
+            entry={item.entry}
+            quantity={item.quantity}
+            onQuantity={(q) => {
+              item.setQuantity(q);
+              onUpdate();
+            }}
+            onDelete={() => setPendingDelete(item)}
+          />
+        ))}
+      </Items>
+
+      <ConfirmationModal
+        open={Boolean(pendingDelete)}
+        title="Delete Item"
+        message={`Delete ${pendingDelete?.entry.label || 'this item'}? This cannot be undone.`}
+        confirmLabel="Delete"
+        onConfirm={() => {
+          pendingDelete?.remove();
+          setPendingDelete(null);
+          onUpdate();
+        }}
+        onCancel={() => setPendingDelete(null)}
+      />
+    </>
+  );
+}
+
+// Cybertech rows (onInstall) get Install, or an Installed tag. Weapons
+// flagged smartjack get a Smart tag, "linked" with a SmartJack installed.
+export function ItemRow({ character, entry, quantity, onQuantity, onDelete, onInstall = null, installed = false }) {
   const counted = typeof quantity === 'number';
+  const { smartjack } = cyberEffects(character);
+  const die = dieInfo(entry.die);
   const unitCost = parseCost(entry.cost);
   const totalValue = counted ? unitCost * quantity : 0;
 
@@ -236,6 +304,17 @@ function ItemRow({ character, entry, quantity, onQuantity, onDelete }) {
         <ItemMain>
           <ItemTitle>
             <ItemName>{entry.label}</ItemName>
+            {entry.tier && <Tag>{entry.tier}</Tag>}
+            {die?.autofire && <Tag title="Capable of autofire">Autofire</Tag>}
+            {entry.smartjack && (
+              <Tag
+                data-tone={smartjack ? 'highlight' : undefined}
+                title={smartjack ? 'SmartJack installed: full Smart™ potential' : 'Smart™ weapon: needs a SmartJack for its full potential'}
+              >
+                {smartjack ? 'Smart · linked' : 'Smart'}
+              </Tag>
+            )}
+            {installed && <Tag title="This piece is installed (Cybertech section)">Installed</Tag>}
             {totalValue > 0 && <ItemValue>{formatCost(totalValue)}</ItemValue>}
           </ItemTitle>
           {entry.description && <ItemDescription>{entry.description}</ItemDescription>}
@@ -243,6 +322,11 @@ function ItemRow({ character, entry, quantity, onQuantity, onDelete }) {
 
         {counted && (
           <ItemSide>
+            {onInstall && !installed && quantity > 0 && (
+              <Button type="button" onClick={onInstall} title="Install (moves one to the Cybertech section)">
+                Install
+              </Button>
+            )}
             <NumberStepper
               value={quantity}
               min={0}
@@ -263,9 +347,9 @@ function ItemRow({ character, entry, quantity, onQuantity, onDelete }) {
         )}
       </ItemTop>
 
-      {entry.die && (
+      {die && (
         <ItemRoller>
-          <SegmentedDice dice={entry.die} character_id={character.id} />
+          <SegmentedDice dice={die.dice} character_id={character.id} />
         </ItemRoller>
       )}
     </Item>

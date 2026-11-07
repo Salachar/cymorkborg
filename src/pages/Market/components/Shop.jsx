@@ -3,6 +3,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
 import { Button, IconButton, Roll, Tag } from '@components/Layout/Layout';
+import { cyberEffects } from '@utils/cybertech';
 
 import MarketCart from './MarketCart';
 import {
@@ -64,6 +65,7 @@ export default function Shop({ character = null, sections = [], searchQuery = ''
   if (!character || !sections.length) return null;
 
   const searching = searchQuery.trim().length > 0;
+  const { smartjack } = cyberEffects(character);
 
   const allEntries = {};
   sections.forEach((section) => {
@@ -138,6 +140,7 @@ export default function Shop({ character = null, sections = [], searchQuery = ''
                         quantity={quantity}
                         onAdd={() => addToCart(section.name, entry)}
                         onSetQuantity={(q) => setQuantity(section.name, entry, q)}
+                        smartLinked={smartjack}
                       />
                     );
                   })}
@@ -162,7 +165,8 @@ export default function Shop({ character = null, sections = [], searchQuery = ''
   );
 }
 
-function ShopItem({ entry, quantity, onAdd, onSetQuantity }) {
+// smartLinked: the shopper has a SmartJack installed.
+function ShopItem({ entry, quantity, onAdd, onSetQuantity, smartLinked = false }) {
   const inCart = quantity > 0;
 
   return (
@@ -174,6 +178,14 @@ function ShopItem({ entry, quantity, onAdd, onSetQuantity }) {
           {entry.tags?.map((tag) => (
             <Tag key={tag}>{tag}</Tag>
           ))}
+          {entry.smartjack && (
+            <Tag
+              data-tone={smartLinked ? 'highlight' : undefined}
+              title={smartLinked ? 'Your SmartJack links this weapon' : 'Smart™ weapon: needs a SmartJack for its full potential'}
+            >
+              {smartLinked ? 'Smart · linked' : 'Smart'}
+            </Tag>
+          )}
         </ItemTitle>
         {entry.description && <ItemDescription>{entry.description}</ItemDescription>}
       </ItemMain>

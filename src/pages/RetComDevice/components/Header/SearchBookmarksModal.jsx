@@ -9,10 +9,14 @@ import { Layout, ListArea, ListLabel, Rows, Empty } from './SearchBookmarks.styl
 // Search field on top (no autofocus, so the keyboard stays down when
 // you're after a bookmark). Empty field: your bookmarks. Typing: results,
 // in the same spot, right under the field.
+//
+// Search only finds unlocked, searchable nodes (see buildSearchIndex);
+// bookmarks show regardless.
 export default function SearchBookmarksModal({
   open,
   onClose,
   searchIndex = [],
+  bookmarkEntries = [],
   bookmarks = {},
   onNavigate,
   onToggleBookmark,
@@ -20,7 +24,9 @@ export default function SearchBookmarksModal({
   const [query, setQuery] = useState('');
 
   const trimmed = query.trim();
-  const bookmarkedEntries = searchIndex.filter((entry) => bookmarks[entry.path]);
+  // Bookmarks come resolved by path, not from the search index, so locked
+  // and unsearchable bookmarks still appear.
+  const bookmarkedEntries = bookmarkEntries;
   const results = trimmed ? searchIndex_filter(searchIndex, query, 20) : [];
 
   const handleClose = () => {

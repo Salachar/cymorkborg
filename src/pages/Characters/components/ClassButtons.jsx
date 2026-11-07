@@ -27,7 +27,7 @@ export default function ClassButtons({
           const isActive = currentIndex === index;
 
           return (
-            <Row key={character_class.id || name} data-active={isActive}>
+            <Row key={`${character_class.id || name}_class_button`} data-active={isActive}>
               <Preview
                 type="button"
                 aria-current={isActive}

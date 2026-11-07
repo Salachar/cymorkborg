@@ -13,14 +13,14 @@ export const Head = styled.div`
   min-height: 2.25rem;
   margin-bottom: 0.75rem;
   padding-bottom: 0.4rem;
-  border-bottom: 1px solid var(--cy-hairline);
+  /* border-bottom: 1px solid var(--cy-hairline); */
 `;
 
 export const Title = styled.h3`
   flex: 1;
   min-width: 0;
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;

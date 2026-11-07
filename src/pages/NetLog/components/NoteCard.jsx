@@ -9,14 +9,15 @@ import ConfirmationModal from '@components/ConfirmationModal/ConfirmationModal';
 import { IconButton, TextArea } from '@components/Layout/Layout';
 import { formatTimestamp } from '@utils/time';
 
-import { Card, Meta, MetaText, Edited, Controls, Body } from './NoteCard.styles';
+import { Card, Meta, MetaText, Edited, Controls, Body, SharedTag } from './NoteCard.styles';
 
 const ICON = { fontSize: 16 };
 
-export default function NoteCard({ note, onSave, onDelete, onShare, isConnected = false }) {
+// Share is available offline too: it queues and sends on reconnect.
+export default function NoteCard({ note, onSave, onDelete, onShare }) {
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(note.text);
-  const [justShared, setJustShared] = useState(false);
+  const [justShared, setJustShared] = useState(null); // 'sent' | 'queued' | null
   const [confirmDelete, setConfirmDelete] = useState(false);
   const sharedTimer = useRef(null);
 
@@ -42,12 +43,13 @@ export default function NoteCard({ note, onSave, onDelete, onShare, isConnected 
     setEditing(false);
   };
 
+  // onShare returns 'sent' or 'queued' (queued shares go out on reconnect).
   const handleShare = () => {
-    const ok = onShare?.(note);
-    if (!ok) return;
-    setJustShared(true);
+    const result = onShare?.(note);
+    if (!result) return;
+    setJustShared(result);
     clearTimeout(sharedTimer.current);
-    sharedTimer.current = setTimeout(() => setJustShared(false), 2000);
+    sharedTimer.current = setTimeout(() => setJustShared(null), 2000);
   };
 
   // Enter saves, Shift+Enter is a newline, Escape cancels.
@@ -68,6 +70,11 @@ export default function NoteCard({ note, onSave, onDelete, onShare, isConnected 
         <MetaText>
           <span>{formatTimestamp(note.createdAt)}</span>
           {wasEdited && <Edited>(edited)</Edited>}
+          {note.sharedAt && (
+            <SharedTag data-queued={note.shareQueued || undefined}>
+              {note.shareQueued ? 'Queued' : 'Shared'}
+            </SharedTag>
+          )}
         </MetaText>
 
         <Controls>
@@ -82,13 +89,13 @@ export default function NoteCard({ note, onSave, onDelete, onShare, isConnected 
             </>
           ) : (
             <>
-              {isConnected && (
+              {onShare && (
                 <IconButton
                   type="button"
                   data-state={justShared ? 'done' : undefined}
                   onClick={handleShare}
-                  aria-label={justShared ? 'Shared' : 'Share to network'}
-                  title={justShared ? 'Shared' : 'Share to network'}
+                  aria-label={justShared ? (justShared === 'queued' ? 'Queued' : 'Shared') : 'Share to network'}
+                  title={justShared ? (justShared === 'queued' ? 'Queued: sends when you reconnect' : 'Shared') : 'Share to network'}
                 >
                   {justShared ? <CheckIcon style={ICON} /> : <ShareIcon style={ICON} />}
                 </IconButton>

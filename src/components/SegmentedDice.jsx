@@ -75,7 +75,8 @@ export default function SegmentedDice({
     let max = 6;
 
     if (typeof dice === "string" && dice.includes("d")) {
-      const [count, sides] = dice.split("d").map(Number);
+      // A trailing "a" marks an autofire weapon (d10a): the die is still a d10.
+      const [count, sides] = dice.trim().replace(/a$/i, "").split("d").map(Number);
       amount = !count ? 1 : count;
       max = !sides ? 6 : sides;
     }

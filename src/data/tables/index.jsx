@@ -1,8 +1,9 @@
 // Central export for all CY_BORG data tables
 
 import { WEAPONS_FOR_SALE } from './weapons';
+import { ARMOR_FOR_SALE } from './armor';
 import { EQUIPMENT } from './equipment';
-import { DRUGS } from './drugs';
+import { DRUGS, DRUGS_MARKET } from './drugs';
 import { AMMO_BOOSTERS } from './ammo';
 import { CYBERTECH } from './cybertech';
 import { RANDOM_ITEMS } from './random_items';
@@ -18,6 +19,7 @@ export {
   WEAPONS_FOR_SALE,
   EQUIPMENT,
   DRUGS,
+  DRUGS_MARKET,
   AMMO_BOOSTERS,
   CYBERTECH,
 };
@@ -39,10 +41,15 @@ export const GEAR_SECTIONS = [
   {
     name: "weapons",
     label: "Weapons",
-    note: (
-      <span>You get d4 Basic Mags for free (in shop) if applicable to the weapon.</span>
-    ),
+    // note: (
+    //   <span>You get d4 Basic Mags for free (in shop) if applicable to the weapon.</span>
+    // ),
     entries: WEAPONS_FOR_SALE,
+  },
+  {
+    name: "armor",
+    label: "Armor",
+    entries: ARMOR_FOR_SALE,
   },
   {
     name: "ammo",
@@ -68,7 +75,7 @@ export const GEAR_SECTIONS = [
     note: (
       <span>Cost after the / is for weaker, recreational doses</span>
     ),
-    entries: DRUGS,
+    entries: DRUGS_MARKET,
   },
 ]
 

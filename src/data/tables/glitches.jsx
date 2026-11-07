@@ -26,3 +26,4 @@ export const GLITCHES = [
     description: <>Reroll a dice roll (yours or someone else's)</>,
   },
 ];
+

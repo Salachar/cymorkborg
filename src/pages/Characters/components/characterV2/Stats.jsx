@@ -31,8 +31,10 @@ const STAT_INFO = {
   KNO: { name: 'Knowledge', description: 'Science, use tech or App' },
 };
 
+// Abilities run −3 to +6 (advancement can raise them past the +3 that
+// character creation reaches).
 const MIN = -3;
-const MAX = 3;
+const MAX = 6;
 
 // Creation roll: 3d6 (+ class bonus) mapped to a modifier.
 const ROLL_TABLE = [
