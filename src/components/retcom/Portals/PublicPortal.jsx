@@ -4,10 +4,6 @@ import { Line, Divider, DataTable } from '@retcom/RetComComponents';
 export default function PublicPortal({
   name,
   tagline,
-  network,
-  signalStrength = 'strong',
-  status,
-  statusColor = 'neon',
   nowPlaying,
   notes = [],
   theme = 'friendly',
@@ -43,24 +39,6 @@ export default function PublicPortal({
 
   const colors = themeConfig[theme] || themeConfig.friendly;
 
-  // const getSignalBars = () => {
-  //   const bars = {
-  //     weak: '██░░░░',
-  //     medium: '████░░',
-  //     strong: '██████',
-  //   };
-  //   return bars[signalStrength] || bars.strong;
-  // };
-
-  // const getStatusColor = () => {
-  //   const statusColors = {
-  //     neon: 'rgb(0, 170, 40)',
-  //     yellow: 'rgb(251, 191, 36)',
-  //     red: 'rgb(239, 68, 68)',
-  //   };
-  //   return statusColors[statusColor] || statusColors.neon;
-  // };
-
   return (
     <div
       style={{
@@ -68,13 +46,11 @@ export default function PublicPortal({
         borderRadius: '6px',
         padding: '1rem',
         backgroundColor: colors.bg,
-        // marginBottom: '1rem',
         boxShadow: `0 0 15px ${colors.primary}30`,
         position: 'relative',
         overflow: 'hidden',
       }}
     >
-      {/* Animated corner accents */}
       <div
         style={{
           position: 'absolute',
@@ -124,7 +100,6 @@ export default function PublicPortal({
         }}
       />
 
-      {/* Header with glow */}
       <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         {name && (
           <Line
@@ -156,58 +131,6 @@ export default function PublicPortal({
         )}
       </div>
 
-      {/* Network handshake */}
-      {/* <div style={{ marginTop: '0.75rem', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <Line smoke style={{ fontSize: '0.8rem', margin: 0, fontFamily: 'monospace' }}>
-          {network}
-        </Line>
-        <span style={{
-          fontSize: '0.65rem',
-          fontFamily: 'monospace',
-          color: getStatusColor(),
-          fontWeight: 'bold',
-          letterSpacing: '0.1em',
-        }}>
-          ● CONNECTED
-        </span>
-      </div> */}
-
-      {/* <Divider style={{
-        borderColor: colors.primary,
-      }} /> */}
-
-      {/* Network details with signal animation */}
-      {/* <div style={{ marginTop: '0.75rem', marginBottom: '0.75rem' }}>
-        <DataTable
-          data={[
-            { label: 'SSID', value: network },
-            {
-              label: 'Signal',
-              value: (
-                <span style={{ color: colors.primary }}>
-                  {getSignalBars()} ({signalStrength.charAt(0).toUpperCase() + signalStrength.slice(1)})
-                </span>
-              ),
-            },
-            { label: 'Security', value: 'Open Network' },
-            {
-              label: 'Status',
-              value: (
-                <span
-                  style={{
-                    color: getStatusColor(),
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {status}
-                </span>
-              ),
-            },
-          ]}
-        />
-      </div> */}
-
-      {/* Now playing with styled box */}
       {nowPlaying && (
         <div
           style={{
@@ -231,7 +154,6 @@ export default function PublicPortal({
         </div>
       )}
 
-      {/* Notes with bullet styling */}
       {notes.length > 0 && (
         <>
           <Divider

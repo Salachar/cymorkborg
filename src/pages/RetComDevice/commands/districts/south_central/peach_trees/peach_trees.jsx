@@ -2,7 +2,6 @@ import Icons from '@utils/icons';
 
 import {
   Line,
-  Divider,
   InsetBox,
   NodePreview,
 } from '@retcom/RetComComponents';
@@ -13,13 +12,10 @@ import {
   DistrictPortal,
   HoursBanner,
   Menu,
-  NetworkActivity,
   Node,
   PersonnelFile,
   PublicPortal,
-  RetComImage,
   Safe,
-  BuildingAccess,
   Tenet,
   VendingMachine,
 } from '@retcom';
@@ -28,7 +24,6 @@ import { TOWER_MANAGEMENT_COMMANDS } from './peach_trees_management';
 import { GLASS_GARDENS_COMMANDS } from './glass_gardens';
 import { STEEL_PENTHOUSE_COMMANDS } from './steel_penthouse';
 
-import penthouseBlueprint from '@images/blueprints/steel_penthouse_2.png';
 import central_tower_atrium_cctv_image from '@images/locations/central_tower_atrium_cctv.png';
 
 export const PEACH_TREES_COMMANDS = {
@@ -110,6 +105,7 @@ export const PEACH_TREES_COMMANDS = {
 
           "Atrium ATM": {
             favicon: <Icons.ATM />,
+            searchable: false,
             content: (
               <ATM
                 id="atm-tower-lobby"

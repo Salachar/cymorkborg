@@ -121,6 +121,7 @@ export const BODEGA_COMMANDS = {
 
       "Bodega ATM": {
         favicon: <Icons.ATM />,
+        searchable: false,
         content: (
           <ATM
             id="bodega-corner-atm"

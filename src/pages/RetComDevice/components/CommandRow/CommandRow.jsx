@@ -1,9 +1,4 @@
-import React from 'react';
-import LockIcon from '@mui/icons-material/Lock';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import CollapseIcon from '@mui/icons-material/UnfoldLess';
-import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import ShareIcon from '@mui/icons-material/IosShare';
@@ -11,7 +6,23 @@ import ShareIcon from '@mui/icons-material/IosShare';
 import Icons from '@utils/icons';
 import { getDefaultFavicon } from '@utils/favicon';
 
-import './commandRow.css';
+import {
+  Root,
+  LockIndicator,
+  Meta,
+  Breadcrumb,
+  BreadcrumbSep,
+  BreadcrumbPart,
+  ChildCount,
+  MetaStart,
+  RcdMarker,
+  Strip,
+  Name,
+  BypassBadge,
+  Controls,
+  ControlButton,
+  Preview,
+} from './CommandRow.app.styles'; // or './CommandRow.app.styles' to try the app palette
 
 function Favicon({ favicon, displayName }) {
   if (favicon) return favicon;
@@ -34,122 +45,100 @@ export default function CommandRow({
   hasChildren = false,
   childCount = 0,
   depth = 0,
-  hasContent = false,
-  contentSize = 'full',
   isBookmarked = false,
   isConnected = false,
-  onToggleSize,
   onClick,
   onCollapse,
   onToggleBookmark,
-  // onShareUnlock,
   onShareNode,
+  theme = null, // 'rcda': only visible thanks to the jailbroken RCD
   style = {},
 }) {
-  const isVisible = contentSize !== 'hidden';
   const stopProp = (fn) => (e) => { e.stopPropagation(); fn?.(); };
 
+  // Parents of this node; the last two in full, older ones as initials.
   const breadcrumb = depth > 0 ? (() => {
-    const parts = path.split('/');
-    const parents = parts.slice(0, -1);
+    const parents = path.split('/').slice(0, -1);
     return parents.map((part, i) => {
       const isRecent = i >= parents.length - 2;
       if (isRecent) return part;
-      return part.split(/\s+/).map(word => word[0]?.toUpperCase() ?? '').join('');
+      return part.split(/\s+/).map((word) => word[0]?.toUpperCase() ?? '').join('');
     });
   })() : null;
 
   return (
-    <div
+    <Root
       data-path={path}
+      data-expanded={isExpanded || undefined}
+      data-locked={(hasBlocker && !isBypassed) || undefined}
+      data-theme={theme || undefined}
       onClick={onClick}
-      className='cr-root'
       style={{ cursor: isExpandable ? 'pointer' : 'default', ...style }}
     >
-      {(hasBlocker && !isBypassed) && (
-        <LockIcon className="cr-lock-indicator" />
-      )}
+      {hasBlocker && !isBypassed && <LockIndicator />}
 
       {/* Meta row */}
-      <div className="cr-meta">
-        {breadcrumb ? (
-          <div className="cr-breadcrumb">
-            {breadcrumb.map((part, i, arr) => (
-              <span key={i}>
-                {i > 0 && <span className="cr-breadcrumb-sep"> → </span>}
-                <span className={i >= arr.length - 2 ? 'cr-breadcrumb-near' : 'cr-breadcrumb-far'}>
-                  {part}
+      <Meta>
+        <MetaStart>
+          {theme === 'rcda' && <RcdMarker>◈ RCD</RcdMarker>}
+          {breadcrumb && (
+            <Breadcrumb>
+              {breadcrumb.map((part, i, arr) => (
+                <span key={i}>
+                  {i > 0 && <BreadcrumbSep> → </BreadcrumbSep>}
+                  <BreadcrumbPart data-near={i >= arr.length - 2}>{part}</BreadcrumbPart>
                 </span>
-              </span>
-            ))}
-          </div>
-        ) : <div />}
+              ))}
+            </Breadcrumb>
+          )}
+        </MetaStart>
 
         {!isLocked && hasChildren && childCount > 0 && (
-          <span className="cr-child-count">({childCount} nodes)</span>
+          <ChildCount>({childCount} nodes)</ChildCount>
         )}
-      </div>
+      </Meta>
 
-      <div className="cr-strip">
+      <Strip>
         <Favicon favicon={favicon} displayName={displayName} />
 
-        <span className={`cr-name pl-2`}>
-          {displayName}
-        </span>
+        <Name>{displayName}</Name>
 
-        {isBypassed && bypassValue && (
-          <span className="cr-badge cr-badge-bypassed">
-            PW:{bypassValue}
-          </span>
-        )}
+        {isBypassed && bypassValue && <BypassBadge>PW:{bypassValue}</BypassBadge>}
 
-        <div className="cr-controls">
-          <button
+        <Controls>
+          <ControlButton
+            type="button"
             onClick={stopProp(onToggleBookmark)}
-            className="cr-vis-btn"
-            title={isBookmarked ? "Remove bookmark" : "Add bookmark"}
+            title={isBookmarked ? 'Remove bookmark' : 'Add bookmark'}
           >
             {isBookmarked
               ? <StarIcon style={{ fontSize: 14, color: 'rgb(250, 204, 21)' }} />
               : <StarBorderIcon style={{ fontSize: 14 }} />}
-          </button>
+          </ControlButton>
 
-          {/* {isBypassed && isConnected && (
-            <button
-              onClick={stopProp(onShareUnlock)}
-              className="cr-vis-btn"
-              title="Share unlock with all players"
-            >
-              <ShareIcon style={{ fontSize: 14 }} />
-            </button>
-          )} */}
           {isConnected && (
-            <button
+            <ControlButton
+              type="button"
               onClick={stopProp(onShareNode)}
-              className="cr-vis-btn"
               title="Share with all players"
             >
               <ShareIcon style={{ fontSize: 14 }} />
-            </button>
+            </ControlButton>
           )}
 
           {isExpanded && hasChildren && (
-            <button
+            <ControlButton
+              type="button"
               onClick={stopProp(onCollapse)}
-              className="cr-vis-btn"
               title="Collapse all"
             >
               <CollapseIcon style={{ fontSize: 14 }} />
-            </button>
+            </ControlButton>
           )}
-        </div>
-      </div>
+        </Controls>
+      </Strip>
 
-      {preview && (
-        <div className={`cr-preview cr-preview-depth-${depth === 0 ? 0 : 1}`}>
-          {preview}
-        </div>
-      )}
-    </div>
+      {preview && <Preview>{preview}</Preview>}
+    </Root>
   );
 }

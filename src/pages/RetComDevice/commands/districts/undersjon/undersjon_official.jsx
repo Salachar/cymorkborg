@@ -430,6 +430,7 @@ export const FOOD_COURT_COMMANDS = {
           "ATM and vending machine near the east entrance",
           "Lake water leak above stall 4 — management aware, bucket provided",
           "The smell is permanent. You stop noticing it.",
+          "Aurelion's display windows overlook the east seating. They can see you. You can't afford to see them.",
         ]}
       />
     ),
@@ -722,6 +723,7 @@ export const FOOD_COURT_COMMANDS = {
               { text: "Unit 14 is reminded that load-bearing walls are load-bearing for a reason. This is the second notice.", color: "red" },
               { text: "Luk's is sold out by 14:00. Stop asking at 15:00.", color: "smoke" },
               { text: "Lost: one boot. Left foot. Size 11. No questions.", color: "pink" },
+              { text: "Aurelion management asks food court patrons not to press their faces against the display glass. Again.", color: "yellow" },
             ]}
             vibe="Functional tension. Everyone is polite. Nobody is relaxed."
           />

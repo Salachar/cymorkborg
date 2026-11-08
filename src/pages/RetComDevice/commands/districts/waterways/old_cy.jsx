@@ -11,14 +11,14 @@ import {
 } from "@retcom";
 
 import OLD_CY_NEARBY_COMMANDS from './old_cy_nearby';
-import { MONASTERY_ROUGH_BEAST_COMMANDS } from './monastery_rough_beast';
+import { MONASTERY_ROUGH_BEAST_COMMANDS } from './monastery_rough_beast_v2';
 
 export const OLD_CY_COMMANDS = {
   "Old Cy": {
     favicon: <Icons.City />,
     preview: (
       <NodePreview>
-        <Line span smoke> · Pre-Incident ruins. Gravel Lake border. What the city used to be.</Line>
+        <Line span smoke> · Pre-Incident ruins. Lake Gravel border. What the city used to be.</Line>
       </NodePreview>
     ),
     content: (
@@ -26,7 +26,7 @@ export const OLD_CY_COMMANDS = {
         districtName="OLD CY"
         districtId="OLD-CY-01"
         tagline="The wreckage of what came before."
-        region="Gravel Lake border — between Central and the Slums"
+        region="Lake Gravel border — between Central and the Slums"
         corporatePresence="NONE"
         crimeThreat="HIGH"
         securityResponse="NONE"
@@ -39,14 +39,14 @@ export const OLD_CY_COMMANDS = {
         ]}
       >
         <InsetBox title="KNOWN OCCUPANTS:">
-          <Line neon>• Gravel Lake Charitable Foundation — Gravel Lake border</Line>
+          <Line neon>• Lake Gravel Charitable Foundation — Lake Gravel border</Line>
           <Line yellow>• Various squatter settlements — unregistered, unmapped</Line>
           <Line yellow>• Roadrunner clan territory — eastern approaches</Line>
         </InsetBox>
       </DistrictPortal>
     ),
     related_commands: {
-      ...MONASTERY_ROUGH_BEAST_COMMANDS,
+      // ...MONASTERY_ROUGH_BEAST_COMMANDS,
       ...OLD_CY_NEARBY_COMMANDS,
     },
   },

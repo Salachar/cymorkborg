@@ -12,6 +12,7 @@ import {
 
 import UNDERSJON_OFFICAL_COMMANDS from './undersjon_official';
 import UNDERSJON_UNOFFICIAL_COMMANDS from './undersjon_unofficial';
+import AURELION from './aurelion';
 
 export const UNDERSJON_COMMANDS = {
   "Undersjon": {
@@ -40,6 +41,7 @@ export const UNDERSJON_COMMANDS = {
           <Line neon bullet>Ongo Gablogian's — Unit 3, north corridor — fashion</Line>
           <Line neon bullet>RetCom Electronics — Unit 7, east corridor — electronics and repair</Line>
           <Line neon bullet>Food Court — central atrium — six stalls, ATM, vending</Line>
+          <Line yellow bold bullet>Aurelion — central atrium — prestige dining, reservations only</Line>
           <Line smoke small>Further units available — contact AST Endless Seas tenancy division</Line>
         </InsetBox>
       </Nodes.PublicPortal>
@@ -47,6 +49,7 @@ export const UNDERSJON_COMMANDS = {
     related_commands: {
       ...UNDERSJON_OFFICAL_COMMANDS,
       ...UNDERSJON_UNOFFICIAL_COMMANDS,
+      ...AURELION,
     },
   },
 };

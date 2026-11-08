@@ -335,7 +335,63 @@ export const BRIEFINGS_COMMANDS = {
         ),
       },
 
-
+      "Mags Wren — Second Seating": {
+        favicon: <Icons.Briefing />,
+        content: (
+          <Briefing
+            title="Second Seating"
+            issuer="Mags Wren"
+            classification="CONFIDENTIAL"
+            primary={[
+              {
+                text: "Keep Odile Vance-Marr alive through dinner service",
+                note: "She's dining in a private VIP suite at Aurelion tonight. Breathing at midnight or no pay.",
+                priority: "critical",
+              },
+              {
+                text: "Stop the poisoned dessert",
+                note: "Word is someone paid off a cook to spike her dessert course. Find the plate before it reaches her table.",
+                priority: "critical",
+              },
+            ]}
+            secondary={[
+              {
+                text: "Find out who ordered the hit",
+                note: "Bring back proof, not rumours. Mags pays extra for a name she can use.",
+                priority: "high",
+              },
+              {
+                text: "Keep Mags out of it",
+                note: "Nobody can know she cared. Don't drop her name, even to Odile.",
+                priority: "normal",
+              },
+            ]}
+            intel={[
+              "Aurelion: prestige restaurant in Undersjon, central atrium. Corporate neutral ground between North and South Central.",
+              "Dinner service starts 20:00. Dessert usually goes out around 22:00.",
+              "Odile Vance-Marr: data broker, mid-tier, paranoid. Dining with two guests. Won't trust strangers.",
+              "Facial recognition at the front entrance. Expect to be logged.",
+              "Undersjon public parking level. Stair up to the restaurant needs a staff or valet keycard.",
+              "Glass doors in the south-west corner face the atrium and food court. Locked, display only.",
+              "Inside stairwell in the south-west corner drops to Undersjon's lower level. Public fire exit.",
+              "Staff are trained to calm things down, not to fight. Security stays out of sight until it doesn't.",
+              "A corp executive is booked in the neighbouring VIP suite tonight. Expect bodyguards.",
+            ]}
+            payment={[
+              "1,500¤ on completion",
+              "300¤ expenses up front (main dining runs 40¤+ a head)",
+              "+1,000¤ bonus for proof of who ordered the hit",
+            ]}
+            warnings={[
+              "Don't start a war in there. That place has teeth.",
+              "VIP protocols protect the biggest name in the building first. That isn't Odile.",
+              "Fights, break-ins or alarms lock the building down fast.",
+              "Breaking glass anywhere brings security running.",
+            ]}
+            footer="Eat something nice. It's on me. — M"
+          />
+        ),
+      },
 
     },
   },

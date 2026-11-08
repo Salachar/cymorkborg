@@ -16,8 +16,9 @@ const FADE_COLOR = 'rgba(19, 23, 34, 0.95)';
 // CONTENT PANEL
 // ============================================================================
 
-function ContentPanel({ children, size, onToggleSize, style = {} }) {
+function ContentPanel({ children, size, onToggleSize, theme = null, style = {} }) {
   const isPartial = size === 'partial';
+  const isRcda = theme === 'rcda';
 
   return (
     <div
@@ -28,9 +29,9 @@ function ContentPanel({ children, size, onToggleSize, style = {} }) {
         onToggleSize?.();
       }}
       style={{
-        border: `1px solid ${CONTENT_BORDER}`,
+        border: `1px solid ${isRcda ? 'rgba(168, 85, 247, 0.35)' : CONTENT_BORDER}`,
         borderRadius: '4px',
-        backgroundColor: CONTENT_BG,
+        backgroundColor: isRcda ? 'rgb(12, 8, 18)' : CONTENT_BG,
         marginTop: '0.125rem',
         marginBottom: '0.125rem',
         position: 'relative',
@@ -172,6 +173,7 @@ function CommandNode({
           // onShareUnlock={() => onEvent({ type: 'share_unlock', path, value: bypassValue })}
           onShareNode={() => onEvent({ type: 'share_node', path, unlocked: !isLocked })}
           onClick={() => isExpandable && onToggle(path)}
+          theme={def.theme ?? null}
           style={{
             marginLeft: `${depth * indent}rem`,
           }}
@@ -181,6 +183,7 @@ function CommandNode({
           <ContentPanel
             size={contentSize}
             onToggleSize={handleToggleSize}
+            theme={def.theme ?? null}
             style={{
               marginLeft: `${contentSize === 'partial' ? (depth * indent) + 'rem' : '0'}`
             }}

@@ -21,7 +21,7 @@ export const GRAVEL_LAKE_TAXI_COMMANDS = {
     favicon: <Icons.Taxi />,
     preview: (
       <NodePreview>
-        <Line span smoke> · Canal taxi. Gravel Lake outlet. Runs day and night.</Line>
+        <Line span smoke> · Canal taxi. Lake Gravel outlet. Runs day and night.</Line>
       </NodePreview>
     ),
     content: (
@@ -33,7 +33,7 @@ export const GRAVEL_LAKE_TAXI_COMMANDS = {
         status="OPEN"
         statusColor="neon"
         notes={[
-          "Single vessel — moored at Gravel Lake south outlet",
+          "Single vessel — moored at Lake Gravel south outlet",
           "Canal routes: Lake Gravel, North Central waterfront, Ports connections",
           "Flat rate: 15¤ per trip, cash only",
           "Night rate: 25¤ — runs until 03:00",
@@ -41,15 +41,15 @@ export const GRAVEL_LAKE_TAXI_COMMANDS = {
         theme="casual"
       >
         <InsetBox title="ROUTES:">
-          <Line neon bullet>Gravel Lake outlet — North Central waterfront: 15¤</Line>
-          <Line neon bullet>Gravel Lake outlet — Old Cy shore: 10¤</Line>
-          <Line neon bullet>Gravel Lake outlet — Ports canal junction: 20¤</Line>
+          <Line neon bullet>Lake Gravel outlet — North Central waterfront: 15¤</Line>
+          <Line neon bullet>Lake Gravel outlet — Old Cy shore: 10¤</Line>
+          <Line neon bullet>Lake Gravel outlet — Ports canal junction: 20¤</Line>
           <Line yellow bullet>Custom routes available — ask Maret directly</Line>
         </InsetBox>
         <Nodes.HoursBanner
           hours="06:00 — 03:00"
           days="Daily"
-          location="Gravel Lake — south outlet, look for the yellow lamp"
+          location="Lake Gravel — south outlet, look for the yellow lamp"
           note="Night runs available. Extra charge applies after 20:00."
         />
       </Nodes.PublicPortal>
@@ -69,7 +69,7 @@ export const GRAVEL_LAKE_TAXI_COMMANDS = {
               "Sole operator — Maret, owner and pilot",
               "No staff register",
               "Cash only — no transaction records",
-              "Vessel registration current — Gravel Lake Water Authority",
+              "Vessel registration current — Lake Gravel Water Authority",
             ]}
           />
         ),
@@ -81,7 +81,7 @@ export const GRAVEL_LAKE_TAXI_COMMANDS = {
                 employeeId="OWNER-001"
                 name="Maret"
                 position="Owner / Pilot"
-                district="Gravel Lake — lives aboard"
+                district="Lake Gravel — lives aboard"
                 notes={[
                   "Has operated this route for eleven years",
                   "Knows every vessel that uses the lake — notices anything new",
@@ -99,7 +99,7 @@ export const GRAVEL_LAKE_TAXI_COMMANDS = {
             content: (
               <Node
                 title="VESSEL LOG — RECENT ENTRIES"
-                subtitle="Maret's Water Taxi — Gravel Lake"
+                subtitle="Maret's Water Taxi — Lake Gravel"
                 notes={[
                   "This morning — two passengers, Old Cy shore drop, paid cash, no conversation",
                   "Yesterday night — solo passenger, North Central waterfront, paid double, asked to not be logged",
@@ -160,13 +160,13 @@ export const WATER_TAXI_STOP_COMMANDS = {
     favicon: <Icons.Taxi />,
     preview: (
       <NodePreview>
-        <Line span smoke> · Gravel Lake east shore. Next taxi: eventually.</Line>
+        <Line span smoke> · Lake Gravel east shore. Next taxi: eventually.</Line>
       </NodePreview>
     ),
     content: (
       <Node
         title="WATER TAXI — STOP 14"
-        subtitle="Gravel Lake east shore — served by Maret's Water Taxi"
+        subtitle="Lake Gravel east shore — served by Maret's Water Taxi"
         notes={[
           "Fares: 15¤ flat · 25¤ after 20:00 · cash only",
           "Next arrival: 12 min (estimate unreliable)",
@@ -238,7 +238,7 @@ export const FLOATING_MARKET_COMMANDS = {
     favicon: <Icons.Warehouse />,
     preview: (
       <NodePreview>
-        <Line span smoke> · Floating market. Gravel Lake. Moves berth weekly.</Line>
+        <Line span smoke> · Floating market. Lake Gravel. Moves berth weekly.</Line>
       </NodePreview>
     ),
     content: (
@@ -250,7 +250,7 @@ export const FLOATING_MARKET_COMMANDS = {
         status="OPEN"
         statusColor="neon"
         notes={[
-          "Floating market — Gravel Lake, berth rotates weekly",
+          "Floating market — Lake Gravel, berth rotates weekly",
           "General goods, salvage, food, and sundries",
           "Cash only — no credchip readers",
           "Six to eight traders on board at any time — stock varies",
@@ -267,7 +267,7 @@ export const FLOATING_MARKET_COMMANDS = {
         <Nodes.HoursBanner
           hours="09:00 — 18:00"
           days="Daily (weather permitting)"
-          location="Gravel Lake — current berth on community board"
+          location="Lake Gravel — current berth on community board"
           note="Berth moves weekly. Follow the board or ask Maret."
         />
       </Nodes.PublicPortal>
@@ -280,7 +280,7 @@ export const FLOATING_MARKET_COMMANDS = {
             name="THE BARGE — NOTICE BOARD"
             location="Main deck, near gangway"
             posts={[
-              { text: "Current berth: Gravel Lake east shore, two hundred metres north of the pump house", color: "neon" },
+              { text: "Current berth: Lake Gravel east shore, two hundred metres north of the pump house", color: "neon" },
               { text: "WANTED: Anyone with experience in pre-Incident building plans or military survey records — ask for Doss", color: "yellow" },
               { text: "Foundation charity taking people in again. Queue was sixty deep yesterday. Getting longer every week.", color: "smoke" },
               { text: "Do NOT take the Old Cy shore path after dark. Something is wrong near the compound wall. Third time this month.", color: "red" },
@@ -307,83 +307,71 @@ export const FLOATING_MARKET_COMMANDS = {
       },
 
       // ── Secret #4: members use a custom pheromone; it can be bought ──────
-      "Second Skin Scents": {
-        favicon: <Icons.Stars />,
-        preview: (
-          <NodePreview>
-            <Line span smoke> · Custom fragrance stall, lower deck. Smell like someone new.</Line>
-          </NodePreview>
-        ),
-        content: (
-          <Nodes.PublicPortal
-            name="SECOND SKIN SCENTS"
-            tagline="Smell like someone new."
-            network="SECONDSKIN"
-            signalStrength="weak"
-            status="OPEN"
-            statusColor="neon"
-            notes={[
-              "The Barge, lower deck — follow the smell",
-              "Custom blends mixed while you wait",
-              "Private and bulk orders welcome",
-            ]}
-            theme="fancy"
-          >
-            <InsetBox title="HOUSE BLENDS:">
-              <KeyValue label="No. 2 'Rain on Chrome'" value="40¤" />
-              <KeyValue label="No. 5 'Clean Sheets'" value="35¤" />
-              <KeyValue label="No. 7 'Old Money'" value="90¤" />
-              <Line smoke>Custom blends: ask at the stall</Line>
-            </InsetBox>
-          </Nodes.PublicPortal>
-        ),
-        related_commands: {
-          "Order Book": {
-            favicon: <Icons.Files />,
-            password: {
-              pw: "kinship",
-              hint: "Name of the best-selling private blend",
-              showCount: true,
-            },
-            content: (
-              <Node
-                title="SECOND SKIN — PRIVATE ORDERS"
-                notes={[
-                  "Mixer: Odile Fane",
-                  "Private orders are confidential. Mostly.",
-                ]}
-              />
-            ),
-            related_commands: {
-              "Standing Orders": {
-                favicon: <Icons.Files />,
-                content: (
-                  <Nodes.EncryptedMessage
-                    messages={[
-                      "GLCF — No. 9 'KINSHIP' — 40 vials, monthly. Collected, never delivered. Paid in full, cash.",
-                      "Formula supplied by the client. Not my nose. Base notes are wrong for perfume; it's not meant for people to smell. It's meant for people to recognise.",
-                      "Retail on No. 9 if anyone ever asks: 400¤ a vial. Special order, two days. Nobody's asked.",
-                    ]}
-                  />
-                ),
-              },
-              "Tester Rack": {
-                favicon: <Icons.Inventory />,
-                content: (
-                  <Nodes.RCDAlert
-                    id="second-skin-tester-rack"
-                    message="Unlabelled tester at the back of the rack. Same chemical signature as the GLCF order."
-                    details={["Nearly empty. Maybe one application left."]}
-                    physical={[
-                      { id: "second_skin_no9_tester", label: "Tester vial — No. 9 'Kinship'", description: "Nearly empty. One application, if you're lucky." },
-                    ]}
-                  />
-                ),
-              },
-            },
-          },
-        },
-      },
+      // "Second Skin Scents": {
+      //   favicon: <Icons.Stars />,
+      //   preview: (
+      //     <NodePreview>
+      //       <Line span smoke> · Custom fragrance stall, lower deck. Smell like someone new.</Line>
+      //     </NodePreview>
+      //   ),
+      //   content: (
+      //     <Nodes.PublicPortal
+      //       name="SECOND SKIN SCENTS"
+      //       tagline="Smell like someone new."
+      //       network="SECONDSKIN"
+      //       signalStrength="weak"
+      //       status="OPEN"
+      //       statusColor="neon"
+      //       notes={[
+      //         "The Barge, lower deck — follow the smell",
+      //         "Custom blends mixed while you wait",
+      //         "Private and bulk orders welcome",
+      //       ]}
+      //       theme="fancy"
+      //     >
+      //       <InsetBox title="HOUSE BLENDS:">
+      //         <KeyValue label="No. 2 'Rain on Chrome'" value="40¤" />
+      //         <KeyValue label="No. 5 'Clean Sheets'" value="35¤" />
+      //         <KeyValue label="No. 7 'Old Money'" value="90¤" />
+      //         <Line smoke>Custom blends: ask at the stall</Line>
+      //       </InsetBox>
+      //     </Nodes.PublicPortal>
+      //   ),
+      //   related_commands: {
+      //     "Order Book": {
+      //       favicon: <Icons.Files />,
+      //       password: {
+      //         pw: "kinship",
+      //         hint: "What strangers become when they smell alike",
+      //         showCount: true,
+      //       },
+      //       content: (
+      //         <Node
+      //           title="SECOND SKIN — PRIVATE ORDERS"
+      //           notes={[
+      //             "Mixer: Odile Fane",
+      //             "Private orders are confidential. Mostly.",
+      //           ]}
+      //         />
+      //       ),
+      //       related_commands: {
+      //         "Standing Orders": {
+      //           favicon: <Icons.Files />,
+      //           content: (
+      //             <Nodes.EncryptedMessage
+      //               messages={[
+      //                 "GLCF — monthly standing order: custom blend, 40 vials. Collected, never delivered. Paid in full, cash.",
+      //                 "Raw material is supplied by the client, not sourced by me: sealed tins of pale petals, stamped CY TRANSIT AUTH — PLATFORM STOCK. I have never seen the plant. It does not grow in any garden I know.",
+      //                 "Base notes are wrong for perfume. It is not meant for people to smell. It is meant for people to recognise.",
+      //                 "Their tin count has dropped. They asked whether I know anyone who will bring more. I do not.",
+      //               ]}
+      //             />
+      //           ),
+      //         },
+      //       },
+      //     },
+      //   },
+      // },
     },
   },
 };

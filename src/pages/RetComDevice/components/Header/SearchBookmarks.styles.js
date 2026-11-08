@@ -48,6 +48,26 @@ export const Empty = styled.p`
   color: var(--cy-text-muted);
 `;
 
+// Footer under the search results: what search can't find. A hairline
+// separates it from the rows so it reads as a note, not a result.
+export const Note = styled.div`
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--cy-hairline);
+  font-size: 0.7rem;
+  line-height: 1.5;
+  color: var(--cy-text-muted);
+
+  & > p {
+    margin: 0;
+  }
+`;
+
+export const NoteList = styled.ul`
+  margin: 0.25rem 0 0;
+  padding-left: 1.1rem;
+`;
+
 /* ---- Result row ---------------------------------------------------------- */
 
 // Whole row navigates; the star inside it toggles the bookmark.

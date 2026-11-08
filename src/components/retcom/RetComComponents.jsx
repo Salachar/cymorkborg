@@ -34,7 +34,6 @@ export { COLOR_MAP };
 
 export const Spacer = () => <SpacerEl />;
 
-// Text styling. `pulse` is accepted but no longer animates.
 export const Line = ({
   className = '',
   styles = {},
@@ -54,7 +53,6 @@ export const Line = ({
   small = false,
   large = false,
   color = '',
-  pulse, // eslint-disable-line no-unused-vars
   loading = false,
   style = {},
   span = false,
@@ -70,9 +68,10 @@ export const Line = ({
   if (color && COLOR_MAP[color]) {
     css.color = COLOR_MAP[color];
   } else {
+    css.color = COLOR_MAP.smoke;
     if (cyan) css.color = COLOR_MAP.cyan;
     if (smoke) css.color = COLOR_MAP.smoke;
-    if (neon) css.color = COLOR_MAP.neon;
+    // if (neon) css.color = COLOR_MAP.neon;
     if (yellow) css.color = COLOR_MAP.yellow;
     if (pink) css.color = COLOR_MAP.pink;
     if (red) css.color = COLOR_MAP.red;
@@ -165,7 +164,7 @@ export const ProgressBar = ({ percent = 100, label = '' }) => {
   );
 };
 
-export const KeyValue = ({ label, value, valueColor = 'neon' }) => (
+export const KeyValue = ({ label, value, valueColor = 'smoke' }) => (
   <KeyValueEl>
     <KVLabel>{label}:</KVLabel>
     <KVValue $color={valueColor}>{value}</KVValue>

@@ -2,6 +2,7 @@
 // Abilities: Agility, Knowledge, Presence, Strength, Toughness
 // Ability scores range from -3 to +3
 import { cyberEffects } from '@utils/cybertech';
+import { searchAllItems } from './tables';
 
 class BaseClass {
   _name = "";
@@ -154,6 +155,47 @@ class BaseClass {
         urgency: data.debt.urgency || null
       };
     }
+
+    this.#migrateStartingIds();
+    this.#cleanGear();
+  }
+
+  // One-time id migration for class tables: entries were renamed with a
+  // "starting_" prefix (so they don't collide with Market items). An old
+  // saved id that's missing from its table, but whose "starting_" version
+  // exists, is renamed. Anything else is left as it is.
+  #migrateStartingIds() {
+    (this.constructor.components || []).forEach((component) => {
+      if (component.type !== "rollable" || !Array.isArray(component.entries)) return;
+      const selections = this._selected_tables[component.name];
+      if (!selections) return;
+
+      const ids = new Set(component.entries.map((e) => e.id || e.label || e.name));
+      let changed = false;
+      const next = {};
+
+      Object.entries(selections).forEach(([id, selected]) => {
+        if (!ids.has(id) && ids.has(`starting_${id}`)) {
+          next[`starting_${id}`] = selected;
+          changed = true;
+        } else {
+          next[id] = selected;
+        }
+      });
+
+      if (changed) this._selected_tables[component.name] = next;
+    });
+  }
+
+  // Table items in older saves carried copies of their table data (incl.
+  // JSX descriptions): trim them to quantity. Fill in missing quantities.
+  #cleanGear() {
+    Object.values(this._gear).forEach((section) => {
+      Object.entries(section).forEach(([itemId, stack]) => {
+        const quantity = typeof stack.quantity === "number" ? stack.quantity : 1;
+        section[itemId] = searchAllItems(itemId) ? { quantity } : { ...stack, quantity };
+      });
+    });
   }
 
   #checkStatPoints(stat, new_value) {
@@ -495,26 +537,57 @@ class BaseClass {
     return true;
   }
 
+  // addItemToGear(item) {
+  //   const section = item.section || 'extracted';
+  //   const itemId = item.id || item.label;
+  //   if (!itemId) return;
+
+  //   if (!this._gear[section]) this._gear[section] = {};
+
+  //   if (this._gear[section][itemId]) {
+  //     this._gear[section][itemId].quantity += item.quantity || 1;
+  //   } else {
+  //     // Store fallback data — used if item isn't found in any section table
+  //     this._gear[section][itemId] = {
+  //       quantity: item.quantity,
+  //       label: item.label,
+  //       description: item.description || null,
+  //       die: item.die || null,
+  //       cost: item.cost || null,
+  //       value: item.value || null,
+  //     };
+  //   }
+  // }
+
   addItemToGear(item) {
-    const section = item.section || 'extracted';
+    const section = item.section || "extracted";
     const itemId = item.id || item.label;
     if (!itemId) return;
 
     if (!this._gear[section]) this._gear[section] = {};
+    const quantity = item.quantity || 1;
+    const stack = this._gear[section][itemId];
 
-    if (this._gear[section][itemId]) {
-      this._gear[section][itemId].quantity += item.quantity || 1;
-    } else {
-      // Store fallback data — used if item isn't found in any section table
-      this._gear[section][itemId] = {
-        quantity: item.quantity,
-        label: item.label,
-        description: item.description || null,
-        die: item.die || null,
-        cost: item.cost || null,
-        value: item.value || null,
-      };
+    if (stack) {
+      stack.quantity = (stack.quantity || 0) + quantity;
+      return;
     }
+
+    // Table items resolve by id, so quantity is all they need.
+    if (searchAllItems(itemId)) {
+      this._gear[section][itemId] = { quantity };
+      return;
+    }
+
+    // Custom loot isn't in any table: keep what its row shows.
+    this._gear[section][itemId] = {
+      quantity,
+      label: item.label,
+      description: item.description || null,
+      die: item.die || null,
+      cost: item.cost || null,
+      value: item.value || null,
+    };
   }
 
   addFreeToInventory() {

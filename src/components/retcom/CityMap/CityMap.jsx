@@ -41,7 +41,6 @@ export default function CityMap({ src, spots = CY_CITY_MAP_SPOTS, calibrate = fa
     const y = (((e.clientY - rect.top) / rect.height) * 100).toFixed(1);
     setReadout({ x, y });
     // eslint-disable-next-line no-console
-    console.log(`x: ${x}, y: ${y}`);
   };
 
   const linked = spots.filter((s) => s.path);

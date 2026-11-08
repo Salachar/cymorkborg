@@ -8,7 +8,7 @@ import { mq } from '@styles/media';
 export const COLOR_MAP = {
   cyan: 'rgb(0, 255, 255)',
   smoke: 'rgb(133, 175, 231)',
-  neon: 'rgb(0, 170, 40)',
+  // neon: 'rgb(0, 170, 40)',
   yellow: 'rgb(250, 204, 21)',
   pink: 'rgb(255, 0, 128)',
   red: 'rgb(239, 68, 68)',
@@ -91,7 +91,7 @@ export const DividerEl = styled.div`
 `;
 
 export const ListItemEl = styled.div`
-  color: ${COLOR_MAP.neon};
+  color: ${COLOR_MAP.smoke};
 
   &[data-indent='true'] {
     margin-left: 1rem;
@@ -142,14 +142,14 @@ export const DataLabel = styled.span`
 
 export const DataValue = styled.span`
   ${smallText}
-  color: ${COLOR_MAP.neon};
+  color: ${COLOR_MAP.smoke};
 `;
 
 export const ProgressEl = styled.div`
   ${smallText}
   overflow: hidden;
   word-break: break-all;
-  color: ${COLOR_MAP.neon};
+  color: ${COLOR_MAP.smoke};
 `;
 
 export const ProgressLabel = styled.span`

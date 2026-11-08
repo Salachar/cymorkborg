@@ -149,7 +149,7 @@ export const RUBBLE_SALVAGE_COMMANDS = {
                   "Ledger: First order from the Foundation when they moved in. Industrial epoxy sealant, a lot of it. Paid cash, asked no questions. Neither did I.",
                   "Ledger: Standing buy order on anything from the old installation. Plans, access records, survey data, hardware. Top price.",
                   "Ledger: Bought the salvage lot with the keycard in it. That's when I started paying attention.",
-                  "Own note: That ground was wrong before the wall went up. Whatever they're doing in there, they're keeping it in.",
+                  "Own note: That ground was wrong before the Foundation bolted that coating on. Whatever they're doing in there, they're keeping it in.",
                 ]}
                 status="ACTIVE"
               />
@@ -189,7 +189,7 @@ export const RUBBLE_SALVAGE_COMMANDS = {
                   {
                     id: "rubble_photo",
                     label: "Photograph",
-                    description: "The compound before the Foundation. No wall yet. The main building visible. Something on the roof that isn't there now.",
+                    description: "The compound before the Foundation, back when Halvard held the lease. Bare concrete wall, no wire. The main building visible. Something on the roof that isn't there now.",
                   },
                 ]}
               />
@@ -452,8 +452,13 @@ export const LAST_SEEN_WALL_COMMANDS = {
   },
 };
 
+// Replace HALVARD_FIELD_OFFICE_COMMANDS in old_cy_nearby.jsx with this block.
+// The mass calculation is now a corporate plan that never worked, not a live
+// cult clock: Halvard modelled covering CY, found the yield nowhere near
+// enough, and the project was suspended under municipal scrutiny.
+
 // ============================================================================
-// VANISHED MILCORP — Secret #5: someone calculated the mass to cover CY
+// VANISHED MILCORP — Secret #5: someone calculated the mass needed to cover CY
 // ============================================================================
 
 export const HALVARD_FIELD_OFFICE_COMMANDS = {
@@ -509,6 +514,7 @@ export const HALVARD_FIELD_OFFICE_COMMANDS = {
                   "Phase 2 note: subjects report \"hearing it.\" Continue.",
                   "COVERAGE ESTIMATE (rough): raw material required to cover CY municipal area at 2cm depth — see attached. Who asked for this?",
                   "Attachment: coverage_estimate.calc — [FILE INTACT]",
+                  "Compliance: Municipal Enforcement has queried the feedstock inventory at the shore site. Response deferred.",
                   "Final entry: all staff to report to the shore site. Bring nothing.",
                 ]}
               />
@@ -523,8 +529,13 @@ export const HALVARD_FIELD_OFFICE_COMMANDS = {
                   "Area: CY municipal boundary",
                   "Depth: 2cm (minimum viable)",
                   "Required mass: 1.9 × 10^9 kg",
-                  "Current mass: [FIELD UPDATED REMOTELY — LAST VALUE 3.1 × 10^6 kg]",
-                  "Rate: [FIELD UPDATED REMOTELY]",
+                  "Feedstock on hand (Phase 2 yield): 3.1 × 10^6 kg",
+                  "Coverage achievable at current yield: 0.16%",
+                  "Scale-up route: [UNSPECIFIED]",
+                  "Requested by: [REDACTED — board office]",
+                ]}
+                alerts={[
+                  "Model status: INFEASIBLE at current yield. Project review pending.",
                 ]}
               />
             ),
@@ -560,6 +571,7 @@ export const SALVAGE_CLAIM_COMMANDS = {
           "Location: Old Cy outskirts, north of the shore path",
           "Status: CLAIM PENDING — owner of record has not responded",
           "Claimant: J. Okonjo",
+          "Crash report: no distress call on record",
         ]}
         theme="industrial"
       />
@@ -760,9 +772,9 @@ export const OLD_CY_NEARBY_COMMANDS = {
   ...RUBBLE_SALVAGE_COMMANDS,
   ...ROADRUNNER_WAYPOINT_COMMANDS,
   ...EX_NEOPHYTE_SQUAT_COMMANDS,
-  ...LAST_SEEN_WALL_COMMANDS,
-  ...HALVARD_FIELD_OFFICE_COMMANDS,
-  ...SALVAGE_CLAIM_COMMANDS,
+  // ...LAST_SEEN_WALL_COMMANDS,
+  // ...HALVARD_FIELD_OFFICE_COMMANDS,
+  // ...SALVAGE_CLAIM_COMMANDS,
   ...SUDS_SPIN_COMMANDS,
   ...PIRATE_RADIO_COMMANDS,
   ...CHARGING_KIOSK_COMMANDS,

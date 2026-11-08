@@ -80,6 +80,7 @@ export const CY_SANITATION_HQ_COMMANDS = {
         related_commands: {
           "ATM": {
             favicon: <Icons.ATM />,
+            searchable: false,
             content: (
               <Nodes.ATM
                 id="cy_sanitation_hq_atm"

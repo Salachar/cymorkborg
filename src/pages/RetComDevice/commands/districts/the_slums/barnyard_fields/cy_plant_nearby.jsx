@@ -269,6 +269,7 @@ export const BARNYARD_FUEL_STATION_COMMANDS = {
     related_commands: {
       "Depot ATM": {
         favicon: <Icons.ATM />,
+        searchable: false,
         content: (
           <Nodes.ATM
             id="depot9-atm"

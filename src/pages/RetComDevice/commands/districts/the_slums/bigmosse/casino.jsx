@@ -81,6 +81,7 @@ export const LUCKY_FLIGHT_CASINO = {
       },
       "Lobby ATM": {
         favicon: <Icons.ATM />,
+        searchable: false,
         password: {
           pw: "liquidity",
           hint: "You don't need more money. You need to move it.",

@@ -21,7 +21,7 @@ export const PUMP_HOUSE_CLINIC_COMMANDS = {
     favicon: <Icons.RipperDoc />,
     preview: (
       <NodePreview>
-        <Line span smoke> · Ripper doc. Converted pump house, Gravel Lake shore. Cash only.</Line>
+        <Line span smoke> · Ripper doc. Converted pump house, Lake Gravel shore. Cash only.</Line>
       </NodePreview>
     ),
     content: (
@@ -33,7 +33,7 @@ export const PUMP_HOUSE_CLINIC_COMMANDS = {
         status="OPEN"
         statusColor="neon"
         notes={[
-          "Gravel Lake south shore — converted water authority pump house",
+          "Lake Gravel south shore — converted water authority pump house",
           "Medical treatment, cyberware installation and removal",
           "No records kept — no city registration",
           "Cash only — bring exact change",
@@ -50,7 +50,7 @@ export const PUMP_HOUSE_CLINIC_COMMANDS = {
         <Nodes.HoursBanner
           hours="10:00 — 22:00"
           days="Daily"
-          location="Gravel Lake south shore — look for the pump house, blue door"
+          location="Lake Gravel south shore — look for the pump house, blue door"
           note="No appointment needed. No names required."
         />
       </Nodes.PublicPortal>
@@ -81,13 +81,13 @@ export const PUMP_HOUSE_CLINIC_COMMANDS = {
                 employeeId="OWNER-001"
                 name="Doss"
                 position="Practitioner"
-                district="Gravel Lake south shore"
+                district="Lake Gravel south shore"
                 notes={[
                   "Licence: City Medical, general practice. Lapsed pre-Incident, not renewed",
-                  "Practice: Pump House Clinic, Gravel Lake south shore. Sole operator, 15+ yrs",
+                  "Practice: Pump House Clinic, Lake Gravel south shore. Sole operator, 15+ yrs",
                   "Staff: none. Referrals: none. Affiliations: none",
                   "Billing: cash or barter. No records kept outside this file",
-                  "Own note: Watched them put the wall up around the old military site. Nobody used it for years before that. Squatters, now and then.",
+                  "Own note: Watched the Foundation buy the old military site and bolt the coating and wire onto the wall. Nobody had used it since the Halvard people left.”",
                   "Own note: Four walk-ins from the Foundation this year. Two couldn't say how long they'd been inside. One kept asking if I could hear it too.",
                   "Own note: Don't send anyone back there. I don't care how long the queue is. It isn't a charity. More like a church, or something worse.",
                   "Own note: Notice is up on the Barge board. I need the old survey records. There's a level under that building nobody admits to.",
@@ -146,7 +146,7 @@ export const FISHING_PLATFORM_COMMANDS = {
     favicon: <Icons.Water />,
     preview: (
       <NodePreview>
-        <Line span smoke> · Squatter fishing platform. Gravel Lake north shore. Old Cy side.</Line>
+        <Line span smoke> · Squatter fishing platform. Lake Gravel north shore. Old Cy side.</Line>
       </NodePreview>
     ),
     content: (
@@ -158,7 +158,7 @@ export const FISHING_PLATFORM_COMMANDS = {
         status="OPEN"
         statusColor="neon"
         notes={[
-          "Gravel Lake north shore — Old Cy side",
+          "Lake Gravel north shore — Old Cy side",
           "Unregistered squatter structure — repurposed water authority jetty",
           "Fishing, camping, loose community of Old Cy residents",
           "No commerce — bring your own supplies",
@@ -249,7 +249,7 @@ export const HOT_STUFF_COMMANDS = {
         status="OPEN"
         statusColor="neon"
         notes={[
-          "Gravel Lake east shore — the shed with the orange door",
+          "Lake Gravel east shore — the shed with the orange door",
           "Road flares, marine flares, lamp oil, cooking fuel",
           "Torch rental for the Old Cy shore path (deposit required)",
           "No open flames inside the shed. Obviously.",
@@ -301,7 +301,7 @@ export const HOT_STUFF_COMMANDS = {
                 employeeId="OWNER-001"
                 name="Bex Talo"
                 position="Owner"
-                district="Gravel Lake east shore"
+                district="Lake Gravel east shore"
                 notes={[
                   "Business licence: shore trading, renewed annually (late, every year)",
                   "Staff: none. Cousin helps on weekends, off the books",
@@ -354,7 +354,7 @@ export const GROUND_STABILITY_NODE_COMMANDS = {
         status="NOMINAL"
         statusColor="neon"
         notes={[
-          "Automated subsidence and seismic monitoring, Gravel Lake shore",
+          "Automated subsidence and seismic monitoring, Lake Gravel shore",
           "Unstaffed. Report damage via your Cynergy account.",
           "Tampering with utility equipment is a corporate offence",
         ]}
@@ -404,7 +404,7 @@ export const GROUND_STABILITY_NODE_COMMANDS = {
                 subtitle="Flagged: ANOMALOUS — MULTIPLE SOURCES"
                 notes={[
                   "Duration: 00:04:51",
-                  "Classifier: speech-like, overlapping. Source count estimate: >200. Estimate unstable.",
+                  "Classifier: speech-like, overlapping. Source count estimate: >1000. Estimate unstable.",
                   "Technician comment field: [empty]",
                 ]}
               />
@@ -441,7 +441,7 @@ export const INCIDENT_MEMORIAL_COMMANDS = {
     ),
     content: (
       <Node
-        title="GRAVEL LAKE INCIDENT MEMORIAL"
+        title="LAKE GRAVEL INCIDENT MEMORIAL"
         subtitle="Public monument — maintained by volunteers"
         notes={[
           "Four panels of names. The fourth is still being added to.",
@@ -474,8 +474,8 @@ export const LAKE_GRAVEL_NEARBY_COMMANDS = {
   ...PUMP_HOUSE_CLINIC_COMMANDS,
   ...FISHING_PLATFORM_COMMANDS,
   ...BAIT_TACKLE_COMMANDS,
-  ...HOT_STUFF_COMMANDS,
-  ...GROUND_STABILITY_NODE_COMMANDS,
+  // ...HOT_STUFF_COMMANDS,
+  // ...GROUND_STABILITY_NODE_COMMANDS,
   ...INCIDENT_MEMORIAL_COMMANDS,
 };
 

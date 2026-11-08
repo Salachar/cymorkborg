@@ -489,6 +489,7 @@ export const BUSINESS_COMMANDS = {
 
       "ATM": {
         favicon: <Icons.ATM />,
+        searchable: false,
         password: {
           pw: "cashmoney",
           hint: "What everyone wants from an ATM",

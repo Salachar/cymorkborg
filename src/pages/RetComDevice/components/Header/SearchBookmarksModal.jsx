@@ -4,14 +4,34 @@ import { SearchInput } from '@components/Layout/Layout';
 import { searchIndex_filter } from '@utils/commands';
 
 import SearchResultRow from './SearchResultRow';
-import { Layout, ListArea, ListLabel, Rows, Empty } from './SearchBookmarks.styles';
+import {
+  Layout,
+  ListArea,
+  ListLabel,
+  Rows,
+  Empty,
+  Note,
+  NoteList,
+} from './SearchBookmarks.styles';
+
+// What search can't find. Shown under the results while typing, so it's
+// in view at the moment someone wonders why a node isn't there. The last
+// entry is deliberately vague.
+//   - Locked nodes and anything behind them: not in the index (see buildSearchIndex)
+//   - Nodes marked private: searchable: false
+const SEARCH_BLIND_SPOTS = [
+  'Locked nodes',
+  'Anything behind a locked node',
+  'Nodes marked private',
+  'Other secrets',
+];
 
 // Search field on top (no autofocus, so the keyboard stays down when
 // you're after a bookmark). Empty field: your bookmarks. Typing: results,
 // in the same spot, right under the field.
 //
 // Search only finds unlocked, searchable nodes (see buildSearchIndex);
-// bookmarks show regardless.
+// bookmarks show regardless. The note under the results says so.
 export default function SearchBookmarksModal({
   open,
   onClose,
@@ -74,6 +94,14 @@ export default function SearchBookmarksModal({
             <>
               <ListLabel>Results</ListLabel>
               {results.length === 0 ? <Empty>No results.</Empty> : renderRows(results)}
+              <Note>
+                <p>Search won't find everything. These stay hidden:</p>
+                <NoteList>
+                  {SEARCH_BLIND_SPOTS.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </NoteList>
+              </Note>
             </>
           ) : (
             <>

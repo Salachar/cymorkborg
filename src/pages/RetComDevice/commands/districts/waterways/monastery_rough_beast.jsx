@@ -12,23 +12,23 @@ import {
 } from "@retcom";
 
 export const MONASTERY_ROUGH_BEAST_COMMANDS = {
-  "Gravel Lake Charitable Foundation": {
+  "Lake Gravel Charitable Foundation": {
     favicon: <Icons.Medical />,
     preview: (
       <NodePreview>
-        <Line span smoke> · Community outreach and medical services. Gravel Lake / Old Cy border.</Line>
+        <Line span smoke> · Community outreach and medical services. Lake Gravel / Old Cy border.</Line>
       </NodePreview>
     ),
     content: (
       <Nodes.PublicPortal
-        name="GRAVEL LAKE CHARITABLE FOUNDATION"
+        name="LAKE GRAVEL CHARITABLE FOUNDATION"
         tagline="Healing. Community. Renewal."
         network="GLCF_PUBLIC"
         signalStrength="weak"
         status="OPEN"
         statusColor="neon"
         notes={[
-          "Gravel Lake / Old Cy border",
+          "Lake Gravel / Old Cy border",
           "Drop-in support and outreach services for displaced and injured residents",
           "Medical appointments available to the public — see Infirmary booking",
           "All visitors processed at main gate",
@@ -45,7 +45,7 @@ export const MONASTERY_ROUGH_BEAST_COMMANDS = {
         <Nodes.HoursBanner
           hours="08:00 — 20:00"
           days="Daily"
-          location="Gravel Lake / Old Cy border — follow the outer wall north from the lake"
+          location="Lake Gravel / Old Cy border — follow the outer wall north from the lake"
           note="Gate staff present at all hours. Medical appointments bookable below."
         />
       </Nodes.PublicPortal>
@@ -92,7 +92,7 @@ export const MONASTERY_ROUGH_BEAST_COMMANDS = {
         content: (
           <Node
             title="FRONT GATES"
-            subtitle="Main Entry — Gravel Lake Charitable Foundation"
+            subtitle="Main Entry — Lake Gravel Charitable Foundation"
             notes={[
               "Single vehicle gate and pedestrian access point",
               "Foundation staff manage visitor intake during operating hours",
@@ -140,7 +140,7 @@ export const MONASTERY_ROUGH_BEAST_COMMANDS = {
         },
         content: (
           <Node
-            title="GRAVEL LAKE CHARITABLE FOUNDATION — STAFF NETWORK"
+            title="LAKE GRAVEL CHARITABLE FOUNDATION — STAFF NETWORK"
             subtitle="Authorised personnel only — all access logged"
             notes={[
               "Internal operations network",
@@ -154,7 +154,7 @@ export const MONASTERY_ROUGH_BEAST_COMMANDS = {
             favicon: <Icons.Schedule />,
             content: (
               <Nodes.ShiftSchedule
-                location="Gravel Lake Charitable Foundation"
+                location="Lake Gravel Charitable Foundation"
                 shift="Day Shift"
                 shiftTime="08:00 — 20:00"
                 nextShift="Night watch — 20:00"
@@ -439,7 +439,7 @@ export const MONASTERY_ROUGH_BEAST_COMMANDS = {
                         name="Flower Child"
                         position="Community Outreach Lead"
                         department="Visitor Care"
-                        district="Gravel Lake / Old Cy border"
+                        district="Lake Gravel / Old Cy border"
                         notes={[
                           "Primary public-facing representative of the Foundation",
                           "Leads all community support meetings",
@@ -601,7 +601,7 @@ export const MONASTERY_ROUGH_BEAST_COMMANDS = {
                         name="Armitage"
                         position="Foundation Director"
                         department="Senior Leadership"
-                        district="Gravel Lake / Old Cy border"
+                        district="Lake Gravel / Old Cy border"
                         notes={[
                           "Public director — primary external representative of the Foundation",
                           "Conducts visitor selection at main gate — twice daily",
@@ -621,7 +621,7 @@ export const MONASTERY_ROUGH_BEAST_COMMANDS = {
                         name="Flower Child"
                         position="Community Outreach Lead"
                         department="Visitor Care"
-                        district="Gravel Lake / Old Cy border"
+                        district="Lake Gravel / Old Cy border"
                         notes={[
                           "Resident — upper floor quarters, Cathedral",
                           "Biometric access: Cathedral lower level hatch — registered holder",
